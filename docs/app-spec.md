@@ -252,11 +252,26 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
 
 - Vite + React + TypeScript strict, dans `app/`.
 - Dexie (IndexedDB), Zod (validation des fichiers), vite-plugin-pwa (service worker, manifeste d'installation).
-- Routage côté client (React Router ou TanStack Router).
+- Routage côté client : React Router.
 - Pas de bibliothèque de composants lourde ; pas de backend.
 - Tests Vitest sur toutes les règles du §5 (fonctions pures, sans React), avec un petit catalogue de test tiré des vraies données.
 
-Les règles de calcul (§5) vivent dans un module pur (`app/src/domain/`) testé indépendamment de l'interface.
+### 9.1 Portabilité (règles obligatoires)
+
+L'app doit pouvoir passer un jour à React Native ou dans une coquille native sans réécrire sa logique. Deux règles, dès l'étape 1 :
+
+1. **Domaine pur** : les règles du §5, les types du catalogue et de la collection, et les schémas Zod vivent dans `app/src/domain/`. Ce dossier **n'importe ni React, ni Dexie, ni aucune API du navigateur** (`window`, `document`, `localStorage`, `navigator`…). Il est testé seul.
+2. **Stockage derrière une interface** : l'interface `CollectionStore` (lire, modifier une entrée, tout remplacer, exporter) est définie dans le domaine ; Dexie en est la première implémentation, dans `app/src/storage/`. Même principe pour le catalogue (`CatalogStore`) et les réglages. L'interface n'appelle jamais Dexie directement.
+
+### 9.2 Distribution
+
+| Étape | Moyen | Quand |
+|---|---|---|
+| MVP | **PWA** installable depuis `novapreem.app` (Android, PC ; iPhone via « Sur l'écran d'accueil ») | dès l'étape 1 |
+| Play Store | **TWA** générée avec Bubblewrap, plus `/.well-known/assetlinks.json` sur le site | après le MVP, quand l'app est stable |
+| Fonctions natives (scan de carte…) ou App Store | **Capacitor** | seulement si un besoin réel apparaît |
+
+Conséquences pour le MVP : manifeste complet (nom, icônes 192 et 512 px dont une version *maskable*, couleurs de thème, `display: standalone`, `start_url`, `scope`), service worker qui fonctionne entièrement hors-ligne, et score PWA « installable » dans Lighthouse. Ce sont les prérequis de la TWA.
 
 ---
 

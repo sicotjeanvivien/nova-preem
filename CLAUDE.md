@@ -39,6 +39,8 @@ Documents de référence :
 - `docs/catalog-spec.md` : le pipeline du catalogue (source, normalisation, format de sortie).
 - `docs/app-spec.md` : l'app MVP (écrans, fichier de collection, règles de complétion, doublons, recherche, étapes). **Lire avant toute modification de `app/`**, et suivre ses étapes dans l'ordre.
 
+Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src/domain/` n'importe ni React, ni Dexie, ni API du navigateur ; tout stockage passe par une interface (`CollectionStore`…) dont Dexie n'est qu'une implémentation. Distribution : PWA, puis TWA pour le Play Store, Capacitor seulement si besoin natif.
+
 ## Travail en cours : le pipeline du catalogue
 
 **Lire `docs/catalog-spec.md` avant toute modification de `catalog/`.** Il contient la source de données (API Netdeck), le format réel des données, les règles de normalisation (décomposition édition → set / tirage / langue, rattachement VO ↔ VF) et le format de sortie.
