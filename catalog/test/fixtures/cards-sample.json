@@ -1,0 +1,1342 @@
+{
+  "items": [
+    {
+      "id": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
+      "external_id": "cb-johnny-silverhand-rocking-renegade",
+      "name": "Johnny Silverhand",
+      "subname": "Rocking Renegade",
+      "display_name": "Johnny Silverhand: Rocking Renegade",
+      "slug": "johnny-silverhand-rocking-renegade",
+      "canonical_name": "Johnny Silverhand — Rocking Renegade",
+      "canonical_base_name": "Johnny Silverhand",
+      "rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+      "official_rules_text_en": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+      "printed_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+      "official_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "a8a7d286-0c66-4f01-aca7-45570474d9e4",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Secret",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a8a7d286-0c66-4f01-aca7-45570474d9e4/render-mpvmpqtq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=OrSBAjyPQpiFK2tKS9zgciySJQA3UnbOtewRSyMrFNT9L~YXRvx4J1u9UhkxCVgmym5p1DZLIQ7DoWLAG9BHW8r7zffWtpGf-~etFvBW4f2YmuvhMJlvLiqTFsy-uPRVO~hlT3H93Z4~b3tj-yA6q6XQGtIVVLb6MYO3A-eLaDdYWxkYr96IxOjwBxSNXTgEWyk704bXvwddUTyQbEVLJdt2M~XpL32~HGV12QOb3ObXzk6QR~E6NMBZ32b52R-H~7ORQ0gJJnV~BFIqchF0ER5v~ynLD2CKN1U0wurM~RUexArDJEgrXLij9vCINi0Kkqa85uLFqXgAyC1nYmXhkg__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a8a7d286-0c66-4f01-aca7-45570474d9e4/render-mpvmpqtq.webp",
+      "color": "Red",
+      "card_type": "Legend",
+      "is_eddiable": true,
+      "classifications": [
+        "Merc",
+        "Rocker",
+        "Samurai"
+      ],
+      "keywords": [],
+      "cost": null,
+      "power": null,
+      "ram": 2,
+      "artist": "Daniel Valaisis",
+      "print_number": "003",
+      "printings": [
+        {
+          "id": "a8a7d286-0c66-4f01-aca7-45570474d9e4",
+          "collector_number": "003",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a8a7d286-0c66-4f01-aca7-45570474d9e4/render-mpvmpqtq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=OrSBAjyPQpiFK2tKS9zgciySJQA3UnbOtewRSyMrFNT9L~YXRvx4J1u9UhkxCVgmym5p1DZLIQ7DoWLAG9BHW8r7zffWtpGf-~etFvBW4f2YmuvhMJlvLiqTFsy-uPRVO~hlT3H93Z4~b3tj-yA6q6XQGtIVVLb6MYO3A-eLaDdYWxkYr96IxOjwBxSNXTgEWyk704bXvwddUTyQbEVLJdt2M~XpL32~HGV12QOb3ObXzk6QR~E6NMBZ32b52R-H~7ORQ0gJJnV~BFIqchF0ER5v~ynLD2CKN1U0wurM~RUexArDJEgrXLij9vCINi0Kkqa85uLFqXgAyC1nYmXhkg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a8a7d286-0c66-4f01-aca7-45570474d9e4/render-mpvmpqtq.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Secret",
+          "finish": null,
+          "artist": "Daniel Valaisis",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+          "official_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value."
+        },
+        {
+          "id": "1159e69c-614f-4a8e-be76-d69ee734bd22",
+          "collector_number": "β003",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1159e69c-614f-4a8e-be76-d69ee734bd22/render-mpvkhkg3.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=NiTHIiOoFsrwO9drCWXv6ht0KG-pv59uyi6N7S64YV~gCJj5bxL00LG2~swtAPr03zWgHRmabAjZ2N-hdSbLs-RKxuOXVV8yOkRRalcuCMiGrDMcY0oJuZcOzxN5i5RtNAVo1U0rV-PoFr0-uUxP5bXSH7iprCwxGorh2W-6-~7v87rBSW1hXAxDXmtDZipvPX8RqGfSaAg-Z9WTA5hZAZlyDn9hsNRyJwMdkRe-yb4923zjFTllNsP8s-UOh7z2rrms6MhskiZCuW5xuN5J-7nrQiv~KxgRwuePctZ6HgRjsHAZeN9ueNth04Wi67AHMt7~kyo5PH2PDx9e6aNXDg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1159e69c-614f-4a8e-be76-d69ee734bd22/render-mpvkhkg3.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Secret",
+          "finish": null,
+          "artist": "Daniel Valaisis",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+          "official_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value."
+        },
+        {
+          "id": "4f8fbab4-7aad-4271-8dd6-8cdf68654c5e",
+          "collector_number": "β168",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4f8fbab4-7aad-4271-8dd6-8cdf68654c5e/render-mpxm40x1.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ImUpeof2tbfmeDcTXywMIbXcEloI4zcyma4n10DgiseYl3KB9b0BNlOpyP17pRDZIRxxnP6oTzdOCL-rPS5acz8M1PUpjNFI4yAGof1g-2-SwrqDhgd8KVxWBMqotN02CdBeqmQTD~JOQXWhs6t2r1zsa-IzUTguxMKoB9b3bYYewPi6RMnYHHqfxHRAXDmyx1DsrDQHlygcCOngiunuTcKiYQSt6wmQv7oaLr3ELW~BW07zU5kIPLbxeOLUHt5ioNbmQY2WSOjYErJQUIepUMpiTAavcn0LUn65h1CsS4YFQKTn03IbYSWwGH9wJcFY~J5B6gDi8DJ74DmFvi~Qww__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4f8fbab4-7aad-4271-8dd6-8cdf68654c5e/render-mpxm40x1.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Iconic Secret",
+          "finish": null,
+          "artist": "Divebound Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value.",
+          "official_rules_text": "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value."
+        },
+        {
+          "id": "7f03795b-029a-4347-a685-d67dcd879a93",
+          "collector_number": "003",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/7f03795b-029a-4347-a685-d67dcd879a93/render-381b764f-0b33-49fa-b5e7-3b80e9e876fa.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=mS1HQUKChXQZQbuG~Qgj1UoJwarXg~C43UAoVqsTUbZ1e6RK~1GUEmRmA2SQy02bevi~DloRbiRmm5VsgBkJNtKSaSQKn70agnu-XMvRl5~vpsfVEjtxxQiYM4ZkFNAGeqYlS8OzaR60sguZfgxGoIvUmN8zAIE6l0GoX91gCJdP6x8b~jjAtwLas5SOKf-Y8UEkiP9mEEHFj5Ur9PwvXeHoYNEkxRV8sexz1rY8B7CvLe3aN9ZzQJ96AqCk-~TMDiJUZbpY1Iu8n3ZLUwhTkXl38fS6Cy6ZB3WZ~PVZ8PsG7w-D~8nssBVlVLvAisoukHZE1tuWoOf93E~fsTXlHA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/7f03795b-029a-4347-a685-d67dcd879a93/render-381b764f-0b33-49fa-b5e7-3b80e9e876fa.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Secret",
+          "finish": null,
+          "artist": "Daniel Valaisis",
+          "language": "fr",
+          "localized_name": "Johnny Silverhand — Rock'n'Rebelle",
+          "printed_rules_text": "2 €$, {Spend} Une Unité alliée peut attaquer une Unité rivale épuisée le tour où elle est jouée. Si c'est une Unité ROCKER, donnez-lui aussi +2 Power ce tour-ci. Cet effet coûte -1 €$ par Gig allié de valeur 8+.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "a8a7d286-0c66-4f01-aca7-45570474d9e4",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "81a8dec7-9541-4020-93e1-7d798a57dcbc",
+      "external_id": "cb-v-streetkid",
+      "name": "V",
+      "subname": "Streetkid",
+      "display_name": "V: Streetkid",
+      "slug": "v-streetkid",
+      "canonical_name": "V — Streetkid",
+      "canonical_base_name": "V",
+      "rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+      "official_rules_text_en": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+      "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+      "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "3fc63c58-5954-4744-a5af-047bfc5cb159",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Rare",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3fc63c58-5954-4744-a5af-047bfc5cb159/render-mq9zzfnq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=r21coo5Gw~wC44~uXss1kfB1n4RK~Mek1CEOpM2-9FPfNQfKFjBEhD6FTWwYJ9BlA96IBobCw8CIeJHx~O6J7IvK2XMiqsTAYIbkIiED~VZiOJRIkkzCphcRbeOKjjHkRXuEXtUHQ0Tplkb3A7AAdbd5L8nwNyAGqvGqbpx3Stc8fpsh7DzpO44Njc8lS5IIIXunRr7FeVqLwQu52-OVn7GJO7a~Vjf5I5C9kSEx5zSoit-EnGy727IHCkHH7bqbILJV8Oc9t4LKMb6BCLszkXGc9JMoxgAbMdPgJLf5-csb9JUvncl3H9vdEbHvOOLkdAUAi-BND7B-Ef3W4Ch2Qg__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3fc63c58-5954-4744-a5af-047bfc5cb159/render-mq9zzfnq.webp",
+      "color": "Red",
+      "card_type": "Legend",
+      "is_eddiable": true,
+      "classifications": [
+        "Merc"
+      ],
+      "keywords": [],
+      "cost": 5,
+      "power": 6,
+      "ram": 2,
+      "artist": "Olgierd Ciszak",
+      "print_number": "005a",
+      "printings": [
+        {
+          "id": "3fc63c58-5954-4744-a5af-047bfc5cb159",
+          "collector_number": "005a",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3fc63c58-5954-4744-a5af-047bfc5cb159/render-mq9zzfnq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=r21coo5Gw~wC44~uXss1kfB1n4RK~Mek1CEOpM2-9FPfNQfKFjBEhD6FTWwYJ9BlA96IBobCw8CIeJHx~O6J7IvK2XMiqsTAYIbkIiED~VZiOJRIkkzCphcRbeOKjjHkRXuEXtUHQ0Tplkb3A7AAdbd5L8nwNyAGqvGqbpx3Stc8fpsh7DzpO44Njc8lS5IIIXunRr7FeVqLwQu52-OVn7GJO7a~Vjf5I5C9kSEx5zSoit-EnGy727IHCkHH7bqbILJV8Oc9t4LKMb6BCLszkXGc9JMoxgAbMdPgJLf5-csb9JUvncl3H9vdEbHvOOLkdAUAi-BND7B-Ef3W4Ch2Qg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3fc63c58-5954-4744-a5af-047bfc5cb159/render-mq9zzfnq.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "c2d0e2a7-470f-4498-b6d5-5df1e3ecc3ef",
+          "collector_number": "005b",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/c2d0e2a7-470f-4498-b6d5-5df1e3ecc3ef/render-mpvmk1ou.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=Zjbuak0Uo-jIGOuTL3dok5Rxu8aQ8UQMFIi-cORe0-psOPqbMsvGWVOW1cAQd0cOr2elBH5fuLRijkOIymhTD0e81G8DJqx0JnS~m0k7mYQKc41pznWu3warSlS7eSQhomyfAeuMVyqEaC4htjTErRTfYOyioZBhVp0bIX0DJNULIOswHWA4OgccMzVm2pWraDu9-P6r700~hdj-kQ6koOGkAoIlH8vqBW3VW1USjk2m2Kx5Y5s~DJ4vQPqviFpi0PPpW~p9f91UiD6Sdw4vW2AsFS5cR7xuBbWVL0dAGsNAOOlIKb~0W2DIexpr4fFh8xnVReluPxuZQgXKj4JseA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/c2d0e2a7-470f-4498-b6d5-5df1e3ecc3ef/render-mpvmk1ou.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "837d354a-a1c8-4df0-b4ac-4db43730187a",
+          "collector_number": "144",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/837d354a-a1c8-4df0-b4ac-4db43730187a/render-mpvmu8qm.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=dVX3X2WPl0~dsF1SZapkwrbKhXp4UsP8mk1h8BfiUA9gQYzSoVEe42sHj6CgBElkBRp-Kg0JQn~dT5smyE59B23tfla1xb6MO81aDzsB6bYmJ86OnFPF9-mCsze1cOx6rEgqLFQCVNQe8rI6cWyIh6NwddCd3wSF8iY0ZV4PVXUxpfUorKN6WSNl0wmTgZ2CHKwa~BorN4a5WuEoVZ0JBKFtYFdtbNfD3U6KO4dl-cHeocG6COhKte6Fm-j-Pjtc9sAuYb6FpcVRPtsy52huiHW64oy0ODEmqs6iN5Gp9lEsKWSFUX~AyWY3JbZ9LwbBIj8cdTDSlXMFe5ZfbVUwxw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/837d354a-a1c8-4df0-b4ac-4db43730187a/render-mpvmu8qm.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Iconic Legend",
+          "finish": null,
+          "artist": "Pandart Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "79119e83-b50b-4a79-8a6c-f496d9ed7ef6",
+          "collector_number": "β005a",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/79119e83-b50b-4a79-8a6c-f496d9ed7ef6/render-mpu5tt66.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=XWYuIpdF4Yn9CfEqDD95KbyYuhjeehq3Vl3W6c59v0X7BbsUADTBq4SVKqR9OThFESLVn9ItiBTshOF1UUMfntAj8kNh6R~MTGgkSaS-79nQWyyW3-YuYKH4VC96EkLPA0Q-dLfeEDysmh0kzJDrkxQRau9Xv6ETf9cwTIymwsjl8fI2389oZgU8Vw4df~Ymqqb3LsBBjEGdtgHAEwcQ-hL7XKaJG8MMmjS80ZMZu0gCrhnk843jT5QAm~KB07w54--gV3XqODw-ssvUjpArAn3aT9gMIlYe3~MPnifxMauP3lFDrg4NVOHaMd0IkRhzUalx~NvBqwAxePqXLMVPeQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/79119e83-b50b-4a79-8a6c-f496d9ed7ef6/render-mpu5tt66.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "e6dbfd52-85c5-4fd4-a77c-ca829e827d8a",
+          "collector_number": "β005b",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/e6dbfd52-85c5-4fd4-a77c-ca829e827d8a/render-mpu5v3ef.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=WPR0vSPDbmNf8WmM6~So8UJK5dnzU0kmp9eNkTbuMWXvJi9~1DdrVXIDrO4ADgwUKPN8uP1IPVi~Jow91G2-e-GW6zKYIPpwZr1HJdn~3dJH3zLqjSxutenusl3Jo~AuaporEnfTSGIkDqpE9IgLaehGAqvTvQaxsoCJfi5X2rMH0n70MQSAwFvx6O9oO1N3D5HXxy3gU03ETrdCEooTixNw6ojN~jF91aU87n1IcV3eUVZGwzBCNxMDYMHpMW5ySXgNmDh5eYwqBmduwFp16X8APUZZQ5vW2gvwqUeZtqS-hOvI1ZrsflyxOmjIgoPjXTJ6UhXv22hlc2Ln-D0vTg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/e6dbfd52-85c5-4fd4-a77c-ca829e827d8a/render-mpu5v3ef.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "20debd66-ff1c-42c3-9869-928cba33ccb5",
+          "collector_number": "β144",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/20debd66-ff1c-42c3-9869-928cba33ccb5/render-mpxm5mbr.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=KLhy3I3LQvU5CTOI9FvFbUltFuzfQyLYBgKiRxrjUEw-6XjytbYy7xwbnry9azoe5j9Cb1p3N2e8JEX5cJslLLB05exq0tbxb7rBdQkRWusmVCBYw5uvyj9RwJf7bQ9fplde5bfGRTGhYB9~F3DQktGUniMYMYUoY22ix4dMAl8VNDCm44dAcv3Y6WKvMgxX-Zj7qQenX9FiqqUkfhxk9biVr8237COm7pxQS8RN~1ikdRtfUvwihVzF6lmpZJQMonuxvXtRGZOrwVmawboHO6sOp3JSvla~TUBehQV7hpOMse3oX~FrE8q2GWNQ5O8GCJeFE4UYh0kF4fdN-AjN9A__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/20debd66-ff1c-42c3-9869-928cba33ccb5/render-mpxm5mbr.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Iconic Legend",
+          "finish": null,
+          "artist": "Pandart Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "ce137eea-c335-4f03-81f0-4717b75d5ce7",
+          "collector_number": "013",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ce137eea-c335-4f03-81f0-4717b75d5ce7/render-msyh4ii0.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=AQxHjNWN~pB3M2SCfEc2mAON2Kzg-zG4r2tVa~9mcWqW9DHy6~E~vTv66dBxbWdg44-PxsSJMSmTQ7cMmMoZQmShqvzyFb7hfdSmAmnWVMYXzFuG~oGYlb-bmpOs9bo3XD675WJ935AamVk1MDGjkv0HPvN8hfHGo64y5-o8180UDxi~36o5wt0WOaw1N1RTrQVxCzO0dWhJKNBkT8UGs2Okn8PtOpqnziDO2UyUu~YLIRezixBsZuSQoPKiuet5bTGp4tEN-EPmlN5UTnF63B~pnud8OjBAFNAtVgjKuvvC~ApsZIpQxlvCKzIWin3HUKd5kyikb3okAkcDK5SpNA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ce137eea-c335-4f03-81f0-4717b75d5ce7/render-msyh4ii0.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Envar Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "0f082a95-b3e2-4563-be0b-88b5d85d6138",
+          "collector_number": "017",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0f082a95-b3e2-4563-be0b-88b5d85d6138/render-mt7ob1qo.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=MvgxoLKDC7aNpJWZUGSstdhnzCrcIUoNGhfIaiaNc3rT2kVMN0QDu~I--wpxDWFnKnHEaRLjjz6LTf-E47j3g0fBB8aSzTHsKnUD1Swuo6~KuTUJBk3yTa-4DM4dwFtP2zuShRenKxn629Si-sa6nolBVltzxHwcWHrvuxwef25i0LOl4cVkC784p1X6T7~vTnMT1QsyhrsbgAiQj4PvKKf~80W4fdoTkCISrB~1RFyBpaeiw5qwzuc7xbKZGu1ClIwlBAz1WPsZEUEgMiNDUWBONSqzgpwlsQW1J9ZCfzfi-xyAmwD0TLLhC3xJHm-hNLH0y~oXn3eJdRwbS3Jcrw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0f082a95-b3e2-4563-be0b-88b5d85d6138/render-mt7ob1qo.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Envar Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "248f408c-437b-48df-8410-b7419e2f54d2",
+          "collector_number": "021",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/248f408c-437b-48df-8410-b7419e2f54d2/render-msyh51ny.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=U8sDrOyKlN4GDBq08iQ~trbzYnBSOJjFCk3pKvhgnCj-3uy2u9eJOMMrKjX7BvfRBfhIPQs5MAGo5rDSjBJz6tJBm1dpm28Fv0qvhVM4t8FHpF2t49IW4vJPi2ZCMiB00LgY6ndPZnsvTZWRoGKWU1kEaOUgstDYhHGqrQG8NoNpM2Llq3~Xcn4O0zvFW5z~SeQljo0cXr5bjuhcrDDqurZwN8M2uI~miSK4twgofpa6yKT4qrv-zkHisGLDXCI3FTdL~5f1UOw7lTXKXsQzyJNF5hcsBe9qTMRLMs0rMPzhu8pPG6u5IicV7uv52WrVMxNLlzV26aDZIzgjFsgsJg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/248f408c-437b-48df-8410-b7419e2f54d2/render-msyh51ny.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Envar Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "ccbdc832-812d-4b93-abd2-c2a5ba1684d2",
+          "collector_number": "025",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ccbdc832-812d-4b93-abd2-c2a5ba1684d2/render-msyheqjy.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=j8kEJ5E7xH1KGYMsZQkm2gh3T1-7vOIxFlKbAjnxUdICHG9XUkuaR-R-T85iMQIN~nmJX7rhwvPphCN7AAzOBtm4fy~A-nRh4-hpv02SLSv2QUu7g3Moj3jKA~TAbWoylJY8sp5VOAm~6IVnP2LVLtiG8vQNpzlzzV1ysJUdHNpznB81QhppcIAlJHrERNAeow1JOTsxJdr26oAzNCwqn56DOPtTlwQ84u0Q4OvdVsSY9Ww16J3Iq8kFSXQhThCrrQNMfyJa2vzXRuN7IRQvRj1FJx-a1vLL5idctjCuZakVXbgLp5BqmfjS~3tt9GoLPxiEr6BASR9XlnUO1qp0Xg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ccbdc832-812d-4b93-abd2-c2a5ba1684d2/render-msyheqjy.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Envar Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "71f7fbe5-29ee-4432-911a-865db0346b16",
+          "collector_number": "033",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71f7fbe5-29ee-4432-911a-865db0346b16/render-mtcqjl63.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=W7lPzwQW7KqMo5U3KK3ofFJZZ6fDpOtb1HCoIpGeC~B4NO7bh6JGDkZ2AhvypDWbHC1FQty7416h4C~zkeW2ZXUO20mnDLX7W0hqey-qnaMGHC6BxXxCENvTtSABTfCO6scL~44gP~FpfoOu6YgZN2s21JX1BXMgO3K1zQcqWzIb7HTHKZkxfydjzxSaUtj06IabpaPKci6ugVjJbObJ5DwVk0AVxKdDzuiqxjF0OYKwrflLJFJH6HaUQVmBkJFgurIEipfhmeDnF42MCvUqdBTWxlTzkMV7GYQRF4FmyZf115ifTNKvjBTz8xvDUS-5B2EiHdQvbKE4xNnfnuEAPw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71f7fbe5-29ee-4432-911a-865db0346b16/render-mtcqjl63.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Pandart Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)",
+          "official_rules_text": "{Call} Trash 3. Then, add 1 BRAINDANCE Program from your trash to your hand.\n{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)"
+        },
+        {
+          "id": "1c3de235-c8a3-4d05-8f8a-7e9c12b799b2",
+          "collector_number": "005a",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1c3de235-c8a3-4d05-8f8a-7e9c12b799b2/render-3f02ba0a-4a45-4fcc-a529-74e37f8c4bdd.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ICdNarJ-pVqtAj05qIE3J7v9nXnp2-Cs9VfDW4bezwf~8py1RmIFhemLYNkUPVwjn4Sob9BdKUN0Tu6ki49hdgCPeCqmWGmfq43cv~HVc7IEw3tJWxTVTKE9wXm0IjRjWie2e6v5D9pJjPdifc3nDhE27f9QIXW3cChN0wm6fqLWvtrgVSxcjgD~Alow6u3~-xJgMRUZz7rxWEUqO4EE8V8JNCRli0jDwqjd8~GhEY7Yiyr71S~JDV-j91zB2wAL6DgPFXzmodSb8CgXZXic1TeaFcx0x3EymedEDpSi7xoWFIwl73auZ7MbpOAtFllSgjf6FLJh4~uvbQI3GJrwJw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1c3de235-c8a3-4d05-8f8a-7e9c12b799b2/render-3f02ba0a-4a45-4fcc-a529-74e37f8c4bdd.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "fr",
+          "localized_name": "V — Gosse Des Rues",
+          "printed_rules_text": "{Call} Jetez 3. Puis, ajoutez un Programme BRAINDANCE de votre défausse à votre main.\n{Go Solo} (Payez le coût de cette Légende pour la jouer comme une Unité préparée. Elle peut attaquer ce tour-ci. Si elle quitte le terrain, retirez-la de la partie.)",
+          "official_rules_text": null
+        },
+        {
+          "id": "635e8f5e-6ece-44ad-af27-0f36fef34f22",
+          "collector_number": "005b",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/635e8f5e-6ece-44ad-af27-0f36fef34f22/render-78fbffb6-48d5-4b45-9a40-0b449d682049.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=kWc-hMU3IokJwvJPLWAvMVGvx0G-PGx~8KJKOcAcXuaoviG87oxvnQ-3rolkDiacZvbTUrRB-EscQrZf00xpAJketHtwYaesDilOD2NS7F92YF52QUv0vSmmx5xnZgKxHCtGNKcfIuxCMHIaWAp9V3fV0cj8hOs7Yr4JW30JkcoMzVBVAjNE6PtKxLhabEfbnJmSeSvQBDoAsQO2R4jpHWx34f3P5dMACkIXPSCRyjnBtQ~5T2Sy4S0T7L8NMlzNU-ewa8sFDPYQ0D2mQl7-2spsCILXRTXQ1yLg07K4u-isOXcTxYeNkRKnTomjpu-SwJMp10K-jQGz2rG9mil~NQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/635e8f5e-6ece-44ad-af27-0f36fef34f22/render-78fbffb6-48d5-4b45-9a40-0b449d682049.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Rare",
+          "finish": null,
+          "artist": "Olgierd Ciszak",
+          "language": "fr",
+          "localized_name": "V — Gosse Des Rues",
+          "printed_rules_text": "{Call} Jetez 3. Puis, ajoutez un Programme BRAINDANCE de votre défausse à votre main.\n{Go Solo} (Payez le coût de cette Légende pour la jouer comme une Unité préparée. Elle peut attaquer ce tour-ci. Si elle quitte le terrain, retirez-la de la partie.)",
+          "official_rules_text": null
+        },
+        {
+          "id": "eefebbcf-db78-4f26-b4cd-2c9501f5c446",
+          "collector_number": "144",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/eefebbcf-db78-4f26-b4cd-2c9501f5c446/render-75260599-4ec8-46d2-89ac-5dac9d58dfaf.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=aHUxc3FrJtRp6YsWUA9aL5h0wQ-WG7c~enTkcgN~BPEcbwAViNUc-ffdpAHpeRKFYSFK8pFqvUkRH3T44t7yegQakDOo~LK83QBCYNmdgriqJvFietTW8Y5Jf~lPCIvawAYeFruDQkNkzb0ZL8j-rpmlfjk5CS9idzf2YDOb4ge7EefacuFzZt05Z~LyLEtqfu976gZH2A0UKHqVGlUeTfiuTg4yxtbakcpMHqyTNETNsNNxSVcv2IZU8u85MMohMEYCdNov-RUK4-L1RE1Su8y1FL7xU-4rgBrrLIl-KlACqAsuqWIfb9LVf1oChTFcKCJTRwPRwA0u-Tg~T9aBGQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/eefebbcf-db78-4f26-b4cd-2c9501f5c446/render-75260599-4ec8-46d2-89ac-5dac9d58dfaf.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Iconic Legend",
+          "finish": null,
+          "artist": "Pandart Studio",
+          "language": "fr",
+          "localized_name": "V — Gosse Des Rues",
+          "printed_rules_text": "{Call} Jetez 3. Puis, ajoutez un Programme BRAINDANCE de votre défausse à votre main.\n{Go Solo}",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "3fc63c58-5954-4744-a5af-047bfc5cb159",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "144c3559-3518-4c01-b9e6-af42b7166661",
+      "external_id": "cb-over-the-edge",
+      "name": "Over the Edge",
+      "subname": null,
+      "display_name": "Over the Edge",
+      "slug": "over-the-edge",
+      "canonical_name": "Over the Edge",
+      "canonical_base_name": "Over the Edge",
+      "rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+      "official_rules_text_en": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+      "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+      "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "f1cf4133-45ef-4de5-abfc-757de1613731",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Common",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f1cf4133-45ef-4de5-abfc-757de1613731/render-mpvmc1b2.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=pRWvQ83LFVedcOsX~iJMG3Flb9ZsVvE62JknWElvu6PgvmVraZIbtpuB7eI~tKY4tqpbYsvx2eD39XOIFUnetgYKroI~hLfhSv6eFUIqfp70NTyKNXkkf1xzmQamYO9D~7cR-Emn5RBZkvf4QCqM4E-nvtMCsTWhi~BelZDHT5gCEaz8zKPfutlEEMnsGxwRNLZrI4PNCKHGnCZK8jOy0B1kvlnYZrbJRPnSgzizTXamz~h-7yLY5A1fasK3Kz-NGeNZz4qZ1pjq7c1DWk4QhHq1PdE4isP35P8ZyvopBODmu-HGDuDyG7ZliVbwO91FhXXM~WXS2M8hQ7EYGUOTfw__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f1cf4133-45ef-4de5-abfc-757de1613731/render-mpvmc1b2.webp",
+      "color": "Red",
+      "card_type": "Program",
+      "is_eddiable": true,
+      "classifications": [
+        "Merc"
+      ],
+      "keywords": [],
+      "cost": 3,
+      "power": null,
+      "ram": 2,
+      "artist": "Roberto Ricci",
+      "print_number": "034",
+      "printings": [
+        {
+          "id": "f1cf4133-45ef-4de5-abfc-757de1613731",
+          "collector_number": "034",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f1cf4133-45ef-4de5-abfc-757de1613731/render-mpvmc1b2.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=pRWvQ83LFVedcOsX~iJMG3Flb9ZsVvE62JknWElvu6PgvmVraZIbtpuB7eI~tKY4tqpbYsvx2eD39XOIFUnetgYKroI~hLfhSv6eFUIqfp70NTyKNXkkf1xzmQamYO9D~7cR-Emn5RBZkvf4QCqM4E-nvtMCsTWhi~BelZDHT5gCEaz8zKPfutlEEMnsGxwRNLZrI4PNCKHGnCZK8jOy0B1kvlnYZrbJRPnSgzizTXamz~h-7yLY5A1fasK3Kz-NGeNZz4qZ1pjq7c1DWk4QhHq1PdE4isP35P8ZyvopBODmu-HGDuDyG7ZliVbwO91FhXXM~WXS2M8hQ7EYGUOTfw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f1cf4133-45ef-4de5-abfc-757de1613731/render-mpvmc1b2.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+          "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20."
+        },
+        {
+          "id": "6213bf57-92d7-4a64-8d80-948ba53b8d80",
+          "collector_number": "β034",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/6213bf57-92d7-4a64-8d80-948ba53b8d80/render-mpvk55fl.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=hZKMPLXXU2aEHn36S0qt7MJFVhMRUWH-4jUHgwoWpC2c6aTKjEnG5jItgq8w0S4a6qI4FctDhY1YP522oJAx3SRe7aH7eRcJ4cZC9QOAgELZnv4ZzNbY7uYBbvLVvrxMB5LD5ZLQLWotfRQOID5cMFIZyOQABJ922RK2dtjypmzHEtuldxkPr42P2--0U56tKTxmTaHxARODJEQzAxNdbaglsmdVdS8LHbVMUW7ed1xcMxVemOgIS11jcbMouQs5X5ITwEGPeEXjF-McVN~0uZkIq6EK3LH3CmJJweujfmcr~eosViNSIM2DDtA-Fn5uZuuWBVXdD2d7LWITv~XJKw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/6213bf57-92d7-4a64-8d80-948ba53b8d80/render-mpvk55fl.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+          "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20."
+        },
+        {
+          "id": "9e5a152e-6105-44a4-8db0-9cbf6cda2252",
+          "collector_number": "10",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/9e5a152e-6105-44a4-8db0-9cbf6cda2252/render-mpwbyqow.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=OHP6UWrCbsC5i7awMkjbcEMiLZ2AbV2wms~p3I-ZOPLIb5ar1xt0ZtJwsOubQiFmuqNzPdFvK4M115xZz8lTeCHpJwJymju1klOJdHBYX6tcySP53ZsGbw2qagOp~fUQ3X4WlAqHtOGmK~IDggJXB6RqH0S14lILs3sm5PaxlXwXA7z23CXpx8nIcLaQi2o3hiIA5h2nkEfMihuD2zMl1QDi4ztwsGSxH6XSyeeTqCvGKglqQl7ci0C9S5gBGpc0USPFsHnp98MtqA~lBhoCkJw9FsPLMtMVud~NBbUY0aOoFLUBE35cvVyMEtJ64AWg3yBGovoBl~kBKPv5qSPqIg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/9e5a152e-6105-44a4-8db0-9cbf6cda2252/render-mpwbyqow.webp",
+          "set": {
+            "code": "embracingpowerretailstarterdeck",
+            "name": "Embracing Power — Retail Starter Deck"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+          "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20."
+        },
+        {
+          "id": "de9b7361-6d1c-4a27-bcfb-50ec7a78e518",
+          "collector_number": "β010",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/de9b7361-6d1c-4a27-bcfb-50ec7a78e518/render-mpwbnkb0.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=mePTGaWJnJLksn~MHoSIS6eM4mX02uk0k9UtoEW2S4H7muaVPQUSpdoHCF9tcB2LQy8Q4rBunuRWw5W2TBn1ci4GdM60uSW1LIoSBb0WmymT2Qs8jEiITrz0ctg3ZcZYw2yHg0MDvAWyFUj-iRlVIpiWYkreYLQAk8JQDkeDGEi2BV2GCZjcrMSuie-kePgpTd9VMNf~tv13oMCCo6ryuePzsi1FLwdtVWAfv3eJXfyEZv-oT7cfTd1glOECuSL7ZKRaYptbG-~VEGVwVM2pmdyspk9DdItf9wABPkjkf2hCK-b4HSiZqIA3NlIvVwugQNUJC2c4mgrpoCli1YXJbQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/de9b7361-6d1c-4a27-bcfb-50ec7a78e518/render-mpwbnkb0.webp",
+          "set": {
+            "code": "embracingpowerbetastarterdeck",
+            "name": "Embracing Power — Beta Starter Deck"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+          "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20."
+        },
+        {
+          "id": "cf48d5e6-21d2-4d17-a731-5dc9091c6cd1",
+          "collector_number": "007",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/cf48d5e6-21d2-4d17-a731-5dc9091c6cd1/render-mqf82fxe.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=hO4gjasos41eNv3zxShk0GxvJaTQlshT8ZcdrhapFP8HFzOCnGrgtDKiDyvM8Urmfwghw0xAkpyD4tZZAYZlkGkosk5HglQJ4QTsjtXlTJrT~5T~9zEQ9n3V57hcYLdDKUMgAtwRo1F4rlnMnIOL6ESFZ1yh-RmjDcyQonQVZnoowU88SpXoWiD1I2Bkx~MpdIDDyoWaimBMhjV0OXMx5PGfOdeLk2SYg9961UWhPPOUjgXT3iCssCiekZx3SjBNy7nsaaR~pcOAMbDHRFJVv3qL0hB8l22Jx2tlkHvAl6kORSxsEPJ3Dpo-dEF~C6o90MZMMqSZXpOva1FMvXBjfA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/cf48d5e6-21d2-4d17-a731-5dc9091c6cd1/render-mqf82fxe.webp",
+          "set": {
+            "code": "arasakademodeck",
+            "name": "Arasaka Demo Deck"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20.",
+          "official_rules_text": "Defeat a Unit with power equal to or less than the value of a friendly d20."
+        },
+        {
+          "id": "a0c8883d-7b8b-4b1f-bb6b-8f4c762f3fdd",
+          "collector_number": "034",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a0c8883d-7b8b-4b1f-bb6b-8f4c762f3fdd/render-44b5706c-32e3-40cf-bb5f-ff23ca5b36d4.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ZoVZQL0lHILoByKkS0cZtXfdrXeZByTEJodNuMzWP2IKsr-i7u206dt0BeNagIyktxHCuhOH-yC-f-2VOlZe6fqs2jgxq99mVaBbs7mIxIz0JdaRgRC~Qg5eW2n~mQnn9xKTVk~SPnSncaq7zXROwh5Lu1IHZX6dZj4BrgFSF5nnM~8iKBxgVpethY7DqAHwosTLfn78hLLANoy58IoQFMmvV8uBFQLjhhpJAnpCYUwIMWv3aVTrA0JFQWmyQIFZWW4GsovNBKu094LQb97WW6Q~zMt5qlxNygxCEvUu1Fzzi~KLUQ1TNabt511V5GEqFbzrvlguUm-GPtZtsC8n-g__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a0c8883d-7b8b-4b1f-bb6b-8f4c762f3fdd/render-44b5706c-32e3-40cf-bb5f-ff23ca5b36d4.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Roberto Ricci",
+          "language": "fr",
+          "localized_name": "Au Bord du Gouffre",
+          "printed_rules_text": "Éliminez une Unité de Power inférieur ou égal à la valeur d'un d20 allié.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "f1cf4133-45ef-4de5-abfc-757de1613731",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "31fa5825-946a-4ca2-afa8-8f07b9898d6a",
+      "external_id": "cb-yorinobu-arasaka-embracing-destruction",
+      "name": "Yorinobu Arasaka",
+      "subname": "Embracing Destruction",
+      "display_name": "Yorinobu Arasaka: Embracing Destruction",
+      "slug": "yorinobu-arasaka-embracing-destruction",
+      "canonical_name": "Yorinobu Arasaka — Embracing Destruction",
+      "canonical_base_name": "Yorinobu Arasaka",
+      "rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+      "official_rules_text_en": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+      "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+      "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec",
+      "set": {
+        "code": "embracingpowerretailstarterdeck",
+        "name": "Embracing Power — Retail Starter Deck"
+      },
+      "rarity": "Epic",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec/render-mpwbzegh.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=lmsNtf~BiLi5sO3uEZ3TbspJvnpJ-gpOw3UZQYa9xXlrWLr1Cze4vbeJ1wtYf26ruH5uKXutvu2OBPwWnIv0Z50WHe2JJgRnFOrPW7t-Qc4Ob31~lstUkcryxVZMuZLvelzr-RR5FD1mG6qirKaoEkNrTvU8ytahooTeMZVc1tITUr1QH6PRxOScLU5UhhvEtZdDzWIN~2wBOArmbRXll1lBZ1gDT~H861dMfegH7rxtKqY3vutte65juVsaYvX2u69hbTziax-YEQMHj1Cn9q-AYqnpe3rp8KnCFSUh8J~hD4HVVtag3Od1QoZuZKHkTYg6KvuFsTtZryqC8xQSog__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec/render-mpwbzegh.webp",
+      "color": "Red",
+      "card_type": "Legend",
+      "is_eddiable": true,
+      "classifications": [
+        "Arasaka",
+        "Corpo"
+      ],
+      "keywords": [],
+      "cost": null,
+      "power": null,
+      "ram": 2,
+      "artist": "ADIA",
+      "print_number": "001",
+      "printings": [
+        {
+          "id": "f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec",
+          "collector_number": "001",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec/render-mpwbzegh.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=lmsNtf~BiLi5sO3uEZ3TbspJvnpJ-gpOw3UZQYa9xXlrWLr1Cze4vbeJ1wtYf26ruH5uKXutvu2OBPwWnIv0Z50WHe2JJgRnFOrPW7t-Qc4Ob31~lstUkcryxVZMuZLvelzr-RR5FD1mG6qirKaoEkNrTvU8ytahooTeMZVc1tITUr1QH6PRxOScLU5UhhvEtZdDzWIN~2wBOArmbRXll1lBZ1gDT~H861dMfegH7rxtKqY3vutte65juVsaYvX2u69hbTziax-YEQMHj1Cn9q-AYqnpe3rp8KnCFSUh8J~hD4HVVtag3Od1QoZuZKHkTYg6KvuFsTtZryqC8xQSog__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec/render-mpwbzegh.webp",
+          "set": {
+            "code": "embracingpowerretailstarterdeck",
+            "name": "Embracing Power — Retail Starter Deck"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "ADIA",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        },
+        {
+          "id": "362bef23-c935-4729-a13b-dc3bc646d9b3",
+          "collector_number": "β001",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/362bef23-c935-4729-a13b-dc3bc646d9b3/render-mpwbnlmb.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ffY5JpMmkggB~pthUdn1zqZwJyx4xjSgYOfjE7tV-iWZI03d2S6srjx9fVNNKEF7JL34GRUDi5Umfu3UvYFu2iyc3jCTkZw03CTxl5v12zjZeUNA4FbsZuqgKPdQWmSUh~rShdm5CqJECp-qGDO4wHp1ERmKAjjNQHSQ~Ke6td8wdM4HqQhiuxfreh1-pGFFMsyr2IM4kPbEGjjf1aNNR2U88cCFIUjs5j2Iu6tjZe8EusN84v1eTbkcpumX9PI--Otfwl6B0p8KLDdRErL3ljBJhOCMv-LL7eALrGxNUCHy452kH5xNeaaFlTlsly3FVWNjlc8hgnOIwvQ1fSZ~mw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/362bef23-c935-4729-a13b-dc3bc646d9b3/render-mpwbnlmb.webp",
+          "set": {
+            "code": "embracingpowerbetastarterdeck",
+            "name": "Embracing Power — Beta Starter Deck"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "ADIA",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        },
+        {
+          "id": "aaad5db8-fcd4-42f0-8ced-e7527dbccf79",
+          "collector_number": "001",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/aaad5db8-fcd4-42f0-8ced-e7527dbccf79/render-mqf81pwo.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=oHjl2c0IFFATbGP95RFasA3~-7q9obSwgGfIH1V5g-P3NYdCDJBU0Lb5hvSA~qX78wllk7iqXsmEkqx3ESY4GpI4fOxBhVwVmMWrzOn5umnDRiDgThne2O2BXLCZXTu158gx2D2jA70pkRzd2efqXhhp9D2JW8AUDVVuhY90IssDWENf2Quu9l61hS25mJOjdDGJMQ4e5rY1qH2GZwQtISaAEfoSMexY9NwUpVvCGPmtVrkci5kRjgx5dl~clQN9L56R3gxZQ9~-6tcgnnl2i1NMNaOahYrp8d1wZRM3lLebviZx6kX4g57eHalCuaS8nBWey6frSyADVnNhFSWbnQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/aaad5db8-fcd4-42f0-8ced-e7527dbccf79/render-mqf81pwo.webp",
+          "set": {
+            "code": "arasakademodeck",
+            "name": "Arasaka Demo Deck"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "ADIA",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        },
+        {
+          "id": "dc7bb3cf-1005-4584-ad7a-447f0ccf07bf",
+          "collector_number": "001",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/dc7bb3cf-1005-4584-ad7a-447f0ccf07bf/render-mpvt1j4x.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=hJXE1SLkhBw3Vj5thEYc1bRxfT3MgWlhrkUKWjwdpljY~S~aM4oQuJsuk1fTMAN0j7w~E15mByTN05Nj5x2WRNy03q2d1-7~jaA-aMpm3de1r4~oL9zK-BCy~THpzWrkAvThtVgNC52VlMEFuDqIABCK1qmNPXggGFXNQJulDgfWD3Q8xN2-kSJBipN3bgWwWevOzOlGivcdE6os-Hfcl3KYnehUN1pMNO8PRtprJfk4S4m-quAsS0oKWGmO1GFAj6xta2~9Fv~LKzpLI3tMr2AKc8qWleHf9JNT~CdyINwkyAsKGKijHirDOAglWrDEuwVftGjpH0C2217l8-nV2g__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/dc7bb3cf-1005-4584-ad7a-447f0ccf07bf/render-mpvt1j4x.webp",
+          "set": {
+            "code": "boxtoppersretail",
+            "name": "Box Toppers — Retail"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Vincenzo Riccardi",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        },
+        {
+          "id": "12337d92-713c-4c7c-8a16-595a7b4717f1",
+          "collector_number": "β001",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/12337d92-713c-4c7c-8a16-595a7b4717f1/render-mpvsti09.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=rosrPBLh11CYnC2SGn8Q4dr7sZ7SnWGW~ZkBkrTifNM~Epz8ewIFjP9fOn4-3US52vy2qvNFDDZSERs4XckPvrzus3EdGb5p9Ql4xhM4T8METp6Cxm-BE-LvykruQvedBCaQkrjgW5zd2Spn4T63vTZpvl0hTMSR1dN1ubKcz4-WbxfcH3OSV~ygg6dWZRyufFSFiJtqKbBYvegovosnzcgkMft~R-X4Z-N8EBY51dfl4ZnoLAsVB0Tn0LlMNUm4miLtzi4r1guTJJPIEtB85OlmqSdC2d0HdikmDasHCk7aZDsYjGWz-9wNUJNX~FtR7HOdx~u~QOQVx-s745V-UA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/12337d92-713c-4c7c-8a16-595a7b4717f1/render-mpvsti09.webp",
+          "set": {
+            "code": "boxtoppersbeta",
+            "name": "Box Toppers — Beta"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Vincenzo Riccardi",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        },
+        {
+          "id": "ba15a39b-fc76-474b-a2f0-76e5069a69e4",
+          "collector_number": "034",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ba15a39b-fc76-474b-a2f0-76e5069a69e4/render-mtcqj3os.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=Ocsrxb96J83Necv5gJA-~80iQGNNErkvKw82bxu3WnFVqSJ2mHchYNqFkJ7pxAlfyCU-1bjX7xGEQee25JX4EjQBU0Vbat7d2a-tjoECkXhbSRVumuiLf7H2J3qqkx8NYT2iElRoOo8oMmQG5bCaxZI7qvmi7PlrnzQcP0lHlTTMPgwulhyU~hENCQ4vGR-dUwxz4uav-vCnilNk5J24dUWwu8u6hTbLk7suclGqggMleI6LfRS~iwK0NrLgH7BfYjuxd2UDWFdWB-EqEyHwuRh77degma62rdVy8zYRwGN~Zk5nd8cuHKIdOOIAucE7abWwRYlcUgj2TY6JJCiaoQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/ba15a39b-fc76-474b-a2f0-76e5069a69e4/render-mtcqj3os.webp",
+          "set": {
+            "code": "edgerunneropens1",
+            "name": "Edgerunner Open S 1"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Vincenzo Riccardi",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+          "official_rules_text": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        }
+      ],
+      "selected_printing_id": "f70b75b5-aa2f-4c2d-b8c3-01fcb2a670ec",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "4acee220-f0ae-4bdc-85c9-f8e70ba99673",
+      "external_id": "cb-rebecca-having-a-moment",
+      "name": "Rebecca",
+      "subname": "Having a Moment",
+      "display_name": "Rebecca: Having a Moment",
+      "slug": "rebecca-having-a-moment",
+      "canonical_name": "Rebecca — Having a Moment",
+      "canonical_base_name": "Rebecca",
+      "rules_text": null,
+      "official_rules_text_en": null,
+      "printed_rules_text": null,
+      "official_rules_text": null,
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "71a35836-e604-4d98-ab56-58bfb4581033",
+      "set": {
+        "code": "PRM01",
+        "name": "Set 1 Promos"
+      },
+      "rarity": "Nova Rare",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71a35836-e604-4d98-ab56-58bfb4581033/render-msyihf1e.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=EqgOmU78Q23AQZoFVF3PeFtD4I8jeBeW~RrYMkRyiVrnp46ErQuSYDfO9v4-6OwYHSAZdF-nWkVnAIbSlvd0C6iTkd--jeT7MfXP6k0rVXg0Xkwvg1LdLanRd-GTQhx17kl0FsrDcwXIAE1w7F0ZUmbpDyVhtARNBC60q4eDiOomC5s7-1Ikxbklt1C-MEWcVxAuy~D3q1CCpxZEEoptdESOBdYEPdIiz68M6oqgMH~~~XZueNiW-MQYi5MOnPetDft0q~D9xGGkUbx-phc3~PKQ1yJPvGoY-fPCoUZyJV980U9m0na-pe4QbDDDH~gERlSXVMGg0jzVDlxRE768Jw__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71a35836-e604-4d98-ab56-58bfb4581033/render-msyihf1e.webp",
+      "color": "Red",
+      "card_type": "Legend",
+      "is_eddiable": false,
+      "classifications": [],
+      "keywords": [],
+      "cost": null,
+      "power": null,
+      "ram": null,
+      "artist": "Narupiti Harunsong",
+      "print_number": "005",
+      "printings": [
+        {
+          "id": "71a35836-e604-4d98-ab56-58bfb4581033",
+          "collector_number": "005",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71a35836-e604-4d98-ab56-58bfb4581033/render-msyihf1e.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=EqgOmU78Q23AQZoFVF3PeFtD4I8jeBeW~RrYMkRyiVrnp46ErQuSYDfO9v4-6OwYHSAZdF-nWkVnAIbSlvd0C6iTkd--jeT7MfXP6k0rVXg0Xkwvg1LdLanRd-GTQhx17kl0FsrDcwXIAE1w7F0ZUmbpDyVhtARNBC60q4eDiOomC5s7-1Ikxbklt1C-MEWcVxAuy~D3q1CCpxZEEoptdESOBdYEPdIiz68M6oqgMH~~~XZueNiW-MQYi5MOnPetDft0q~D9xGGkUbx-phc3~PKQ1yJPvGoY-fPCoUZyJV980U9m0na-pe4QbDDDH~gERlSXVMGg0jzVDlxRE768Jw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/71a35836-e604-4d98-ab56-58bfb4581033/render-msyihf1e.webp",
+          "set": {
+            "code": "PRM01",
+            "name": "Set 1 Promos"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Narupiti Harunsong",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": null,
+          "official_rules_text": null
+        },
+        {
+          "id": "f625d2ac-3007-48f4-82b3-b521fc11a172",
+          "collector_number": "007",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f625d2ac-3007-48f4-82b3-b521fc11a172/render-msyii4oh.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=FsEklo8U~OMvtIEqH2TFyQ-rhGdT-D2n9WT0Sfgn8SmYPLu2Q96Wlc9OKV1akuOxS~I7heTzV~ZxHbkk-9~BTPVsXwLpwb04foDDMy0TWXtXr65ccgYhmWPTcCSWwHOLVX0IebmsSc6oJm-juyr4Or17bYUlkuOvjQUoziHsG-Ujyp8~Mm24Ek2Qp96Mfsgrowr-hm0mWanwrNrEjbGOzmBUaIfaTHWYlxPQRtgqH205maUIaDWQ5UWg94nrkaj5WehZtmbVMvULouz5D4LRIHAGz7HAQbYPzaaXJleVTBQ1pNlp3N1i~5I88ZLI89ZWTFV2rhBeg~-eBr7itwnFEg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/f625d2ac-3007-48f4-82b3-b521fc11a172/render-msyii4oh.webp",
+          "set": {
+            "code": "PRM01",
+            "name": "Set 1 Promos"
+          },
+          "rarity": "Nova Rare",
+          "finish": null,
+          "artist": "Pandart Studio",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": null,
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "71a35836-e604-4d98-ab56-58bfb4581033",
+      "rulings": [],
+      "legalities": {
+        "standard": "not-legal"
+      },
+      "legality": "not-legal"
+    },
+    {
+      "id": "78ea68b3-1260-416b-9f88-d6be4586232b",
+      "external_id": "cb-overwatch-panam-s-gift",
+      "name": "Overwatch",
+      "subname": "Panam's Gift",
+      "display_name": "Overwatch: Panam's Gift",
+      "slug": "overwatch-panam-s-gift",
+      "canonical_name": "Overwatch — Panam's Gift",
+      "canonical_base_name": "Overwatch",
+      "rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+      "official_rules_text_en": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+      "printed_rules_text": "{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+      "official_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "336131d1-3bc8-4b39-b893-5fce9be8ce7f",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Epic",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/336131d1-3bc8-4b39-b893-5fce9be8ce7f/render-mpvn1gb1.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ZsKOYq0nlw4DiW0C39WFBrSPhlghlO8rpHj63-fmXT2qlYiRvbdPAMSiXsbISCMIemlsmT00Uq~RqLCQE5i6Weh32r2S8N4UvAuWt~mWYECR~PQ7rd9JlxAsuxBV57OexxK9aSgyFNINMQH6g-tLP4F6hhO~aN0v8neT26-HpPPZMKJtYFImAuQMU5J2LS11NIxV15R4LsUbFkP2I0GAvcQ-wVqJq1k9J9-UcT5vVxoOfXofaf~-gwK1B1A8efaxjb6DNaUjJuMh3l5~~ZoscmYg5XRCumCGcNoZMX4OTHPrTbY~CynvvRIo7RmINW9oUl0mXxgJCxGRRa-Ym8wwgQ__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/336131d1-3bc8-4b39-b893-5fce9be8ce7f/render-mpvn1gb1.webp",
+      "color": "Green",
+      "card_type": "Gear",
+      "is_eddiable": true,
+      "classifications": [
+        "Weapon"
+      ],
+      "keywords": [],
+      "cost": 4,
+      "power": 4,
+      "ram": 4,
+      "artist": "Mooncolony",
+      "print_number": "093",
+      "printings": [
+        {
+          "id": "336131d1-3bc8-4b39-b893-5fce9be8ce7f",
+          "collector_number": "093",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/336131d1-3bc8-4b39-b893-5fce9be8ce7f/render-mpvn1gb1.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ZsKOYq0nlw4DiW0C39WFBrSPhlghlO8rpHj63-fmXT2qlYiRvbdPAMSiXsbISCMIemlsmT00Uq~RqLCQE5i6Weh32r2S8N4UvAuWt~mWYECR~PQ7rd9JlxAsuxBV57OexxK9aSgyFNINMQH6g-tLP4F6hhO~aN0v8neT26-HpPPZMKJtYFImAuQMU5J2LS11NIxV15R4LsUbFkP2I0GAvcQ-wVqJq1k9J9-UcT5vVxoOfXofaf~-gwK1B1A8efaxjb6DNaUjJuMh3l5~~ZoscmYg5XRCumCGcNoZMX4OTHPrTbY~CynvvRIo7RmINW9oUl0mXxgJCxGRRa-Ym8wwgQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/336131d1-3bc8-4b39-b893-5fce9be8ce7f/render-mpvn1gb1.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+          "official_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
+        },
+        {
+          "id": "768ac843-133b-4c01-b4d9-c1bc9c28470d",
+          "collector_number": "165",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/768ac843-133b-4c01-b4d9-c1bc9c28470d/render-mpvn25vy.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=sxXdmCPKS05uGMtLZZyYQGnlXwJUl1sBHJmDN0Uofl-Rz0OQVqIV5z0WS~U0MX1JJQuT72X7PiqzYn6oQMSJUzLDRa1naRnuOpF0H98m9Ua-owGekyF7F2gsRgM9TWLsP1k0~KauuSySpQYbkBwwe3M9ZEuXfsujXUir1Dw-85Id5fp13bXd7oZBoqtc8d5VleQncQP~5GEDtdskAtM7UqLNMPqfgtkcgJAz1-aM-0~khUkBWah7kj3IJ1rra3Kvst1xZGENUTXksuUVQpRwTpSrxwpM1nthH1T9Az2aft~1O9rEve~LWFCaQJedmF4OzQY7xQ2A9Lfl-TmDOn7f5g__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/768ac843-133b-4c01-b4d9-c1bc9c28470d/render-mpvn25vy.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Dardo Studios",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+          "official_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
+        },
+        {
+          "id": "0f825d0d-be91-4f42-9e97-5d87488ee2fc",
+          "collector_number": "β093",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0f825d0d-be91-4f42-9e97-5d87488ee2fc/render-mpvjy2kt.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=kFwULcZqxhZw9mlYooBDMbhx4pc4kkidPf-4w9tIi9BCS-Mteom2TXWSyRvpXmscHgbMIGxb4TyEM-IHQNvK1lN6yOzOmw4Z5ql41iNLZRWk13H1wRT-U9qr3RPrrRBRo0xD3~a2stbWjlE6k7kRG-QPptz655iRt5gvlhzKq3bPtkRaVaUGLUzr-xI3zaPSKlOme2RoK75NooZou5IR-HTuCQTD4nqetR49DXB1wLfXDSXemkHojnoejoxgkogPj8NRKSIuT7dR4ibv1~K4yJ9z8XWATZuusGuX1~Gc~wV22WiUggN0QxuIoToS~4Hflc7Y-EgeQ5VlfWTJeMUm3Q__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0f825d0d-be91-4f42-9e97-5d87488ee2fc/render-mpvjy2kt.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+          "official_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
+        },
+        {
+          "id": "775e7d6b-b9d9-48cf-a34d-00ba2b1c0a43",
+          "collector_number": "β165",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/775e7d6b-b9d9-48cf-a34d-00ba2b1c0a43/render-mpxm741u.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=LOtGozJ06psVEM3CbVSu2ZfET4FPcJFIWa3lPFFWBVkog7MB7jwlrpSb5hnS8KiRr3eyO5jGrd6QkAk2EZY4QCu0WIAMk4IZNgUK1-wqufHQen9S3aGuVgBEz7ESiUphPEjHdsHxCE44Ag0DV6ArgkVzvxgphwNGS3M7Cl9SHUkYJfp-7dh-SKMmOb1GAsgZLjpQgx15Jox1UgScrtFWikEsbO-FrxlShQYh7ZITDMuvtsIi3Ccb9UQGPjJL42RVCWDTxR5Nby85NEeH0tnnPF5CWMxPTM4KDls9dgcRwHwR2XXme1l1FkP7mQxN44JA5L~npPFaUc4GVQeER~RxRw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/775e7d6b-b9d9-48cf-a34d-00ba2b1c0a43/render-mpxm741u.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Michal Ivan",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost.",
+          "official_rules_text": "(Equip to a friendly Unit or face-up Legend.)\n{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
+        },
+        {
+          "id": "809a9921-cc08-4fa8-a3b5-9559cdb82a07",
+          "collector_number": "093",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/809a9921-cc08-4fa8-a3b5-9559cdb82a07/render-14b9b705-33af-4898-815d-fc6273f23d00.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=KUz95lO4~e1A8-2CjTcdr9M9J7k7ho~UNTIKWW5nHc6Nzze0IE0krb~0NDytdkP-Wm17g8DM1yADSFbrkrNZuEg0wV3DJm1d7Fw9Ogl1-AVQP4PsHMAL4WdxuL4llcLanTgFrcPYW1-62G9iyensvHqJPghjV8TW8rAUueei8bFlCbL3nWQnENfu39GOkArfWgquExnI4H8o31pUnwE1BwKhNJkWDPIvS7nzBpjmkAEDTkCX3ri-kft~TBNBdDlui7wuKnbvegknQx~HYKV7P5vIBnMbzv6qmWOjzV6fYU5tSjSeWL3Nhh1ByKqSYXU1YwFw3JGWvJGYTXOeQgwlpQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/809a9921-cc08-4fa8-a3b5-9559cdb82a07/render-14b9b705-33af-4898-815d-fc6273f23d00.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "fr",
+          "localized_name": "Overwatch — Cadeau de Panam",
+          "printed_rules_text": "(Équipez à une Unité alliée ou une Légende alliée face visible.)\n{Quick} 1 €$, {Spend} Défaussez 1. Éliminez une Unité rivale épuisée de coût inférieur ou égal au coût de la carte défaussée.",
+          "official_rules_text": null
+        },
+        {
+          "id": "220a69ab-4470-49f6-b0c3-d97036ac549b",
+          "collector_number": "165",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/220a69ab-4470-49f6-b0c3-d97036ac549b/render-d58d9004-53fb-43f6-b5cf-67c87d40a387.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=L3yFhzjynGH5OjB2P9xH2WuOHM0T6wc~n2cZ8Cpwg7kANSknYWCfY~T6M1pZRn8XkiUaaslh8JBuKsc9ZPJ834kmC6Qqe~OqiYr0RETL3lcHEZrsQ9cHgAJWu9kfNVDhpAmYqpHgEZMKa1Gv3plVqKH5hjZlMhyht~7zTUvRYcXTMTFqlZhDk6SL5A17UJtjvjdox6C8UTY53L3E3mYqUAD4OnaxeR1JzSl-XvBEyrH-K9aM6ozzS5BOlc~U4tD5edRTgCHD18Q9Y5cGGWm9UscDbJw-OUbaD-CXa220N4GEgmNaZC5~WkzHmYDGNrIp7x4WE0OUlceEs9xTFo~wPA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/220a69ab-4470-49f6-b0c3-d97036ac549b/render-d58d9004-53fb-43f6-b5cf-67c87d40a387.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Dardo Studios",
+          "language": "fr",
+          "localized_name": "Overwatch — Cadeau de Panam",
+          "printed_rules_text": "{Quick} 1 €$, {Spend} Défaussez 1. Éliminez une Unité rivale épuisée de coût inférieur ou égal au coût de la carte défaussée.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "336131d1-3bc8-4b39-b893-5fce9be8ce7f",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "3c4cf61f-c469-4ad6-a209-67e715f9d45b",
+      "external_id": "cb-chrome-fang",
+      "name": "Chrome Fang",
+      "subname": null,
+      "display_name": "Chrome Fang",
+      "slug": "chrome-fang",
+      "canonical_name": "Chrome Fang",
+      "canonical_base_name": "Chrome Fang",
+      "rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+      "official_rules_text_en": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+      "printed_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+      "official_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "40db55a6-0220-4cb9-8854-0e23f7cb91f8",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Common",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/40db55a6-0220-4cb9-8854-0e23f7cb91f8/render-mpvlsztq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=gzhmA5tz3PNU8AoBBMiPDgE~DQ7bjHgTWF9HU6cZVHkxFVOiuBd38ZzXg1fYr~dp8jSAwdcCOgcmqz7pB~iIWyuMEXkXyl2DgGR6En9yE2n9h0Yq9fcAA~ZARkbCPCnIm2lUO5jK~juOz8n3ObnOxFuDFxni9J~I5hZmSro03uRTJtRC~kpj4o-E4EKJUrjZ3YmVYgokoQSzOH~9Th-wIfzzlL5bmfNZBtRKcfgVXnF1Qpo~7Oo34WxYMmYjXGY0NTBIc9tZDnsvzjhWKW2wjPqPF1AS9WmkzJV8PFnh7K8FcqicdBGGAQO-yjjCEycEu58~rCdtilULQ-NMUCeZ6A__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/40db55a6-0220-4cb9-8854-0e23f7cb91f8/render-mpvlsztq.webp",
+      "color": "Red",
+      "card_type": "Unit",
+      "is_eddiable": false,
+      "classifications": [
+        "Ganger",
+        "Netrunner",
+        "Tyger Claws"
+      ],
+      "keywords": [],
+      "cost": 5,
+      "power": 6,
+      "ram": 1,
+      "artist": "Bernard Kowalczuk",
+      "print_number": "008",
+      "printings": [
+        {
+          "id": "40db55a6-0220-4cb9-8854-0e23f7cb91f8",
+          "collector_number": "008",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/40db55a6-0220-4cb9-8854-0e23f7cb91f8/render-mpvlsztq.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=gzhmA5tz3PNU8AoBBMiPDgE~DQ7bjHgTWF9HU6cZVHkxFVOiuBd38ZzXg1fYr~dp8jSAwdcCOgcmqz7pB~iIWyuMEXkXyl2DgGR6En9yE2n9h0Yq9fcAA~ZARkbCPCnIm2lUO5jK~juOz8n3ObnOxFuDFxni9J~I5hZmSro03uRTJtRC~kpj4o-E4EKJUrjZ3YmVYgokoQSzOH~9Th-wIfzzlL5bmfNZBtRKcfgVXnF1Qpo~7Oo34WxYMmYjXGY0NTBIc9tZDnsvzjhWKW2wjPqPF1AS9WmkzJV8PFnh7K8FcqicdBGGAQO-yjjCEycEu58~rCdtilULQ-NMUCeZ6A__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/40db55a6-0220-4cb9-8854-0e23f7cb91f8/render-mpvlsztq.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Bernard Kowalczuk",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+          "official_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power."
+        },
+        {
+          "id": "d6dd0114-fdd5-452a-b752-3e58a2e137f5",
+          "collector_number": "β008",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/d6dd0114-fdd5-452a-b752-3e58a2e137f5/render-mpv4k4h5.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ByGXnZI9ExjNjfui4RMvwdSvAfU95Ry8A1gZrcqDSTFGFR3G~oKgLlA1TSACRsPhzP-ENDH01ELMTuLkrv9KTfvyH7RW89iU-JCuiQsIdPX4Rg2yolbbwMKCA7T1Z6OqjMwD1QkTXtHXHy8tCqeaIZf6Jy1vvWie5IQh484jgDZMLh57J~cnnAABifcGhw6J2-VXcC3lFFyFTNi9EbLjkq3946WVYog0zjHCQu4T-zYWevpeeq0DJPYMx2WIdvDjrG2XFJ4pJwqVXMPfonsVWajuC0VhcWNrxLCtMnL~DFHGYa5gEY-9KT92j-7RaCQOkiM2fJRVvKHiSOwxHZ~MuA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/d6dd0114-fdd5-452a-b752-3e58a2e137f5/render-mpv4k4h5.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Bernard Kowalczuk",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+          "official_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power."
+        },
+        {
+          "id": "0aab2858-fa5e-42f6-997e-39797fefb669",
+          "collector_number": "002",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0aab2858-fa5e-42f6-997e-39797fefb669/render-mpwbur72.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=TbnGfqsH2-2LDaoVjlp6WJFvuxnFGnCsTld~rOKKnQ-sRvtD2rQ0jBlR45radbM8B2axibNL4FV6LODNmC6qgRJrEvzQoYwPO5lfTriyh0Jkfpp7~3IjHEjLpX0SxLy4a4RhfWhroyuRGMs6xu11jK7pIk4Wd9Uym6GWNvLvtzDHecd43~BNHLYDJ4rVcpZFM-IxZCU87S9qH91kdaywzBVQINPerjX6HCaNIXKH6ARpXsdcABEswOl0obbmXdz-F1xjPZa4pnDHBIRXSV5iDge3hyETQoswhC2Yj395FZ3JRbNBx5DpC6G0PIvNw3cOr2m51lMQAMsElN1nShfBXw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/0aab2858-fa5e-42f6-997e-39797fefb669/render-mpwbur72.webp",
+          "set": {
+            "code": "embracingpowerretailstarterdeck",
+            "name": "Embracing Power — Retail Starter Deck"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Bernard Kowalczuk",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+          "official_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power."
+        },
+        {
+          "id": "1e80ecfb-a3f2-421d-ac71-c05547366fb6",
+          "collector_number": "β002",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1e80ecfb-a3f2-421d-ac71-c05547366fb6/render-mpwbkakj.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=Bh2xSSxSYoMVHtfsuUZLY-UYc9dnsvDNTs-GJtmI6IQdMsz9dEMaGbe7lFppzOaMWgJ9XU0zKoanmObhDkRElUm8LK7bDVEjm4VnuC6K82Dw3wnAwmHyP78eVr7EeJNmnnYayTre~LmIu9R22NVV5nq5kfO9FivmAv8hyc~b7NsAMMxGJUqqnYirHBjjFcuu-tanD6NLo2urGtF4N~~QkpkpV3E9eMKXklDqrHv9fpd4jqJo5e271PO-SlHeyc2BxTnYc1KdGtSn5qhCFwG3wfBk66V5H~FJtsh4cHtb2RwjLb89bTTAuS4klQHPglY0AcGfPKUgVV8DgmikvFNsTg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/1e80ecfb-a3f2-421d-ac71-c05547366fb6/render-mpwbkakj.webp",
+          "set": {
+            "code": "embracingpowerbetastarterdeck",
+            "name": "Embracing Power — Beta Starter Deck"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Bernard Kowalczuk",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power.",
+          "official_rules_text": "{Play} Until your next turn, rival Units can't steal friendly Gigs with value higher than their power."
+        },
+        {
+          "id": "a2ba9cce-3b49-4ad8-9ca0-fb8d9265e7a0",
+          "collector_number": "008",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a2ba9cce-3b49-4ad8-9ca0-fb8d9265e7a0/render-b6f76d74-e791-4cbf-b5eb-c27bd6117d66.webp?Expires=1793004990&Key-Pair-Id=K3SGRHESIHQPEW&Signature=KsSc6T9dAuxSFF8SK2slrUiflJq4Hp5s230DOt9urTPr~w8uaSwbO-YUci~bhQmpK-7eJqRIp7wR~behsR7MmBhxNg1rrC5tDnap4LrWSxN3yXucLDN9cWrkZd12ndoytJl9n7R0KQUV9w7t~aSGQseWtk3BMMZpgYHOITV8~9WSahmMj8ksqMWwv2O7~dT1AcRQ8u9CRRCNtF~eV0B2hYkXKp017AqXtv7AMbaOXRLtDMv6p64aQE6eS6BQ6GW17syjkl1LwRZ5zuMjSFyIqdE7QQpjyAiMoRhcz49BU6uoILz7lDCMwdrkcNPkZrfisn7L~2Q4ufDk-Ukd~ODF5Q__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/a2ba9cce-3b49-4ad8-9ca0-fb8d9265e7a0/render-b6f76d74-e791-4cbf-b5eb-c27bd6117d66.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Common",
+          "finish": null,
+          "artist": "Bernard Kowalczuk",
+          "language": "fr",
+          "localized_name": "Croc Chromé",
+          "printed_rules_text": "{Play} Jusqu'à votre prochain tour, les Unités rivales ne peuvent pas voler de Gigs alliés ayant une valeur supérieure à leur Power.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "40db55a6-0220-4cb9-8854-0e23f7cb91f8",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "9a0fd5a3-a00b-425c-a251-755eeab12bfe",
+      "external_id": "cb-towerfall",
+      "name": "Towerfall",
+      "subname": null,
+      "display_name": "Towerfall",
+      "slug": "towerfall",
+      "canonical_name": "Towerfall",
+      "canonical_base_name": "Towerfall",
+      "rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+      "official_rules_text_en": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+      "printed_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+      "official_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "15920617-a06f-4302-9dfb-c85d3470c7eb",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Epic",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/15920617-a06f-4302-9dfb-c85d3470c7eb/render-mpvmjkr0.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=dn6FSl6TXVtbHqSXxIjOGuxiMlo7OYv4PfonuJMt8g0-EE-VOrIdiNufVokFjbNia32LEpk4~w8QhOqhOItTbHEPKErShslQuP9mQnws~XeFmlCKBRgL7A3NZDsqmi85aXhILDRHR4sDK0vArfBa2uF79TGIu~-o49-8tAK8xj8FQJNYJPys0tVg9jr7r5RgwEy4VPAVWEOnUv0-TGieK4lMeh58~ttI6B7LgHU~VyM~7rCysfoKsQPzLJooKKJJDgS88nPafuuoNDK5dHHosyFOD~CXiCYjzLt1OHFEj0oJihrFg4YLnwWR9nmtjnUEVQaFJcrtkDRv7dvI4Qqkxw__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/15920617-a06f-4302-9dfb-c85d3470c7eb/render-mpvmjkr0.webp",
+      "color": "Blue",
+      "card_type": "Program",
+      "is_eddiable": true,
+      "classifications": [
+        "Braindance"
+      ],
+      "keywords": [],
+      "cost": 6,
+      "power": null,
+      "ram": 4,
+      "artist": "Mooncolony",
+      "print_number": "138",
+      "printings": [
+        {
+          "id": "15920617-a06f-4302-9dfb-c85d3470c7eb",
+          "collector_number": "138",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/15920617-a06f-4302-9dfb-c85d3470c7eb/render-mpvmjkr0.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=dn6FSl6TXVtbHqSXxIjOGuxiMlo7OYv4PfonuJMt8g0-EE-VOrIdiNufVokFjbNia32LEpk4~w8QhOqhOItTbHEPKErShslQuP9mQnws~XeFmlCKBRgL7A3NZDsqmi85aXhILDRHR4sDK0vArfBa2uF79TGIu~-o49-8tAK8xj8FQJNYJPys0tVg9jr7r5RgwEy4VPAVWEOnUv0-TGieK4lMeh58~ttI6B7LgHU~VyM~7rCysfoKsQPzLJooKKJJDgS88nPafuuoNDK5dHHosyFOD~CXiCYjzLt1OHFEj0oJihrFg4YLnwWR9nmtjnUEVQaFJcrtkDRv7dvI4Qqkxw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/15920617-a06f-4302-9dfb-c85d3470c7eb/render-mpvmjkr0.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+          "official_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0."
+        },
+        {
+          "id": "b4ff8d51-99e1-4d6f-b8b7-c98d59283400",
+          "collector_number": "167",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/b4ff8d51-99e1-4d6f-b8b7-c98d59283400/render-mpxvhclb.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=ftUjjzHZnkAoJl~ThLfGIffvwBXT41Zq9gTHTyx-7lZjRvedDzWQeQndMhJESau33833MG-5FNUXGG0TYYA7DENvy0I~LFfRtCStHQbsys8QN984PpxI7Moa6gQCljifneYoS1Kf3cE4jkmjTcOiLLmzJgPwglDx0L7RNH66gLvLcHmz19~uYJIOvhZqGTkf-VMxoLol8kQkpu1P2SXhAhCQUvdD6akYF9zlqsOukCrDz9AdC-ZZhBlykmK6fZ81ZChcN8~J7iVIHaZnv0xZdMKqDq8xE14khQN6YcGq-gT-C~LeMjHO~Ux1g-3xlusqTKBnMeCFNSYYbiPe5Amr7Q__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/b4ff8d51-99e1-4d6f-b8b7-c98d59283400/render-mpxvhclb.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+          "official_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0."
+        },
+        {
+          "id": "25508f49-7256-47be-bc95-c420c7105c62",
+          "collector_number": "β138",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/25508f49-7256-47be-bc95-c420c7105c62/render-mpvk46pt.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=GAK7OYczh23lCeKYShZ9uPMV99WyeK4uLsfcBk3zwZB5ljFT81qjOA6ltSaMI4aRJhLHr3WmCDF5FDA16mIZonk~FTxxMI6eXMWIOmWLeGWtXV57S0ijgbI~zZELfRi6EwOjm9adUtB~zeL0ULgd-N1YSkJIC~H864gi7H60KKBTS97lxHdfReO28HHcti0UTIttCmaumTqCswp4uVbAzObCBWc6tRiN1qN~jDa5SWP-HRpgT~roti6pMwfR9x2qemeaY8soYEt0N0eVsUNYeQTr4YDyypyQiW-rqH-~HRJtv479wl0PZ-vkMIQBP-MHidOZV7-NJ5D2ZQzQKx3uYw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/25508f49-7256-47be-bc95-c420c7105c62/render-mpvk46pt.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Dardo Studios",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+          "official_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0."
+        },
+        {
+          "id": "4d8a1ccb-6d46-45b1-839a-fd3b7fa84b72",
+          "collector_number": "β167",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4d8a1ccb-6d46-45b1-839a-fd3b7fa84b72/render-mpxlznrl.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=N90swsKD3sAaQ2byBMJQ3VdUwXpR-xnXeMPq9uwXbKADPjPI9UScob3guFuKI2vmZQc1izD6zcyzlFR6DcpWHjHTDcqmHG8r-54uGo57p4hSg9yMj32yrCiY3PVhwie4ZkXe7725B3JpHP4KK7WVjSSfI68UGVyiheIeAXNJrLmYsqZMhG3hMLghCPf7rQBXyoPpVBCgfZZ3cd3TpoBJGMdht4TIAg4NTAhQfxa3lx8GYG0dZQY8jCMTAVXnqAdb~JZWujIpTAELXntc1TAHt7if~sLJLgoxZ~WlGeAkh0WanKUtoeucW0c7sfkXpaAYcAjnSM5T6aUN~objZrB9wQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4d8a1ccb-6d46-45b1-839a-fd3b7fa84b72/render-mpxlznrl.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "ADIA",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0.",
+          "official_rules_text": "Choose one effect. If you have less ☆ (Street Cred) than a Rival, choose both instead.\nGive all rival Units -5 power this turn. // Bottom-deck all rival Units with power 0."
+        },
+        {
+          "id": "7b7ad582-cc40-4d20-899e-2aaec1eddc72",
+          "collector_number": "138",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/7b7ad582-cc40-4d20-899e-2aaec1eddc72/render-cb52eba8-038c-4a15-bcf3-91da1e14e6f9.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=iK3uPi8szTpNELWhu3EzsvadejwGrdMpdNgH4F5nnwsaC9mxqFJ3e02Al1t-p-rzOk~TB6FLgnImAOOqNuLHMYgGIOypwnXqkA8Fsch5LyDw8jgm4Akk7-rQcZkBILKnZNkLAjf~RVofGg75QhPRGGXM7yABUxzz4HDP43GPZHFk5VUz4Bz4Vk-8e7kCnN-2GhNw0xB0VKd9AUI7EWSUT8fwbtfPcXGwbTfYAppXlbw6O6qLj~uhHtoeBZVt~AKWN2kShMc4q5LwPTrG5w7r6Kxi7kdI~70JFV1Z58-irAT6OXGLJ-A08Brf3LfwGi6MJNNrkA89sSZVaX6kcQzC~A__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/7b7ad582-cc40-4d20-899e-2aaec1eddc72/render-cb52eba8-038c-4a15-bcf3-91da1e14e6f9.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "fr",
+          "localized_name": "Destruction de Tour",
+          "printed_rules_text": "Choisissez un effet. Si vous avez moins de ☆ (Street Cred) qu'un Rival, choisissez les deux à la place.\nDonnez -5 Power à toutes les Unités rivales ce tour-ci. // Archivez toutes les Unités rivales de Power 0.",
+          "official_rules_text": null
+        },
+        {
+          "id": "106d37fb-6703-4a32-82c4-8966054e58ae",
+          "collector_number": "167",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/106d37fb-6703-4a32-82c4-8966054e58ae/render-93133286-6660-4e33-ac4e-1be85afa4dfc.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=Vbf2l66rfAyW~FEmbrfP404vAgh~uXilpsQAdJ9vSrG0v1LFlIl-NIynW~i0ndNN6sksAUNNeRRxNr2a2JN05FLNHBs6-v1NdhpH~i8rmOTHcHh79C8LlcoCt3PatbjUVV3NSLG-IiXKQ-TKK3Trs2bhLXZcuRED36uk1gLF~C1YwLovsT4wpLBgAtweNrSr1gsBYhooe29E0lQinhM1eAfpt1OtGaUaOewRIg8mzcCk~XzivsyHb-bvlgGWLgZcXUaPQQJZB8CdTdluoPf-GFBoqvQ9OEMtjzZaBs2zyfxQsD0EYyN4vf596aMvt4qlQoSZpAG~XfHZNFkkMjTdlg__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/106d37fb-6703-4a32-82c4-8966054e58ae/render-93133286-6660-4e33-ac4e-1be85afa4dfc.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "fr",
+          "localized_name": "Towerfall",
+          "printed_rules_text": "Choisissez un effet. Si vous avez moins de ☆ (Street Cred) qu'un Rival, choisissez les deux à la place.\nDonnez -5 Power à toutes les Unités rivales ce tour-ci. // Archivez toutes les Unités rivales de Power 0.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "15920617-a06f-4302-9dfb-c85d3470c7eb",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    },
+    {
+      "id": "9d994a42-4a63-44ad-ad7a-edead6af06a2",
+      "external_id": "cb-rogue-amendiares-queen-of-the-afterlife",
+      "name": "Rogue Amendiares",
+      "subname": "Queen of the Afterlife",
+      "display_name": "Rogue Amendiares: Queen of the Afterlife",
+      "slug": "rogue-amendiares-queen-of-the-afterlife",
+      "canonical_name": "Rogue Amendiares — Queen of the Afterlife",
+      "canonical_base_name": "Rogue Amendiares",
+      "rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+      "official_rules_text_en": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+      "printed_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+      "official_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+      "language": "en",
+      "flavor_text": null,
+      "printing_id": "3193a6bd-3e99-4501-9c5c-8d5ea32c779c",
+      "set": {
+        "code": "welcometonightcityretail",
+        "name": "Welcome to Night City — Retail"
+      },
+      "rarity": "Epic",
+      "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3193a6bd-3e99-4501-9c5c-8d5ea32c779c/render-mpvlna4t.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=J2gbaUT74C41msBRsY3QqyN5bxNa1HQjA9MKRhaYWKFbbHKpaMwGdN~F9dnCR5JYzTk0ss~O0yYp-1jV~SvQCZLmQlz6Roa9i0l7~s8BR1tpUNflh0Krv51I23kSbU28dcKk3OWOg0m0ug8D~gLPhX7hQJLVo7WFuca72I6Eg6tK5BehcZZEd9rudg3o22Rmo-hEGqa9ZHgoMeb6RCR7V~jMz8gdClliU8HNlLAdtoHQ2V0Ic~Mig49qe-4Yfc44V5GUvSkUoXrpWRUWE7C0bvQK1d~4jV5HwZ-vxWr16LNT3-dWQXKIIFs-p0Lu3oGtLhSh18WGirCmRTKawVZH2g__",
+      "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3193a6bd-3e99-4501-9c5c-8d5ea32c779c/render-mpvlna4t.webp",
+      "color": "Blue",
+      "card_type": "Unit",
+      "is_eddiable": false,
+      "classifications": [
+        "Fixer",
+        "Merc"
+      ],
+      "keywords": [],
+      "cost": 5,
+      "power": 4,
+      "ram": 2,
+      "artist": "Mooncolony",
+      "print_number": "126",
+      "printings": [
+        {
+          "id": "3193a6bd-3e99-4501-9c5c-8d5ea32c779c",
+          "collector_number": "126",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3193a6bd-3e99-4501-9c5c-8d5ea32c779c/render-mpvlna4t.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=J2gbaUT74C41msBRsY3QqyN5bxNa1HQjA9MKRhaYWKFbbHKpaMwGdN~F9dnCR5JYzTk0ss~O0yYp-1jV~SvQCZLmQlz6Roa9i0l7~s8BR1tpUNflh0Krv51I23kSbU28dcKk3OWOg0m0ug8D~gLPhX7hQJLVo7WFuca72I6Eg6tK5BehcZZEd9rudg3o22Rmo-hEGqa9ZHgoMeb6RCR7V~jMz8gdClliU8HNlLAdtoHQ2V0Ic~Mig49qe-4Yfc44V5GUvSkUoXrpWRUWE7C0bvQK1d~4jV5HwZ-vxWr16LNT3-dWQXKIIFs-p0Lu3oGtLhSh18WGirCmRTKawVZH2g__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/3193a6bd-3e99-4501-9c5c-8d5ea32c779c/render-mpvlna4t.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+          "official_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn."
+        },
+        {
+          "id": "9f251692-ea15-45d9-8fa3-5833453502c6",
+          "collector_number": "166",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/9f251692-ea15-45d9-8fa3-5833453502c6/render-mpxvev8y.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=cewXtq2xjdaJwgb2N76i2uzpXqk9TtdzR3qoZEkSTE3kLgTjFcmqiJvbzezUZUAfeq0XPhwTERssDwcvTxspXiGk6O8lYZbHvwhNvdhkC13mpjpMGkwDDUftUVQ7~4mI1mfB13zpeVoBuMQ0mYU-yoLu2thYFe2ckxloir05x0we9ys8HUkj2WxS~nPlNjBlpKnAQEWpVrvL-49GSSIVC-oZ09JDVsqnXqNQE67SSZ4J1kwR6AZ6idYQ2LwVMOm0Cv1hluJSGTjlCsMFSRoTGgSfNU0DmMbMTHf~lQT7sqsOjyDs8m5EHyNbLFoWNah1teF4j6xHoueVivrUpGUULw__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/9f251692-ea15-45d9-8fa3-5833453502c6/render-mpxvev8y.webp",
+          "set": {
+            "code": "welcometonightcityretail",
+            "name": "Welcome to Night City — Retail"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Dardo Studios",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+          "official_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn."
+        },
+        {
+          "id": "4abedde2-f9db-4451-a2ab-fc7f594ea132",
+          "collector_number": "β126",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4abedde2-f9db-4451-a2ab-fc7f594ea132/render-mpv4txw9.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=n96kIhUx9~vNjaJ5hxp55cycpXAlkMBQsycEQ-Wo7ZSBX4rXZhAaUlf8VYK8NSnC4vPpHUV4zR3~lglJkkkxfFn7IXA3MYNuPAgq4ktnvwDZBoAbn0VKwAYcTsU1s4kkwRagc1dIc1UhS~23bYAOx0bJTzX4n3gjLpMGXeD-WzjsMk3EGNnsae5PTmGKfWgxGeQQP500yXNCLTTR-toF6xAlmeB49BO88~GKEO0SdUu6fu~N5Wcm8VlO0lXeeU7Ta5w-5z4a7STKmNZgRn7UhA9pQhR44l1X9YPpQ07zS-KJs8M8w9FcwHKj-4jEQfvMeoD7M0oKAYizAmbIIWOJKA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/4abedde2-f9db-4451-a2ab-fc7f594ea132/render-mpv4txw9.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+          "official_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn."
+        },
+        {
+          "id": "807c871c-bebe-4343-9b68-1f89af5ed0da",
+          "collector_number": "β166",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/807c871c-bebe-4343-9b68-1f89af5ed0da/render-mpxlxqiz.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=mE~bz8KJPiHY0YHOqmHcvpud622NS8V0uHIRpFqjTjDE0CWDnUDMyoWQSrCjfy7j46OAuCMZKqP48oMC4cOkUuIv04pIQFegfA76E7sLbbHapsNMEOIEc1pnW8Vkjeh3IzxT6crMxSaINxKwzMCMDimAioIRgkJ49CG-yiIyMqnoQG2CUCiE~l1Lck-W-gppWlMakZ3PiHjm4TFsbFRDd8joHPh4S1hIQ6WKXKVsbvHTRkr7VS~XFNgV4Ax-aAAnMWr28dGAh2r8K8XiFlCapBIXDcfWQ0uNUfCOJg3LbI9rofJtwXgKAq7YPB0wBl3BL9O8W0eeLz60YABvAl3vbA__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/807c871c-bebe-4343-9b68-1f89af5ed0da/render-mpxlxqiz.webp",
+          "set": {
+            "code": "welcometonightcitybeta",
+            "name": "Welcome to Night City — Beta"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "ADIA",
+          "language": "en",
+          "localized_name": null,
+          "printed_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn.",
+          "official_rules_text": "The first time another friendly Unit steals a Gig with value less than its power each turn, ready 2 Eddies.\n{Quick} 2 €$,  {Spend} A rival Unit loses power equal to this Unit's power this turn."
+        },
+        {
+          "id": "da689d07-a775-4c10-b3ae-5320feb56fea",
+          "collector_number": "126",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/da689d07-a775-4c10-b3ae-5320feb56fea/render-9435a6db-2498-41e4-8761-ef85cfd8b8b0.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=HIdPVzScqb8-lAZFNkLnlJuW~uKAf2ZA6vjoH5uI~yefwFf6nLwppqP~wfFcInaxlYVGazujdT7QZR2S~LxZVhofQgVXIgSPKt0sa4BikZWnpMFZpqCFxf33XglTTwzNyCKf2KLEVp-kQrurf76ptZH6V2Ay3yxcVEdS4TeP~ODGU28VkFrHPWPRqDEoETVMxkvBsZ~msuPARbw7LCzFIoBtQ1HJkWLPOalDqNDS-XsftMVkIZ6BA0Ll16bKx3MqnexrnLnbuO~Bm58NgLvs6cwvymgokFLc8RMJiNNrJqNfG4xO5P3eo1p0mPlTh24cNG8nnmfbiK0-8YdxceuQ-Q__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/da689d07-a775-4c10-b3ae-5320feb56fea/render-9435a6db-2498-41e4-8761-ef85cfd8b8b0.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Epic",
+          "finish": null,
+          "artist": "Mooncolony",
+          "language": "fr",
+          "localized_name": "Rogue Amendiares — Reine de l'Afterlife",
+          "printed_rules_text": "La première fois par tour qu'une autre Unité alliée vole un Gig de valeur inférieure à son Power, préparez 2 Eddies.\n{Quick} 2 €$,  {Spend} Une Unité rivale perd un Power égal au Power de cette Unité ce tour-ci.",
+          "official_rules_text": null
+        },
+        {
+          "id": "d97bfbb9-99ca-48bb-922a-367c79d2d689",
+          "collector_number": "166",
+          "image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/d97bfbb9-99ca-48bb-922a-367c79d2d689/render-4a1c718b-69f2-44b1-a37b-fde8548134e6.webp?Expires=1793005000&Key-Pair-Id=K3SGRHESIHQPEW&Signature=OHAL2-fCNdjHdFRgeKQiduJsywCEwWvVdwWtF5ANf2j-RyFCweTxbpkB-PrwAkFWRSFOE8u80B1acKLJRsoZmKCNkBTYs9Sld2p03zUsW19~n5EkpZpuQXeNuIeH0KK3W5OZ3tly7Trfe3zars~0gLkeSqJIaLSZsn4ne1owpYwA--Jy3FffdogAPtPsSKkKIkpzFVfs2999MfDVDvoPpvm-E5JBpd4wUPBexGS3pT7OaMTUAJUCBcSPEhPxrR3VpNPc9tAbAYP2bmPkEK7l0qW9ARgSBuuGfJq58gVQZa4b412bt9t2QJZQ3D70-hTvoAWniIfMpNgap2xUpHWlIQ__",
+          "source_image_url": "https://dstcynss47vun.cloudfront.net/prod/cyberpunk/portal/d97bfbb9-99ca-48bb-922a-367c79d2d689/render-4a1c718b-69f2-44b1-a37b-fde8548134e6.webp",
+          "set": {
+            "code": "welcometonightcityretail-fr",
+            "name": "Welcome to Night City — Retail — FR"
+          },
+          "rarity": "Iconic Other",
+          "finish": null,
+          "artist": "Dardo Studios",
+          "language": "fr",
+          "localized_name": "Rogue Amendiares — Reine de l'Afterlife",
+          "printed_rules_text": "La première fois par tour qu'une autre Unité alliée vole un Gig de valeur inférieure à son Power, préparez 2 Eddies.\n{Quick} 2 €$,  {Spend} Une Unité rivale perd un Power égal au Power de cette Unité ce tour-ci.",
+          "official_rules_text": null
+        }
+      ],
+      "selected_printing_id": "3193a6bd-3e99-4501-9c5c-8d5ea32c779c",
+      "rulings": [],
+      "legalities": {
+        "standard": "legal"
+      },
+      "legality": "legal"
+    }
+  ],
+  "total": 9,
+  "limit": 60,
+  "offset": 0
+}
