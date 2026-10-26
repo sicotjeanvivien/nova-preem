@@ -1,8 +1,7 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { localize, type ReleaseGroup } from "../../domain/catalog.ts";
 import { releasesOfSet } from "../../domain/catalogIndex.ts";
-import { checkCatalogUpdate, type CatalogCheck } from "../../domain/catalogLoader.ts";
-import { parseCollectionFile, type CollectionFile, type ImportError } from "../../domain/collectionFile.ts";
+import type { CatalogCheck } from "../../domain/catalogLoader.ts";
 import { interfaceLanguages, resolveInterfaceLanguage, type Settings } from "../../domain/settings.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
@@ -10,8 +9,9 @@ import type { MessageKey } from "../../i18n/messages.ts";
 import { downloadImages, useImageDownload } from "../../platform/imageDownload.ts";
 import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
+import { useCatalogUpdate } from "../CatalogUpdate.tsx";
 import { useDataActions } from "../dataActions.ts";
-import { ImportDialog } from "../ImportDialog.tsx";
+import { useImportFlow } from "../useImportFlow.tsx";
 import { languageLabel } from "../labels.ts";
 import { Toast } from "../Toast.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
@@ -29,10 +29,10 @@ export function SettingsScreen() {
   const isDesktop = useIsDesktop();
   const { exportCollection, exportCsv } = useDataActions();
   const images = useImageDownload();
-  const fileInput = useRef<HTMLInputElement>(null);
+  const catalogUpdate = useCatalogUpdate();
   const [check, setCheck] = useState<CatalogCheck | "checking" | null>(null);
-  const [importing, setImporting] = useState<CollectionFile | null>(null);
   const [message, setMessage] = useState<{ id: number; text: string } | null>(null);
+  const importFlow = useImportFlow((text) => setMessage({ id: Date.now(), text }));
   useDocumentTitle(t("settings.title"));
 
   const set = [...index.catalog.sets].sort((a, b) => a.order - b.order)[0];
@@ -41,7 +41,6 @@ export function SettingsScreen() {
   const shortName = (name: Record<string, string>) => releaseShortName(localize(name, uiLanguage), setName);
   const entryRelease = index.releases.get(settings.entryReleaseId);
   const languages = index.catalog.languages.slice().sort((a, b) => (a === settings.entryLanguage ? -1 : 0) - (b === settings.entryLanguage ? -1 : 0));
-  const show = (text: string) => setMessage({ id: Date.now(), text });
 
   const groupDetail = (group: ReleaseGroup) => {
     const names = [...new Set(releases.filter((r) => r.group === group).map((r) => shortName(r.name).replace(/ — (Retail|Beta)$/, "")))];
@@ -55,16 +54,10 @@ export function SettingsScreen() {
     if (next.length > 0) updateSettings({ completionGroups: next });
   };
 
+  // A new catalog opens the update sheet (States 3); the result also shows here.
   const runCheck = async () => {
     setCheck("checking");
-    setCheck(await checkCatalogUpdate(services.catalog.source, catalog.manifest));
-  };
-  const onFile = async (file: File | undefined) => {
-    if (fileInput.current) fileInput.current.value = "";
-    if (!file) return;
-    const parsed = parseCollectionFile(await file.text());
-    if (parsed.ok) setImporting(parsed.file);
-    else show(t(`import.error.${parsed.error satisfies ImportError}` as MessageKey));
+    setCheck(await catalogUpdate.check());
   };
   const downloadAll = async () => {
     const urls = index.catalog.printings.flatMap((printing) =>
@@ -241,21 +234,13 @@ export function SettingsScreen() {
             <button type="button" className="data-button" onClick={exportCollection}>
               {t("settings.export")}
             </button>
-            <button type="button" className="data-button" onClick={() => fileInput.current?.click()}>
+            <button type="button" className="data-button" onClick={importFlow.open}>
               {t("settings.import")}
             </button>
             <button type="button" className="data-button" onClick={exportCsv}>
               {t("settings.csv")}
             </button>
-            <input
-              ref={fileInput}
-              type="file"
-              accept="application/json,.json"
-              className="visually-hidden"
-              tabIndex={-1}
-              aria-hidden="true"
-              onChange={(event) => void onFile(event.target.files?.[0])}
-            />
+            {importFlow.element}
           </div>
           <p className="settings__note settings__note--data">
             {t("settings.dataNoteBefore")}
@@ -273,16 +258,6 @@ export function SettingsScreen() {
       </div>
       <p className="settings__legal">{t("legal.settings")}</p>
 
-      {importing && (
-        <ImportDialog
-          file={importing}
-          onClose={() => setImporting(null)}
-          onDone={(count) => {
-            setImporting(null);
-            show(t("import.done", { count }));
-          }}
-        />
-      )}
       {message && <Toast key={message.id} text={message.text} />}
     </div>
   );

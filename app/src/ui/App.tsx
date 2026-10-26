@@ -9,6 +9,7 @@ import { I18nProvider } from "../i18n/i18n.tsx";
 import type { Services } from "../platform/services.ts";
 import { AppContext } from "./AppContext.tsx";
 import { AppLayout } from "./AppLayout.tsx";
+import { CatalogUpdateProvider } from "./CatalogUpdate.tsx";
 import { CollectionProvider } from "./CollectionContext.tsx";
 import { FirstLaunch } from "./FirstLaunch.tsx";
 import { CollectionScreen } from "./screens/CollectionScreen.tsx";
@@ -107,9 +108,11 @@ export function App({ services }: { services: Services }) {
       {boot.status === "downloading" && <FirstLaunch progress={boot.progress} error={boot.error} onRetry={download} />}
       {context && entries && (
         <AppContext.Provider value={context}>
-          <CollectionProvider store={services.collection} initial={entries}>
-            <RouterProvider router={router} />
-          </CollectionProvider>
+          <CatalogUpdateProvider onUpdated={(catalog) => setBoot({ status: "ready", catalog })} checkAtLaunch={navigator.onLine}>
+            <CollectionProvider store={services.collection} initial={entries}>
+              <RouterProvider router={router} />
+            </CollectionProvider>
+          </CatalogUpdateProvider>
         </AppContext.Provider>
       )}
     </I18nProvider>

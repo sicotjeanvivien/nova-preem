@@ -23,6 +23,7 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState } from "../cardLink.ts";
 import { useDataActions } from "../dataActions.ts";
+import { EmptyCollection } from "../EmptyCollection.tsx";
 import { useCollection } from "../CollectionContext.tsx";
 import { FilterFieldsets, FilterMenus, type FilterGroup } from "../FilterControls.tsx";
 import { cardColor, cardColorLabel, cardTypeLabel, languageLabel, rarityColor } from "../labels.ts";
@@ -46,6 +47,11 @@ const MOBILE_SORTS: { key: CollectionSortKey; label: MessageKey }[] = [
  * sortable table on desktop.
  */
 export function CollectionScreen() {
+  const { entries } = useCollection();
+  return entries.size === 0 ? <EmptyCollection /> : <CollectionList />;
+}
+
+function CollectionList() {
   const { index, settings, services } = useApp();
   const { entries } = useCollection();
   const { t, language: uiLanguage } = useI18n();

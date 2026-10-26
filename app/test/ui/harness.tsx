@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { manifestSchema } from "../../src/domain/catalog.ts";
+import { indexCatalog } from "../../src/domain/catalogIndex.ts";
 import type { CollectionEntry } from "../../src/domain/collection.ts";
 import { DEFAULT_SETTINGS, type Settings } from "../../src/domain/settings.ts";
 import type { CollectionStore } from "../../src/domain/stores.ts";
@@ -8,6 +9,9 @@ import { I18nProvider } from "../../src/i18n/i18n.tsx";
 import type { Services } from "../../src/platform/services.ts";
 import { AppContext } from "../../src/ui/AppContext.tsx";
 import { AppLayout } from "../../src/ui/AppLayout.tsx";
+import type { CatalogSource } from "../../src/domain/catalogLoader.ts";
+import type { StoredCatalog } from "../../src/domain/stores.ts";
+import { CatalogUpdateProvider } from "../../src/ui/CatalogUpdate.tsx";
 import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
 import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
@@ -17,7 +21,7 @@ import { SearchScreen } from "../../src/ui/screens/SearchScreen.tsx";
 import { SetPage } from "../../src/ui/screens/SetPage.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
 import { index } from "../helpers-catalog.ts";
-import { realManifest } from "../helpers.ts";
+import { fakeSource, MemoryCatalogStore, nodeHasher, realManifest } from "../helpers.ts";
 
 /** In-memory collection store, recording the writes. */
 export class MemoryCollectionStore implements CollectionStore {
@@ -70,6 +74,9 @@ export function TestApp({
   store = new MemoryCollectionStore(),
   settings: initialSettings = DEFAULT_SETTINGS,
   services: extraServices = {},
+  catalogSource = fakeSource(),
+  catalogStore = new MemoryCatalogStore(),
+  checkAtLaunch = false,
 }: {
   path: string;
   language?: "fr" | "en";
@@ -77,22 +84,41 @@ export function TestApp({
   store?: CollectionStore;
   settings?: Settings;
   services?: Partial<Services>;
+  catalogSource?: CatalogSource;
+  catalogStore?: MemoryCatalogStore;
+  checkAtLaunch?: boolean;
 }): ReactNode {
   const [settings, setSettings] = useState(initialSettings);
+  const [catalog, setCatalog] = useState<StoredCatalog>(() => ({ manifest: manifestSchema.parse(realManifest), catalog: index.catalog }));
+  const [catalogIndex, setCatalogIndex] = useState(index);
   const [router] = useState(() => createMemoryRouter(routes, { initialEntries: [path] }));
   const context = {
-    services: { collection: store, imageBaseUrl: "http://localhost/catalog/images/", appVersion: "0.1.0", ...extraServices } as Services,
-    catalog: { manifest: manifestSchema.parse(realManifest), catalog: index.catalog },
-    index,
+    services: {
+      collection: store,
+      catalog: { store: catalogStore, source: catalogSource, hasher: nodeHasher },
+      imageBaseUrl: "http://localhost/catalog/images/",
+      appVersion: "0.1.0",
+      ...extraServices,
+    } as Services,
+    catalog,
+    index: catalogIndex,
     settings,
     updateSettings: (changes: Partial<Settings>) => setSettings((current) => ({ ...current, ...changes })),
   };
   return (
     <I18nProvider language={language ?? settings.interfaceLanguage ?? "fr"}>
       <AppContext.Provider value={context}>
-        <CollectionProvider store={store} initial={entries}>
-          <RouterProvider router={router} />
-        </CollectionProvider>
+        <CatalogUpdateProvider
+          checkAtLaunch={checkAtLaunch}
+          onUpdated={(next) => {
+            setCatalog(next);
+            setCatalogIndex(indexCatalog(next.catalog));
+          }}
+        >
+          <CollectionProvider store={store} initial={entries}>
+            <RouterProvider router={router} />
+          </CollectionProvider>
+        </CatalogUpdateProvider>
       </AppContext.Provider>
     </I18nProvider>
   );

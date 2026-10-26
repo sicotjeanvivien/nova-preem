@@ -46,7 +46,10 @@ export function SetTile({ variant, language, name, releaseName, quantities, remo
           {thumb ? (
             <img src={thumb} alt="" loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
           ) : (
-            <CardPlaceholderIcon width={26} height={26} className="tile__placeholder" />
+            <span className="tile__placeholder">
+              <CardPlaceholderIcon width={26} height={26} />
+              {imageFailed && <span className="tile__placeholder-text">{t("tile.imageMissing")}</span>}
+            </span>
           )}
           <span className="tile__number">{variant.collectorNumber}</span>
           <span className="tile__rarity" style={{ background: rarityColor(variant.rarity) }}>
