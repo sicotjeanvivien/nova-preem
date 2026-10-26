@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Welcome to Night City (web)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+input::placeholder{color:#8B92A3}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+
+<nav aria-label="Navigation principale" style="flex: 1 1 220px; box-sizing: border-box; padding: 20px 14px; background: #11141B; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">NOVA PREEM</span>
+</div>
+<a href="WebSetList.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #0D0F14; background: {{accent}}; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="WebCollection.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="WebSearch.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="WebStats.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="WebSettings.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+<div style="margin-top: auto; padding: 16px 10px 0; font-size: 12px; color: #8B92A3">Fan-made, non officiel</div>
+</nav>
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 14px 28px; border-bottom: 1px solid #232838">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 13px; color: #A3AAB9"><a href="WebSetList.dc.html" style="color: #A3AAB9">Sets</a> / Set 1</span>
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Welcome to Night City</h1>
+</div>
+<label for="wrelq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Filtrer les tirages</label>
+<input id="wrelq" type="search" value="{{query}}" onInput="{{onQuery}}" placeholder="Filtrer par nom" style="flex: 0 1 320px; margin: 0 auto; height: 40px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: #161922; color: #ECEEF3; font-size: 14px; font-family: inherit">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">17 tirages</span>
+</header>
+
+<main style="padding: 20px 28px 40px; display: flex; flex-direction: column; gap: 22px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<section style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">{{g.title}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; max-width: 1400px">
+<sc-for list="{{g.items}}" as="r" hint-placeholder-count="2">
+<a href="WebSets.dc.html" style="display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: #161922; border: 1px solid #232838; color: #ECEEF3">
+<div style="height: 88px; position: relative; background: #1C2029; display: flex; flex-direction: column; justify-content: center; padding: 0 14px 0 38px">
+<span style="position: absolute; left: 0; top: 0; bottom: 0; width: 24px; background: {{r.ribbon}}; display: flex; align-items: center; justify-content: center"><span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #0D0F14; text-transform: uppercase">{{r.tag}}</span></span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-size: 11px; letter-spacing: 0.12em; color: #A3AAB9; text-transform: uppercase">Welcome to Night City</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.15">{{r.name}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 9px 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px">{{r.count}}</span>
+<div style="display: flex; gap: 4px">
+<sc-for list="{{r.langs}}" as="l" hint-placeholder-count="1">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: {{l.color}}; border: 1px solid {{l.color}}; border-radius: 3px; padding: 0 4px">{{l.code}}</span>
+</sc-for>
+</div>
+<span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{r.pctColor}}">{{r.pct}} %</span>
+</div>
+<div style="height: 4px; background: #232838"><div style="height: 100%; width: {{r.pct}}%; background: {{r.bar}}"></div></div>
+</a>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 32px 0; text-align: center; color: #A3AAB9; font-size: 15px">Aucun tirage ne correspond.</p>
+</sc-if>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+const RELEASES = [
+  ['main', 'Retail', ['en', 'fr'], 112, 168], ['main', 'Beta', ['en'], 9, 172],
+  ['starter', 'The Heist — Retail', ['en'], 0, 20], ['starter', 'The Heist — Beta', ['en'], 0, 20],
+  ['starter', 'Embracing Power — Retail', ['en'], 20, 20], ['starter', 'Embracing Power — Beta', ['en'], 0, 20],
+  ['demo', 'Merc', ['en'], 0, 15], ['demo', 'Arasaka', ['en'], 0, 14],
+  ['promo', 'Pre-Release — Retail', ['en'], 4, 11], ['promo', 'Pre-Release — Beta', ['en'], 0, 11],
+  ['promo', 'Box Toppers — Retail', ['en'], 1, 6], ['promo', 'Box Toppers — Beta', ['en'], 0, 6],
+  ['promo', 'Edgerunner Open S1', ['en'], 0, 51], ['promo', 'Night City Brawl S1', ['en'], 0, 37],
+  ['promo', 'Night City Showdown S1', ['en'], 0, 5], ['promo', 'Set 1 Promos', ['en'], 2, 4], ['promo', 'Judge Promos', ['en'], 0, 3]
+];
+const GROUPS = [['main', 'Set principal', 'Principal', '#46E3C8'], ['starter', 'Starters', 'Starter', '#FFB067'], ['demo', 'Decks démo', 'Démo', '#A3AAB9'], ['promo', 'Promos', 'Promo', '#B98CFF']];
+const LANG = { fr: { code: 'VF', color: '#FFB067' }, en: { code: 'VO', color: '#8FB4FF' } };
+const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { query: '' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const q = norm(this.state.query.trim());
+    const groups = GROUPS.map(([id, title, tag, ribbon]) => ({
+      title,
+      items: RELEASES.filter((r) => r[0] === id && (!q || norm(r[1]).includes(q))).map((r) => {
+        const pct = Math.floor((r[3] / r[4]) * 100);
+        return {
+          name: r[1], tag, ribbon, count: r[3] + ' / ' + r[4], pct,
+          pctColor: pct === 100 ? accent : '#A3AAB9', bar: pct === 100 ? accent : '#5B9CFF',
+          langs: r[2].map((l) => LANG[l])
+        };
+      })
+    })).filter((g) => g.items.length > 0);
+    return { accent, groups, query: this.state.query, empty: groups.length === 0, onQuery: (e) => this.setState({ query: e.target.value }) };
+  }
+}
+</script>
+</body>
+</html>
