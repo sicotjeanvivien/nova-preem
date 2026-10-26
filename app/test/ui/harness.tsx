@@ -12,6 +12,7 @@ import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
 import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
 import { SettingsScreen } from "../../src/ui/screens/EmptyScreen.tsx";
+import { StatsScreen } from "../../src/ui/screens/StatsScreen.tsx";
 import { SearchScreen } from "../../src/ui/screens/SearchScreen.tsx";
 import { SetPage } from "../../src/ui/screens/SetPage.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
@@ -55,6 +56,7 @@ const routes: RouteObject[] = [
       { path: "cartes/:slug", element: <CardScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },
+      { path: "stats", element: <StatsScreen /> },
       { path: "reglages", element: <SettingsScreen /> },
     ],
   },
