@@ -17,7 +17,6 @@ export function EmptyScreen({ title, children }: { title: MessageKey; children?:
   );
 }
 
-export const SearchScreen = () => <EmptyScreen title="search.title" />;
 export const StatsScreen = () => <EmptyScreen title="stats.title" />;
 
 export function SettingsScreen() {

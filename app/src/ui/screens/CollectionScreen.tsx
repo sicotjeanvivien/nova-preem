@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Link, useLocation, useSearchParams } from "react-router";
 import { localize } from "../../domain/catalog.ts";
 import { releasesOfSet } from "../../domain/catalogIndex.ts";
@@ -23,18 +23,14 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState } from "../cardLink.ts";
 import { useCollection } from "../CollectionContext.tsx";
-import { ChevronDownIcon } from "../icons.tsx";
+import { FilterFieldsets, FilterMenus, type FilterGroup } from "../FilterControls.tsx";
 import { cardColor, cardColorLabel, cardTypeLabel, languageLabel, rarityColor } from "../labels.ts";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 import { useTabLabel } from "./useTabLabel.ts";
 
 type ListFilter = "sets" | "releases" | "rarities" | "types" | "colors";
 
-interface FilterGroup {
-  field: ListFilter;
-  title: MessageKey;
-  options: { value: string; label: string }[];
-}
+type CollectionFilterGroup = FilterGroup<ListFilter>;
 
 const MOBILE_SORTS: { key: CollectionSortKey; label: MessageKey }[] = [
   { key: "recent", label: "collection.sort.recent" },
@@ -137,12 +133,7 @@ export function CollectionScreen() {
                 {t("collection.duplicatesSwitch", { count: settings.duplicateThreshold })}
               </button>
             </fieldset>
-            {groups.map((group) => (
-              <fieldset key={group.field} className="filter-group">
-                <legend>{t(group.title)}</legend>
-                <CheckboxList group={group} selected={filters[group.field]} onChange={(values) => setFilters({ [group.field]: values })} />
-              </fieldset>
-            ))}
+            <FilterFieldsets groups={groups} selected={(field) => filters[field]} onChange={(field, values) => setFilters({ [field]: values })} />
           </aside>
           <div className="collection-table-area">
             {rows.length === 0 ? (
@@ -242,7 +233,12 @@ export function CollectionScreen() {
             {t("collection.duplicates")}
           </button>
         </div>
-        <FilterMenus groups={groups} filters={filters} onChange={(field, values) => setFilters({ [field]: values })} />
+        <FilterMenus
+          groups={groups}
+          selected={(field) => filters[field]}
+          onChange={(field, values) => setFilters({ [field]: values })}
+          panelId="collection-filter-options"
+        />
       </header>
       <div className="sort-bar">
         <span className="sort-bar__label">{t("collection.sortBy")}</span>
@@ -296,7 +292,7 @@ export function CollectionScreen() {
 }
 
 /** Options of the list filters, from the catalog (spec §5.7: set, release, rarity, type, color). */
-function useFilterGroups(): FilterGroup[] {
+function useFilterGroups(): CollectionFilterGroup[] {
   const { index } = useApp();
   const { t, language } = useI18n();
   const tabLabel = useTabLabel();
@@ -322,74 +318,8 @@ function useFilterGroups(): FilterGroup[] {
       { field: "rarities", title: "collection.filter.rarity", options: [...rarities].map(([value, label]) => ({ value, label })) },
       { field: "types", title: "collection.filter.type", options: types.map((value) => ({ value, label: cardTypeLabel(t, value) })) },
       { field: "colors", title: "collection.filter.color", options: colors.map((value) => ({ value, label: cardColorLabel(t, value) })) },
-    ] satisfies FilterGroup[];
+    ] satisfies CollectionFilterGroup[];
   }, [index, t, language, tabLabel]);
-}
-
-function CheckboxList({ group, selected, onChange }: { group: FilterGroup; selected: string[]; onChange: (values: string[]) => void }) {
-  return (
-    <>
-      {group.options.map((option) => (
-        <label key={option.value} className="checkbox">
-          <input
-            type="checkbox"
-            checked={selected.includes(option.value)}
-            onChange={(event) =>
-              onChange(event.target.checked ? [...selected, option.value] : selected.filter((value) => value !== option.value))
-            }
-          />
-          {option.label}
-        </label>
-      ))}
-    </>
-  );
-}
-
-/** Mobile: one button per list filter; the open one shows its options below the row. */
-function FilterMenus({
-  groups,
-  filters,
-  onChange,
-}: {
-  groups: FilterGroup[];
-  filters: CollectionFilters;
-  onChange: (field: ListFilter, values: string[]) => void;
-}) {
-  const { t } = useI18n();
-  const [open, setOpen] = useState<ListFilter | null>(null);
-  const openGroup = groups.find((group) => group.field === open);
-  return (
-    <>
-      <div className="chip-row">
-        {groups.map((group) => {
-          const count = filters[group.field].length;
-          return (
-            <button
-              key={group.field}
-              type="button"
-              aria-expanded={open === group.field}
-              aria-controls="collection-filter-options"
-              className={`menu-button ${count > 0 ? "menu-button--active" : ""}`}
-              onClick={() => setOpen(open === group.field ? null : group.field)}
-            >
-              {count > 0 ? t("collection.filter.count", { label: t(group.title), count }) : t(group.title)}
-              <ChevronDownIcon width={14} height={14} />
-            </button>
-          );
-        })}
-      </div>
-      {openGroup && (
-        <div id="collection-filter-options" role="group" aria-label={t(openGroup.title)} className="menu-panel">
-          <CheckboxList group={openGroup} selected={filters[openGroup.field]} onChange={(values) => onChange(openGroup.field, values)} />
-          {filters[openGroup.field].length > 0 && (
-            <button type="button" className="secondary-button menu-panel__clear" onClick={() => onChange(openGroup.field, [])}>
-              {t("collection.filter.clear")}
-            </button>
-          )}
-        </div>
-      )}
-    </>
-  );
 }
 
 /** "Ajoutée aujourd'hui", "Ajoutée il y a 3 jours", then the date after a month. */
