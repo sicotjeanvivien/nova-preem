@@ -1,0 +1,9 @@
+packages:
+  - "."
+
+allowBuilds:
+  '@pnpm/exe': true
+  sharp: true
+  # + chaque paquet qui était dans pnpm.onlyBuiltDependencies, ex :
+  # esbuild: true
+  # sharp: true

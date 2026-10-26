@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "vite",
     "build": "pnpm typecheck && vite build",
@@ -38,10 +38,5 @@
     "vite-plugin-pwa": "^2.0.0",
     "vitest": "^5.0.5",
     "workbox-window": "^7.4.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
   }
 }
