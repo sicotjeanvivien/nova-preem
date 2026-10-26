@@ -21,7 +21,7 @@ describe("app shell", () => {
   });
 
   it("shows the legal notice at the bottom of the settings", () => {
-    expect(text(render({ path: "/reglages" }))).toContain("Outil de fan, non officiel");
+    expect(text(render({ path: "/reglages" }))).toContain("outil de fan, non officiel");
   });
 });
 

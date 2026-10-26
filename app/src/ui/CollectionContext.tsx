@@ -18,6 +18,8 @@ interface CollectionContextValue {
   /** Adds `delta` copies; returns null when nothing changed (removing from 0). */
   change(printingId: string, delta: number): QuantityChange | null;
   undo(change: QuantityChange): void;
+  /** Replaces the whole collection (import). */
+  replaceAll(entries: CollectionEntry[]): Promise<void>;
 }
 
 const CollectionContext = createContext<CollectionContextValue | null>(null);
@@ -57,7 +59,19 @@ export function CollectionProvider({ store, initial, children }: { store: Collec
 
   const undo = useCallback((change: QuantityChange) => apply(change.printingId, change.before), [apply]);
 
-  const value = useMemo(() => ({ ...snapshot, change, undo }), [snapshot, change, undo]);
+  const replaceAll = useCallback(
+    async (next: CollectionEntry[]) => {
+      // Waits for pending writes, so that none of them lands after the replacement.
+      const done = writes.current.then(() => store.replaceAll(next));
+      writes.current = done.catch((error: unknown) => console.error("Collection replace failed", error));
+      await done;
+      entries.current = new Map(next.map((entry) => [entry.printingId, entry]));
+      setSnapshot({ entries: new Map(entries.current), quantities: toQuantities(entries.current) });
+    },
+    [store],
+  );
+
+  const value = useMemo(() => ({ ...snapshot, change, undo, replaceAll }), [snapshot, change, undo, replaceAll]);
   return <CollectionContext.Provider value={value}>{children}</CollectionContext.Provider>;
 }
 

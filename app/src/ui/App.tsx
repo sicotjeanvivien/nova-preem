@@ -12,7 +12,7 @@ import { AppLayout } from "./AppLayout.tsx";
 import { CollectionProvider } from "./CollectionContext.tsx";
 import { FirstLaunch } from "./FirstLaunch.tsx";
 import { CollectionScreen } from "./screens/CollectionScreen.tsx";
-import { SettingsScreen } from "./screens/EmptyScreen.tsx";
+import { SettingsScreen } from "./screens/SettingsScreen.tsx";
 import { StatsScreen } from "./screens/StatsScreen.tsx";
 import { SearchScreen } from "./screens/SearchScreen.tsx";
 import { CardScreen } from "./screens/CardScreen.tsx";
@@ -89,9 +89,17 @@ export function App({ services }: { services: Services }) {
   }, [language]);
 
   const index = useMemo(() => (boot.status === "ready" ? indexCatalog(boot.catalog.catalog) : null), [boot]);
+  // Settings apply at once; they are written to the store in the background.
+  const updateSettings = useCallback(
+    (changes: Partial<Settings>) => {
+      setSettings((current) => (current ? { ...current, ...changes } : current));
+      services.settings.update(changes).catch((error: unknown) => console.error("Settings write failed", error));
+    },
+    [services],
+  );
   const context = useMemo(
-    () => (boot.status === "ready" && settings && index ? { services, catalog: boot.catalog, index, settings } : null),
-    [boot, settings, services, index],
+    () => (boot.status === "ready" && settings && index ? { services, catalog: boot.catalog, index, settings, updateSettings } : null),
+    [boot, settings, services, index, updateSettings],
   );
 
   return (

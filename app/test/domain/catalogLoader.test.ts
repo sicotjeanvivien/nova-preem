@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CatalogError, downloadCatalog } from "../../src/domain/catalogLoader.ts";
+import { CatalogError, checkCatalogUpdate, downloadCatalog } from "../../src/domain/catalogLoader.ts";
 import { MemoryCatalogStore, fakeSource, nodeHasher, realCatalogText, realManifest } from "../helpers.ts";
 
 async function expectCatalogError(promise: Promise<unknown>, code: string) {
@@ -62,5 +62,15 @@ describe("downloadCatalog", () => {
       downloadCatalog({ store: new MemoryCatalogStore(), source: fakeSource({ fail: true }), hasher: nodeHasher }),
       "network",
     );
+  });
+});
+
+
+describe("checkCatalogUpdate (spec §6)", () => {
+  it("compares the remote manifest hash with the stored one", async () => {
+    expect(await checkCatalogUpdate(fakeSource(), realManifest)).toEqual({ status: "up-to-date" });
+    const newer = { ...realManifest, version: "2026-11-02.1", hash: "sha256:other" };
+    expect(await checkCatalogUpdate(fakeSource({ manifest: newer }), realManifest)).toEqual({ status: "available", manifest: newer });
+    expect(await checkCatalogUpdate(fakeSource({ fail: true }), realManifest)).toEqual({ status: "error" });
   });
 });

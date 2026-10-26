@@ -9,6 +9,7 @@ export interface AppContextValue {
   catalog: StoredCatalog;
   index: CatalogIndex;
   settings: Settings;
+  updateSettings(changes: Partial<Settings>): void;
 }
 
 export const AppContext = createContext<AppContextValue | null>(null);

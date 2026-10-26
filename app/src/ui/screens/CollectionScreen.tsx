@@ -22,6 +22,7 @@ import type { MessageKey } from "../../i18n/messages.ts";
 import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState } from "../cardLink.ts";
+import { useDataActions } from "../dataActions.ts";
 import { useCollection } from "../CollectionContext.tsx";
 import { FilterFieldsets, FilterMenus, type FilterGroup } from "../FilterControls.tsx";
 import { cardColor, cardColorLabel, cardTypeLabel, languageLabel, rarityColor } from "../labels.ts";
@@ -49,6 +50,7 @@ export function CollectionScreen() {
   const { entries } = useCollection();
   const { t, language: uiLanguage } = useI18n();
   const isDesktop = useIsDesktop();
+  const { exportCsv } = useDataActions();
   const location = useLocation();
   const [params, setParams] = useSearchParams();
   useDocumentTitle(t("collection.title"));
@@ -107,6 +109,9 @@ export function CollectionScreen() {
         <header className="collection-header">
           <h1>{t("collection.title")}</h1>
           <span className="collection-header__summary">{t("collection.summaryLong", summary)}</span>
+          <button type="button" className="secondary-button collection-header__csv" onClick={exportCsv}>
+            {t("collection.csv")}
+          </button>
         </header>
         <div className="collection-body">
           <aside aria-label={t("collection.filters")} className="filter-panel">
@@ -216,6 +221,9 @@ export function CollectionScreen() {
         <div className="collection-header__title">
           <h1>{t("collection.title")}</h1>
           <span className="collection-header__summary">{t("collection.summary", summary)}</span>
+          <button type="button" className="secondary-button collection-header__csv" aria-label={t("collection.csv")} onClick={exportCsv}>
+            {t("settings.csv")}
+          </button>
         </div>
         <div className="chip-row">
           {languageOptions.map((option) => (

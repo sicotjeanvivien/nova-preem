@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { manifestSchema } from "../../src/domain/catalog.ts";
 import type { CollectionEntry } from "../../src/domain/collection.ts";
@@ -11,7 +11,7 @@ import { AppLayout } from "../../src/ui/AppLayout.tsx";
 import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
 import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
-import { SettingsScreen } from "../../src/ui/screens/EmptyScreen.tsx";
+import { SettingsScreen } from "../../src/ui/screens/SettingsScreen.tsx";
 import { StatsScreen } from "../../src/ui/screens/StatsScreen.tsx";
 import { SearchScreen } from "../../src/ui/screens/SearchScreen.tsx";
 import { SetPage } from "../../src/ui/screens/SetPage.tsx";
@@ -65,26 +65,30 @@ const routes: RouteObject[] = [
 /** The app at `path`, with the real catalog and a given collection. */
 export function TestApp({
   path,
-  language = "fr",
+  language,
   entries = [],
   store = new MemoryCollectionStore(),
-  settings = DEFAULT_SETTINGS,
+  settings: initialSettings = DEFAULT_SETTINGS,
+  services: extraServices = {},
 }: {
   path: string;
   language?: "fr" | "en";
   entries?: CollectionEntry[];
   store?: CollectionStore;
   settings?: Settings;
+  services?: Partial<Services>;
 }): ReactNode {
+  const [settings, setSettings] = useState(initialSettings);
+  const [router] = useState(() => createMemoryRouter(routes, { initialEntries: [path] }));
   const context = {
-    services: { collection: store, imageBaseUrl: "http://localhost/catalog/images/" } as Services,
+    services: { collection: store, imageBaseUrl: "http://localhost/catalog/images/", appVersion: "0.1.0", ...extraServices } as Services,
     catalog: { manifest: manifestSchema.parse(realManifest), catalog: index.catalog },
     index,
     settings,
+    updateSettings: (changes: Partial<Settings>) => setSettings((current) => ({ ...current, ...changes })),
   };
-  const router = createMemoryRouter(routes, { initialEntries: [path] });
   return (
-    <I18nProvider language={language}>
+    <I18nProvider language={language ?? settings.interfaceLanguage ?? "fr"}>
       <AppContext.Provider value={context}>
         <CollectionProvider store={store} initial={entries}>
           <RouterProvider router={router} />

@@ -1,4 +1,4 @@
-import { catalogSchema, manifestSchema } from "./catalog.ts";
+import { catalogSchema, manifestSchema, type CatalogManifest } from "./catalog.ts";
 import type { CatalogStore, StoredCatalog } from "./stores.ts";
 
 /** Where the catalog is downloaded from (HTTP in the browser, anything in tests). */
@@ -74,4 +74,20 @@ export async function downloadCatalog(
   await store.save(stored);
   onProgress(1);
   return stored;
+}
+
+export type CatalogCheck =
+  | { status: "up-to-date" }
+  | { status: "available"; manifest: CatalogManifest }
+  | { status: "error" };
+
+/** Compares the remote manifest with the stored one (spec §6): a different hash means a new catalog. */
+export async function checkCatalogUpdate(source: CatalogSource, current: CatalogManifest): Promise<CatalogCheck> {
+  try {
+    const manifest = manifestSchema.safeParse(await source.fetchManifest());
+    if (!manifest.success) return { status: "error" };
+    return manifest.data.hash === current.hash ? { status: "up-to-date" } : { status: "available", manifest: manifest.data };
+  } catch {
+    return { status: "error" };
+  }
 }

@@ -2175,6 +2175,339 @@ h2 {
   grid-template-columns: 150px minmax(0, 1fr) 70px;
 }
 
+/* ---------- Settings ---------- */
+
+.collection-header__csv {
+  margin-left: auto;
+}
+
+.collection-header__title .collection-header__csv {
+  margin-left: 10px;
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.collection-header__title .collection-header__summary {
+  margin-left: auto;
+}
+
+.settings__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 16px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-section__title {
+  font-family: var(--font-text);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+}
+
+.settings-row:last-child {
+  border-bottom: 0;
+}
+
+.settings-row--stacked {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 12px 14px;
+}
+
+.settings-row--disabled {
+  opacity: 0.6;
+}
+
+.settings-row__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-row__hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.settings__note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--color-text-faint);
+}
+
+.settings-section > .settings__note,
+.settings-card > .settings__note {
+  padding: 0 2px;
+}
+
+.settings-card > .settings__note--data {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.settings-card > .settings__note:not(.settings__note--data) {
+  padding: 10px 14px;
+}
+
+.chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-wrap .filter-pill {
+  min-height: 34px;
+}
+
+.segmented__option--neutral[aria-pressed="true"] {
+  background: var(--color-selected-pill);
+  color: var(--color-on-accent);
+}
+
+.segmented__option--neutral {
+  font-family: var(--font-text);
+}
+
+.switch--large .switch__track {
+  width: 52px;
+  height: 32px;
+}
+
+.switch--large .switch__thumb {
+  width: 26px;
+  height: 26px;
+}
+
+.data-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-button {
+  min-height: var(--touch-target);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-small);
+  background: var(--color-stepper);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.data-button:hover {
+  border-color: var(--color-border-dashed);
+}
+
+.soon-badge {
+  padding: 2px 6px;
+  border: 1px solid var(--color-border-dashed);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.settings__legal {
+  margin: 0;
+  padding: 0 16px 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-faint);
+}
+
+/* Dialog (import), as the update sheet of States 3: bottom sheet on mobile, centered on desktop. */
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(5, 6, 9, 0.6);
+}
+
+.dialog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-strong);
+  border-radius: 16px 16px 0 0;
+}
+
+.dialog__title {
+  font-size: 19px;
+}
+
+.dialog__meta {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.dialog__list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.dialog__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.button--secondary {
+  border: 1px solid var(--color-border-strong);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.import-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.import-mode {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  cursor: pointer;
+}
+
+.import-mode--selected {
+  border-color: var(--color-accent);
+}
+
+.import-mode input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--color-accent);
+}
+
+.import-mode__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.import-mode__title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.import-mode__hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* Desktop layout of the Settings (rendered only from 900 px, see useIsDesktop). */
+
+.settings--desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 24px 32px;
+}
+
+.settings__title {
+  font-size: 26px;
+}
+
+.settings--desktop .settings__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  align-items: start;
+  gap: 16px;
+  max-width: 1100px;
+  padding: 0;
+}
+
+.settings--desktop .settings-section {
+  gap: 14px;
+  padding: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.settings--desktop .settings-section__title {
+  font-size: 13px;
+}
+
+.settings--desktop .settings-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.settings--desktop .settings-row,
+.settings--desktop .settings-row--stacked,
+.settings--desktop .data-actions,
+.settings--desktop .settings-card > .settings__note {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.settings--desktop .settings__legal {
+  max-width: 1100px;
+  padding: 0;
+}
+
 /* ---------- First launch ---------- */
 
 .first-launch {
@@ -2788,6 +3121,23 @@ h2 {
     margin: 0;
     font-size: 12px;
     color: var(--color-text-faint);
+  }
+
+  .dialog-backdrop {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dialog {
+    width: 440px;
+    padding: 22px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 14px;
+  }
+
+  .dialog__actions {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .first-launch {
