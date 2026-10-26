@@ -34,10 +34,17 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 ### 2.1 Sets : trois niveaux
 
 1. **Liste des sets** (`/sets`) : un bloc par set avec sa progression ; un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration : ne l'afficher que si le catalogue le contient).
-2. **Page d'un set** (`/sets/:setId`) : toutes les cartes du set. Les **tirages sont des onglets** (Retail, Beta, starters, démos, promos), dans l'ordre `release.order` ; l'onglet par défaut est le tirage de saisie des Réglages s'il appartient au set, sinon le premier. C'est l'écran de **saisie** (§5.1).
+2. **Page d'un set** (`/sets/:setId`) : toutes les cartes du set, réparties en **cinq onglets fixes**, identiques sur mobile et sur bureau :
+   - **Retail** et **Beta** : un onglet par tirage du groupe `main` ;
+   - **Starters**, **Démos**, **Promos** : un onglet par groupe (`starter`, `demo`, `promo`), avec un **sous-filtre** pour choisir le tirage précis (« Tous » par défaut, puis chaque tirage du groupe dans l'ordre `release.order`, ex. « The Heist — Retail », « Edgerunner Open S1 »).
+   - Un onglet sans aucune impression dans le set n'est pas affiché. Chaque onglet montre son compteur (possédées / total).
+   - Avec le sous-filtre « Tous », une carte présente dans plusieurs tirages du groupe apparaît une fois par impression, avec le nom du tirage sur la vignette.
+   - L'onglet par défaut est celui qui contient le tirage de saisie des Réglages, sinon Retail. C'est l'écran de **saisie** (§5.1) : dans un onglet de groupe, un tap avec « Tous » ajoute l'impression de la vignette touchée.
 3. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis la page d'un set, la Collection ou la Recherche (§5.9).
 
-Écrans hors barre : **états** (`States`) : premier lancement, hors-ligne, nouveau catalogue, collection vide.
+Écrans hors barre : **états** (`States` / `WebStates`) : premier lancement, hors-ligne, nouveau catalogue, collection vide.
+
+**Règle d'harmonisation** : mobile et bureau ont **les mêmes écrans, les mêmes fonctions et les mêmes filtres**. Seule la disposition change (§8). Une fonction présente sur une seule des deux maquettes est un oubli de maquette, pas une différence voulue.
 
 Il n'y a **pas d'onglet « Manques »** : les manques sont le filtre « Manquantes » de la page d'un set, les doublons le filtre « Doublons » de Collection.
 
@@ -174,7 +181,7 @@ Manques — Welcome to Night City · Retail · VF (12)
 - Porte sur **toutes les cartes du catalogue**, possédées ou non, tous sets et tous tirages.
 - Le texte cherché est comparé, **sans casse ni accents** (normalisation NFD), à : les noms de la carte dans toutes les langues, ses numéros de collection, et ses classifications. Option dans les filtres : inclure le texte de règles.
 - Un résultat par **carte** (pas par impression) : nom dans la langue d'affichage, nom dans l'autre langue en dessous (préfixé « VO : » quand c'est lui qui correspond), type, liste résumée des impressions, badge « Possédée ×N » ou « Manquante ».
-- Filtres : type, couleur, rareté, set, coût, RAM, possession (toutes / possédées / manquantes). Les valeurs proposées viennent du catalogue.
+- Filtres : type, couleur, rareté, set, coût, RAM, possession (toutes / possédées / manquantes), et une case « Chercher aussi dans le texte de règles ». Les valeurs proposées viennent du catalogue. Mêmes filtres sur mobile et sur bureau.
 - La recherche s'exécute à chaque frappe, sans réseau.
 
 ### 5.7 Collection (onglet)
@@ -304,5 +311,5 @@ Synchronisation Google Drive (juste après le MVP, en s'appuyant sur le fichier 
 ## 12. Questions ouvertes
 
 - ~~Sens des suffixes `a`/`b`~~ : **résolu**. Ce sont deux illustrations de la même carte (V — Streetkid : V masculin `005a`, V féminin `005b`), voir `catalog-spec.md` §9. Elles s'affichent comme deux variantes distinctes dans la grille.
-- Ordre des onglets de tirage dans la page d'un set : ordre du catalogue (`release.order`) ; avec neuf releases promo, il faudra sans doute un onglet « Promos » unique avec un sous-filtre par série (proposition, à valider sur l'app).
+- ~~Ordre des onglets de tirage~~ : **résolu**, cinq onglets fixes avec sous-filtre (§2.1).
 - Les tirages en `demo` et `promo` restent affichés dans la page du set même quand ils ne sont pas comptés : seule la complétion change.
