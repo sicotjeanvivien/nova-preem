@@ -83,3 +83,9 @@ export const CardPlaceholderIcon = (props: IconProps) => (
     <path d="M9 8h6M9 12h6" />
   </Icon>
 );
+
+export const ChevronDownIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M6 9l6 6 6-6" />
+  </Icon>
+);

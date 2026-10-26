@@ -23,8 +23,8 @@ describe("card page content (§5.9)", () => {
 
   it("lists every printing with its quantity, rarity, artist and exclusivity", () => {
     expect(content).toContain("2 exemplaires");
-    expect(content).toMatch(/Retail # 003 Illustration : Daniel Valaisis Secrète VF Français − 2 \+ VO Anglais − 0 \+/);
-    expect(content).toContain("Beta # β168 exclusive Beta");
+    expect(content).toMatch(/Retail #003 Illustration : Daniel Valaisis Secrète VF Français − 2 \+ VO Anglais − 0 \+/);
+    expect(content).toContain("Beta #β168 exclusive Beta");
     expect(content).toContain("Exclusive au tirage Beta : pas d'équivalent en Retail");
     expect(content).toContain("Illustration : Divebound Studio");
     expect(html).toContain('aria-label="Ajouter Retail 003 VF"');

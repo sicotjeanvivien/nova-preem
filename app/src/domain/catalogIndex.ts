@@ -8,6 +8,7 @@ export interface CatalogIndex {
   rarities: Map<string, Rarity>;
   cards: Map<string, Card>;
   cardsBySlug: Map<string, Card>;
+  printings: Map<string, Printing>;
   /** Printings of each release, in catalog order (number, then language). */
   printingsByRelease: Map<string, Printing[]>;
   printingsByCard: Map<string, Printing[]>;
@@ -22,6 +23,7 @@ export function indexCatalog(catalog: Catalog): CatalogIndex {
     rarities: byId(catalog.rarities),
     cards: byId(catalog.cards),
     cardsBySlug: new Map(catalog.cards.map((card) => [card.slug, card])),
+    printings: byId(catalog.printings),
     printingsByRelease: groupBy(catalog.printings, (printing) => printing.releaseId),
     printingsByCard: groupBy(catalog.printings, (printing) => printing.cardId),
   };

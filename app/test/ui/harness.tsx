@@ -10,6 +10,7 @@ import { AppContext } from "../../src/ui/AppContext.tsx";
 import { AppLayout } from "../../src/ui/AppLayout.tsx";
 import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
+import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
 import { SettingsScreen } from "../../src/ui/screens/EmptyScreen.tsx";
 import { SetPage } from "../../src/ui/screens/SetPage.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
@@ -51,6 +52,7 @@ const routes: RouteObject[] = [
       { path: "sets", element: <SetsScreen /> },
       { path: "sets/:setId", element: <SetPage /> },
       { path: "cartes/:slug", element: <CardScreen /> },
+      { path: "collection", element: <CollectionScreen /> },
       { path: "reglages", element: <SettingsScreen /> },
     ],
   },
@@ -93,4 +95,13 @@ export function entry(printingId: string, quantity: number): CollectionEntry {
 }
 
 /** Visible text of an HTML string, whitespace collapsed. */
-export const text = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&#x27;/g, "'").replace(/&amp;/g, "&").replace(/\s+/g, " ");
+export const text = (html: string) =>
+  html
+    // React separates adjacent text parts with empty comments: they are not spaces.
+    .replace(/<!-- -->/g, "")
+    .replace(/<[^>]+>/g, " ").replace(/&#x27;/g, "'").replace(/&amp;/g, "&").replace(/\s+/g, " ");
+
+/** Sets the window width of the simulated DOM (happy-dom), for the mobile or desktop layout. */
+export function setViewportWidth(width: number) {
+  (window as unknown as { happyDOM?: { setViewport(size: { width: number; height: number }): void } }).happyDOM?.setViewport({ width, height: 900 });
+}

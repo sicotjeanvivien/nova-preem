@@ -13,6 +13,8 @@ export interface QuantityChange {
 
 interface CollectionContextValue {
   quantities: Quantities;
+  /** Every entry, with its dates (Collection tab). */
+  entries: ReadonlyMap<string, CollectionEntry>;
   /** Adds `delta` copies; returns null when nothing changed (removing from 0). */
   change(printingId: string, delta: number): QuantityChange | null;
   undo(change: QuantityChange): void;
@@ -27,14 +29,14 @@ const CollectionContext = createContext<CollectionContextValue | null>(null);
  */
 export function CollectionProvider({ store, initial, children }: { store: CollectionStore; initial: CollectionEntry[]; children: ReactNode }) {
   const entries = useRef(new Map(initial.map((entry) => [entry.printingId, entry])));
-  const [quantities, setQuantities] = useState<Quantities>(() => toQuantities(entries.current));
+  const [snapshot, setSnapshot] = useState(() => ({ entries: new Map(entries.current), quantities: toQuantities(entries.current) }));
   const writes = useRef(Promise.resolve());
 
   const apply = useCallback(
     (printingId: string, entry: CollectionEntry | undefined) => {
       if (entry) entries.current.set(printingId, entry);
       else entries.current.delete(printingId);
-      setQuantities(toQuantities(entries.current));
+      setSnapshot({ entries: new Map(entries.current), quantities: toQuantities(entries.current) });
       writes.current = writes.current
         .then(() => (entry ? store.put(entry) : store.remove(printingId)))
         .catch((error: unknown) => console.error("Collection write failed", error));
@@ -55,7 +57,7 @@ export function CollectionProvider({ store, initial, children }: { store: Collec
 
   const undo = useCallback((change: QuantityChange) => apply(change.printingId, change.before), [apply]);
 
-  const value = useMemo(() => ({ quantities, change, undo }), [quantities, change, undo]);
+  const value = useMemo(() => ({ ...snapshot, change, undo }), [snapshot, change, undo]);
   return <CollectionContext.Provider value={value}>{children}</CollectionContext.Provider>;
 }
 
