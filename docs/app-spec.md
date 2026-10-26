@@ -183,10 +183,16 @@ Manques — Welcome to Night City · Retail · VF (12)
 
 ### 5.7 Collection (onglet)
 
-- Une ligne par **impression possédée** : vignette, nom, tirage et numéro, rareté, date d'ajout, quantités par langue.
-- Filtres : langue (toutes / VF / VO), doublons, set, tirage, rareté, type, couleur.
-- Tri : **Récents** (`lastAddedAt` décroissant, défaut), numéro, nom (ordre alphabétique français), quantité.
+But : **admirer sa collection**. C'est une **galerie**, pas une liste ni un tableau.
+
+- Une **image de carte en grand format** (proportions de la carte) par **impression possédée**. Sur l'image : badge de rareté, badges de quantité par langue (« VF ×2 », « VO ×1 »), et le surplus avec le filtre Doublons (« +2 en trop »). Sous l'image : nom, tirage et numéro.
+- **Un clic sur une carte ouvre sa page carte** (§5.9) ; le retour ramène à la galerie dans le même état. Pas de + ni de − dans la galerie : la saisie se fait dans Sets ou sur la page carte.
+- Filtres : langue (toutes / VF / VO), doublons, set, tirage, rareté, type, couleur. Sur bureau, ils sont dans une **colonne à gauche**, toujours visible ; sur mobile, dans un **panneau** ouvert par le bouton « Filtres » (qui affiche le nombre de filtres actifs), avec « Réinitialiser » et « Voir N cartes ».
+- Champ de filtre par nom (VF et VO, sans accents).
+- Tri : **Ajouts récents** (`lastAddedAt` décroissant, défaut), numéro, nom (ordre alphabétique français), rareté (de la plus rare à la plus commune), quantité.
+- **Taille des cartes** réglable sur bureau (curseur en bas de la galerie) ; mobile : deux colonnes. Le réglage est mémorisé.
 - Résumé en haut : nombre d'exemplaires et nombre d'impressions affichées.
+- Les images viennent du cache (§6) ; une image absente hors-ligne affiche l'emplacement neutre avec le nom et le numéro.
 
 ### 5.8 Langue des noms
 
@@ -240,7 +246,7 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
   - **liste des sets** et **tirages du set** : tuiles en grille (colonnes automatiques), fil d'Ariane en haut ;
   - **cartes d'un tirage** : grille de vignettes plus large (colonnes automatiques d'environ 150 px minimum), barre de filtres et sélecteur de langue sous l'en-tête, − quantité + sous chaque vignette comme sur mobile ;
   - **page carte** : en pleine page, image et vignettes des impressions à gauche, informations et tableau des impressions à droite ; précédente / suivante dans la barre du haut ;
-  - **Collection** : un **tableau triable** (clic sur un en-tête pour trier, second clic pour inverser), filtres en colonne à gauche, bouton d'export CSV ;
+  - **Collection** : galerie de cartes en grand format (colonnes automatiques, taille réglable), filtres en colonne à gauche, tri et filtre par nom en haut ;
   - **Recherche** : grand champ, filtres en colonne à gauche, résultats en grille de cartes ;
   - **Stats** : tableau de bord (indicateurs en haut, blocs de ventilation dessous) ;
   - **Réglages** : sections en cartes côte à côte.
@@ -289,7 +295,7 @@ Chaque étape se termine par une app qui fonctionne. Ne pas commencer la suivant
    *Critère* : saisir 12 cartes d'un booster en moins de 30 secondes ; les quantités survivent à un redémarrage.
 3. **Page carte** : la page commune du §5.9 (impressions, quantités par langue, texte de règles, retour contextuel, précédente / suivante), ouverte depuis les cartes d'un tirage.
    *Critère* : depuis les cartes du Retail filtrées sur « Manquantes », ouvrir une carte, passer à la suivante, revenir : on retrouve le filtre, la langue et la position.
-4. **Collection** : liste (tableau sur bureau), filtres, tri, doublons avec surplus ; chaque ligne ouvre la page carte.
+4. **Collection** : galerie de cartes, filtres (colonne sur bureau, panneau sur mobile), tri, taille des cartes, doublons avec surplus ; chaque carte ouvre la page carte.
 5. **Recherche** : recherche multilingue sans accents, filtres, résultats par carte ; chaque résultat ouvre la page carte.
 6. **Stats** : les quatre mesures du §5.3 et leurs ventilations.
    *Critère* : tests unitaires couvrant chaque règle, dont l'impression exclusive à un tirage et la langue absente d'un tirage.
