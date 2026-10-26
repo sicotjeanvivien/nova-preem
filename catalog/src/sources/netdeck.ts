@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { z } from "zod";
 import { PoliteClient } from "../http.ts";
-import type { SourceCard, SourcePrinting, SourceSnapshot } from "./types.ts";
+import type { SourceCard, SourcePage, SourcePrinting, SourceSnapshot } from "./types.ts";
 
 const API_BASE = "https://api.netdeck.gg/api/cards/cyberpunk";
 /** The API silently caps `limit` at 100. Small pages leave time to download images before their URLs expire. */
@@ -87,26 +87,60 @@ export class NetdeckSource {
   /** Fetches (or reads from cache) every page of the card list and returns validated, source-neutral cards. */
   async fetchSnapshot(pageSize = DEFAULT_PAGE_SIZE): Promise<SourceSnapshot> {
     const pages: { fetchedAt: string; page: NetdeckListPage }[] = [];
-    let offset = 0;
-    for (;;) {
-      const response = await this.fetchListPage(offset, pageSize);
-      const page = parseListPage(response.body, response.url);
-      pages.push({ fetchedAt: response.fetchedAt, page });
-      offset += page.items.length;
-      if (page.items.length === 0 || offset >= page.total) break;
-    }
+    for await (const handle of this.#walk(pageSize)) pages.push(handle.loaded);
     return toSnapshot(pages);
   }
 
-  /** Cached by offset only: pagination follows `items.length`, so pages of any size can be read back. */
-  fetchListPage(offset: number, limit: number): Promise<CachedResponse> {
-    const url = `${API_BASE}?limit=${limit}&offset=${offset}`;
-    return this.#getJson(url, `cards-offset${offset}.json`);
+  /**
+   * Iterates over the pages of the card list, for the crawl. Each page can be
+   * downloaded again with `refresh()` to get fresh (short-lived) image URLs.
+   */
+  async *pages(pageSize = DEFAULT_PAGE_SIZE): AsyncGenerator<SourcePage> {
+    for await (const handle of this.#walk(pageSize)) {
+      yield {
+        get cards() {
+          return handle.loaded.cards;
+        },
+        get fetchedAt() {
+          return handle.loaded.fetchedAt;
+        },
+        get total() {
+          return handle.loaded.page.total;
+        },
+        refresh: () => handle.reload(),
+      };
+    }
   }
 
-  async #getJson(url: string, cacheName: string): Promise<CachedResponse> {
+  async *#walk(pageSize: number): AsyncGenerator<{ loaded: LoadedPage; reload(): Promise<void> }> {
+    let offset = 0;
+    for (;;) {
+      const pageOffset = offset;
+      const handle = {
+        loaded: await this.#loadPage(pageOffset, pageSize, false),
+        reload: async () => {
+          handle.loaded = await this.#loadPage(pageOffset, pageSize, true);
+        },
+      };
+      yield handle;
+      // Follow the page actually received (it may have been refreshed with another size).
+      const { page } = handle.loaded;
+      offset += page.items.length;
+      if (page.items.length === 0 || offset >= page.total) return;
+    }
+  }
+
+  /** Cached by offset only: pagination follows `items.length`, so pages of any size can be read back. */
+  async #loadPage(offset: number, limit: number, force: boolean): Promise<LoadedPage> {
+    const url = `${API_BASE}?limit=${limit}&offset=${offset}`;
+    const response = await this.#getJson(url, `cards-offset${offset}.json`, force);
+    const page = parseListPage(response.body, response.url);
+    return { fetchedAt: response.fetchedAt, page, cards: page.items.map(toSourceCard) };
+  }
+
+  async #getJson(url: string, cacheName: string, force: boolean): Promise<CachedResponse> {
     const cachePath = join(this.#cacheDir, cacheName);
-    if (!this.#refresh) {
+    if (!this.#refresh && !force) {
       const cached = await readJsonIfExists(cachePath);
       if (cached) return cached as CachedResponse;
     }
@@ -118,6 +152,12 @@ export class NetdeckSource {
     await writeFile(cachePath, JSON.stringify(entry));
     return entry;
   }
+}
+
+interface LoadedPage {
+  fetchedAt: string;
+  page: NetdeckListPage;
+  cards: SourceCard[];
 }
 
 /** Validates a raw list response. Throws with a readable message if the source format changed. */
@@ -180,7 +220,14 @@ function toSourcePrinting(printing: NetdeckPrinting): SourcePrinting {
     finish: printing.finish,
     imageUrl: printing.image_url,
     imageVersion: basename(new URL(printing.image_url).pathname),
+    imageExpiresAt: signatureExpiry(printing.image_url),
   };
+}
+
+/** Expiry of a CloudFront signed URL (`Expires` = Unix time in seconds), or null if the URL is not signed. */
+function signatureExpiry(url: string): string | null {
+  const expires = Number(new URL(url).searchParams.get("Expires"));
+  return Number.isFinite(expires) && expires > 0 ? new Date(expires * 1000).toISOString() : null;
 }
 
 async function readJsonIfExists(path: string): Promise<unknown> {

@@ -71,6 +71,14 @@ export interface Printing {
   rarityId: string;
   artist: string | null;
   finish: string | null;
-  image: { path: string; width?: number; height?: number } | null;
+  image: PrintingImage | null;
   sourceCode: string;
+}
+
+/** Paths are relative to the image storage base URL (`catalog/dist/images/` in development). */
+export interface PrintingImage {
+  path: string;
+  thumbPath: string;
+  width: number;
+  height: number;
 }

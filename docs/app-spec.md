@@ -261,6 +261,6 @@ Synchronisation Google Drive (juste après le MVP, en s'appuyant sur le fichier 
 
 ## 12. Questions ouvertes
 
-- Sens des suffixes `a`/`b` (ex. V — Streetkid `005a`/`005b`) : deux variantes distinctes dans la grille, ou une seule carte avec deux faces ? En attendant : deux variantes distinctes.
+- ~~Sens des suffixes `a`/`b`~~ : **résolu**. Ce sont deux illustrations de la même carte (V — Streetkid : V masculin `005a`, V féminin `005b`), voir `catalog-spec.md` §9. Elles s'affichent comme deux variantes distinctes dans la grille.
 - Ordre des tirages dans la liste Sets : ordre du catalogue (`release.order`) ; à revoir quand les promos seront nombreuses.
 - Les tirages en `demo` et `promo` sont-ils affichés dans Sets quand ils ne sont pas comptés ? Proposition : oui, toujours visibles, seule la complétion change.

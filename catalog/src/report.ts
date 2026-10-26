@@ -27,7 +27,8 @@ export type AnomalyCode =
   | "missing-rules-text"
   | "placeholder-artist"
   | "numbering-gap"
-  | "missing-image";
+  | "missing-image"
+  | "outdated-image";
 
 export type AnomalyContext = Record<string, string | number | string[]>;
 
