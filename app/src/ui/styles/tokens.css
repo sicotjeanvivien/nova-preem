@@ -1,0 +1,46 @@
+/* Design tokens from the mockups (docs/app-spec.md §8). Defined here only. */
+:root {
+  color-scheme: dark;
+
+  --color-bg: #0d0f14;
+  --color-surface: #161922;
+  --color-surface-raised: #1c2029;
+  --color-nav: #11141b;
+  --color-border: #232838;
+  --color-border-strong: #2b3040;
+  --color-border-dashed: #3a4152;
+  --color-text: #eceef3;
+  --color-text-secondary: #d5d9e2;
+  --color-text-muted: #a3aab9;
+  --color-text-faint: #8b92a3;
+  --color-accent: #46e3c8;
+  --color-accent-hover: #8af0dd;
+  --color-on-accent: #0d0f14;
+  --color-vf: #ffb067;
+  --color-vo: #8fb4ff;
+  --color-warning-bg: #2a2213;
+  --color-warning-border: #5a4520;
+  --color-warning-text: #ffd99a;
+
+  --color-rarity-common: #a3aab9;
+  --color-rarity-uncommon: #6fcf97;
+  --color-rarity-rare: #5b9cff;
+  --color-rarity-epic: #b98cff;
+  --color-rarity-nova-rare: #ff9f43;
+  --color-rarity-secret: #ff5c8a;
+  --color-rarity-iconic: #f2c94c;
+
+  --font-display: "Chakra Petch", sans-serif;
+  --font-text: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius-small: 8px;
+  --radius-medium: 10px;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+
+  --touch-target: 44px;
+  --bottom-nav-height: 68px;
+  --sidebar-width: 220px;
+  --topbar-height: 60px;
+}
