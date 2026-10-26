@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Nova Preem — Grille Retail</title>
+<title>Nova Preem — Retail</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -18,45 +18,27 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
 
 <header style="flex-shrink: 0; display: flex; align-items: center; gap: 4px; padding: 8px 8px 8px 4px; border-bottom: 1px solid #232838">
-<a href="Main.dc.html" aria-label="Retour aux sets" style="width: 44px; height: 44px; display: grid; place-items: center; color: #ECEEF3">
+<a href="SetReleases.dc.html" aria-label="Retour à Welcome to Night City" style="width: 44px; height: 44px; display: grid; place-items: center; color: #ECEEF3">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
 </a>
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
-<span style="font-size: 12px; color: #A3AAB9">Set 1</span>
-<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px; line-height: 1.2">Welcome to Night City</h1>
+<span style="font-size: 12px; color: #A3AAB9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Welcome to Night City</span>
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.2">Retail</h1>
 </div>
 <div style="text-align: right; padding-right: 8px">
-<div style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: {{accent}}">{{ownedCount}} / {{total}}</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{accent}}">{{ownedCount}} / {{total}}</div>
 <div style="font-size: 11px; color: #A3AAB9">variantes possédées</div>
 </div>
 </header>
 
-<div role="tablist" aria-label="Tirages du set" style="flex-shrink: 0; display: flex; gap: 2px; overflow-x: auto; padding: 0 8px; border-bottom: 1px solid #232838; background: #11141B">
-<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
-<button role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="height: 44px; padding: 0 12px; border: 0; background: transparent; cursor: pointer; white-space: nowrap; font-size: 14px; font-weight: 600; color: {{t.fg}}; border-bottom: 2px solid {{t.line}}">{{t.label}} <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 12px; color: #A3AAB9">{{t.count}}</span></button>
-</sc-for>
-</div>
-<sc-if value="{{hasSubs}}" hint-placeholder-val="{{ false }}">
-<div role="group" aria-label="Tirage précis" style="flex-shrink: 0; display: flex; gap: 6px; overflow-x: auto; padding: 8px 12px; border-bottom: 1px solid #232838; background: #11141B">
-<sc-for list="{{subs}}" as="sb" hint-placeholder-count="4">
-<button onClick="{{sb.pick}}" aria-pressed="{{sb.pressed}}" style="height: 30px; padding: 0 10px; border-radius: 6px; cursor: pointer; font-size: 12px; white-space: nowrap; border: 1px solid {{sb.border}}; background: {{sb.bg}}; color: {{sb.fg}}">{{sb.label}}</button>
-</sc-for>
-</div>
-</sc-if>
 <div style="flex-shrink: 0; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; border-bottom: 1px solid #232838; background: #11141B">
 <div style="display: flex; align-items: center; gap: 8px">
-<span style="font-size: 12px; color: #A3AAB9">Un tap ajoute</span>
-<sc-if value="{{showLang}}" hint-placeholder-val="{{ true }}">
-<div role="group" aria-label="Langue saisie" style="display: flex; border: 1px solid #2B3040; border-radius: 8px; overflow: hidden">
+<span style="font-size: 12px; color: #A3AAB9">Quantités en</span>
+<div role="group" aria-label="Langue des quantités" style="display: flex; border: 1px solid #2B3040; border-radius: 8px; overflow: hidden">
 <sc-for list="{{langBtns}}" as="l" hint-placeholder-count="2">
 <button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; min-width: 52px; padding: 0 10px; border: 0; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
 </sc-for>
 </div>
-</sc-if>
-<sc-if value="{{voOnly}}" hint-placeholder-val="{{ false }}">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8FB4FF; border: 1px solid #8FB4FF; border-radius: 6px; padding: 6px 8px">VO uniquement</span>
-</sc-if>
-<button onClick="{{toggleMode}}" aria-pressed="{{removeMode}}" style="margin-left: auto; height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; border: 1px solid {{modeBorder}}; background: {{modeBg}}; color: {{modeFg}}">{{modeLabel}}</button>
 </div>
 <div role="group" aria-label="Filtrer" style="display: flex; gap: 6px; overflow-x: auto">
 <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
@@ -65,34 +47,32 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </div>
 <sc-if value="{{isMissingFilter}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 8px">
-<span style="flex: 1; font-size: 13px; color: #A3AAB9">{{missingCount}} variantes manquantes dans ce tirage</span>
+<span style="flex: 1; font-size: 13px; color: #A3AAB9">{{missingCount}} variantes manquantes</span>
 <button onClick="{{copyMissing}}" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Copier la liste</button>
 </div>
 </sc-if>
 </div>
 
 <main style="flex: 1; overflow-y: auto; padding: 12px">
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
 <sc-for list="{{cards}}" as="c" hint-placeholder-count="9">
-<div style="display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: #161922; border: 1px {{c.borderStyle}} {{c.borderColor}}; opacity: {{c.opacity}}">
-<button onClick="{{c.tap}}" aria-label="{{c.aria}}" style="border: 0; padding: 0; margin: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; display: flex; flex-direction: column">
+<div style="display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: #161922; border: 1px {{c.borderStyle}} {{c.borderColor}}">
+<a href="CardDetail.dc.html" aria-label="{{c.openAria}}" style="display: flex; flex-direction: column; color: #ECEEF3; opacity: {{c.opacity}}">
 <div style="height: 4px; background: {{c.stripe}}"></div>
 <div style="height: 96px; display: grid; place-items: center; background: #1C2029; position: relative">
 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3A4152" stroke-width="1.5" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"></rect><path d="M9 8h6M9 12h6"></path></svg>
 <span style="position: absolute; top: 6px; left: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #D5D9E2; background: #0D0F14; padding: 1px 5px; border-radius: 4px">{{c.n}}</span>
 <span style="position: absolute; top: 6px; right: 6px; font-size: 10px; font-weight: 600; color: #0D0F14; background: {{c.rColor}}; padding: 1px 5px; border-radius: 4px">{{c.rShort}}</span>
+<sc-if value="{{c.hasOther}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; bottom: 6px; right: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: #0D0F14; background: {{c.otherColor}}; padding: 0 4px; border-radius: 3px">{{c.otherLabel}}</span>
+</sc-if>
 </div>
 <div style="padding: 6px 7px 4px; font-size: 12px; line-height: 1.25; height: 32px; overflow: hidden">{{c.name}}</div>
-</button>
-<div style="display: flex; align-items: center; justify-content: space-between; padding: 0 2px 2px 7px; min-height: 36px">
-<div style="display: flex; gap: 4px">
-<sc-for list="{{c.badges}}" as="b" hint-placeholder-count="1">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: #0D0F14; background: {{b.color}}; border-radius: 4px; padding: 1px 4px">{{b.label}}</span>
-</sc-for>
-</div>
-<a href="CardDetail.dc.html" aria-label="{{c.openAria}}" style="width: 36px; height: 36px; color: #A3AAB9; display: grid; place-items: center">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
 </a>
+<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid #232838">
+<button onClick="{{c.dec}}" aria-label="{{c.decAria}}" style="height: 40px; border: 0; background: transparent; color: {{c.decColor}}; font-size: 20px; cursor: pointer">−</button>
+<span style="min-width: 22px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{c.qtyColor}}">{{c.qty}}</span>
+<button onClick="{{c.inc}}" aria-label="{{c.incAria}}" style="height: 40px; border: 0; background: transparent; color: {{accent}}; font-size: 20px; cursor: pointer">+</button>
 </div>
 </div>
 </sc-for>
@@ -105,7 +85,9 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="position: absolute; left: 12px; right: 12px; bottom: 80px; display: flex; align-items: center; gap: 10px; padding: 10px 8px 10px 14px; background: #262B38; border: 1px solid #3A4152; border-radius: 10px; font-size: 14px">
 <span style="flex: 1; min-width: 0">{{toastText}}</span>
+<sc-if value="{{canUndo}}" hint-placeholder-val="{{ true }}">
 <button onClick="{{undo}}" style="height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: {{accent}}; font-weight: 600; cursor: pointer">Annuler</button>
+</sc-if>
 </div>
 </sc-if>
 
@@ -121,24 +103,18 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
 </nav>
-
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
 const CARDS = [{"n":"001","en":"Adam Smasher — Ender of Legends","fr":"Adam Smasher — Acheveur De Légendes","r":"E","col":"R"},{"n":"002","en":"Dexter DeShawn — Off the Grid","fr":"Dexter DeShawn — Indétectable","r":"R","col":"R"},{"n":"003","en":"Johnny Silverhand — Rocking Renegade","fr":"Johnny Silverhand — Rock'n'Rebelle","r":"S","col":"R"},{"n":"004","en":"Royce — Psycho on the Edge","fr":"Royce — Psychoverdose","r":"R","col":"R"},{"n":"005a","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"R","col":"R"},{"n":"005b","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"R","col":"R"},{"n":"006","en":"6th Street Recruits","fr":"Recrues Des 6th Street","r":"C","col":"R"},{"n":"007","en":"Animals Wrecker","fr":"Destructeur Des Animals","r":"C","col":"R"},{"n":"008","en":"Chrome Fang","fr":"Croc Chromé","r":"C","col":"R"},{"n":"009","en":"El Sombrerón — La Venganza Lenta","fr":"El Sombrerón — La Venganza Lenta","r":"R","col":"R"},{"n":"010","en":"Japantown Jonin","fr":"Jônin De Japantown","r":"C","col":"R"},{"n":"011","en":"Johnny Silverhand — Never Stop Fighting","fr":"Johnny Silverhand — N'abandonne Jamais Le Combat","r":"E","col":"R"},{"n":"012","en":"Kerry Eurodyne — The Last Rockerboy","fr":"Kerry Eurodyne — Le Dernier Rockerboy","r":"U","col":"R"},{"n":"013","en":"La Llorona — Ghost of the Past","fr":"La Llorona — Fantôme Du Passé","r":"U","col":"R"},{"n":"014","en":"Meredith Stout — Stone Cold Corpo","fr":"Meredith Stout — Corpo Sans Pitié","r":"R","col":"R"},{"n":"015","en":"Octant","fr":"Octant","r":"C","col":"R"},{"n":"016","en":"Royce — Don't Call Me Simon","fr":"Royce — J'suis Pas Simon","r":"U","col":"R"},{"n":"017","en":"Ruthless Lowlife","fr":"Racaille Impitoyable","r":"C","col":"R"},{"n":"018","en":"Screw — Lovelorn Fool","fr":"Screw — Seul En Amour","r":"C","col":"R"},{"n":"019","en":"Swordwise Huscle","fr":"Gros Bras Sabreur","r":"C","col":"R"},{"n":"020","en":"V — Roamer of the Badlands","fr":"V — Errance À Travers Les Badlands","r":"E","col":"R"},{"n":"021","en":"Valentino Guerrera","fr":"Guerrera Des Valentinos","r":"C","col":"R"},{"n":"022","en":"Yorinobu Arasaka — Steel Dragon","fr":"Yorinobu Arasaka — Dragon D'acier","r":"R","col":"R"},{"n":"023","en":"Arasaka Emergency Radioport","fr":"Radioport d'urgence d'Arasaka","r":"C","col":"R"},{"n":"024","en":"Deadman Transmitter","fr":"Émetteur Deadman","r":"U","col":"R"},{"n":"025","en":"Mantis Blades","fr":"Lames Mantis","r":"C","col":"R"},{"n":"026","en":"Satori — Sword of Saburo","fr":"Satori — Lame De Saburo","r":"U","col":"R"},{"n":"027","en":"All is Lost","fr":"Tout Est Perdu","r":"C","col":"R"},{"n":"028","en":"Appetite for Destruction","fr":"Soif de Destruction","r":"U","col":"R"},{"n":"029","en":"Bonnie and Clyde","fr":"Bonnie et Clyde","r":"U","col":"R"},{"n":"030","en":"Carnage at the Colosseum","fr":"Massacre au Colisée","r":"C","col":"R"},{"n":"031","en":"Detonate","fr":"Détonation","r":"C","col":"R"},{"n":"032","en":"Gunpoint Diplomacy","fr":"Diplomatie du Pistolet","r":"U","col":"R"},{"n":"033","en":"Industrial Assembly","fr":"Assemblage Industriel","r":"U","col":"R"},{"n":"034","en":"Over the Edge","fr":"Au Bord du Gouffre","r":"C","col":"R"},{"n":"035","en":"Shattered Memories","fr":"Souvenirs en Lambeaux","r":"R","col":"R"},{"n":"036","en":"Dum Dum — Maelstrom Triggerman","fr":"Dum Dum — As de la Gâchette du Maelstrom","r":"R","col":"Y"},{"n":"037","en":"Kerry Eurodyne — Axe, Attitude, Audience","fr":"Kerry Eurodyne — Une Gratte, du Style et un Public","r":"R","col":"Y"},{"n":"038","en":"Muamar Reyes — El Capitán","fr":"Muamar Reyes — El Capitán","r":"R","col":"Y"},{"n":"039","en":"River Ward — Detective on the Hunt","fr":"River Ward — Détective en Action","r":"R","col":"Y"},{"n":"040","en":"Rogue Amendiares — Preem Solo","fr":"Rogue Amendiares — Solo Premios","r":"R","col":"Y"},{"n":"043","en":"Augmented Negotiators","fr":"Négociateurs Augmentés","r":"C","col":"Y"},{"n":"044","en":"Caliber — Totentanz's Top Dog","fr":"Caliber — La Meilleure du Totentanz","r":"R","col":"Y"},{"n":"045","en":"Gilded Matón","fr":"Matón Doré","r":"C","col":"Y"},{"n":"046","en":"Hanako Arasaka — In a Gilded Cage","fr":"Hanako Arasaka — Mise en Cage Dorée","r":"R","col":"Y"},{"n":"047","en":"Heywood Ripperdoc","fr":"Charcudoc d'Heywood","r":"U","col":"Y"},{"n":"048","en":"Jackie Welles — Ride or Die Choom","fr":"Jackie Welles — Marche ou Crève","r":"E","col":"Y"},{"n":"049","en":"Maelstrom Goons","fr":"Sbires du Maelstrom","r":"C","col":"Y"},{"n":"050","en":"MaxTac Suppression Team","fr":"Escouade de Répression de la MaxTac","r":"C","col":"Y"},{"n":"051","en":"Offduty Malfini","fr":"Malfini Après le Boulot","r":"C","col":"Y"},{"n":"052","en":"Rockn' Rockerboy","fr":"Rockn' Rockerboy","r":"C","col":"Y"},{"n":"053","en":"Secondhand Bombus","fr":"Bombus d'Occasion","r":"C","col":"Y"},{"n":"054","en":"Sketchy Ripper","fr":"Charcu Louche","r":"C","col":"Y"},{"n":"055","en":"T-Bug — Amateur Philosopher","fr":"T-Bug — Philosophe Amatrice","r":"U","col":"Y"},{"n":"057","en":"Viktor Vektor — Drop Your Illusions","fr":"Viktor Vektor — Oublie tes Illusions","r":"E","col":"Y"},{"n":"058","en":"Viktor Vektor — You Might Feel a Little Pinch","fr":"Viktor Vektor — Ça va Picoter un Peu","r":"U","col":"Y"},{"n":"141","en":"Adam Smasher — Ender of Legends","fr":"Adam Smasher — Acheveur De Légendes","r":"IL","col":"R"},{"n":"142","en":"Dexter DeShawn — Off the Grid","fr":"Dexter DeShawn — Indétectable","r":"IL","col":"R"},{"n":"143","en":"Royce — Psycho on the Edge","fr":"Royce — Psychoverdose","r":"IL","col":"R"},{"n":"144","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"IL","col":"R"},{"n":"145","en":"Dum Dum — Maelstrom Triggerman","fr":"Dum Dum — As de la Gâchette du Maelstrom","r":"IL","col":"Y"},{"n":"146","en":"Kerry Eurodyne — Axe, Attitude, Audience","fr":"Kerry Eurodyne — Une Gratte, du Style et un Public","r":"IL","col":"Y"},{"n":"147","en":"Muamar Reyes — El Capitán","fr":"Muamar Reyes — El Capitán","r":"IL","col":"Y"},{"n":"148","en":"River Ward — Detective on the Hunt","fr":"River Ward — Détective en Action","r":"IL","col":"Y"},{"n":"149","en":"Rogue Amendiares — Preem Solo","fr":"Rogue Amendiares — Solo Premios","r":"IL","col":"Y"},{"n":"159","en":"Johnny Silverhand — Never Stop Fighting","fr":"Johnny Silverhand — N'abandonne Jamais Le Combat","r":"IO","col":"R"},{"n":"162","en":"Hanako Arasaka — In a Gilded Cage","fr":"Hanako Arasaka — Mise en Cage Dorée","r":"IO","col":"Y"}];
 const RARITY = {
-  C: { short: 'C', label: 'Commune', color: '#A3AAB9' },
-  U: { short: 'PC', label: 'Peu commune', color: '#6FCF97' },
-  R: { short: 'R', label: 'Rare', color: '#5B9CFF' },
-  E: { short: 'É', label: 'Épique', color: '#B98CFF' },
-  N: { short: 'N', label: 'Nova Rare', color: '#FF9F43' },
-  S: { short: 'S', label: 'Secrète', color: '#FF5C8A' },
-  IL: { short: 'IC', label: 'Iconic Legend', color: '#F2C94C' },
-  IS: { short: 'IC', label: 'Iconic Secret', color: '#F2C94C' },
+  C: { short: 'C', label: 'Commune', color: '#A3AAB9' }, U: { short: 'PC', label: 'Peu commune', color: '#6FCF97' },
+  R: { short: 'R', label: 'Rare', color: '#5B9CFF' }, E: { short: 'É', label: 'Épique', color: '#B98CFF' },
+  S: { short: 'S', label: 'Secrète', color: '#FF5C8A' }, IL: { short: 'IC', label: 'Iconic Legend', color: '#F2C94C' },
   IO: { short: 'IC', label: 'Iconic Other', color: '#F2C94C' }
 };
 const STRIPE = { R: '#E5484D', Y: '#E8C547' };
-const LANG = { fr: { code: 'VF', color: '#FFB067', label: 'Français' }, en: { code: 'VO', color: '#8FB4FF', label: 'Anglais' } };
+const LANG = { fr: { code: 'VF', color: '#FFB067' }, en: { code: 'VO', color: '#8FB4FF' } };
 
 class Component extends DCLogic {
   constructor(props) {
@@ -150,106 +126,52 @@ class Component extends DCLogic {
       const en = iconic ? 0 : (i % 6 === 2 ? 1 : 0);
       qty[c.n] = { fr, en };
     });
-    this.state = { qty, lang: 'fr', filter: 'all', remove: false, open: null, last: null, tab: 'retail' };
+    this.state = { qty, lang: 'fr', filter: 'all', last: null };
   }
-
   change(n, lang, delta) {
-    const cur = this.state.qty[n];
-    const next = Math.max(0, cur[lang] + delta);
+    const cur = this.state.qty[n]; const next = Math.max(0, cur[lang] + delta);
     if (next === cur[lang]) return;
-    const qty = Object.assign({}, this.state.qty);
-    qty[n] = Object.assign({}, cur, { [lang]: next });
+    const qty = Object.assign({}, this.state.qty); qty[n] = Object.assign({}, cur, { [lang]: next });
     const card = CARDS.find((c) => c.n === n);
-    const name = lang === 'fr' ? card.fr : card.en;
-    const text = (delta > 0 ? '+1 ' : '−1 ') + name + ' · ' + LANG[lang].code;
-    this.setState({ qty, last: { n, lang, delta, text } });
+    this.setState({ qty, last: { n, lang, delta, text: (delta > 0 ? '+1 ' : '−1 ') + (lang === 'fr' ? card.fr : card.en) + ' · ' + LANG[lang].code } });
   }
-
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
-    const s = this.state;
-    const dup = 1;
-    const total = CARDS.length;
-    let ownedCount = 0;
-    CARDS.forEach((c) => { const q = s.qty[c.n]; if (q.fr + q.en > 0) ownedCount++; });
-
+    const s = this.state; const total = CARDS.length; const other = s.lang === 'fr' ? 'en' : 'fr';
+    let ownedCount = 0; CARDS.forEach((c) => { const q = s.qty[c.n]; if (q.fr + q.en > 0) ownedCount++; });
     const visible = CARDS.filter((c) => {
       const q = s.qty[c.n]; const sum = q.fr + q.en;
       if (s.filter === 'missing') return sum === 0;
       if (s.filter === 'owned') return sum > 0;
-      if (s.filter === 'dups') return sum > dup;
+      if (s.filter === 'dups') return sum > 1;
       return true;
     });
-
     const cards = visible.map((c) => {
-      const q = s.qty[c.n]; const sum = q.fr + q.en; const r = RARITY[c.r];
-      const badges = [];
-      if (q.fr > 0) badges.push({ label: 'VF ' + q.fr, color: LANG.fr.color });
-      if (q.en > 0) badges.push({ label: 'VO ' + q.en, color: LANG.en.color });
-      const name = s.lang === 'fr' ? c.fr : c.en;
+      const q = s.qty[c.n]; const r = RARITY[c.r]; const name = s.lang === 'fr' ? c.fr : c.en; const mine = q[s.lang];
       return {
-        n: c.n, name, rShort: r.short, rColor: r.color, stripe: STRIPE[c.col], badges,
-        opacity: sum === 0 ? 0.5 : 1,
-        borderStyle: sum === 0 ? 'dashed' : 'solid',
-        borderColor: sum === 0 ? '#3A4152' : '#232838',
-        aria: (s.remove ? 'Retirer un exemplaire ' : 'Ajouter un exemplaire ') + LANG[s.lang].code + ' : ' + name + ', numéro ' + c.n,
-        openAria: 'Quantités par langue : ' + name,
-        tap: () => this.change(c.n, s.lang, s.remove ? -1 : 1),
-        open: () => this.setState({ open: c.n })
+        n: c.n, name, rShort: r.short, rColor: r.color, stripe: STRIPE[c.col], qty: mine,
+        qtyColor: mine > 0 ? '#ECEEF3' : '#8B92A3', decColor: mine > 0 ? '#ECEEF3' : '#3A4152',
+        opacity: q.fr + q.en === 0 ? 0.55 : 1, borderStyle: q.fr + q.en === 0 ? 'dashed' : 'solid', borderColor: q.fr + q.en === 0 ? '#3A4152' : '#232838',
+        hasOther: q[other] > 0, otherLabel: LANG[other].code + ' ' + q[other], otherColor: LANG[other].color,
+        openAria: 'Ouvrir la carte ' + name + ', numéro ' + c.n,
+        decAria: 'Retirer un exemplaire ' + LANG[s.lang].code + ' : ' + name, incAria: 'Ajouter un exemplaire ' + LANG[s.lang].code + ' : ' + name,
+        dec: () => this.change(c.n, s.lang, -1), inc: () => this.change(c.n, s.lang, 1)
       };
     });
-
     const langBtns = ['fr', 'en'].map((l) => ({
-      label: LANG[l].code, pressed: s.lang === l ? 'true' : 'false',
-      bg: s.lang === l ? LANG[l].color : 'transparent', fg: s.lang === l ? '#0D0F14' : '#D5D9E2',
+      label: LANG[l].code, pressed: s.lang === l ? 'true' : 'false', bg: s.lang === l ? LANG[l].color : 'transparent', fg: s.lang === l ? '#0D0F14' : '#D5D9E2',
       pick: () => this.setState({ lang: l })
     }));
-
     const filters = [['all', 'Toutes'], ['missing', 'Manquantes'], ['owned', 'Possédées'], ['dups', 'Doublons']].map(([id, label]) => ({
-      label, pressed: s.filter === id ? 'true' : 'false',
-      bg: s.filter === id ? '#ECEEF3' : 'transparent', fg: s.filter === id ? '#0D0F14' : '#D5D9E2', border: s.filter === id ? '#ECEEF3' : '#2B3040',
+      label, pressed: s.filter === id ? 'true' : 'false', bg: s.filter === id ? '#ECEEF3' : 'transparent', fg: s.filter === id ? '#0D0F14' : '#D5D9E2', border: s.filter === id ? '#ECEEF3' : '#2B3040',
       pick: () => this.setState({ filter: id })
     }));
-
-    let sheet = { n: '', fr: '', en: '', rLabel: '', stripe: '#232838', rows: [] };
-    if (s.open) {
-      const c = CARDS.find((x) => x.n === s.open); const q = s.qty[c.n];
-      sheet = {
-        n: c.n, fr: c.fr, en: c.en, rLabel: RARITY[c.r].label, stripe: STRIPE[c.col],
-        rows: ['fr', 'en'].map((l) => ({
-          code: LANG[l].code, color: LANG[l].color, label: LANG[l].label, qty: q[l],
-          decAria: 'Retirer un exemplaire ' + LANG[l].code, incAria: 'Ajouter un exemplaire ' + LANG[l].code,
-          dec: () => this.change(c.n, l, -1), inc: () => this.change(c.n, l, 1)
-        }))
-      };
-    }
-
     return {
-      accent, total, ownedCount, cards, langBtns, filters, sheet,
-      tabs: [['retail', 'Retail', ownedCount + '/' + total], ['beta', 'Beta', '4/68'], ['starters', 'Starters', '11/34'], ['demo', 'Démos', '0/10'], ['promo', 'Promos', '2/56']].map(([id, label, count]) => ({
-        label, count, selected: s.tab === id ? 'true' : 'false', fg: s.tab === id ? '#ECEEF3' : '#A3AAB9', line: s.tab === id ? accent : 'transparent',
-        pick: () => this.setState({ tab: id, sub: 0 })
-      })),
-      subs: ({
-        starters: ['Tous', 'The Heist — Retail', 'The Heist — Beta', 'Embracing Power — Retail', 'Embracing Power — Beta'],
-        demo: ['Tous', 'Merc', 'Arasaka'],
-        promo: ['Toutes', 'Pre-Release Retail', 'Pre-Release Beta', 'Box Toppers Retail', 'Box Toppers Beta', 'Edgerunner Open S1', 'Night City Brawl S1', 'Night City Showdown S1', 'Set 1 Promos', 'Judge Promos']
-      }[s.tab] || []).map((label, i) => {
-        const on = (s.sub || 0) === i;
-        return { label, pressed: on ? 'true' : 'false', bg: on ? '#2B3040' : 'transparent', fg: on ? '#ECEEF3' : '#A3AAB9', border: on ? '#3A4152' : '#232838', pick: () => this.setState({ sub: i }) };
-      }),
-      hasSubs: ['starters', 'demo', 'promo'].includes(s.tab),
-      showLang: s.tab === 'retail', voOnly: s.tab !== 'retail',
+      accent, total, ownedCount, cards, langBtns, filters, empty: cards.length === 0,
       isMissingFilter: s.filter === 'missing', missingCount: total - ownedCount,
-      copyMissing: () => this.setState({ last: { n: null, lang: null, delta: 0, text: 'Liste des manques copiée, prête à coller sur Discord.' } }),
-      empty: cards.length === 0,
-      removeMode: s.remove ? 'true' : 'false',
-      modeLabel: s.remove ? 'Mode retrait' : 'Mode ajout',
-      modeBg: s.remove ? '#3A1C25' : 'transparent', modeFg: s.remove ? '#FF8FAB' : '#D5D9E2', modeBorder: s.remove ? '#FF5C8A' : '#2B3040',
-      toggleMode: () => this.setState({ remove: !s.remove }),
-      sheetOpen: !!s.open, closeSheet: () => this.setState({ open: null }),
-      hasToast: !!s.last, toastText: s.last ? s.last.text : '',
-      undo: () => { const l = s.last; if (!l) return; if (l.n) this.change(l.n, l.lang, -l.delta); this.setState({ last: null }); }
+      copyMissing: () => this.setState({ last: { n: null, text: 'Liste des manques copiée, prête à coller sur Discord.' } }),
+      hasToast: !!s.last, toastText: s.last ? s.last.text : '', canUndo: !!(s.last && s.last.n),
+      undo: () => { const l = s.last; if (!l || !l.n) return; this.change(l.n, l.lang, -l.delta); this.setState({ last: null }); }
     };
   }
 }

@@ -13,6 +13,7 @@
 <style>
 body{margin:0;background:#0D0F14}
 a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+input::placeholder{color:#8B92A3}
 </style>
 </helmet>
 <div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
@@ -38,47 +39,35 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </div>
 </nav>
 
-<div style="flex: 999 1 640px; min-width: 0; box-sizing: border-box; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 20px">
-<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 28px">Sets</h1>
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px 28px; border-bottom: 1px solid #232838">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Sets</h1>
+<label for="wsetq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Filtrer les sets</label>
+<input id="wsetq" type="search" placeholder="Filtrer par nom" style="flex: 0 1 320px; margin: 0 auto; height: 40px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: #161922; color: #ECEEF3; font-size: 14px; font-family: inherit">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">1 set</span>
+</header>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 18px; max-width: 1200px">
-
-<a href="WebSets.dc.html" style="display: flex; flex-direction: column; gap: 16px; padding: 20px; background: #161922; border: 1px solid #232838; border-radius: 16px; color: #ECEEF3">
-<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
-<div style="display: flex; flex-direction: column; gap: 4px">
-<span style="font-size: 12px; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Set 1 · 2026</span>
-<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.15">Welcome to Night City</h2>
-<span style="font-size: 13px; color: #A3AAB9">7 tirages · 151 cartes · VO et VF</span>
+<main style="padding: 24px 28px 40px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; max-width: 1400px">
+<a href="WebSetReleases.dc.html" style="display: flex; align-items: center; gap: 16px; padding: 16px 18px; background: #161922; border: 1px solid #232838; border-radius: 12px; color: #ECEEF3">
+<div style="width: 56px; height: 56px; flex-shrink: 0; border-radius: 10px; background: #1C2029; display: grid; place-items: center">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D5D9E2" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V9l5-3v15M8 21V4l6 3v14M14 21V10l7 3v8M2 21h20"></path></svg>
 </div>
-<div style="text-align: right">
-<div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: {{accent}}">73 %</div>
-<div style="font-size: 12px; color: #A3AAB9; margin-top: 4px">set jouable</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 17px; font-weight: 600">Welcome to Night City</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">{{owned}} / 151 cartes · 17 tirages</span>
+<div style="height: 5px; background: #232838; border-radius: 3px; overflow: hidden"><div style="height: 100%; width: {{pct}}%; background: {{accent}}"></div></div>
 </div>
-</div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<sc-for list="{{bars}}" as="b" hint-placeholder-count="3">
-<div style="display: grid; grid-template-columns: 140px minmax(0, 1fr) 80px; align-items: center; gap: 10px">
-<span style="font-size: 13px; color: #D5D9E2">{{b.label}}</span>
-<div style="height: 8px; background: #232838; border-radius: 4px; overflow: hidden"><div style="height: 100%; width: {{b.pct}}%; background: {{b.color}}"></div></div>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9; text-align: right">{{b.count}}</span>
-</div>
-</sc-for>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 6px">
-<sc-for list="{{releases}}" as="r" hint-placeholder-count="5">
-<span style="font-size: 12px; color: #D5D9E2; border: 1px solid #2B3040; border-radius: 999px; padding: 3px 10px">{{r}}</span>
-</sc-for>
-</div>
-<span style="display: flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 14px; color: {{accent}}">Voir les cartes
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></span>
 </a>
-
-<div aria-disabled="true" style="display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 20px; border: 1px dashed #3A4152; border-radius: 16px; min-height: 200px">
-<span style="font-size: 12px; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Set 2 · printemps 2027</span>
-<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 22px; color: #D5D9E2">Edgerunners: Burn Bright</span>
-<span style="font-size: 14px; color: #A3AAB9">À venir : apparaîtra dès que ses cartes seront dans le catalogue.</span>
+<div aria-disabled="true" style="display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px dashed #3A4152; border-radius: 12px">
+<div style="width: 56px; height: 56px; flex-shrink: 0; border-radius: 10px; border: 1px dashed #3A4152"></div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 17px; font-weight: 600; color: #D5D9E2">Edgerunners: Burn Bright</span>
+<span style="font-size: 13px; color: #A3AAB9">Printemps 2027 · affiché dès qu'il sera dans le catalogue</span>
 </div>
 </div>
+</div>
+</main>
 </div>
 </div>
 </x-dc>
@@ -86,13 +75,8 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
-    const pct = (a, b) => Math.floor((a / b) * 100);
-    const bars = [
-      { label: 'Set jouable', count: '44 / 60', pct: pct(44, 60), color: accent },
-      { label: 'Master set', count: '57 / 202', pct: pct(57, 202), color: '#B98CFF' },
-      { label: 'Retail en VF', count: '41 / 67', pct: pct(41, 67), color: '#FFB067' }
-    ];
-    return { accent, bars, releases: ['Retail', 'Beta', 'Starters', 'Démos', 'Promos'] };
+    const owned = 104;
+    return { accent, owned, pct: Math.floor((owned / 151) * 100) };
   }
 }
 </script>

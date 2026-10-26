@@ -25,30 +25,28 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 
 | Onglet | Rôle | Maquettes (mobile / web) |
 |---|---|---|
-| Sets | Tout le catalogue, en trois niveaux (ci-dessous) ; c'est là qu'on saisit | `Main`, `SetGrid`, `CardDetail` / `WebSetList`, `WebSets`, `WebCard` |
+| Sets | Tout le catalogue, en quatre niveaux (ci-dessous) ; c'est là qu'on saisit | `Main`, `SetReleases`, `SetGrid`, `CardDetail` / `WebSetList`, `WebSetReleases`, `WebSets`, `WebCard` |
 | Collection | Uniquement ce qui est possédé, avec filtres et tri | `Collection` / `WebCollection` |
 | Recherche | Recherche dans tous les sets et toutes les langues | `Search` / `WebSearch` |
 | Stats | Complétion et chiffres de la collection | `Completion` / `WebStats` |
 | Réglages | Saisie, complétion, affichage, données | `Settings` / `WebSettings` |
 
-### 2.1 Sets : trois niveaux
+### 2.1 Sets : quatre niveaux (modèle UrzaGatherer : Blocs → extensions → cartes)
 
-1. **Liste des sets** (`/sets`) : un bloc par set avec sa progression ; un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration : ne l'afficher que si le catalogue le contient).
-2. **Page d'un set** (`/sets/:setId`) : toutes les cartes du set, réparties en **cinq onglets fixes**, identiques sur mobile et sur bureau :
-   - **Retail** et **Beta** : un onglet par tirage du groupe `main` ;
-   - **Starters**, **Démos**, **Promos** : un onglet par groupe (`starter`, `demo`, `promo`), avec un **sous-filtre** pour choisir le tirage précis (« Tous » par défaut, puis chaque tirage du groupe dans l'ordre `release.order`, ex. « The Heist — Retail », « Edgerunner Open S1 »).
-   - Un onglet sans aucune impression dans le set n'est pas affiché. Chaque onglet montre son compteur (possédées / total).
-   - Avec le sous-filtre « Tous », une carte présente dans plusieurs tirages du groupe apparaît une fois par impression, avec le nom du tirage sur la vignette.
-   - L'onglet par défaut est celui qui contient le tirage de saisie des Réglages, sinon Retail. C'est l'écran de **saisie** (§5.1) : dans un onglet de groupe, un tap avec « Tous » ajoute l'impression de la vignette touchée.
-3. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis la page d'un set, la Collection ou la Recherche (§5.9).
+1. **Liste des sets** (`/sets`) : une tuile par set (icône, nom, cartes possédées / total, nombre de tirages, barre de progression), avec un champ de filtre par nom. Un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration).
+2. **Tirages du set** (`/sets/:setId`) : **une tuile par tirage** (Retail, Beta, chaque starter, chaque deck démo, chaque série de promos), regroupées sous les titres « Set principal », « Starters », « Decks démo », « Promos » (groupes `main`, `starter`, `demo`, `promo`), dans l'ordre `release.order`. Chaque tuile : bandeau avec le nom du tirage et un ruban vertical indiquant le groupe, variantes possédées / total, pourcentage, barre de progression, langues disponibles (VO, VF). Champ de filtre par nom. Un tirage sans impression n'est pas affiché.
+3. **Cartes d'un tirage** (`/sets/:setId/:releaseId`) : la grille des cartes du tirage, dans l'ordre des numéros. C'est l'écran de **saisie** (§5.1) : chaque vignette a ses boutons **− quantité +** ; un clic sur l'image ou le nom ouvre la page carte. Filtres : toutes, manquantes, possédées, doublons ; « Copier la liste » avec le filtre Manquantes.
+4. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis les cartes d'un tirage, la Collection ou la Recherche (§5.9).
+
+Le fil d'Ariane (bureau) et le bouton retour (mobile) remontent d'un niveau : page carte → cartes du tirage → tirages du set → liste des sets.
 
 Écrans hors barre : **états** (`States` / `WebStates`) : premier lancement, hors-ligne, nouveau catalogue, collection vide.
 
 **Règle d'harmonisation** : mobile et bureau ont **les mêmes écrans, les mêmes fonctions et les mêmes filtres**. Seule la disposition change (§8). Une fonction présente sur une seule des deux maquettes est un oubli de maquette, pas une différence voulue.
 
-Il n'y a **pas d'onglet « Manques »** : les manques sont le filtre « Manquantes » de la page d'un set, les doublons le filtre « Doublons » de Collection.
+Il n'y a **pas d'onglet « Manques »** : les manques sont le filtre « Manquantes » de la page des cartes d'un tirage, les doublons le filtre « Doublons » de Collection.
 
-Chaque écran a une URL (routage côté client) pour que le bouton retour d'Android et l'historique du navigateur fonctionnent. L'onglet de tirage et les filtres d'une page de set sont dans l'URL (`?tirage=wnc-retail&filtre=manquantes`), pour que le retour depuis une page carte retrouve exactement le même état.
+Chaque écran a une URL (routage côté client) pour que le bouton retour d'Android et l'historique du navigateur fonctionnent. Le tirage est dans le chemin et les filtres de la page des cartes sont dans l'URL (`/sets/wnc/wnc-retail?filtre=manquantes&langue=fr`), pour que le retour depuis une page carte retrouve exactement le même état.
 
 ---
 
@@ -125,13 +123,12 @@ Une ligne par entrée, séparateur `;` (Excel FR), UTF-8 avec BOM : `set;tirage;
 
 ### 5.1 Saisie
 
-- Le **tirage et la langue de saisie** par défaut viennent des Réglages (défaut : Retail, VF). Dans la page d'un set, le tirage est l'onglet affiché ; la langue se change avec le sélecteur VF/VO de la page.
-- **Un tap** sur la vignette d'une carte ajoute 1 exemplaire de l'impression (tirage de l'onglet, numéro, langue choisie), **sans quitter la page**.
-- Si l'impression n'existe pas dans la langue choisie, on n'ajoute rien et on ouvre la page carte. C'est le cas courant : le FR n'existe que pour le Retail du set principal (pas de Beta, starters ni promos en FR). Quand l'onglet affiché n'existe que dans une langue, le sélecteur VF/VO est masqué.
-- **Mode retrait** : le même tap retire 1 exemplaire (jamais en dessous de 0).
-- Après chaque saisie, un bandeau « +1 [nom] · VF » avec **Annuler** (annule exactement la dernière action). Le bandeau reste jusqu'à l'action suivante ou 5 s.
-- La **flèche** d'une vignette (et le nom de la carte) ouvre la **page carte** (§5.9).
-- Sur la page carte, chaque impression a ses boutons − et +.
+- La saisie se fait sur la page des **cartes d'un tirage** : le tirage est celui de la page.
+- Chaque vignette affiche **− quantité +**. **+** ajoute 1 exemplaire de l'impression (tirage, numéro, langue choisie), **−** en retire 1 (jamais en dessous de 0 ; le bouton − est grisé à 0). La page ne change pas.
+- La **langue** des quantités se choisit avec le sélecteur VF/VO de la page ; défaut : la langue de saisie des Réglages (VF). Le sélecteur n'apparaît que si le tirage existe dans plusieurs langues (aujourd'hui, seul le Retail a une VF). Quand une autre langue est aussi possédée, un petit badge sur l'image l'indique (ex. « VO 1 »).
+- **Un clic sur l'image ou le nom** de la carte ouvre la **page carte** (§5.9). Il n'y a plus de « tap pour ajouter » ni de mode retrait.
+- Après chaque + ou −, un bandeau « +1 [nom] · VF » avec **Annuler** (annule exactement la dernière action). Le bandeau reste jusqu'à l'action suivante ou 5 s.
+- Sur la page carte, chaque impression (tous tirages, toutes langues) a aussi ses boutons − et +.
 
 ### 5.2 Possession
 
@@ -158,7 +155,7 @@ Conséquences :
 
 ### 5.4 Manques
 
-- Filtre « Manquantes » de la page d'un set, pour l'onglet de tirage affiché : variantes non possédées selon la langue sélectionnée dans la portée (toutes langues, VF, VO).
+- Filtre « Manquantes » de la page des cartes d'un tirage : variantes non possédées selon la langue sélectionnée dans la portée (toutes langues, VF, VO).
 - Une carte manquante en VF mais possédée en VO porte l'indication « en VO ».
 - **Copier la liste** copie un texte prêt à coller sur Discord :
 
@@ -201,8 +198,8 @@ Une seule page par carte (`/cartes/:slug`), la même quel que soit l'écran d'o�
 
 - **Contenu** : image de l'impression sélectionnée (par défaut, celle du tirage et de la langue d'où l'on vient, sinon la première impression Retail dans la langue d'affichage), vignettes des autres impressions pour changer d'image, nom dans la langue d'affichage et dans l'autre langue, type, couleur, RAM / coût / power quand ils existent, classifications, texte de règles avec sélecteur VF/VO.
 - **Impressions** : toutes les impressions de la carte, groupées par tirage puis par numéro, une ligne par langue, avec rareté, quantité, − et +. Une impression exclusive à un tirage porte une mention (ex. « exclusive Beta »). Les artistes sont indiqués.
-- **Retour contextuel** : le bouton retour ramène à l'écran d'origine, dans le même état (onglet, filtres, position de défilement) ; son libellé nomme cet écran (« Welcome to Night City · Retail », « Collection », « Recherche »). Arrivé par un lien direct, il ramène à la page du set de la carte.
-- **Précédente / suivante** : uniquement en venant d'une page de set, pour parcourir les cartes **dans l'ordre et avec les filtres de cette page** (ex. seulement les manquantes du Retail). Libellés avec numéro et nom de la carte voisine.
+- **Retour contextuel** : le bouton retour ramène à l'écran d'origine, dans le même état (filtres, langue, position de défilement) ; son libellé nomme cet écran (« Welcome to Night City · Retail », « Collection », « Recherche »). Arrivé par un lien direct, il ramène aux cartes du tirage de l'impression affichée.
+- **Précédente / suivante** : uniquement en venant de la page des cartes d'un tirage, pour parcourir les cartes **dans l'ordre et avec les filtres de cette page** (ex. seulement les manquantes du Retail). Libellés avec numéro et nom de la carte voisine.
 - Textes divergents entre impressions d'une même langue (cas réels, voir `catalog-spec.md` §9) : afficher le texte de l'impression sélectionnée, c'est-à-dire `printing.printedRulesText` s'il existe, sinon `card.rulesText[langue]`.
 
 ---
@@ -240,8 +237,8 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
 - Mobile d'abord, largeur de référence 390 px. **Une seule app** : la mise en page s'adapte à la largeur, il n'y a pas de version web séparée.
 - **Bureau (à partir d'environ 900 px)**, voir les maquettes `Web*` :
   - la barre de navigation du bas devient une **barre latérale** à gauche (logo, cinq onglets, état hors-ligne, mention fan-made) ;
-  - **liste des sets** : blocs de set en grille (2 colonnes ou plus) ;
-  - **page d'un set** : onglets de tirages en haut, grille de vignettes plus large (colonnes automatiques d'environ 130 px minimum) ; un clic ajoute un exemplaire comme sur mobile ;
+  - **liste des sets** et **tirages du set** : tuiles en grille (colonnes automatiques), fil d'Ariane en haut ;
+  - **cartes d'un tirage** : grille de vignettes plus large (colonnes automatiques d'environ 150 px minimum), barre de filtres et sélecteur de langue sous l'en-tête, − quantité + sous chaque vignette comme sur mobile ;
   - **page carte** : en pleine page, image et vignettes des impressions à gauche, informations et tableau des impressions à droite ; précédente / suivante dans la barre du haut ;
   - **Collection** : un **tableau triable** (clic sur un en-tête pour trier, second clic pour inverser), filtres en colonne à gauche, bouton d'export CSV ;
   - **Recherche** : grand champ, filtres en colonne à gauche, résultats en grille de cartes ;
@@ -288,10 +285,10 @@ Chaque étape se termine par une app qui fonctionne. Ne pas commencer la suivant
 
 1. **Squelette** : projet Vite/React/PWA, les cinq onglets vides avec la navigation, chargement du catalogue (depuis `catalog/dist/`) et stockage IndexedDB, état « premier lancement ».
    *Critère* : l'app s'installe sur Android, se relance hors-ligne et affiche le nombre de cartes du catalogue.
-2. **Sets et saisie** : liste des sets, page d'un set avec onglets de tirages, sélecteur VF/VO, tap +1, mode retrait, annuler, filtres (toutes, manquantes, possédées, doublons), copier les manques, état de la page dans l'URL.
+2. **Sets et saisie** : liste des sets, tirages du set en tuiles, cartes d'un tirage avec − et +, sélecteur VF/VO, annuler, filtres (toutes, manquantes, possédées, doublons), copier les manques, état de la page dans l'URL.
    *Critère* : saisir 12 cartes d'un booster en moins de 30 secondes ; les quantités survivent à un redémarrage.
-3. **Page carte** : la page commune du §5.9 (impressions, quantités par langue, texte de règles, retour contextuel, précédente / suivante), ouverte depuis la page d'un set.
-   *Critère* : depuis la page d'un set filtrée sur « Manquantes », ouvrir une carte, passer à la suivante, revenir : on retrouve l'onglet, le filtre et la position.
+3. **Page carte** : la page commune du §5.9 (impressions, quantités par langue, texte de règles, retour contextuel, précédente / suivante), ouverte depuis les cartes d'un tirage.
+   *Critère* : depuis les cartes du Retail filtrées sur « Manquantes », ouvrir une carte, passer à la suivante, revenir : on retrouve le filtre, la langue et la position.
 4. **Collection** : liste (tableau sur bureau), filtres, tri, doublons avec surplus ; chaque ligne ouvre la page carte.
 5. **Recherche** : recherche multilingue sans accents, filtres, résultats par carte ; chaque résultat ouvre la page carte.
 6. **Stats** : les quatre mesures du §5.3 et leurs ventilations.
@@ -311,5 +308,5 @@ Synchronisation Google Drive (juste après le MVP, en s'appuyant sur le fichier 
 ## 12. Questions ouvertes
 
 - ~~Sens des suffixes `a`/`b`~~ : **résolu**. Ce sont deux illustrations de la même carte (V — Streetkid : V masculin `005a`, V féminin `005b`), voir `catalog-spec.md` §9. Elles s'affichent comme deux variantes distinctes dans la grille.
-- ~~Ordre des onglets de tirage~~ : **résolu**, cinq onglets fixes avec sous-filtre (§2.1).
+- ~~Ordre des onglets de tirage~~ : **résolu** autrement : plus d'onglets, une page de tirages en tuiles (§2.1).
 - Les tirages en `demo` et `promo` restent affichés dans la page du set même quand ils ne sont pas comptés : seule la complétion change.

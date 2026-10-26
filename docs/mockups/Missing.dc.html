@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Manques et doublons</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
+
+<header style="flex-shrink: 0; padding: 12px 16px 0; border-bottom: 1px solid #232838; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Manques et doublons</h1>
+<button onClick="{{copy}}" style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"></path></svg>Copier la liste</button>
+</div>
+<div role="tablist" aria-label="Listes" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr))">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+<button role="tab" aria-selected="{{t.selected}}" onClick="{{t.pick}}" style="height: 44px; border: 0; background: transparent; cursor: pointer; font-size: 14px; font-weight: 600; color: {{t.fg}}; border-bottom: 2px solid {{t.line}}">{{t.label}}</button>
+</sc-for>
+</div>
+</header>
+
+<main style="flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px">
+
+<sc-if value="{{isMissing}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div role="group" aria-label="Portée" style="display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{scopes}}" as="sc" hint-placeholder-count="3">
+<button onClick="{{sc.pick}}" aria-pressed="{{sc.pressed}}" style="height: 34px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{sc.border}}; background: {{sc.bg}}; color: {{sc.fg}}">{{sc.label}}</button>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9">{{missingSummary}}</p>
+<sc-for list="{{missingGroups}}" as="g" hint-placeholder-count="3">
+<section style="display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">
+<span style="width: 10px; height: 10px; border-radius: 2px; background: {{g.color}}"></span>{{g.label}} · {{g.count}}</h2>
+<sc-for list="{{g.items}}" as="it" hint-placeholder-count="2">
+<a href="CardDetail.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 12px; background: #161922; border: 1px dashed #3A4152; border-radius: 10px; color: #ECEEF3">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9; width: 34px">{{it.n}}</span>
+<span style="flex: 1; font-size: 14px; min-width: 0">{{it.name}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A3AAB9">{{it.hint}}</span>
+</a>
+</sc-for>
+</section>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{isDups}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #161922; border: 1px solid #232838; border-radius: 12px">
+<span style="flex: 1; font-size: 14px">Je garde <strong>{{keep}}</strong> exemplaire{{keepPlural}} par carte</span>
+<button onClick="{{keepDec}}" aria-label="Garder un exemplaire de moins" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">−</button>
+<button onClick="{{keepInc}}" aria-label="Garder un exemplaire de plus" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">+</button>
+</div>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9">{{dupSummary}}</p>
+<sc-for list="{{dups}}" as="d" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 6px 12px; background: #161922; border: 1px solid #232838; border-radius: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9; width: 34px">{{d.n}}</span>
+<span style="flex: 1; display: flex; flex-direction: column; min-width: 0">
+<span style="font-size: 14px">{{d.name}}</span>
+<span style="font-size: 12px; color: #A3AAB9">{{d.detail}}</span>
+</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 500; color: #0D0F14; background: {{accent}}; border-radius: 6px; padding: 2px 8px">×{{d.extra}}</span>
+</div>
+</sc-for>
+<sc-if value="{{noDups}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 24px 0; text-align: center; color: #A3AAB9; font-size: 14px">Aucun doublon avec ce seuil.</p>
+</sc-if>
+</div>
+</sc-if>
+</main>
+
+<sc-if value="{{copied}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 12px; right: 12px; bottom: 80px; padding: 12px 14px; background: #262B38; border: 1px solid #3A4152; border-radius: 10px; font-size: 14px">Liste copiée en texte, prête à coller sur Discord.</div>
+</sc-if>
+
+<nav aria-label="Navigation principale" style="height: 68px; flex-shrink: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #232838; background: #11141B">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="11" height="15" rx="2"></rect><path d="M9 21h9a2 2 0 0 0 2-2V7"></path></svg>Collection</a>
+<a href="Missing.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: {{accent}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" stroke-dasharray="3 3"></rect><path d="M12 9v6M9 12h6"></path></svg>Manques</a>
+<a href="Completion.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg>Réglages</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+const MISSING = [
+  { n: '015', name: 'Octant', r: 'C', vf: true, vo: true },
+  { n: '027', name: 'Tout Est Perdu', r: 'C', vf: false, vo: true },
+  { n: '049', name: 'Sbires du Maelstrom', r: 'C', vf: true, vo: true },
+  { n: '033', name: 'Assemblage Industriel', r: 'U', vf: true, vo: false },
+  { n: '035', name: 'Souvenirs en Lambeaux', r: 'R', vf: true, vo: true },
+  { n: '039', name: 'River Ward — Détective en Action', r: 'R', vf: true, vo: true },
+  { n: '048', name: 'Jackie Welles — Marche ou Crève', r: 'E', vf: true, vo: true },
+  { n: '143', name: 'Royce — Psychoverdose', r: 'IC', vf: true, vo: true },
+  { n: '147', name: 'Muamar Reyes — El Capitán', r: 'IC', vf: true, vo: true },
+  { n: '159', name: "Johnny Silverhand — N'abandonne Jamais Le Combat", r: 'IC', vf: true, vo: false }
+];
+const RG = { C: ['Communes', '#A3AAB9'], U: ['Peu communes', '#6FCF97'], R: ['Rares', '#5B9CFF'], E: ['Épiques', '#B98CFF'], IC: ['Iconic', '#F2C94C'] };
+const DUPS = [
+  { n: '008', name: 'Croc Chromé', vf: 3, vo: 0 },
+  { n: '025', name: 'Lames Mantis', vf: 2, vo: 1 },
+  { n: '053', name: "Bombus d'Occasion", vf: 3, vo: 0 },
+  { n: '017', name: 'Racaille Impitoyable', vf: 2, vo: 0 },
+  { n: '029', name: 'Bonnie et Clyde', vf: 2, vo: 0 },
+  { n: '006', name: 'Recrues Des 6th Street', vf: 1, vo: 1 }
+];
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'missing', scope: 'all', keep: 1, copied: false }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state;
+    const tabs = [['missing', 'Manques'], ['dups', 'Doublons']].map(([id, label]) => ({
+      label, selected: s.tab === id ? 'true' : 'false', fg: s.tab === id ? '#ECEEF3' : '#A3AAB9', line: s.tab === id ? accent : 'transparent',
+      pick: () => this.setState({ tab: id, copied: false })
+    }));
+    const scopes = [['all', 'Retail · toutes langues'], ['vf', 'Retail · VF'], ['vo', 'Retail · VO']].map(([id, label]) => ({
+      label, pressed: s.scope === id ? 'true' : 'false',
+      bg: s.scope === id ? '#ECEEF3' : 'transparent', fg: s.scope === id ? '#0D0F14' : '#D5D9E2', border: s.scope === id ? '#ECEEF3' : '#2B3040',
+      pick: () => this.setState({ scope: id })
+    }));
+    const list = MISSING.filter((m) => s.scope === 'all' ? (m.vf && m.vo) : (s.scope === 'vf' ? m.vf : m.vo));
+    const missingGroups = Object.keys(RG).map((k) => {
+      const items = list.filter((m) => m.r === k).map((m) => ({
+        n: m.n, name: m.name,
+        hint: s.scope === 'all' ? '' : (s.scope === 'vf' ? (m.vo ? '' : 'en VO') : (m.vf ? '' : 'en VF'))
+      }));
+      return { label: RG[k][0], color: RG[k][1], count: items.length, items };
+    }).filter((g) => g.items.length > 0);
+    const scopeText = s.scope === 'all' ? 'ni en VO ni en VF' : (s.scope === 'vf' ? 'en VF (« en VO » : vous l’avez dans l’autre langue)' : 'en VO (« en VF » : vous l’avez dans l’autre langue)');
+
+    const dups = DUPS.map((d) => {
+      const total = d.vf + d.vo; const extra = total - s.keep;
+      const parts = []; if (d.vf) parts.push('VF ' + d.vf); if (d.vo) parts.push('VO ' + d.vo);
+      return { n: d.n, name: d.name, extra, detail: 'Possédées : ' + parts.join(' · ') };
+    }).filter((d) => d.extra > 0);
+    const extraTotal = dups.reduce((a, d) => a + d.extra, 0);
+
+    return {
+      accent, tabs, scopes, missingGroups, isMissing: s.tab === 'missing', isDups: s.tab === 'dups',
+      missingSummary: list.length + ' variantes du Retail manquantes ' + scopeText + '.',
+      keep: s.keep, keepPlural: s.keep > 1 ? 's' : '',
+      keepDec: () => this.setState({ keep: Math.max(1, s.keep - 1) }), keepInc: () => this.setState({ keep: Math.min(9, s.keep + 1) }),
+      dups, noDups: dups.length === 0,
+      dupSummary: extraTotal + ' exemplaires en trop, sur ' + dups.length + ' cartes.',
+      copy: () => this.setState({ copied: true }), copied: s.copied
+    };
+  }
+}
+</script>
+</body>
+</html>
