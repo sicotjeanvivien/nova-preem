@@ -31,9 +31,13 @@ Conséquences :
 
 ```
 catalog/   pipeline de génération du catalogue (Node + TypeScript)  ← EN COURS
-app/       PWA (Vite + React + TypeScript, Dexie pour IndexedDB)    ← plus tard
+app/       PWA (Vite + React + TypeScript, Dexie pour IndexedDB)    ← ensuite
 docs/      spécifications
 ```
+
+Documents de référence :
+- `docs/catalog-spec.md` : le pipeline du catalogue (source, normalisation, format de sortie).
+- `docs/app-spec.md` : l'app MVP (écrans, fichier de collection, règles de complétion, doublons, recherche, étapes). **Lire avant toute modification de `app/`**, et suivre ses étapes dans l'ordre.
 
 ## Travail en cours : le pipeline du catalogue
 
