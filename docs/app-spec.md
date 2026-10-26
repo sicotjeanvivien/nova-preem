@@ -196,7 +196,7 @@ Une seule page par carte (`/cartes/:slug`), la même quel que soit l'écran d'o�
 - **Impressions** : toutes les impressions de la carte, groupées par tirage puis par numéro, une ligne par langue, avec rareté, quantité, − et +. Une impression exclusive à un tirage porte une mention (ex. « exclusive Beta »). Les artistes sont indiqués.
 - **Retour contextuel** : le bouton retour ramène à l'écran d'origine, dans le même état (onglet, filtres, position de défilement) ; son libellé nomme cet écran (« Welcome to Night City · Retail », « Collection », « Recherche »). Arrivé par un lien direct, il ramène à la page du set de la carte.
 - **Précédente / suivante** : uniquement en venant d'une page de set, pour parcourir les cartes **dans l'ordre et avec les filtres de cette page** (ex. seulement les manquantes du Retail). Libellés avec numéro et nom de la carte voisine.
-- Textes divergents entre impressions d'une même langue (cas réels, voir `catalog-spec.md` §9) : afficher le texte de l'impression sélectionnée.
+- Textes divergents entre impressions d'une même langue (cas réels, voir `catalog-spec.md` §9) : afficher le texte de l'impression sélectionnée, c'est-à-dire `printing.printedRulesText` s'il existe, sinon `card.rulesText[langue]`.
 
 ---
 
