@@ -112,12 +112,12 @@ describe("normalize (real fixture)", () => {
     const overwatch = cardBySlug(catalog, "overwatch-panam-s-gift");
     const withOwnText = overwatch.printings.filter((p) => p.printedRulesText !== undefined);
     expect(withOwnText.map((p) => [p.sourceCode, p.collectorNumber])).toEqual([
-      ["welcometonightcitybeta", "β165"],
       ["welcometonightcityretail", "093"],
       ["welcometonightcityretail-fr", "165"],
+      ["welcometonightcitybeta", "β165"],
     ]);
     expect(overwatch.card.rulesText.en).toMatch(/^\(Equip to/);
-    expect(withOwnText[1]!.printedRulesText).toMatch(/^\{Quick\}/);
+    expect(withOwnText[0]!.printedRulesText).toMatch(/^\{Quick\}/);
   });
 
   it("reports a localized name that differs between printings, keeping the regular one", () => {
