@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 import { localize, type Printing } from "../../domain/catalog.ts";
 import { copiesOwned, defaultPrinting, exclusiveCounterpart, printingsOfVariants, splitCardName, variantsOfCard } from "../../domain/cardView.ts";
-import { computeSetView, neighbors } from "../../domain/setView.ts";
+import { computeReleaseView, neighbors } from "../../domain/releaseView.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
 import { quantityOf, type Variant } from "../../domain/variants.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
@@ -12,9 +12,9 @@ import { useCollection } from "../CollectionContext.tsx";
 import { CardPlaceholderIcon, ChevronLeftIcon, ChevronRightIcon } from "../icons.tsx";
 import { cardColor, cardColorLabel, cardColorText, cardTypeLabel, languageLabel, languageName, rarityColor } from "../labels.ts";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
-import { useTabLabel } from "./useTabLabel.ts";
 
-const SET_PAGE = /^\/sets\/([^/]+)$/;
+/** The cards of a release (Sets, level 3): the only origin with previous / next. */
+const RELEASE_CARDS = /^\/sets\/([^/]+)\/([^/]+)$/;
 
 /**
  * Card page (CardDetail / WebCard, docs/app-spec.md §5.9): one page per card,
@@ -26,7 +26,6 @@ export function CardScreen() {
   const { index, settings, services } = useApp();
   const { quantities, change } = useCollection();
   const { t, language: uiLanguage } = useI18n();
-  const tabLabel = useTabLabel();
   const location = useLocation();
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
@@ -51,36 +50,37 @@ export function CardScreen() {
   useDocumentTitle(name);
   if (!card || !selected) return <Navigate to="/sets" replace />;
 
-  const setOf = (printing: Printing) => index.sets.get(index.releases.get(printing.releaseId)?.setId ?? "");
-  const cardSet = setOf(printings[0] ?? selected);
   const setName = (id: string | undefined) => localize(index.sets.get(id ?? "")?.name ?? {}, uiLanguage);
   const releaseLabel = (variant: Pick<Variant, "release">) => releaseShortName(localize(variant.release.name, uiLanguage), setName(variant.release.setId));
   const variantOf = (printing: Printing) => variants.find((variant) => variant.key === printing.variantKey)!;
 
-  // Screen of origin: set page (with its state), Collection, Search, or none (direct link).
-  const fromSet = linkState ? SET_PAGE.exec(linkState.from.pathname) : null;
+  // Screen of origin: the cards of a release (with their filter and language), Collection, Search,
+  // or none (direct link: back goes up one level, to the cards of the release of the printing shown).
+  const fromRelease = linkState ? RELEASE_CARDS.exec(linkState.from.pathname) : null;
   const originParams = new URLSearchParams(linkState?.from.search ?? "");
-  const setView = fromSet
-    ? computeSetView(
+  const releaseView = fromRelease
+    ? computeReleaseView(
         index,
-        decodeURIComponent(fromSet[1]!),
-        { tirage: originParams.get("tirage"), filtre: originParams.get("filtre"), langue: originParams.get("langue") },
+        decodeURIComponent(fromRelease[1]!),
+        decodeURIComponent(fromRelease[2]!),
+        { filtre: originParams.get("filtre"), langue: originParams.get("langue") },
         settings,
         quantities,
       )
     : null;
-  const backLabel = setView
-    ? `${setName(setView.set.id)} · ${setView.selection.release ? releaseLabel({ release: setView.selection.release }) : tabLabel(setView.selection.tab, setName(setView.set.id))}`
+  const selectedRelease = index.releases.get(selected.releaseId)!;
+  const backLabel = releaseView
+    ? `${setName(releaseView.set.id)} · ${releaseLabel(releaseView)}`
     : linkState?.from.pathname === "/collection"
       ? t("nav.collection")
       : linkState?.from.pathname === "/recherche"
         ? t("nav.search")
-        : setName(cardSet?.id);
-  const goBack = () => (linkState ? navigate(-1) : navigate(`/sets/${cardSet?.id ?? ""}`));
+        : `${setName(selectedRelease.setId)} · ${releaseLabel({ release: selectedRelease })}`;
+  const goBack = () => (linkState ? navigate(-1) : navigate(`/sets/${selectedRelease.setId}/${selectedRelease.id}`));
 
-  const around = setView && linkState?.variantKey ? neighbors(setView, linkState.variantKey) : { previous: null, next: null };
+  const around = releaseView && linkState?.variantKey ? neighbors(releaseView, linkState.variantKey) : { previous: null, next: null };
   const openNeighbor = (variant: Variant) =>
-    navigate(`/cartes/${variant.card.slug}`, { replace: true, state: cardLinkState(linkState!.from, variant.key, setView!.language) });
+    navigate(`/cartes/${variant.card.slug}`, { replace: true, state: cardLinkState(linkState!.from, variant.key, releaseView!.language) });
 
   const setParam = (changes: Record<string, string>) =>
     setParams((current) => ({ ...Object.fromEntries(current), ...changes }), { replace: true, state: location.state });

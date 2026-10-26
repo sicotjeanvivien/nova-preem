@@ -18,7 +18,8 @@ import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
 import { SettingsScreen } from "../../src/ui/screens/SettingsScreen.tsx";
 import { StatsScreen } from "../../src/ui/screens/StatsScreen.tsx";
 import { SearchScreen } from "../../src/ui/screens/SearchScreen.tsx";
-import { SetPage } from "../../src/ui/screens/SetPage.tsx";
+import { ReleaseCardsScreen } from "../../src/ui/screens/ReleaseCardsScreen.tsx";
+import { SetReleasesScreen } from "../../src/ui/screens/SetReleasesScreen.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
 import { index } from "../helpers-catalog.ts";
 import { fakeSource, MemoryCatalogStore, nodeHasher, realManifest } from "../helpers.ts";
@@ -56,7 +57,8 @@ const routes: RouteObject[] = [
     element: <AppLayout />,
     children: [
       { path: "sets", element: <SetsScreen /> },
-      { path: "sets/:setId", element: <SetPage /> },
+      { path: "sets/:setId", element: <SetReleasesScreen /> },
+      { path: "sets/:setId/:releaseId", element: <ReleaseCardsScreen /> },
       { path: "cartes/:slug", element: <CardScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },

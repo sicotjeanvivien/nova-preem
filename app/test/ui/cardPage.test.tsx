@@ -31,8 +31,8 @@ describe("card page content (§5.9)", () => {
     expect(html).toContain('aria-label="Afficher Beta β168 VO"');
   });
 
-  it("returns to the set of the card when opened from a direct link, without previous / next", () => {
-    expect(html).toContain('aria-label="Retour à Welcome to Night City"');
+  it("goes up to the cards of the release of the printing shown when opened from a direct link, without previous / next", () => {
+    expect(html).toContain('aria-label="Retour à Welcome to Night City · Retail"');
     expect(html).not.toContain("Carte suivante");
   });
 
@@ -45,7 +45,7 @@ describe("card page content (§5.9)", () => {
   });
 });
 
-describe("browsing from a set page (step 3 criterion)", () => {
+describe("browsing from the cards of a release (step 3 criterion)", () => {
   let container: HTMLDivElement;
   let root: Root;
 
@@ -68,11 +68,11 @@ describe("browsing from a set page (step 3 criterion)", () => {
   const click = (element: HTMLElement) => act(async () => element.click());
   const heading = () => container.querySelector("h1")?.textContent;
 
-  it("opens a missing card, goes to the next one, and comes back to the same tab and filter", async () => {
+  it("opens a missing card, goes to the next one, and comes back to the same filter and language", async () => {
     const store = new MemoryCollectionStore();
-    await act(async () => root.render(<TestApp path="/sets/wnc?tirage=wnc-retail&filtre=manquantes" store={store} />));
+    await act(async () => root.render(<TestApp path="/sets/wnc/wnc-retail?filtre=manquantes" store={store} />));
 
-    await click(byLabel("Afficher la carte Johnny Silverhand — Rock'n'Rebelle"));
+    await click(byLabel("Ouvrir la carte Johnny Silverhand — Rock'n'Rebelle, numéro 003"));
     expect(heading()).toBe("Johnny Silverhand");
     expect(byLabel("Retour à Welcome to Night City · Retail")).toBeTruthy();
 
@@ -84,9 +84,10 @@ describe("browsing from a set page (step 3 criterion)", () => {
     expect(heading()).toBe("Dexter DeShawn");
 
     await click(byLabel("Retour à Welcome to Night City · Retail"));
-    expect(container.querySelector('[aria-selected="true"]')?.textContent).toMatch(/^Retail/);
+    expect(container.querySelector("h1")?.textContent).toBe("Retail");
     expect(container.querySelector('.filter-pill[aria-pressed="true"]')?.textContent).toBe("Manquantes");
-    expect(container.textContent).toContain("167 variantes manquantes dans ce tirage");
+    // Desktop width (1024 px) by default in the simulated DOM.
+    expect(container.textContent).toContain("Copier les 167 manques");
     await act(async () => {});
     expect(store.entries.get(printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr").id)?.quantity).toBe(1);
   });

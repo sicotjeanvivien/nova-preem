@@ -21,3 +21,6 @@ export function summarizeSets(catalog: Catalog): SetSummary[] {
     })
     .filter((summary) => summary.cardCount > 0);
 }
+
+/** Releases of a set grouped as on its page (spec §2.1): main set, starters, demo decks, promos. */
+export const RELEASE_GROUP_ORDER = ["main", "starter", "demo", "promo", "unknown"] as const;

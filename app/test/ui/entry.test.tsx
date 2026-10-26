@@ -39,27 +39,28 @@ async function click(target: HTMLElement) {
 
 const toast = () => container.querySelector(".toast")?.textContent ?? null;
 const johnnyFr = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
-const addJohnny = "Ajouter un exemplaire VF : Johnny Silverhand — Rock'n'Rebelle, numéro 003";
+const add = "Ajouter un exemplaire VF : Johnny Silverhand — Rock'n'Rebelle";
+const remove = "Retirer un exemplaire VF : Johnny Silverhand — Rock'n'Rebelle";
 
-describe("quick entry", () => {
-  it("adds one copy per tap, writes it, and shows the undo banner", async () => {
+describe("entry with − and + (spec §5.1)", () => {
+  it("adds one copy per +, writes it, and shows the undo banner, without leaving the page", async () => {
     const store = new MemoryCollectionStore();
-    await mount({ path: "/sets/wnc", store });
+    await mount({ path: "/sets/wnc/wnc-retail", store });
 
-    await click(button(addJohnny));
-    await click(button(addJohnny));
+    await click(button(add));
+    await click(button(add));
     expect(toast()).toContain("+1 Johnny Silverhand — Rock'n'Rebelle · VF");
-    expect(container.textContent).toContain("VF 2");
+    expect(container.querySelector("h1")?.textContent).toBe("Retail");
+    expect(button(add).parentElement?.textContent).toBe("−2+");
     await act(async () => {});
     expect(store.writes).toEqual([`put ${johnnyFr.id} 1`, `put ${johnnyFr.id} 2`]);
-    expect(store.entries.get(johnnyFr.id)?.quantity).toBe(2);
   });
 
   it("undoes exactly the last action", async () => {
     const store = new MemoryCollectionStore();
-    await mount({ path: "/sets/wnc", store });
+    await mount({ path: "/sets/wnc/wnc-retail", store });
 
-    await click(button(addJohnny));
+    await click(button(add));
     await click(button("Annuler"));
     await act(async () => {});
     expect(toast()).toBeNull();
@@ -67,28 +68,49 @@ describe("quick entry", () => {
     expect(store.writes).toEqual([`put ${johnnyFr.id} 1`, `remove ${johnnyFr.id}`]);
   });
 
-  it("removes in remove mode, never below zero", async () => {
+  it("removes with −, never below zero (− is disabled at 0)", async () => {
     const store = new MemoryCollectionStore();
-    await mount({ path: "/sets/wnc", store });
+    await mount({ path: "/sets/wnc/wnc-retail", store });
 
-    await click(button(addJohnny));
-    await click(button("Mode ajout"));
-    const remove = button("Retirer un exemplaire VF : Johnny Silverhand — Rock'n'Rebelle, numéro 003");
-    await click(remove);
+    expect(button(remove).disabled).toBe(true);
+    await click(button(add));
+    await click(button(remove));
     expect(toast()).toContain("−1 Johnny Silverhand");
-    await click(remove);
+    expect(button(remove).disabled).toBe(true);
     await act(async () => {});
     expect(store.entries.has(johnnyFr.id)).toBe(false);
-    expect(store.writes).toEqual([`put ${johnnyFr.id} 1`, `remove ${johnnyFr.id}`]);
   });
 
-  it("enters a whole booster of 12 cards, one tap each", async () => {
+  it("changes the quantities of the language chosen, and shows the other one as a badge", async () => {
     const store = new MemoryCollectionStore();
-    await mount({ path: "/sets/wnc", store });
-    const tiles = [...container.querySelectorAll<HTMLButtonElement>(".tile__main")].slice(20, 32);
-    for (const tile of tiles) await click(tile);
+    await mount({ path: "/sets/wnc/wnc-retail", store });
+    await click(button(add));
+    await click(button("VO"));
+    await click(button("Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade"));
+    const tile = button("Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade").closest(".tile")!;
+    expect(tile.querySelector(".tile__other")?.textContent).toBe("VF 1");
+    await act(async () => {});
+    expect(store.entries.size).toBe(2);
+  });
+
+  it("enters a whole booster of 12 cards, one + each", async () => {
+    const store = new MemoryCollectionStore();
+    await mount({ path: "/sets/wnc/wnc-retail", store });
+    const plus = [...container.querySelectorAll<HTMLButtonElement>(".tile__plus")].slice(20, 32);
+    for (const button of plus) await click(button);
     await act(async () => {});
     expect(store.entries.size).toBe(12);
     expect([...store.entries.values()].every((e) => e.quantity === 1)).toBe(true);
+  });
+
+  it("opens the card page from the image or the name", async () => {
+    await mount({ path: "/sets/wnc/wnc-retail" });
+    await click(container.querySelector<HTMLElement>('[aria-label="Ouvrir la carte Johnny Silverhand — Rock\'n\'Rebelle, numéro 003"]')!);
+    expect(container.querySelector("h1")?.textContent).toBe("Johnny Silverhand");
+  });
+
+  it("leads the links of the former tabbed page to the cards of the release", async () => {
+    await mount({ path: "/sets/wnc?tirage=wnc-beta" });
+    expect(container.querySelector("h1")?.textContent).toBe("Beta");
   });
 });

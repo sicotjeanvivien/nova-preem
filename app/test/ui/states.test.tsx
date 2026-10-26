@@ -87,9 +87,9 @@ describe("offline (States 2)", () => {
     Object.defineProperty(navigator, "onLine", { value: false, configurable: true });
     setViewportWidth(390);
     const store = new MemoryCollectionStore();
-    await mount({ path: "/sets/wnc", store });
+    await mount({ path: "/sets/wnc/wnc-retail", store });
     expect(container.querySelector(".offline-banner")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées sur l'appareil.");
-    await act(async () => container.querySelector<HTMLButtonElement>(".tile__main")!.click());
+    await act(async () => container.querySelector<HTMLButtonElement>(".tile__plus")!.click());
     await settle();
     expect(store.writes).toHaveLength(1);
   });
@@ -111,12 +111,12 @@ describe("empty collection (States 4)", () => {
     expect(content).toMatch(/Saisir mes premières cartes Importer une sauvegarde/);
   });
 
-  it("opens the set from the first button, and has its desktop wording", async () => {
+  it("opens the cards of the entry release from the first button, and has its desktop wording", async () => {
     setViewportWidth(1280);
     await mount({ path: "/collection" });
     expect(container.querySelector("h1")?.textContent).toBe("Votre collection est vide");
     await act(async () => button("Ouvrir les sets").click());
-    expect(container.querySelector('[role="tablist"]')).toBeTruthy();
+    expect(container.querySelector("h1")?.textContent).toBe("Retail");
   });
 });
 
@@ -128,7 +128,8 @@ describe("interface in English", () => {
   it.each([
     "/sets",
     "/sets/wnc",
-    "/sets/wnc?tirage=promo&filtre=manquantes",
+    "/sets/wnc/wnc-retail",
+    "/sets/wnc/edgerunner-open-s1?filtre=manquantes",
     "/cartes/chrome-fang",
     "/collection",
     "/collection?doublons=1",

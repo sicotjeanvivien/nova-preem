@@ -22,7 +22,8 @@ export function EmptyCollection() {
   const release = index.releases.get(settings.entryReleaseId);
   const set = release ? index.sets.get(release.setId) : [...index.catalog.sets].sort((a, b) => a.order - b.order)[0];
   const entry = release && set ? `${releaseShortName(localize(release.name, language), localize(set.name, language))} ${languageLabel(t, settings.entryLanguage)}` : "";
-  const start = () => navigate(set ? `/sets/${set.id}` : "/sets");
+  // Straight to the cards of the entry release, where cards are entered (spec §2.1).
+  const start = () => navigate(release && set ? `/sets/${set.id}/${release.id}` : set ? `/sets/${set.id}` : "/sets");
 
   return (
     <div className="empty-collection">

@@ -95,3 +95,10 @@ export const WifiOffIcon = (props: IconProps) => (
     <path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5" />
   </Icon>
 );
+
+/** Generic set icon of the mockups (buildings). */
+export const SetIcon = (props: IconProps) => (
+  <Icon strokeWidth={1.4} {...props}>
+    <path d="M3 21V9l5-3v15M8 21V4l6 3v14M14 21V10l7 3v8M2 21h20" />
+  </Icon>
+);

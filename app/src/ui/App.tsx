@@ -17,7 +17,8 @@ import { SettingsScreen } from "./screens/SettingsScreen.tsx";
 import { StatsScreen } from "./screens/StatsScreen.tsx";
 import { SearchScreen } from "./screens/SearchScreen.tsx";
 import { CardScreen } from "./screens/CardScreen.tsx";
-import { SetPage } from "./screens/SetPage.tsx";
+import { ReleaseCardsScreen } from "./screens/ReleaseCardsScreen.tsx";
+import { SetReleasesScreen } from "./screens/SetReleasesScreen.tsx";
 import { SetsScreen } from "./screens/SetsScreen.tsx";
 
 const router = createBrowserRouter([
@@ -27,7 +28,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/sets" replace /> },
       { path: "sets", element: <SetsScreen /> },
-      { path: "sets/:setId", element: <SetPage /> },
+      { path: "sets/:setId", element: <SetReleasesScreen /> },
+      { path: "sets/:setId/:releaseId", element: <ReleaseCardsScreen /> },
       { path: "cartes/:slug", element: <CardScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },

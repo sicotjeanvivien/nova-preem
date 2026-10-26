@@ -25,71 +25,70 @@ describe("app shell", () => {
   });
 });
 
-describe("set list", () => {
-  it("shows the set, its real counts, its progress and its tabs", () => {
+describe("Sets, level 1: set list", () => {
+  it("shows a tile per set with the cards owned, its releases and a name filter", () => {
     const owned = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
     const content = text(render({ path: "/sets", entries: [entry(owned.id, 2)] }));
-    expect(content).toContain("Welcome to Night City");
-    expect(content).toContain("17 tirages · 151 cartes · VO et VF");
-    expect(content).toContain("Set jouable 1 / 150 cartes");
-    expect(content).toContain("Master set 1 / 588");
-    expect(content).toContain("Retail en VF 1 / 168");
-    expect(content).toMatch(/Retail Beta Starters Démos Promos/);
-    expect(content).toContain("Voir les cartes");
+    expect(content).toMatch(/Sets 1 set/);
+    expect(content).toContain("Welcome to Night City 1 / 151 cartes · 17 tirages");
+    expect(render({ path: "/sets" })).toContain('placeholder="Filtrer par nom"');
   });
 
   it("is translated into English", () => {
-    const content = text(render({ path: "/sets", language: "en" }));
-    expect(content).toContain("17 releases · 151 cards · EN and FR");
-    expect(content).toContain("Retail in FR");
+    expect(text(render({ path: "/sets", language: "en" }))).toContain("Welcome to Night City 0 / 151 cards · 17 releases");
   });
 });
 
-describe("set page", () => {
-  it("opens on Retail with the VF/VO selector and one tile per variant", () => {
-    const html = render({ path: "/sets/wnc" });
-    expect(text(html)).toMatch(/Retail 0\/168 Beta 0\/172 Starters 0\/80 Démos 0\/29 Promos 0\/134/);
-    expect(html).toMatch(/aria-selected="true"[^>]*>Retail/);
-    expect(html).toContain('aria-label="Langue saisie"');
-    expect(count(html, "tile ")).toBe(168);
-    expect(html).toContain("Ajouter un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003");
+describe("Sets, level 2: releases of a set", () => {
+  it("shows one tile per release, grouped by type, with progress and languages", () => {
+    const owned = printingOf("Chrome Fang", "embracing-power-starter-retail", "en");
+    const content = text(render({ path: "/sets/wnc", entries: [entry(owned.id, 1)] }));
+    expect(content).toMatch(/Sets Welcome to Night City 17 tirages/);
+    expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 168 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
+    expect(content).toMatch(/Starters Starter Welcome to Night City The Heist — Retail 0 \/ 20/);
+    expect(content).toContain("Embracing Power — Retail 1 / 20 VO 5 %");
+    expect(content).toMatch(/Decks démo .*Merc 0 \/ 15 .*Arasaka 0 \/ 14/);
+    expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 VO 0 %/);
   });
 
-  it("shows Beta in VO only, with its exclusive Iconics", () => {
-    const html = render({ path: "/sets/wnc?tirage=wnc-beta" });
-    expect(text(html)).toContain("VO uniquement");
-    expect(html).not.toContain('aria-label="Langue saisie"');
+  it("links each tile to the cards of its release", () => {
+    const html = render({ path: "/sets/wnc" });
+    expect(html).toContain('href="/sets/wnc/wnc-retail"');
+    expect(html).toContain('href="/sets/wnc/edgerunner-open-s1"');
+  });
+});
+
+describe("Sets, level 3: cards of a release", () => {
+  it("shows Retail with the VF/VO selector, one tile per variant with − quantity +", () => {
+    const html = render({ path: "/sets/wnc/wnc-retail" });
+    expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 168 variantes possédées/);
+    expect(text(html)).toMatch(/Quantités en VF VO Toutes Manquantes Possédées Doublons/);
+    expect(count(html, "tile ")).toBe(168);
+    expect(html).toContain('aria-label="Ouvrir la carte Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003"');
+    expect(html).toContain('aria-label="Ajouter un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle"');
+    expect(html).toMatch(/aria-label="Retirer un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle" disabled=""/);
+  });
+
+  it("shows Beta without language selector (VO only), with its exclusive Iconics", () => {
+    const html = render({ path: "/sets/wnc/wnc-beta" });
+    expect(text(html)).not.toContain("Quantités en");
     expect(count(html, "tile ")).toBe(172);
     expect(text(html)).toContain("β168");
+    expect(html).toContain('aria-label="Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade"');
   });
 
-  it("offers a sub-filter in group tabs, and names the release on each tile", () => {
-    const all = render({ path: "/sets/wnc?tirage=promo" });
-    expect(text(all)).toMatch(/Toutes Pre-Release — Retail Pre-Release — Beta Box Toppers — Retail/);
-    expect(count(all, "tile ")).toBe(134);
-    expect(count(all, "tile__release")).toBe(134);
-
-    const eo = render({ path: "/sets/wnc?tirage=edgerunner-open-s1" });
-    expect(eo).toMatch(/aria-pressed="true"[^>]*>Edgerunner Open S1/);
-    expect(count(eo, "tile ")).toBe(51);
-    expect(count(eo, "tile__release")).toBe(0);
-  });
-
-  it("filters the missing cards in the entry language and offers to copy them", () => {
+  it("filters the missing cards in the language of the quantities and offers to copy them", () => {
     const johnny = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
     const chrome = printingOf("Chrome Fang", "wnc-retail", "en");
-    const html = render({ path: "/sets/wnc?filtre=manquantes", entries: [entry(johnny.id, 1), entry(chrome.id, 1)] });
+    const html = render({ path: "/sets/wnc/wnc-retail?filtre=manquantes", entries: [entry(johnny.id, 1), entry(chrome.id, 1)] });
     expect(count(html, "tile ")).toBe(167);
-    expect(text(html)).toContain("167 variantes manquantes dans ce tirage");
-    expect(text(html)).toContain("Copier la liste");
-    // Owned in VO only: still missing in VF, with its VO badge.
-    expect(text(html)).toMatch(/Croc Chromé\s+VO 1/);
+    expect(text(html)).toContain("167 variantes manquantes Copier la liste");
+    // Owned in VO only: missing in VF, with the VO badge on the image.
+    expect(text(html)).toMatch(/008 C VO 1 Croc Chromé − 0 \+/);
   });
 
   it("keeps the language from the URL", () => {
-    const html = render({ path: "/sets/wnc?langue=en" });
-    expect(html).toMatch(/aria-pressed="true"[^>]*>VO/);
-    expect(html).toContain("Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade, numéro 003");
+    expect(render({ path: "/sets/wnc/wnc-retail?langue=en" })).toMatch(/aria-pressed="true"[^>]*>VO/);
   });
 });
 
