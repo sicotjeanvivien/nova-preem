@@ -13,7 +13,6 @@ interface CardTileProps {
   language: string;
   name: string;
   quantities: Quantities;
-  highlighted: boolean;
   onChange: (delta: number) => void;
 }
 
@@ -22,7 +21,7 @@ interface CardTileProps {
  * open the card page; − quantity + below change the copies in the page's
  * language. A badge shows the copies owned in the other language.
  */
-export function CardTile({ variant, language, name, quantities, highlighted, onChange }: CardTileProps) {
+export function CardTile({ variant, language, name, quantities, onChange }: CardTileProps) {
   const { t } = useI18n();
   const { services } = useApp();
   const location = useLocation();
@@ -40,7 +39,7 @@ export function CardTile({ variant, language, name, quantities, highlighted, onC
   const params = { language: languageLabel(t, language), name };
 
   return (
-    <div className={`tile ${owned ? "" : "tile--missing"} ${highlighted ? "tile--highlighted" : ""}`}>
+    <div className={`tile ${owned ? "" : "tile--missing"}`}>
       <Link
         to={`/cartes/${variant.card.slug}`}
         state={cardLinkState(location, variant.key, language)}

@@ -315,10 +315,6 @@ h2 {
   border-color: var(--color-border-dashed);
 }
 
-.tile--highlighted {
-  box-shadow: 0 0 0 2px var(--color-accent);
-}
-
 .tile__stripe {
   height: 4px;
 }

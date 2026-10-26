@@ -50,7 +50,6 @@ export function ReleaseCardsScreen() {
   const releaseName = view ? releaseShortName(localize(view.release.name, uiLanguage), setName) : "";
   useDocumentTitle(view ? `${releaseName} · ${setName}` : "");
 
-  const [lastChanged, setLastChanged] = useState<string | null>(null);
   const [toast, setToast] = useState<ToastState | null>(null);
   const toastId = useRef(0);
   useEffect(() => {
@@ -85,7 +84,6 @@ export function ReleaseCardsScreen() {
   const changeQuantity = (variant: Variant, delta: number) => {
     const printing = variant.printings.get(language);
     if (!printing) return;
-    setLastChanged(variant.key);
     const result = change(printing.id, delta);
     if (!result) return;
     showToast(t(delta > 0 ? "setPage.added" : "setPage.removed", { name: cardName(variant), language: languageLabel(t, language) }), result);
@@ -213,7 +211,6 @@ export function ReleaseCardsScreen() {
             language={language}
             name={cardName(variant)}
             quantities={quantities}
-            highlighted={variant.key === lastChanged}
             onChange={(delta) => changeQuantity(variant, delta)}
           />
         ))}
