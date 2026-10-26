@@ -32,6 +32,8 @@ export interface Release {
   /** Source edition codes mapped to this release. */
   sourceCodes: string[];
   order: number;
+  /** Beta ↔ Retail release with the same cards and numbering (β prefix aside), if any. */
+  counterpartReleaseId?: string;
 }
 
 export interface Rarity {

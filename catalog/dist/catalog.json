@@ -36,7 +36,8 @@
         "welcometonightcityretail",
         "welcometonightcityretail-fr"
       ],
-      "order": 1
+      "order": 1,
+      "counterpartReleaseId": "wnc-beta"
     },
     {
       "id": "wnc-beta",
@@ -52,7 +53,8 @@
       "sourceCodes": [
         "welcometonightcitybeta"
       ],
-      "order": 2
+      "order": 2,
+      "counterpartReleaseId": "wnc-retail"
     },
     {
       "id": "heist-starter-retail",
@@ -68,7 +70,8 @@
       "sourceCodes": [
         "theheistretailstarterdeck"
       ],
-      "order": 3
+      "order": 3,
+      "counterpartReleaseId": "heist-starter-beta"
     },
     {
       "id": "heist-starter-beta",
@@ -84,7 +87,8 @@
       "sourceCodes": [
         "theheistbetastarterdeck"
       ],
-      "order": 4
+      "order": 4,
+      "counterpartReleaseId": "heist-starter-retail"
     },
     {
       "id": "embracing-power-starter-retail",
@@ -100,7 +104,8 @@
       "sourceCodes": [
         "embracingpowerretailstarterdeck"
       ],
-      "order": 5
+      "order": 5,
+      "counterpartReleaseId": "embracing-power-starter-beta"
     },
     {
       "id": "embracing-power-starter-beta",
@@ -116,7 +121,8 @@
       "sourceCodes": [
         "embracingpowerbetastarterdeck"
       ],
-      "order": 6
+      "order": 6,
+      "counterpartReleaseId": "embracing-power-starter-retail"
     },
     {
       "id": "merc-demo",
@@ -196,7 +202,8 @@
       "sourceCodes": [
         "boxtoppersretail"
       ],
-      "order": 11
+      "order": 11,
+      "counterpartReleaseId": "box-toppers-beta"
     },
     {
       "id": "box-toppers-beta",
@@ -212,7 +219,8 @@
       "sourceCodes": [
         "boxtoppersbeta"
       ],
-      "order": 12
+      "order": 12,
+      "counterpartReleaseId": "box-toppers-retail"
     },
     {
       "id": "edgerunner-open-s1",

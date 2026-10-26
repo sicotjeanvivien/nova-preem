@@ -55,6 +55,9 @@ describe("normalize (real fixture)", () => {
       sourceCodes: ["welcometonightcityretail", "welcometonightcityretail-fr"],
     });
     expect(catalog.releases.map((r) => r.order)).toEqual([...catalog.releases.map((r) => r.order)].sort((a, b) => a - b));
+    expect(retail.counterpartReleaseId).toBe("wnc-beta");
+    expect(catalog.releases.find((release) => release.id === "wnc-beta")!.counterpartReleaseId).toBe("wnc-retail");
+    expect(catalog.releases.find((release) => release.id === "set1-promos")).not.toHaveProperty("counterpartReleaseId");
   });
 
   it("links the English and French printings of the same card through the variant key", () => {
