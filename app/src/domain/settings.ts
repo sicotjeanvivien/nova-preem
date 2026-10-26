@@ -16,6 +16,8 @@ export const settingsSchema = z.object({
   /** null: follow the browser language. */
   interfaceLanguage: z.enum(interfaceLanguages).nullable(),
   downloadAllImages: z.boolean(),
+  /** Minimum width of the Collection gallery cards on desktop, in pixels (spec §5.7). */
+  collectionCardSize: z.number().int().min(140).max(280),
 });
 
 export type Settings = z.infer<typeof settingsSchema>;
@@ -28,6 +30,7 @@ export const DEFAULT_SETTINGS: Settings = {
   cardNameLanguage: "entry",
   interfaceLanguage: null,
   downloadAllImages: false,
+  collectionCardSize: 180,
 };
 
 /**

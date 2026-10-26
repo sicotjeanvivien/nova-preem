@@ -11,6 +11,7 @@ describe("settings", () => {
       cardNameLanguage: "entry",
       interfaceLanguage: null,
       downloadAllImages: false,
+      collectionCardSize: 180,
     });
     expect(settingsSchema.parse(DEFAULT_SETTINGS)).toEqual(DEFAULT_SETTINGS);
   });

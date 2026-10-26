@@ -10,45 +10,52 @@ import { setViewportWidth, TestApp, text } from "./harness.tsx";
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
 const at = (iso: string, printingId: string, quantity: number): CollectionEntry => ({ printingId, quantity, firstAddedAt: iso, lastAddedAt: iso });
-const now = new Date().toISOString();
 const mantisFr = printingOf("Mantis Blades", "wnc-retail", "fr");
 const mantisEn = printingOf("Mantis Blades", "wnc-retail", "en");
 const chromeFr = printingOf("Chrome Fang", "wnc-retail", "fr");
 const chromeStarter = printingOf("Chrome Fang", "embracing-power-starter-retail", "en");
-const entries = [at(now, mantisFr.id, 2), at(now, mantisEn.id, 1), at("2026-01-02T10:00:00Z", chromeFr.id, 3), at(now, chromeStarter.id, 1)];
+const entries = [
+  at("2026-10-26T12:00:00Z", mantisFr.id, 2),
+  at("2026-10-26T12:00:00Z", mantisEn.id, 1),
+  at("2026-01-02T10:00:00Z", chromeFr.id, 3),
+  at("2026-10-25T10:00:00Z", chromeStarter.id, 1),
+];
 
-describe("Collection, mobile layout (server rendering)", () => {
-  const render = (path: string) => text(renderToString(<TestApp path={path} entries={entries} />));
+describe("Collection gallery, mobile (server rendering)", () => {
+  const render = (path: string) => renderToString(<TestApp path={path} entries={entries} />);
 
-  it("lists one line per owned variant, with its quantities per language and the summary", () => {
-    const content = render("/collection");
+  it("shows one card image per owned variant, with rarity, quantities per language, name and release", () => {
+    const html = render("/collection");
+    const content = text(html);
     expect(content).toContain("7 ex. · 4 impressions");
-    expect(content).toMatch(/Lames Mantis.*Retail #025 · Commune.*Ajoutée aujourd’hui.*VF 2 VO 1/);
-    expect(content).toMatch(/Croc Chromé.*Embracing Power — Retail #002/);
-    expect(content).toMatch(/Toutes langues VF VO Doublons/);
-    expect(content).toMatch(/Set Tirage Rareté Type Couleur/);
-    expect(content).toMatch(/Trier Récents Numéro Nom Quantité/);
+    expect(content).toMatch(/Trier Ajouts récents Numéro Nom Rareté Quantité Filtres/);
+    expect(content).toMatch(/C VF ×2 VO ×1 Lames Mantis Retail · #025 C VO ×1 Croc Chromé Embracing Power — Retail · #002 C VF ×3 Croc Chromé Retail · #008/);
+    expect(html.split('class="gallery-card"').length - 1).toBe(3);
+    expect(html).toContain('placeholder="Nom VF ou VO…"');
+    // No + or − in the gallery: entry is done in Sets or on the card page.
+    expect(html).not.toContain("Ajouter un exemplaire");
   });
 
   it("filters by language and shows the surplus of duplicates, per printing", () => {
-    const vf = render("/collection?langue=fr");
+    const vf = text(render("/collection?langue=fr"));
     expect(vf).toContain("5 ex. · 2 impressions");
-    expect(vf).not.toContain("VO 1");
+    expect(vf).not.toContain("VO ×1");
+    expect(vf).toContain("Filtres · 1");
 
-    const duplicates = render("/collection?doublons=1");
-    expect(duplicates).toContain("Au-delà de 1 exemplaire par impression");
-    expect(duplicates).toMatch(/Lames Mantis.*\+1 en trop/);
-    expect(duplicates).toMatch(/Croc Chromé.*\+2 en trop/);
-    expect(duplicates).toContain("6 ex. · 3 impressions");
+    const duplicates = text(render("/collection?doublons=1"));
+    expect(duplicates).toMatch(/C \+1 VF ×2 VO ×1 Lames Mantis/);
+    expect(duplicates).toMatch(/C \+2 VF ×3 Croc Chromé/);
   });
 
-  it("filters by release group from the URL", () => {
-    expect(render("/collection?tirage=starter")).toContain("1 ex. · 1 impression");
-    expect(render("/collection?tirage=starter&langue=fr")).toContain("Aucune carte possédée pour ces filtres.");
+  it("filters by name, French or English, without accents, and sorts from the URL", () => {
+    expect(text(render("/collection?q=CHROME"))).toContain("4 ex. · 2 impressions");
+    expect(text(render("/collection?q=lames"))).toContain("3 ex. · 2 impressions");
+    // 3 copies each for Croc Chromé (VF 3) and Lames Mantis (VF 2 + VO 1): ties follow the number.
+    expect(text(render("/collection?tri=quantite"))).toMatch(/Filtres C VF ×3 Croc Chromé .* C VF ×2 VO ×1 Lames Mantis .* C VO ×1 Croc Chromé/);
   });
 });
 
-describe("Collection, interactions", () => {
+describe("Collection gallery, interactions", () => {
   let container: HTMLDivElement;
   let root: Root;
 
@@ -66,36 +73,57 @@ describe("Collection, interactions", () => {
 
   const mount = (path: string) => act(async () => root.render(<TestApp path={path} entries={entries} />));
   const click = (element: Element | null | undefined) => act(async () => (element as HTMLElement).click());
-  const buttonNamed = (name: string) => [...container.querySelectorAll("button")].find((b) => b.textContent?.trim().startsWith(name));
+  const button = (name: string, scope: ParentNode = container) => [...scope.querySelectorAll("button")].find((b) => b.textContent?.trim() === name);
+  const names = () => [...container.querySelectorAll(".gallery-card__name")].map((n) => n.textContent);
+  const change = (element: HTMLInputElement | HTMLSelectElement, value: string) =>
+    act(async () => {
+      const prototype = element instanceof HTMLSelectElement ? HTMLSelectElement.prototype : HTMLInputElement.prototype;
+      Object.getOwnPropertyDescriptor(prototype, "value")!.set!.call(element, value);
+      element.dispatchEvent(new Event(element instanceof HTMLSelectElement ? "change" : "input", { bubbles: true }));
+    });
 
-  it("filters with the mobile menus", async () => {
+  it("mobile: filters in a sheet with the active count, Reset and 'Voir N cartes'", async () => {
     setViewportWidth(390);
     await mount("/collection");
-    await click(buttonNamed("Tirage"));
-    const starters = [...container.querySelectorAll("label")].find((label) => label.textContent === "Starters")!;
-    await click(starters.querySelector("input"));
-    expect(container.textContent).toContain("1 ex. · 1 impression");
-    expect(buttonNamed("Tirage (1)")).toBeTruthy();
+    expect(container.querySelector(".gallery")?.getAttribute("style")).toBeNull();
+    await click(button("Filtres"));
+    const sheet = container.querySelector('[role="dialog"]')!;
+    expect(sheet.textContent).toContain("Voir 3 cartes");
+
+    await click(button("Starters", sheet));
+    expect(button("Voir 1 carte", sheet)).toBeTruthy();
+    await click(button("VF", sheet));
+    // French puts 0 in the singular.
+    expect(button("Voir 0 carte", sheet)).toBeTruthy();
+    expect(button("Filtres · 2")).toBeTruthy();
+
+    await click(button("Réinitialiser", sheet));
+    expect(button("Voir 3 cartes", sheet)).toBeTruthy();
+    await click(button("Voir 3 cartes", sheet));
+    expect(container.querySelector('[role="dialog"]')).toBeNull();
+    expect(names()).toHaveLength(3);
   });
 
-  it("sorts the desktop table by column, a second click reverses, and a row opens the card page and comes back", async () => {
+  it("desktop: sort, card size (remembered as a setting), and back from the card page to the same gallery", async () => {
     setViewportWidth(1280);
     await mount("/collection");
-    const names = () => [...container.querySelectorAll(".collection-table__name")].map((n) => n.textContent);
-    expect(container.querySelector("table")).toBeTruthy();
+    expect(container.querySelector("aside")?.textContent).toMatch(/Langue.*Toutes langues.*VF seulement.*VO seulement.*Doublons/);
+    expect(container.querySelector(".gallery")?.getAttribute("style")).toContain("minmax(180px, 1fr)");
 
-    await click(buttonNamed("Carte"));
+    await change(container.querySelector<HTMLSelectElement>("#collection-sort")!, "name");
     expect(names()).toEqual(["Croc Chromé", "Croc Chromé", "Lames Mantis"]);
-    expect(container.querySelector('th[aria-sort="ascending"]')?.textContent).toContain("Carte");
-    await click(buttonNamed("Carte"));
-    expect(names()[0]).toBe("Lames Mantis");
-    expect(container.querySelector('th[aria-sort="descending"]')).toBeTruthy();
+    await change(container.querySelector<HTMLInputElement>("#collection-name")!, "croc");
+    expect(names()).toEqual(["Croc Chromé", "Croc Chromé"]);
 
-    await click(container.querySelector('a[href="/cartes/mantis-blades"]'));
-    const back = container.querySelector('[aria-label="Retour à Collection"]') ?? buttonNamed("Collection");
-    expect(container.querySelector("h1")?.textContent).toBe("Lames Mantis");
-    await click(back);
-    expect(names()[0]).toBe("Lames Mantis");
-    expect(container.querySelector('th[aria-sort="descending"]')?.textContent).toContain("Carte");
+    await change(container.querySelector<HTMLInputElement>("#collection-size")!, "240");
+    expect(container.querySelector(".gallery")?.getAttribute("style")).toContain("minmax(240px, 1fr)");
+
+    await click(container.querySelector('a[aria-label="Ouvrir Croc Chromé, Retail numéro 008"]'));
+    expect(container.querySelector("h1")?.textContent).toBe("Croc Chromé");
+    await click(container.querySelector('[aria-label="Retour à Collection"]') ?? button("Collection"));
+    expect(names()).toEqual(["Croc Chromé", "Croc Chromé"]);
+    expect(container.querySelector<HTMLInputElement>("#collection-name")!.value).toBe("croc");
+    expect(container.querySelector<HTMLSelectElement>("#collection-sort")!.value).toBe("name");
+    expect(container.querySelector(".gallery")?.getAttribute("style")).toContain("minmax(240px, 1fr)");
   });
 });
