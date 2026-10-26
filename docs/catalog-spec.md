@@ -242,7 +242,12 @@ interface Printing {
   rarityId: string;
   artist: string | null;
   finish: string | null;
-  image: { path: string; width?: number; height?: number } | null; // chemin relatif dans le stockage d'images
+  image: {                      // null si l'image n'a pas été téléchargée (anomalie missing-image)
+    path: string;               // "{printingId}.webp", relatif à la base d'URL des images
+    thumbPath: string;          // "thumbs/{printingId}.webp", miniature de 256 px de large
+    width: number;              // dimensions de l'image pleine (733×1024 au 26/10/2026)
+    height: number;
+  } | null;
   sourceCode: string;           // set.code Netdeck d'origine, pour traçabilité
 }
 ```
@@ -296,7 +301,9 @@ Le pipeline **échoue** (code de sortie non nul) seulement si : la validation Zo
   - Le crawl procède **page par page (20 cartes, soit environ 100 images)** : il télécharge une page, puis immédiatement les images manquantes de cette page.
   - Si une URL a expiré (date `Expires` dépassée ou réponse 403), la page est re-demandée une fois pour obtenir des URL fraîches.
   - Cache : une image déjà présente n'est pas retéléchargée, sauf si le nom du fichier source (`render-<hash>.webp`) a changé, ce qui signale une illustration modifiée.
-- Générer aussi une miniature (ex. 256 px de large) pour les grilles : `images/thumbs/{printingId}.webp` (sharp).
+- Générer aussi une miniature de 256 px de large pour les grilles : `images/thumbs/{printingId}.webp` (sharp, WebP qualité 80, environ 18 Ko). Une image source qui ne serait pas en WebP est convertie.
+- `images/index.json` associe chaque impression à la version source de son image (`render-<hash>.webp`) et à ses dimensions. `pnpm build` le lit pour remplir `image`. Une image absente donne une anomalie `missing-image`, une image dont l'illustration a changé à la source une anomalie `outdated-image`.
+- En développement, l'app sert `catalog/dist/` : la base d'URL des images est alors `images/`.
 - Phase 2 (plus tard) : publication des images sur un stockage objet (Cloudflare R2 ou équivalent). Le champ `image.path` reste relatif pour que seule la base d'URL change.
 
 ---
@@ -314,7 +321,9 @@ catalog/
     editions.ts         table set.code → set / release / langue / groupe
     rarities.ts         table des raretés
     normalize.ts        format neutre → modèle du catalogue, variantKey, rattachement VO/VF, contrôles, tri déterministe
-    images.ts           téléchargement et miniatures
+    images.ts           stockage local des images, miniatures, index des versions, rattachement au catalogue
+    crawl.ts            commande crawl : pages + images page par page, rechargement des pages expirées
+    paths.ts            emplacements du cache et de dist/
     report.ts           collecte des anomalies
     build.ts            orchestration, écriture de catalog.json / manifest.json / report.json
   test/
@@ -324,7 +333,7 @@ catalog/
 ```
 
 Commandes attendues :
-- `pnpm crawl` : télécharge les données (avec cache) et les images ;
+- `pnpm crawl` : télécharge les données (avec cache, `--refresh` pour tout re-télécharger) et les images manquantes ou modifiées ;
 - `pnpm build` : génère le catalogue à partir du cache, sans réseau ;
 - `pnpm test` : tests de normalisation sur les fixtures.
 

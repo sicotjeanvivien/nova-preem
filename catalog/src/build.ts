@@ -1,16 +1,14 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { pathToFileURL } from "node:url";
+import { ImageStore, attachImages } from "./images.ts";
 import type { Catalog } from "./model.ts";
 import { normalize } from "./normalize.ts";
 import { Report, type Anomaly } from "./report.ts";
 import { NetdeckSource } from "./sources/netdeck.ts";
 import type { SourceSnapshot } from "./sources/types.ts";
-
-const CATALOG_ROOT = fileURLToPath(new URL("..", import.meta.url));
-export const CACHE_DIR = join(CATALOG_ROOT, ".cache", "netdeck");
-export const DIST_DIR = join(CATALOG_ROOT, "dist");
+import { CACHE_DIR, DIST_DIR, IMAGES_DIR } from "./paths.ts";
 
 export interface Manifest {
   schemaVersion: 1;
@@ -33,13 +31,15 @@ export interface ReportFile {
  * snapshot: `generatedAt` is the time the data was fetched, not the build time,
  * so two builds on the same cache produce identical files.
  */
-export function buildCatalog(snapshot: SourceSnapshot, report: Report): Catalog {
-  return {
+export function buildCatalog(snapshot: SourceSnapshot, report: Report, images?: ImageStore): Catalog {
+  const catalog: Catalog = {
     schemaVersion: 1,
     generatedAt: snapshot.fetchedAt,
     source: { name: snapshot.source, fetchedAt: snapshot.fetchedAt },
     ...normalize(snapshot, report),
   };
+  if (images) attachImages(catalog.printings, snapshot, images, report);
+  return catalog;
 }
 
 export function serialize(value: unknown): string {
@@ -97,6 +97,7 @@ function printSummary(catalog: Catalog, manifest: Manifest, report: Report): voi
   console.log(
     `  ${catalog.cards.length} cartes, ${catalog.printings.length} impressions, ${catalog.releases.length} releases, langues : ${catalog.languages.join(", ")}`,
   );
+  console.log(`  Images : ${catalog.printings.filter((p) => p.image).length}/${catalog.printings.length}`);
   const summary = report.summary();
   if (summary.length === 0) {
     console.log("  Aucune anomalie.");
@@ -110,7 +111,7 @@ function printSummary(catalog: Catalog, manifest: Manifest, report: Report): voi
 async function main(): Promise<void> {
   const snapshot = await new NetdeckSource({ cacheDir: CACHE_DIR, offline: true }).fetchSnapshot();
   const report = new Report();
-  const catalog = buildCatalog(snapshot, report);
+  const catalog = buildCatalog(snapshot, report, await ImageStore.open(IMAGES_DIR));
   const manifest = await writeOutputs(DIST_DIR, catalog, report);
   printSummary(catalog, manifest, report);
 }

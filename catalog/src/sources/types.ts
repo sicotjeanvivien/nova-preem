@@ -49,4 +49,16 @@ export interface SourcePrinting {
   imageUrl: string;
   /** Identifier of the image file at the source; changes when the art changes. */
   imageVersion: string;
+  /** When `imageUrl` stops working (ISO 8601), if known. */
+  imageExpiresAt: string | null;
+}
+
+/** A page of cards during the crawl. */
+export interface SourcePage {
+  readonly cards: SourceCard[];
+  readonly fetchedAt: string;
+  /** Number of cards announced by the source. */
+  readonly total: number;
+  /** Downloads the page again, bypassing the cache, to get fresh image URLs. */
+  refresh(): Promise<void>;
 }

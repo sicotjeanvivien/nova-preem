@@ -86,7 +86,7 @@ describe("writeOutputs", () => {
   it("refuses to write a catalog containing a signed URL", async () => {
     outDir = await mkdtemp(join(tmpdir(), "nova-preem-build-"));
     const { catalog, report } = buildSample();
-    catalog.printings[0]!.image = { path: "https://cdn.example/x.webp?Expires=1&Signature=abc" };
+    catalog.printings[0]!.image = { path: "https://cdn.example/x.webp?Expires=1&Signature=abc", thumbPath: "thumbs/x.webp", width: 1, height: 1 };
     await expect(writeOutputs(outDir, catalog, report)).rejects.toThrow(/signed URL/);
   });
 });

@@ -8,6 +8,7 @@
     "node": ">=22"
   },
   "scripts": {
+    "crawl": "tsx src/crawl.ts",
     "build": "tsx src/build.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
@@ -19,12 +20,14 @@
     "vitest": "^5.0.5"
   },
   "dependencies": {
+    "sharp": "^0.35.5",
     "zod": "^4.6.7"
   },
   "packageManager": "pnpm@10.0.0",
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "sharp"
     ]
   }
 }
