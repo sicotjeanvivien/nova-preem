@@ -249,6 +249,7 @@ interface Printing {
     height: number;
   } | null;
   sourceCode: string;           // set.code Netdeck d'origine, pour traçabilité
+  printedRulesText?: string;    // texte imprimé, présent seulement s'il diffère de card.rulesText[language]
 }
 ```
 
@@ -257,7 +258,8 @@ Règles :
 - Pas d'URL signée dans le catalogue.
 - `name` / `baseName` / `rulesText` d'une carte en `en` : `canonical_name` / `canonical_base_name` / `official_rules_text_en` (texte à jour, errata compris).
 - Pour les autres langues, on part d'une **impression de référence** : de préférence une impression non-Iconic d'une release du groupe `main`, sinon la première dans l'ordre des impressions. `name` vient de son `localized_name` et `rulesText` de son `printed_rules_text`.
-- Les impressions Iconic omettent le texte de rappel : une divergence de texte n'est signalée qu'**entre impressions non-Iconic** d'une même langue. Une divergence de **nom** est signalée entre toutes les impressions d'une même langue.
+- Les impressions Iconic omettent le texte de rappel : une divergence de texte n'est signalée qu'**entre impressions non-Iconic** d'une même langue.
+- `printedRulesText` d'une impression : son `printed_rules_text`, **uniquement s'il diffère** du texte de la carte dans la même langue (absent sinon, pour ne pas alourdir le catalogue). Au 26/10/2026 : 9 impressions, à savoir les 7 Iconic FR sans texte de rappel, et *Overwatch* EN `093` et `β165`. Une divergence de **nom** est signalée entre toutes les impressions d'une même langue.
 - `baseName` dans une autre langue : si le nom anglais a un sous-titre, c'est la partie du nom localisé avant « — », qui doit apparaître exactement une fois ; sinon c'est le nom localisé entier, qui ne doit pas contenir « — ». Tout cas qui ne suit pas cette règle est signalé, et `baseName` est alors omis pour cette langue (vérifié sur 100 % des données au 26/10/2026, voir §9).
 - Les noms de sets et de releases en français sont saisis à la main dans la table des éditions (par défaut identiques à l'anglais).
 

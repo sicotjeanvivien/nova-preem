@@ -100,6 +100,26 @@ describe("normalize (real fixture)", () => {
     expect(divergent).not.toContain(card.id);
   });
 
+  it("keeps a printing's own text only when it differs from the card's text", () => {
+    const v = cardBySlug(catalog, "v-streetkid");
+    const french = new Map(v.printings.filter((p) => p.language === "fr").map((p) => [p.collectorNumber, p]));
+    expect(french.get("005a")).not.toHaveProperty("printedRulesText");
+    expect(french.get("144")!.printedRulesText).toContain("{Go Solo}");
+    expect(french.get("144")!.printedRulesText).not.toContain("(Payez");
+    expect(v.printings.filter((p) => p.language === "en").every((p) => p.printedRulesText === undefined)).toBe(true);
+
+    // Retail EN 093 lacks the reminder text of the official (card) text.
+    const overwatch = cardBySlug(catalog, "overwatch-panam-s-gift");
+    const withOwnText = overwatch.printings.filter((p) => p.printedRulesText !== undefined);
+    expect(withOwnText.map((p) => [p.sourceCode, p.collectorNumber])).toEqual([
+      ["welcometonightcitybeta", "β165"],
+      ["welcometonightcityretail", "093"],
+      ["welcometonightcityretail-fr", "165"],
+    ]);
+    expect(overwatch.card.rulesText.en).toMatch(/^\(Equip to/);
+    expect(withOwnText[1]!.printedRulesText).toMatch(/^\{Quick\}/);
+  });
+
   it("reports a localized name that differs between printings, keeping the regular one", () => {
     const { card } = cardBySlug(catalog, "towerfall");
     expect(card.name.fr).toBe("Destruction de Tour");

@@ -7679,7 +7679,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcitybeta"
+      "sourceCode": "welcometonightcitybeta",
+      "printedRulesText": "{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
     },
     {
       "id": "807c871c-bebe-4343-9b68-1f89af5ed0da",
@@ -11346,7 +11347,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail"
+      "sourceCode": "welcometonightcityretail",
+      "printedRulesText": "{Quick} 1 €$, {Spend} Discard 1. Defeat a spent rival Unit with cost equal to or less than the discarded card's cost."
     },
     {
       "id": "809a9921-cc08-4fa8-a3b5-9559cdb82a07",
@@ -13189,7 +13191,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Go Solo}\n{Play} Éliminez une Unité rivale."
     },
     {
       "id": "3723dc4c-52e1-4091-80c6-38c4175f7145",
@@ -13265,7 +13268,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Go Solo}\nPendant votre tour, cette Légende a +2 Power pour chacun de ses Gears équipés."
     },
     {
       "id": "837d354a-a1c8-4df0-b4ac-4db43730187a",
@@ -13303,7 +13307,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Call} Jetez 3. Puis, ajoutez un Programme BRAINDANCE de votre défausse à votre main.\n{Go Solo}"
     },
     {
       "id": "21716e98-de73-4769-aa28-3474841c0f46",
@@ -13493,7 +13498,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Go Solo}\nQuand une Légende alliée vole un Gig, si sa valeur est paire, piochez 1. Si sa valeur est impaire, un Rival défausse 1."
     },
     {
       "id": "a420db68-9911-42d8-a56c-7bb7d7e9849f",
@@ -13607,7 +13613,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Go Solo}\nSi une Unité alliée devait être éliminée, vous pouvez payer 1 €$ pour éliminer cette Légende à la place. (Retirez-la de la partie.)"
     },
     {
       "id": "18c39784-9fb7-4d72-acd4-35eaff669cd6",
@@ -14025,7 +14032,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Defeated} Jouez gratuitement une autre Unité de coût 9 ou moins de votre défausse. Puis, archivez l'Unité éliminée."
     },
     {
       "id": "6ceb8ace-8b73-4b12-ba75-ee867b936e5c",
@@ -14101,7 +14109,8 @@
         "width": 733,
         "height": 1024
       },
-      "sourceCode": "welcometonightcityretail-fr"
+      "sourceCode": "welcometonightcityretail-fr",
+      "printedRulesText": "{Quick} 1 €$, {Spend} Défaussez 1. Éliminez une Unité rivale épuisée de coût inférieur ou égal au coût de la carte défaussée."
     },
     {
       "id": "9f251692-ea15-45d9-8fa3-5833453502c6",

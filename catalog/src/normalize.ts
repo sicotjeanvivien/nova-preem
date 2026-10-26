@@ -131,6 +131,7 @@ export function normalize(snapshot: SourceSnapshot, report: Report): NormalizedC
 
   const entriesByCard = groupBy(entries, (entry) => entry.card.id);
   const cards = snapshot.cards.map((card) => buildCard(card, entriesByCard.get(card.id) ?? [], report));
+  addPrintedRulesTexts(entries, new Map(cards.map((card) => [card.id, card])));
   const collator = new Intl.Collator("en");
   cards.sort((a, b) => collator.compare(a.name.en!, b.name.en!) || compareStrings(a.id, b.id));
 
@@ -334,6 +335,20 @@ function buildCard(card: SourceCard, entries: Entry[], report: Report): Card {
     baseName,
     rulesText,
   };
+}
+
+/**
+ * Keeps a printing's own text when it differs from the card's text in its language
+ * (Iconic arts without reminder text, source anomalies), so that the app can show
+ * exactly what is printed.
+ */
+function addPrintedRulesTexts(entries: Entry[], cards: Map<string, Card>): void {
+  for (const { printing, source } of entries) {
+    const cardText = cards.get(printing.cardId)?.rulesText[printing.language];
+    if (source.printedRulesText !== null && source.printedRulesText !== cardText) {
+      printing.printedRulesText = source.printedRulesText;
+    }
+  }
 }
 
 /** Names must agree across all printings of a language; texts only across non-Iconic ones (Iconic arts omit reminder text). */

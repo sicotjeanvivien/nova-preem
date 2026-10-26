@@ -73,6 +73,8 @@ export interface Printing {
   finish: string | null;
   image: PrintingImage | null;
   sourceCode: string;
+  /** Rules text printed on this printing, only when it differs from the card's text in the same language. */
+  printedRulesText?: string;
 }
 
 /** Paths are relative to the image storage base URL (`catalog/dist/images/` in development). */
