@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router";
 import { isVariantOwnedIn, quantityOf, type Quantities, type Variant } from "../domain/variants.ts";
 import { useI18n } from "../i18n/i18n.tsx";
 import { useApp } from "./AppContext.tsx";
+import { cardLinkState } from "./cardLink.ts";
 import { CardPlaceholderIcon, ChevronRightIcon } from "./icons.tsx";
 import { cardColor, languageLabel, rarityColor, rarityShort } from "./labels.ts";
 
@@ -63,7 +64,7 @@ export function SetTile({ variant, language, name, releaseName, quantities, remo
             </span>
           ))}
         </div>
-        <Link to={`/cartes/${variant.card.slug}`} state={{ from: location }} className="tile__open" aria-label={t("tile.open", { name })}>
+        <Link to={`/cartes/${variant.card.slug}`} state={cardLinkState(location, variant.key, language)} className="tile__open" aria-label={t("tile.open", { name })}>
           <ChevronRightIcon width={18} height={18} />
         </Link>
       </div>

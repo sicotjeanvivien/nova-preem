@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import { NavLink, Outlet, ScrollRestoration } from "react-router";
+import { NavLink, Outlet, ScrollRestoration, useMatch } from "react-router";
 import { useI18n } from "../i18n/i18n.tsx";
 import type { MessageKey } from "../i18n/messages.ts";
 import { CollectionIcon, LogoIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
@@ -16,8 +16,10 @@ const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVG
 /** Five tabs (spec §2): bottom bar on mobile, sidebar from 900 px (same markup, CSS layout). */
 export function AppLayout() {
   const { t } = useI18n();
+  // The card page is full screen on mobile (CardDetail): no bottom bar there.
+  const onCardPage = useMatch("/cartes/:slug") !== null;
   return (
-    <div className="app">
+    <div className={`app ${onCardPage ? "app--full-page" : ""}`}>
       <nav className="nav" aria-label={t("nav.label")}>
         <div className="nav__brand brand">
           <LogoIcon width={22} height={22} />

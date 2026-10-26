@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { Link, Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 import { localize } from "../../domain/catalog.ts";
-import { releasesOfSet } from "../../domain/catalogIndex.ts";
 import { percentFloor, releaseVariants } from "../../domain/completion.ts";
 import { formatMissingList } from "../../domain/missingList.ts";
-import { buildSetTabs, releaseShortName, selectTab, tabParam, type SetTab, type TabSelection } from "../../domain/setTabs.ts";
-import { filterVariants, languagesOf, ownedInOtherLanguages, type GridFilter, type Variant, variantsOf } from "../../domain/variants.ts";
+import { computeSetView, FILTER_PARAMS } from "../../domain/setView.ts";
+import { releaseShortName, tabParam, type SetTab, type TabSelection } from "../../domain/setTabs.ts";
+import { ownedInOtherLanguages, type GridFilter, type Variant } from "../../domain/variants.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import type { MessageKey } from "../../i18n/messages.ts";
 import { useApp } from "../AppContext.tsx";
+import { cardLinkState } from "../cardLink.ts";
 import { useCollection, type QuantityChange } from "../CollectionContext.tsx";
 import { ChevronLeftIcon } from "../icons.tsx";
 import { languageLabel, rarityShort } from "../labels.ts";
@@ -18,11 +19,11 @@ import { Toast } from "../Toast.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 import { useTabLabel } from "./useTabLabel.ts";
 
-const FILTERS: { id: GridFilter; param: string | null; label: MessageKey }[] = [
-  { id: "all", param: null, label: "filter.all" },
-  { id: "missing", param: "manquantes", label: "filter.missing" },
-  { id: "owned", param: "possedees", label: "filter.owned" },
-  { id: "duplicates", param: "doublons", label: "filter.duplicates" },
+const FILTERS: { id: GridFilter; label: MessageKey }[] = [
+  { id: "all", label: "filter.all" },
+  { id: "missing", label: "filter.missing" },
+  { id: "owned", label: "filter.owned" },
+  { id: "duplicates", label: "filter.duplicates" },
 ];
 
 const TOAST_DURATION_MS = 5000;
@@ -44,23 +45,14 @@ export function SetPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const set = index.sets.get(setId);
+  const view = useMemo(
+    () =>
+      computeSetView(index, setId, { tirage: params.get("tirage"), filtre: params.get("filtre"), langue: params.get("langue") }, settings, quantities),
+    [index, setId, params, settings, quantities],
+  );
+  const set = view?.set;
   const setName = set ? localize(set.name, uiLanguage) : "";
   useDocumentTitle(setName);
-
-  const tabs = useMemo(
-    () => buildSetTabs(releasesOfSet(index, setId), (release) => index.printingsByRelease.has(release.id)),
-    [index, setId],
-  );
-  const selection = selectTab(tabs, params.get("tirage"), settings.entryReleaseId);
-  const variants = useMemo(() => (selection ? variantsOf(index, selection.releases) : []), [index, selection?.releases]);
-  const languages = useMemo(() => languagesOf(variants, index.catalog.languages), [variants, index]);
-  const requestedLanguage = params.get("langue");
-  const language =
-    (requestedLanguage && languages.includes(requestedLanguage) && requestedLanguage) ||
-    (languages.includes(settings.entryLanguage) ? settings.entryLanguage : (languages[0] ?? settings.entryLanguage));
-  const filter = FILTERS.find((f) => f.param === params.get("filtre"))?.id ?? "all";
-  const nameLanguage = settings.cardNameLanguage === "entry" ? language : settings.cardNameLanguage;
 
   const [removeMode, setRemoveMode] = useState(false);
   const [lastTapped, setLastTapped] = useState<string | null>(null);
@@ -90,9 +82,10 @@ export function SetPage() {
     [setParams],
   );
 
-  if (!set || !selection) return <Navigate to="/sets" replace />;
+  if (!view || !set) return <Navigate to="/sets" replace />;
 
-  const visible = filterVariants(variants, filter, quantities, language, settings.duplicateThreshold);
+  const { tabs, selection, languages, language, filter, visible } = view;
+  const nameLanguage = settings.cardNameLanguage === "entry" ? language : settings.cardNameLanguage;
   const progress = releaseVariants(index, selection.releases.map((r) => r.id), quantities);
   const multipleReleases = selection.releases.length > 1;
   const selectionLabel = selection.release ? releaseShortName(localize(selection.release.name, uiLanguage), setName) : tabLabel(selection.tab, setName);
@@ -104,7 +97,7 @@ export function SetPage() {
     const printing = variant.printings.get(language);
     if (!printing) {
       // Not printed in this language: nothing is added, the card page shows what exists (spec §5.1).
-      navigate(`/cartes/${variant.card.slug}`, { state: { from: location } });
+      navigate(`/cartes/${variant.card.slug}`, { state: cardLinkState(location, variant.key, language) });
       return;
     }
     setLastTapped(variant.key);
@@ -233,7 +226,7 @@ export function SetPage() {
           </div>
           <div role="group" aria-label={t("setPage.filters")} className="toolbar__filters">
             {FILTERS.map((f) => (
-              <button key={f.id} type="button" aria-pressed={f.id === filter} className="filter-pill" onClick={() => updateParams({ filtre: f.param })}>
+              <button key={f.id} type="button" aria-pressed={f.id === filter} className="filter-pill" onClick={() => updateParams({ filtre: FILTER_PARAMS[f.id] })}>
                 {t(f.label)}
               </button>
             ))}

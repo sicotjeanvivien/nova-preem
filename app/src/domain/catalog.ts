@@ -22,6 +22,7 @@ const releaseSchema = z.object({
   languages: z.array(z.string()),
   sourceCodes: z.array(z.string()),
   order: z.number(),
+  counterpartReleaseId: z.string().optional(),
 });
 
 const raritySchema = z.object({

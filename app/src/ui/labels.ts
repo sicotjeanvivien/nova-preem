@@ -28,3 +28,23 @@ export function rarityColor(rarity: Rarity | undefined): string {
 export function cardColor(color: string | null): string {
   return color && KNOWN_COLORS.includes(color) ? `var(--color-card-${color})` : "var(--color-border-strong)";
 }
+
+const KNOWN_TYPES = ["legend", "unit", "gear", "program"];
+
+/** "VF" / "Français"… */
+export function languageName(t: Translator["t"], language: string): string {
+  return KNOWN_LANGUAGES.includes(language) ? t(`language.name.${language}` as MessageKey) : language.toUpperCase();
+}
+
+export function cardTypeLabel(t: Translator["t"], type: string): string {
+  return KNOWN_TYPES.includes(type) ? t(`type.${type}` as MessageKey) : type;
+}
+
+export function cardColorLabel(t: Translator["t"], color: string): string {
+  return KNOWN_COLORS.includes(color) ? t(`color.${color}` as MessageKey) : color;
+}
+
+/** Light text color matching a card color, readable on the dark background. */
+export function cardColorText(color: string | null): string {
+  return color && KNOWN_COLORS.includes(color) ? `var(--color-card-${color}-text)` : "var(--color-text-secondary)";
+}
