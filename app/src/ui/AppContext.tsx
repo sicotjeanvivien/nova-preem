@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import type { CatalogIndex } from "../domain/catalogIndex.ts";
 import type { Settings } from "../domain/settings.ts";
 import type { StoredCatalog } from "../domain/stores.ts";
 import type { Services } from "../platform/services.ts";
@@ -6,6 +7,7 @@ import type { Services } from "../platform/services.ts";
 export interface AppContextValue {
   services: Services;
   catalog: StoredCatalog;
+  index: CatalogIndex;
   settings: Settings;
 }
 

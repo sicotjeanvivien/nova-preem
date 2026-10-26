@@ -1,14 +1,19 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
+import { indexCatalog } from "../domain/catalogIndex.ts";
 import { CatalogError, downloadCatalog, type CatalogErrorCode } from "../domain/catalogLoader.ts";
+import type { CollectionEntry } from "../domain/collection.ts";
 import { resolveInterfaceLanguage, type Settings } from "../domain/settings.ts";
 import type { StoredCatalog } from "../domain/stores.ts";
 import { I18nProvider } from "../i18n/i18n.tsx";
 import type { Services } from "../platform/services.ts";
 import { AppContext } from "./AppContext.tsx";
 import { AppLayout } from "./AppLayout.tsx";
+import { CollectionProvider } from "./CollectionContext.tsx";
 import { FirstLaunch } from "./FirstLaunch.tsx";
 import { CollectionScreen, SearchScreen, SettingsScreen, StatsScreen } from "./screens/EmptyScreen.tsx";
+import { CardScreen } from "./screens/CardScreen.tsx";
+import { SetPage } from "./screens/SetPage.tsx";
 import { SetsScreen } from "./screens/SetsScreen.tsx";
 
 const router = createBrowserRouter([
@@ -18,6 +23,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="/sets" replace /> },
       { path: "sets", element: <SetsScreen /> },
+      { path: "sets/:setId", element: <SetPage /> },
+      { path: "cartes/:slug", element: <CardScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },
       { path: "stats", element: <StatsScreen /> },
@@ -38,6 +45,7 @@ type Boot =
  */
 export function App({ services }: { services: Services }) {
   const [settings, setSettings] = useState<Settings | null>(null);
+  const [entries, setEntries] = useState<CollectionEntry[] | null>(null);
   const [boot, setBoot] = useState<Boot>({ status: "starting" });
 
   const download = useCallback(async () => {
@@ -56,9 +64,14 @@ export function App({ services }: { services: Services }) {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      const [loadedSettings, stored] = await Promise.all([services.settings.load(), services.catalog.store.load()]);
+      const [loadedSettings, stored, loadedEntries] = await Promise.all([
+        services.settings.load(),
+        services.catalog.store.load(),
+        services.collection.list(),
+      ]);
       if (cancelled) return;
       setSettings(loadedSettings);
+      setEntries(loadedEntries);
       if (stored) setBoot({ status: "ready", catalog: stored });
       else void download();
     })();
@@ -72,17 +85,20 @@ export function App({ services }: { services: Services }) {
     document.documentElement.lang = language;
   }, [language]);
 
+  const index = useMemo(() => (boot.status === "ready" ? indexCatalog(boot.catalog.catalog) : null), [boot]);
   const context = useMemo(
-    () => (boot.status === "ready" && settings ? { services, catalog: boot.catalog, settings } : null),
-    [boot, settings, services],
+    () => (boot.status === "ready" && settings && index ? { services, catalog: boot.catalog, index, settings } : null),
+    [boot, settings, services, index],
   );
 
   return (
     <I18nProvider language={language}>
       {boot.status === "downloading" && <FirstLaunch progress={boot.progress} error={boot.error} onRetry={download} />}
-      {context && (
+      {context && entries && (
         <AppContext.Provider value={context}>
-          <RouterProvider router={router} />
+          <CollectionProvider store={services.collection} initial={entries}>
+            <RouterProvider router={router} />
+          </CollectionProvider>
         </AppContext.Provider>
       )}
     </I18nProvider>

@@ -10,18 +10,22 @@ export interface Services {
   catalog: CatalogDependencies;
   collection: CollectionStore;
   settings: SettingsStore;
+  /** Base URL of card images (`printing.image.path` and `thumbPath` are relative to it). */
+  imageBaseUrl: string;
 }
 
 /** Browser wiring: IndexedDB (Dexie) for storage, HTTP for the catalog. */
 export function createBrowserServices(): Services {
   const db = new NovaPreemDatabase();
+  const catalogBaseUrl = import.meta.env.VITE_CATALOG_BASE_URL ?? "/catalog/";
   return {
     catalog: {
       store: new DexieCatalogStore(db),
-      source: new HttpCatalogSource(import.meta.env.VITE_CATALOG_BASE_URL ?? "/catalog/"),
+      source: new HttpCatalogSource(catalogBaseUrl),
       hasher: webCryptoHasher,
     },
     collection: new DexieCollectionStore(db),
     settings: new DexieSettingsStore(db),
+    imageBaseUrl: new URL("images/", new URL(catalogBaseUrl, globalThis.location.href)).href,
   };
 }

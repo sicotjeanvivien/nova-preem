@@ -63,3 +63,23 @@ export const SettingsIcon = (props: IconProps) => (
     <circle cx="17" cy="18" r="2" />
   </Icon>
 );
+
+export const ChevronLeftIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M15 18l-6-6 6-6" />
+  </Icon>
+);
+
+export const ChevronRightIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M9 6l6 6-6 6" />
+  </Icon>
+);
+
+/** Placeholder of a card image (not downloaded yet, or offline). */
+export const CardPlaceholderIcon = (props: IconProps) => (
+  <Icon strokeWidth={1.5} {...props}>
+    <rect x="5" y="2" width="14" height="20" rx="2" />
+    <path d="M9 8h6M9 12h6" />
+  </Icon>
+);

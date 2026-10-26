@@ -4,10 +4,10 @@ import { isVariantOwned, quantityOf, type Quantities, variantsOf } from "./varia
 
 // Completion measures (docs/app-spec.md §5.3).
 
-export interface Progress {
+export type Progress = {
   owned: number;
   total: number;
-}
+};
 
 /** Integer percentage rounded down, so that 100 always means "everything" (spec §5.3). */
 export function percentFloor({ owned, total }: Progress): number {

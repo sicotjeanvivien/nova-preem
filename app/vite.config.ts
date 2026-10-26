@@ -42,8 +42,20 @@ export default defineConfig(({ mode }) => {
           // is stored in IndexedDB by the app, so the service worker never caches it.
           globPatterns: ["**/*.{html,js,css,woff2,svg,png,webmanifest}"],
           navigateFallback: "index.html",
-          navigateFallbackDenylist: [new RegExp(`^${catalogBase}`)],
+          navigateFallbackDenylist: [new RegExp(`^${escapeRegExp(catalogBase)}`)],
           cleanupOutdatedCaches: true,
+          // Card images are cached as they are displayed (spec §6): an image seen once stays available offline.
+          runtimeCaching: [
+            {
+              urlPattern: new RegExp(`${escapeRegExp(catalogBase)}images/`),
+              handler: "CacheFirst",
+              options: {
+                cacheName: "card-images",
+                expiration: { maxEntries: 3000 },
+                cacheableResponse: { statuses: [0, 200] },
+              },
+            },
+          ],
         },
       }),
     ],
@@ -51,3 +63,7 @@ export default defineConfig(({ mode }) => {
     preview: { port: 4173, strictPort: true },
   };
 });
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}

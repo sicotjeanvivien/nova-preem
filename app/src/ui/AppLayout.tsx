@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, ScrollRestoration } from "react-router";
 import { useI18n } from "../i18n/i18n.tsx";
 import type { MessageKey } from "../i18n/messages.ts";
 import { CollectionIcon, LogoIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
@@ -37,6 +37,7 @@ export function AppLayout() {
       <main className="app__main">
         <Outlet />
       </main>
+      <ScrollRestoration />
     </div>
   );
 }
