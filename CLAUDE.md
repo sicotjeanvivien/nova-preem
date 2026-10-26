@@ -30,9 +30,9 @@ Conséquences :
 ## Structure du dépôt
 
 ```
-catalog/   pipeline de génération du catalogue (Node + TypeScript)  ← EN COURS
-app/       PWA (Vite + React + TypeScript, Dexie pour IndexedDB)    ← ensuite
-docs/      spécifications
+catalog/   pipeline de génération du catalogue (Node + TypeScript)  ← terminé (MVP)
+app/       PWA (Vite + React + TypeScript, Dexie pour IndexedDB)    ← EN COURS
+docs/      spécifications ; docs/mockups/ = copie du canevas de maquettes
 ```
 
 Documents de référence :
@@ -41,9 +41,20 @@ Documents de référence :
 
 Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src/domain/` n'importe ni React, ni Dexie, ni API du navigateur ; tout stockage passe par une interface (`CollectionStore`…) dont Dexie n'est qu'une implémentation. Distribution : PWA, puis TWA pour le Play Store, Capacitor seulement si besoin natif.
 
-## Travail en cours : le pipeline du catalogue
+## Travail en cours : l'app
 
-**Lire `docs/catalog-spec.md` avant toute modification de `catalog/`.** Il contient la source de données (API Netdeck), le format réel des données, les règles de normalisation (décomposition édition → set / tirage / langue, rattachement VO ↔ VF) et le format de sortie.
+**Lire `docs/app-spec.md` avant toute modification de `app/`**, et réaliser ses étapes (§10) **dans l'ordre**, une à la fois : ne pas commencer une étape tant que le critère de la précédente n'est pas rempli.
+
+Règles importantes :
+- **Maquettes de référence** : le canevas Design « Nova Preem — MVP » (https://claude.ai/artifact/EeVh5fSkMmUbTXN9fnKwXC), copié dans `docs/mockups/` (le canevas fait foi en cas de différence). Les `.dc.html` sont des maquettes, pas du code à copier : reconstruire l'interface en React, avec des variables CSS.
+- En cas de conflit, `docs/app-spec.md` fait foi pour les règles et le comportement, le canevas pour l'apparence. **Signaler tout conflit** au lieu de trancher en silence.
+- Mobile et bureau : mêmes écrans, mêmes fonctions, mêmes filtres ; seule la disposition change. Une fonction absente d'une des deux maquettes est un oubli : l'appliquer aux deux.
+- Les données viennent du vrai catalogue (`catalog/dist/`), jamais des maquettes (échantillon de 60 cartes, quantités fictives).
+- Portabilité (§9.1) : `app/src/domain/` est pur ; le stockage passe par les interfaces `CatalogStore`, `CollectionStore`, `SettingsStore`.
+
+## Le catalogue (terminé pour le MVP)
+
+**Lire `docs/catalog-spec.md` avant toute modification de `catalog/`.** Il contient la source de données (API Netdeck), le format réel des données, les règles de normalisation (décomposition édition → set / tirage / langue, rattachement VO ↔ VF), le format de sortie et les constats sur les données réelles (§9). Mise à jour : `pnpm crawl && pnpm build` dans `catalog/`.
 
 Règles importantes :
 - La source est une API **non documentée et non officielle**. Être poli : requêtes espacées, cache, User-Agent identifiable (voir la spec). Ne jamais la marteler.

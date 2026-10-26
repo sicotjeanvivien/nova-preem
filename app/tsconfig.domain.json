@@ -1,0 +1,11 @@
+{
+  // Portability rule (docs/app-spec.md §9.1): the domain must not depend on the
+  // browser. Without the DOM library, any use of window, document, navigator,
+  // localStorage… fails to typecheck.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "types": []
+  },
+  "include": ["src/domain"]
+}
