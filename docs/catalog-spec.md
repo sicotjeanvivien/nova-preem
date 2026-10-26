@@ -178,7 +178,7 @@ Fichier unique `catalog/dist/catalog.json`, plus un manifeste `catalog/dist/mani
 ```ts
 interface Catalog {
   schemaVersion: 1;
-  generatedAt: string;          // ISO 8601
+  generatedAt: string;          // ISO 8601 : date des données (= source.fetchedAt), pas l'heure du build, pour qu'un même cache donne un fichier identique
   source: { name: "netdeck"; fetchedAt: string };
   languages: LanguageCode[];    // ["en", "fr"]
   sets: Set[];
@@ -264,9 +264,25 @@ Règles :
 
 L'app compare `version`/`hash` au démarrage pour savoir si elle doit retélécharger le catalogue.
 
+- `hash` : SHA-256 du contenu exact de `catalog.json`.
+- `version` : `AAAA-MM-JJ.N`, où la date est celle de `generatedAt`. Elle est **conservée** si le hash n'a pas changé depuis le manifeste précédent. Sinon, `N` est incrémenté dans la même journée, ou repart à 1 un autre jour.
+
 ### report.json
 
 Liste des anomalies, sans faire échouer le pipeline : codes d'édition inconnus, raretés inconnues, impressions VO/VF sans équivalent, contradictions de langue, textes divergents, clés dupliquées, images manquantes. Le pipeline affiche un résumé en fin d'exécution.
+
+```ts
+interface ReportFile {
+  schemaVersion: 1;
+  generatedAt: string;
+  summary: { code: string; severity: "warning" | "info"; count: number }[];
+  anomalies: { code: string; severity: "warning" | "info"; message: string; context: Record<string, unknown> }[];
+}
+```
+
+- `warning` : donnée suspecte, à corriger dans les tables ou à remonter à la source.
+- `info` : situation normale mais notable (Iconic propre à la Beta, trou de numérotation…).
+- Les codes sont listés dans `catalog/src/report.ts`. Les messages sont en français et triés de façon déterministe.
 
 Le pipeline **échoue** (code de sortie non nul) seulement si : la validation Zod échoue, `total` ne correspond pas au nombre de cartes reçues, ou des identifiants (carte ou impression) sont dupliqués.
 

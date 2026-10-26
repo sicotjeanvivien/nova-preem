@@ -98,9 +98,10 @@ export class NetdeckSource {
     return toSnapshot(pages);
   }
 
+  /** Cached by offset only: pagination follows `items.length`, so pages of any size can be read back. */
   fetchListPage(offset: number, limit: number): Promise<CachedResponse> {
     const url = `${API_BASE}?limit=${limit}&offset=${offset}`;
-    return this.#getJson(url, `cards-limit${limit}-offset${offset}.json`);
+    return this.#getJson(url, `cards-offset${offset}.json`);
   }
 
   async #getJson(url: string, cacheName: string): Promise<CachedResponse> {
