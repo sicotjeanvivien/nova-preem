@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Page carte</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="flex-shrink: 0; display: flex; align-items: center; gap: 4px; padding: 8px 8px 8px 4px; border-bottom: 1px solid #232838">
+<a href="SetGrid.dc.html" aria-label="Retour à Welcome to Night City" style="width: 44px; height: 44px; display: grid; place-items: center; color: #ECEEF3">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+</a>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-size: 11px; color: #A3AAB9">Retour à</span>
+<span style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Welcome to Night City</span>
+</span>
+<div role="group" aria-label="Langue d'affichage" style="display: flex; border: 1px solid #2B3040; border-radius: 8px; overflow: hidden; margin-right: 8px">
+<sc-for list="{{langBtns}}" as="l" hint-placeholder-count="2">
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; min-width: 48px; border: 0; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+</sc-for>
+</div>
+</header>
+
+<nav aria-label="Cartes du set" style="flex-shrink: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid #232838; background: #11141B">
+<a href="CardDetail.dc.html" aria-label="Carte précédente : 002 Dexter DeShawn — Indétectable" style="display: flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; font-size: 13px; color: #D5D9E2; border-right: 1px solid #232838; min-width: 0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; color: #A3AAB9">002</span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Dexter DeShawn</span></a>
+<a href="CardDetail.dc.html" aria-label="Carte suivante : 004 Royce — Psychoverdose" style="display: flex; align-items: center; justify-content: flex-end; gap: 6px; min-height: 44px; padding: 0 12px; font-size: 13px; color: #D5D9E2; min-width: 0">
+<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Royce</span><span style="font-family: 'IBM Plex Mono', monospace; color: #A3AAB9">004</span>
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</nav>
+
+<main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; gap: 14px">
+<div style="width: 128px; height: 179px; flex-shrink: 0; border-radius: 8px; background: #1C2029; border-top: 5px solid #E5484D; display: grid; place-items: center">
+<span style="font-size: 11px; color: #8B92A3; text-align: center; padding: 0 8px">Image : {{selLabel}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.15">{{title}}</h1>
+<span style="font-size: 13px; color: #A3AAB9">{{subtitle}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="font-size: 12px; border: 1px solid #2B3040; border-radius: 4px; padding: 2px 6px">Legend</span>
+<span style="font-size: 12px; border: 1px solid #E5484D; color: #FF8A8E; border-radius: 4px; padding: 2px 6px">Rouge</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; border: 1px solid #2B3040; border-radius: 4px; padding: 2px 6px">RAM 2</span>
+</div>
+<span style="font-size: 12px; color: #A3AAB9">Merc · Rocker · Samurai</span>
+</div>
+</div>
+
+<div role="group" aria-label="Impression affichée" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px">
+<sc-for list="{{thumbs}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" aria-label="{{t.aria}}" style="flex-shrink: 0; width: 64px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0; border: 0; background: transparent; cursor: pointer; color: #D5D9E2">
+<span style="display: block; width: 52px; height: 72px; border-radius: 5px; background: #1C2029; border: 2px solid {{t.ring}}"></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">{{t.label}}</span>
+</button>
+</sc-for>
+</div>
+
+<section aria-labelledby="txt" style="background: #161922; border: 1px solid #232838; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+<h2 id="txt" style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Texte de règles · {{langCode}}</h2>
+<p style="margin: 0; font-size: 14px; line-height: 1.5">{{rules}}</p>
+</section>
+
+<section aria-labelledby="imp" style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 id="imp" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase">Impressions</h2>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">{{ownedTotal}} exemplaires</span>
+</div>
+
+<sc-for list="{{variants}}" as="v" hint-placeholder-count="3">
+<div style="background: #161922; border: 1px solid #232838; border-radius: 12px; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #232838">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600; font-size: 14px">{{v.release}} <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: #A3AAB9">#{{v.num}}</span></span>
+<span style="font-size: 12px; color: #A3AAB9">{{v.artist}}</span>
+</div>
+<span style="font-size: 11px; font-weight: 600; color: #0D0F14; background: {{v.rColor}}; border-radius: 4px; padding: 2px 6px; white-space: nowrap">{{v.rarity}}</span>
+</div>
+<sc-for list="{{v.rows}}" as="row" hint-placeholder-count="1">
+<div style="display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{row.color}}; border: 1px solid {{row.color}}; border-radius: 4px; padding: 0 5px">{{row.code}}</span>
+<span style="flex: 1; font-size: 13px; color: #D5D9E2">{{row.label}}</span>
+<button onClick="{{row.dec}}" aria-label="{{row.decAria}}" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">−</button>
+<span style="width: 24px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 17px">{{row.qty}}</span>
+<button onClick="{{row.inc}}" aria-label="{{row.incAria}}" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">+</button>
+</div>
+</sc-for>
+<sc-if value="{{v.hasNote}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 0 14px 10px; font-size: 12px; color: #A3AAB9">{{v.note}}</p>
+</sc-if>
+</div>
+</sc-for>
+</section>
+<p style="margin: 0 0 8px; font-size: 12px; color: #8B92A3; line-height: 1.45">Page commune : la même depuis un set, la Collection ou la Recherche. Le retour ramène à l'écran d'origine ; précédente / suivante n'apparaissent qu'en venant d'un set.</p>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const LANG = { fr: { code: 'VF', color: '#FFB067', label: 'Français' }, en: { code: 'VO', color: '#8FB4FF', label: 'Anglais' } };
+const TEXT = {
+  fr: { title: 'Johnny Silverhand', subtitle: "Rock'n'Rebelle", rules: "2 €$, {Spend} Une Unité alliée peut attaquer une Unité rivale épuisée le tour où elle est jouée. Si c'est une Unité ROCKER, donnez-lui aussi +2 Power ce tour-ci. Cet effet coûte -1 €$ par Gig allié de valeur 8+." },
+  en: { title: 'Johnny Silverhand', subtitle: 'Rocking Renegade', rules: "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value." }
+};
+const VARIANTS = [
+  { key: 'retail-003', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['fr', 'en'], note: '' },
+  { key: 'beta-003', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['en'], note: '' },
+  { key: 'beta-168', release: 'Beta', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', artist: 'Divebound Studio', langs: ['en'], note: "Exclusive au tirage Beta : pas d'équivalent en Retail, elle n'est jamais comptée comme manquante en Retail." }
+];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { lang: 'fr', sel: 'retail-003:fr', qty: { 'retail-003:fr': 1, 'retail-003:en': 0, 'beta-003:en': 0, 'beta-168:en': 0 } };
+  }
+  change(k, d) {
+    const qty = Object.assign({}, this.state.qty);
+    qty[k] = Math.max(0, (qty[k] || 0) + d);
+    this.setState({ qty });
+  }
+  renderVals() {
+    const s = this.state; const t = TEXT[s.lang];
+    let ownedTotal = 0;
+    Object.keys(s.qty).forEach((k) => { ownedTotal += s.qty[k]; });
+    const variants = VARIANTS.map((v) => ({
+      release: v.release, num: v.num, rarity: v.rarity, rColor: v.rColor, artist: 'Illustration : ' + v.artist,
+      hasNote: !!v.note, note: v.note,
+      rows: v.langs.map((l) => {
+        const k = v.key + ':' + l;
+        return {
+          code: LANG[l].code, color: LANG[l].color, label: LANG[l].label, qty: s.qty[k] || 0,
+          decAria: 'Retirer ' + v.release + ' ' + v.num + ' ' + LANG[l].code, incAria: 'Ajouter ' + v.release + ' ' + v.num + ' ' + LANG[l].code,
+          dec: () => this.change(k, -1), inc: () => this.change(k, 1)
+        };
+      })
+    }));
+    const langBtns = ['fr', 'en'].map((l) => ({
+      label: LANG[l].code, pressed: s.lang === l ? 'true' : 'false',
+      bg: s.lang === l ? LANG[l].color : 'transparent', fg: s.lang === l ? '#0D0F14' : '#D5D9E2',
+      pick: () => this.setState({ lang: l })
+    }));
+    const thumbs = [];
+    VARIANTS.forEach((v) => v.langs.forEach((l) => {
+      const k = v.key + ':' + l;
+      thumbs.push({
+        label: v.num + ' ' + LANG[l].code, aria: 'Afficher ' + v.release + ' ' + v.num + ' ' + LANG[l].code,
+        pressed: s.sel === k ? 'true' : 'false', ring: s.sel === k ? '#46E3C8' : '#2B3040',
+        pick: () => this.setState({ sel: k }), text: v.release + ' ' + v.num + ' ' + LANG[l].code, key: k
+      });
+    }));
+    const selLabel = (thumbs.find((x) => x.key === s.sel) || thumbs[0]).text;
+    return { title: t.title, subtitle: t.subtitle, rules: t.rules, langCode: LANG[s.lang].code, variants, ownedTotal, langBtns, thumbs, selLabel };
+  }
+}
+</script>
+</body>
+</html>

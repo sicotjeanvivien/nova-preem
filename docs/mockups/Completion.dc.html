@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Complétion</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="height: 60px; flex-shrink: 0; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid #232838">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Complétion</h1>
+<span style="margin-left: auto; font-size: 13px; color: #A3AAB9">Welcome to Night City</span>
+</header>
+
+<main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px">
+
+<div role="group" aria-label="Mode de calcul" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #161922; border: 1px solid #232838; border-radius: 10px">
+<sc-for list="{{modes}}" as="m" hint-placeholder-count="3">
+<button onClick="{{m.pick}}" aria-pressed="{{m.pressed}}" style="height: 40px; border: 0; border-radius: 7px; cursor: pointer; font-size: 13px; font-weight: 500; background: {{m.bg}}; color: {{m.fg}}">{{m.label}}</button>
+</sc-for>
+</div>
+
+<section style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #A3AAB9">{{headline}}</span>
+<div style="display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; color: {{accent}}">{{pct}} %</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: #D5D9E2">{{owned}} / {{total}}</span>
+</div>
+<div style="height: 8px; background: #232838; border-radius: 4px; overflow: hidden; margin-top: 6px">
+<div style="height: 100%; width: {{pct}}%; background: {{accent}}"></div>
+</div>
+<p style="margin: 6px 0 0; font-size: 13px; color: #A3AAB9; line-height: 1.45">{{explain}}</p>
+</section>
+
+<sc-if value="{{showLang}}" hint-placeholder-val="{{ false }}">
+<div role="group" aria-label="Langue" style="display: flex; gap: 6px">
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; padding: 0 14px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+
+<section aria-labelledby="bd" style="display: flex; flex-direction: column; gap: 12px">
+<h2 id="bd" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase">{{breakdownTitle}}</h2>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 116px minmax(0, 1fr) 64px; align-items: center; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; min-width: 0">
+<span style="width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; background: {{r.color}}"></span>{{r.label}}</span>
+<div style="height: 10px; background: #232838; border-radius: 5px; overflow: hidden">
+<div style="height: 100%; width: {{r.pct}}%; background: {{r.color}}"></div>
+</div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; text-align: right">{{r.count}}</span>
+</div>
+</sc-for>
+</section>
+
+<a href="Settings.dc.html" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border: 1px solid #232838; border-radius: 12px; color: #ECEEF3">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #A3AAB9">Groupes comptés</span>
+<span style="font-size: 14px">Principal + Starters</span>
+</span>
+<span style="font-size: 13px; color: #46E3C8">Modifier</span>
+</a>
+</main>
+
+<nav aria-label="Navigation principale" style="height: 68px; flex-shrink: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #232838; background: #11141B">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="Collection.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="Search.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="Completion.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: {{accent}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+const RAR = [
+  ['Commune', '#A3AAB9', 23], ['Peu commune', '#6FCF97', 12], ['Rare', '#5B9CFF', 15],
+  ['Épique', '#B98CFF', 5], ['Secrète', '#FF5C8A', 1], ['Iconic', '#F2C94C', 11]
+];
+const OWNED = { all: [20, 9, 10, 3, 1, 3], fr: [18, 8, 9, 3, 1, 2], en: [6, 3, 2, 1, 0, 0] };
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: 'retail', lang: 'all' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state;
+    const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+    const row = (label, color, a, b) => ({ label, color, pct: pct(a, b), count: a + '/' + b });
+    let headline, owned, total, explain, rows, breakdownTitle;
+
+    if (s.mode === 'playable') {
+      headline = 'Set jouable'; owned = 44; total = 60; breakdownTitle = 'Par type de carte';
+      explain = "Une copie de chaque carte suffit, quelle que soit l'impression (Retail, Beta, starter) ou la langue.";
+      rows = [row('Legend', '#E5484D', 9, 13), row('Unit', '#8FB4FF', 25, 34), row('Gear', '#B98CFF', 3, 4), row('Program', '#6FCF97', 7, 9)];
+    } else if (s.mode === 'master') {
+      headline = 'Master set'; owned = 57; total = 202; breakdownTitle = 'Par tirage et par langue';
+      explain = 'Chaque impression compte séparément : chaque tirage, chaque langue, chaque Iconic.';
+      rows = [row('Retail VF', '#FFB067', 41, 67), row('Retail VO', '#8FB4FF', 12, 67), row('Beta VO', '#B98CFF', 4, 68)];
+    } else {
+      const o = OWNED[s.lang];
+      owned = o.reduce((a, b) => a + b, 0); total = 67; breakdownTitle = 'Par rareté';
+      headline = s.lang === 'all' ? 'Tirage Retail, toutes langues' : (s.lang === 'fr' ? 'Tirage Retail en VF' : 'Tirage Retail en VO');
+      explain = s.lang === 'all' ? "Une variante est possédée dès qu'on a au moins un exemplaire, en VO ou en VF." : 'Seules les impressions de cette langue comptent.';
+      rows = RAR.map((r, i) => row(r[0], r[1], o[i], r[2]));
+    }
+
+    const modes = [['playable', 'Set jouable'], ['master', 'Master set'], ['retail', 'Par tirage']].map(([id, label]) => ({
+      label, pressed: s.mode === id ? 'true' : 'false',
+      bg: s.mode === id ? '#2B3040' : 'transparent', fg: s.mode === id ? '#ECEEF3' : '#A3AAB9',
+      pick: () => this.setState({ mode: id })
+    }));
+    const langs = [['all', 'Toutes'], ['fr', 'VF'], ['en', 'VO']].map(([id, label]) => ({
+      label, pressed: s.lang === id ? 'true' : 'false',
+      bg: s.lang === id ? '#ECEEF3' : 'transparent', fg: s.lang === id ? '#0D0F14' : '#D5D9E2', border: s.lang === id ? '#ECEEF3' : '#2B3040',
+      pick: () => this.setState({ lang: id })
+    }));
+    return { accent, headline, owned, total, pct: pct(owned, total), explain, rows, breakdownTitle, modes, langs, showLang: s.mode === 'retail' };
+  }
+}
+</script>
+</body>
+</html>

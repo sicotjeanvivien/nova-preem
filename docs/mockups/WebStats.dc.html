@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Stats (web)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+
+<nav aria-label="Navigation principale" style="flex: 1 1 220px; box-sizing: border-box; padding: 20px 14px; background: #11141B; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">NOVA PREEM</span>
+</div>
+<a href="WebSetList.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="WebCollection.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="WebSearch.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="WebStats.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #0D0F14; background: {{accent}}; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="WebSettings.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+<div style="margin-top: auto; padding: 16px 10px 0; font-size: 12px; color: #8B92A3">Fan-made, non officiel</div>
+</nav>
+
+<div style="flex: 999 1 640px; min-width: 0; box-sizing: border-box; padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 20px">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 240px">
+<span style="font-size: 13px; color: #A3AAB9">Welcome to Night City</span>
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Stats</h1>
+</div>
+<a href="WebSettings.dc.html" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border: 1px solid #2B3040; border-radius: 8px; font-size: 13px; color: #D5D9E2">Comptés : Principal + Starters <span style="color: #46E3C8">Modifier</span></a>
+</header>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<section style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; color: #A3AAB9">{{k.label}}</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; color: {{k.color}}">{{k.value}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2">{{k.detail}}</span>
+<div style="height: 6px; background: #232838; border-radius: 3px; overflow: hidden; margin-top: 4px"><div style="height: 100%; width: {{k.pct}}%; background: {{k.color}}"></div></div>
+</section>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 14px">
+
+<section aria-labelledby="t1" style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="t1" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase">Par tirage et par langue</h2>
+<sc-for list="{{releases}}" as="r" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 170px minmax(0, 1fr) 70px; align-items: center; gap: 10px; opacity: {{r.opacity}}">
+<span style="font-size: 13px">{{r.label}}</span>
+<div style="height: 10px; background: #232838; border-radius: 5px; overflow: hidden"><div style="height: 100%; width: {{r.pct}}%; background: {{r.color}}"></div></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; text-align: right">{{r.count}}</span>
+</div>
+</sc-for>
+<p style="margin: 0; font-size: 12px; color: #8B92A3">Les tirages grisés ne sont pas comptés dans la complétion (réglable).</p>
+</section>
+
+<section aria-labelledby="t2" style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<h2 id="t2" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase">Retail par rareté</h2>
+<div role="group" aria-label="Langue" style="display: flex; gap: 4px">
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 30px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 12px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+</sc-for>
+</div>
+</div>
+<sc-for list="{{rarities}}" as="r" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 130px minmax(0, 1fr) 60px; align-items: center; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span style="width: 10px; height: 10px; border-radius: 2px; background: {{r.color}}"></span>{{r.label}}</span>
+<div style="height: 10px; background: #232838; border-radius: 5px; overflow: hidden"><div style="height: 100%; width: {{r.pct}}%; background: {{r.color}}"></div></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; text-align: right">{{r.count}}</span>
+</div>
+</sc-for>
+</section>
+
+<section aria-labelledby="t3" style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="t3" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase">Set jouable par type</h2>
+<sc-for list="{{types}}" as="r" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 110px minmax(0, 1fr) 60px; align-items: center; gap: 10px">
+<span style="font-size: 13px">{{r.label}}</span>
+<div style="height: 10px; background: #232838; border-radius: 5px; overflow: hidden"><div style="height: 100%; width: {{r.pct}}%; background: {{accent}}"></div></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; text-align: right">{{r.count}}</span>
+</div>
+</sc-for>
+<p style="margin: 0; font-size: 12px; color: #8B92A3">Une copie de chaque carte, quelle que soit l'impression ou la langue.</p>
+</section>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+const RAR = [['Commune', '#A3AAB9', 23], ['Peu commune', '#6FCF97', 12], ['Rare', '#5B9CFF', 15], ['Épique', '#B98CFF', 5], ['Secrète', '#FF5C8A', 1], ['Iconic', '#F2C94C', 11]];
+const OWNED = { all: [20, 9, 10, 3, 1, 3], fr: [18, 8, 9, 3, 1, 2], en: [6, 3, 2, 1, 0, 0] };
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { lang: 'all' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state;
+    const pct = (a, b) => (b ? Math.floor((a / b) * 100) : 0);
+    const kpis = [
+      { label: 'Set jouable', value: pct(44, 60) + ' %', detail: '44 / 60 cartes', pct: pct(44, 60), color: accent },
+      { label: 'Master set', value: pct(57, 202) + ' %', detail: '57 / 202 impressions', pct: pct(57, 202), color: '#B98CFF' },
+      { label: 'Retail en VF', value: pct(41, 67) + ' %', detail: '41 / 67 impressions', pct: pct(41, 67), color: '#FFB067' },
+      { label: 'Retail en VO', value: pct(12, 67) + ' %', detail: '12 / 67 impressions', pct: pct(12, 67), color: '#8FB4FF' }
+    ];
+    const rel = (label, a, b, color, counted) => ({ label, count: a + '/' + b, pct: pct(a, b), color, opacity: counted ? 1 : 0.45 });
+    const releases = [
+      rel('Retail VF', 41, 67, '#FFB067', true), rel('Retail VO', 12, 67, '#8FB4FF', true), rel('Beta VO', 4, 68, '#B98CFF', true),
+      rel('Starter Embracing Power', 11, 11, accent, true), rel('Starter The Heist', 0, 6, accent, true),
+      rel('Decks démo', 0, 10, '#5B6378', false), rel('Promos', 2, 56, '#5B6378', false)
+    ];
+    const o = OWNED[s.lang];
+    const rarities = RAR.map((r, i) => ({ label: r[0], color: r[1], count: o[i] + '/' + r[2], pct: pct(o[i], r[2]) }));
+    const types = [['Legend', 9, 13], ['Unit', 25, 34], ['Gear', 3, 4], ['Program', 7, 9]].map(([label, a, b]) => ({ label, count: a + '/' + b, pct: pct(a, b) }));
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const langs = [['all', 'Toutes'], ['fr', 'VF'], ['en', 'VO']].map(([id, label]) => Object.assign({ label, pick: () => this.setState({ lang: id }) }, chip(s.lang === id)));
+    return { accent, kpis, releases, rarities, types, langs };
+  }
+}
+</script>
+</body>
+</html>

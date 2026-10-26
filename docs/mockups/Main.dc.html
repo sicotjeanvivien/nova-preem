@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Sets</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="height: 60px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #232838">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.08em">NOVA PREEM</span>
+</div>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #A3AAB9; padding: 4px 8px; border: 1px solid #2B3040; border-radius: 999px">
+<span style="width: 7px; height: 7px; border-radius: 50%; background: #46E3C8"></span>Hors-ligne prêt</span>
+</header>
+
+<main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 22px">Sets</h1>
+
+<a href="SetGrid.dc.html" style="display: flex; flex-direction: column; gap: 14px; padding: 16px; background: #161922; border: 1px solid #232838; border-radius: 14px; color: #ECEEF3">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 12px; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Set 1 · 2026</span>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.15">Welcome to Night City</h2>
+<span style="font-size: 13px; color: #A3AAB9">7 tirages · VO et VF</span>
+</div>
+<div style="text-align: right">
+<div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: {{accent}}">73 %</div>
+<div style="font-size: 12px; color: #A3AAB9; margin-top: 4px">set jouable</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13px">
+<span style="color: #D5D9E2">{{b.label}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; color: #A3AAB9">{{b.count}}</span>
+</div>
+<div style="height: 6px; background: #232838; border-radius: 3px; overflow: hidden">
+<div style="height: 100%; width: {{b.pct}}%; background: {{b.color}}; border-radius: 3px"></div>
+</div>
+</div>
+</sc-for>
+</div>
+<span style="display: flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 14px; color: {{accent}}">Voir les cartes
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></span>
+</a>
+
+<div aria-disabled="true" style="display: flex; flex-direction: column; gap: 6px; padding: 16px; border: 1px dashed #3A4152; border-radius: 14px">
+<span style="font-size: 12px; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Set 2 · printemps 2027</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 19px; color: #D5D9E2">Edgerunners: Burn Bright</span>
+<span style="font-size: 13px; color: #A3AAB9">À venir : apparaîtra dès que ses cartes seront dans le catalogue.</span>
+</div>
+
+<p style="margin: 8px 0 8px; font-size: 12px; color: #8B92A3; text-align: center">Fan-made, non officiel. Données : base officielle des cartes.</p>
+</main>
+
+<nav aria-label="Navigation principale" style="height: 68px; flex-shrink: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #232838; background: #11141B">
+<a href="Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: {{accent}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="Collection.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="Search.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="Completion.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const pct = (a, b) => Math.floor((a / b) * 100);
+    const bars = [
+      { label: 'Set jouable', count: '44 / 60 cartes', pct: pct(44, 60), color: accent },
+      { label: 'Master set', count: '57 / 202', pct: pct(57, 202), color: '#B98CFF' },
+      { label: 'Retail en VF', count: '41 / 67', pct: pct(41, 67), color: '#FFB067' }
+    ];
+    return { accent, bars };
+  }
+}
+</script>
+</body>
+</html>

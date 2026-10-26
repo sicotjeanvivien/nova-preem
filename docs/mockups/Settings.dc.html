@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Réglages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="height: 60px; flex-shrink: 0; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid #232838">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Réglages</h1>
+</header>
+
+<main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 22px">
+
+<section aria-labelledby="s1" style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="s1" style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Saisie</h2>
+<div style="background: #161922; border: 1px solid #232838; border-radius: 12px">
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border-bottom: 1px solid #232838">
+<span style="font-size: 14px">Tirage par défaut</span>
+<div role="group" aria-label="Tirage par défaut" style="display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{releases}}" as="r" hint-placeholder-count="3">
+<button onClick="{{r.pick}}" aria-pressed="{{r.pressed}}" style="height: 34px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{r.border}}; background: {{r.bg}}; color: {{r.fg}}">{{r.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px">
+<span style="font-size: 14px">Langue par défaut</span>
+<div role="group" aria-label="Langue par défaut" style="display: flex; border: 1px solid #2B3040; border-radius: 8px; overflow: hidden">
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="2">
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 36px; min-width: 52px; border: 0; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+<p style="margin: 0; font-size: 12px; color: #8B92A3">Un tap sur une carte ajoute 1 exemplaire de ce tirage dans cette langue : « {{defaultLabel}} ».</p>
+</section>
+
+<section aria-labelledby="s2" style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="s2" style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Complétion</h2>
+<div style="background: #161922; border: 1px solid #232838; border-radius: 12px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid #232838">
+<span style="flex: 1; display: flex; flex-direction: column">
+<span style="font-size: 14px">{{g.label}}</span>
+<span style="font-size: 12px; color: #A3AAB9">{{g.detail}}</span>
+</span>
+<button role="switch" aria-checked="{{g.checked}}" aria-label="{{g.aria}}" onClick="{{g.toggle}}" style="width: 52px; height: 32px; flex-shrink: 0; border-radius: 999px; border: 0; cursor: pointer; padding: 3px; display: flex; justify-content: {{g.justify}}; background: {{g.track}}">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: #ECEEF3"></span>
+</button>
+</div>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 14px">
+<span style="flex: 1; font-size: 14px">Doublon au-delà de <strong>{{keep}}</strong> ex.</span>
+<button onClick="{{keepDec}}" aria-label="Seuil de doublon moins un" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">−</button>
+<button onClick="{{keepInc}}" aria-label="Seuil de doublon plus un" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 20px; cursor: pointer">+</button>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="s3" style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="s3" style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Affichage</h2>
+<div style="background: #161922; border: 1px solid #232838; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px">Noms des cartes</span>
+<div role="group" aria-label="Langue des noms" style="display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{names}}" as="nm" hint-placeholder-count="3">
+<button onClick="{{nm.pick}}" aria-pressed="{{nm.pressed}}" style="height: 34px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{nm.border}}; background: {{nm.bg}}; color: {{nm.fg}}">{{nm.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 12px; color: #8B92A3">Langue de l'interface : Français</span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 10px; border-top: 1px solid #232838">
+<span style="display: flex; flex-direction: column"><span style="font-size: 14px">Télécharger toutes les images</span><span style="font-size: 12px; color: #A3AAB9">Pour tout voir hors-ligne · Wi-Fi conseillé</span></span>
+<button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Télécharger</button>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="s4" style="display: flex; flex-direction: column; gap: 8px">
+<h2 id="s4" style="margin: 0; font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Données</h2>
+<div style="background: #161922; border: 1px solid #232838; border-radius: 12px">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #232838">
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px">Catalogue des cartes</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9">v2026-10-26.1 · 151 cartes · hors-ligne</span>
+</span>
+<button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Vérifier</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 14px; border-bottom: 1px solid #232838">
+<button style="height: 44px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">Exporter</button>
+<button style="height: 44px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">Importer</button>
+<button style="height: 44px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">CSV</button>
+</div>
+<p style="margin: 0; padding: 10px 14px; font-size: 12px; color: #A3AAB9; line-height: 1.45">Votre collection reste sur cet appareil. Exporter crée un fichier <span style="font-family: 'IBM Plex Mono', monospace">nova-preem-collection.json</span> à garder en sauvegarde.</p>
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid #232838; opacity: 0.6">
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px">Synchronisation Google Drive</span>
+<span style="font-size: 12px; color: #A3AAB9">Après le MVP</span>
+</span>
+<span style="font-size: 11px; border: 1px solid #3A4152; border-radius: 4px; padding: 2px 6px; color: #A3AAB9">Bientôt</span>
+</div>
+</div>
+</section>
+
+<p style="margin: 0 0 8px; font-size: 12px; color: #8B92A3; line-height: 1.5">Nova Preem est un outil de fan, non officiel. Noms, textes et images des cartes appartiennent à leurs ayants droit.</p>
+</main>
+
+<nav aria-label="Navigation principale" style="height: 68px; flex-shrink: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #232838; background: #11141B">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="Collection.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="Search.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="Completion.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="Settings.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: {{accent}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+const LANG = { fr: { code: 'VF', color: '#FFB067' }, en: { code: 'VO', color: '#8FB4FF' } };
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { release: 'retail', lang: 'fr', names: 'entry', keep: 1, groups: { main: true, starter: true, demo: false, promo: false } };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state;
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const RELS = [['retail', 'Retail'], ['beta', 'Beta'], ['ep', 'Starter Embracing Power'], ['heist', 'Starter The Heist']];
+    const releases = RELS.map(([id, label]) => Object.assign({ label, pick: () => this.setState({ release: id }) }, chip(s.release === id)));
+    const langs = ['fr', 'en'].map((l) => ({
+      label: LANG[l].code, pressed: s.lang === l ? 'true' : 'false',
+      bg: s.lang === l ? LANG[l].color : 'transparent', fg: s.lang === l ? '#0D0F14' : '#D5D9E2',
+      pick: () => this.setState({ lang: l })
+    }));
+    const GROUPS = [
+      ['main', 'Set principal', 'Retail, Beta, et leurs langues'],
+      ['starter', 'Starters', 'The Heist, Embracing Power'],
+      ['demo', 'Decks démo', 'Merc, Arasaka'],
+      ['promo', 'Promos', 'Pre-Release, Box Toppers, Edgerunner Open…']
+    ];
+    const groups = GROUPS.map(([id, label, detail]) => {
+      const on = s.groups[id];
+      return {
+        label, detail, checked: on ? 'true' : 'false', aria: 'Compter ' + label + ' dans la complétion',
+        track: on ? accent : '#3A4152', justify: on ? 'flex-end' : 'flex-start',
+        toggle: () => this.setState({ groups: Object.assign({}, s.groups, { [id]: !on }) })
+      };
+    });
+    const names = [['entry', 'Langue de saisie'], ['fr', 'Toujours VF'], ['en', 'Toujours VO']].map(([id, label]) => Object.assign({ label, pick: () => this.setState({ names: id }) }, chip(s.names === id)));
+    const relLabel = RELS.find((r) => r[0] === s.release)[1];
+    return {
+      accent, releases, langs, groups, names, keep: s.keep,
+      defaultLabel: relLabel + ' · ' + LANG[s.lang].code,
+      keepDec: () => this.setState({ keep: Math.max(1, s.keep - 1) }), keepInc: () => this.setState({ keep: Math.min(9, s.keep + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

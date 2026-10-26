@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — États (web)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#07080B}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1120px; box-sizing: border-box; padding: 24px 32px; background: #07080B; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px">
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">1 · Premier lancement</span>
+<div style="height: 480px; box-sizing: border-box; background: #0D0F14; border: 1px solid #232838; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 40px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 0.08em">NOVA PREEM</span>
+<div style="width: 360px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; font-size: 14px"><span>Téléchargement du catalogue</span><span style="font-family: 'IBM Plex Mono', monospace; color: #A3AAB9">62 %</span></div>
+<div style="height: 6px; background: #232838; border-radius: 3px; overflow: hidden"><div style="height: 100%; width: 62%; background: {{accent}}"></div></div>
+<span style="font-size: 13px; color: #A3AAB9; line-height: 1.45">Cartes, impressions et textes VO et VF. Ensuite, l'app fonctionne sans réseau.</span>
+</div>
+<span style="font-size: 12px; color: #8B92A3">Pas de barre latérale tant que le catalogue n'est pas prêt.</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">2 · Hors-ligne</span>
+<div style="height: 480px; box-sizing: border-box; background: #0D0F14; border: 1px solid #232838; border-radius: 8px; display: flex; overflow: hidden">
+<div style="width: 170px; flex-shrink: 0; background: #11141B; border-right: 1px solid #232838; padding: 16px 10px; display: flex; flex-direction: column; gap: 6px; box-sizing: border-box">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; padding: 0 8px 12px">NOVA PREEM</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; border-radius: 6px; font-size: 13px; color: #0D0F14; background: {{accent}}; font-weight: 600">Sets</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Collection</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Recherche</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Stats</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Réglages</span>
+<span style="margin-top: auto; display: inline-flex; align-items: center; gap: 6px; padding: 0 8px; font-size: 12px; color: #FFD99A"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FFB067"></span>Hors-ligne</span>
+</div>
+<div style="flex: 1; display: flex; flex-direction: column; min-width: 0">
+<div role="status" style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #2A2213; border-bottom: 1px solid #5A4520; font-size: 13px; color: #FFD99A">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6"></path></svg>
+Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.</div>
+<div style="padding: 14px 16px; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">Welcome to Night City</div>
+<div style="padding: 0 16px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="10">
+<div style="border-radius: 8px; overflow: hidden; background: #161922; border: 1px solid #232838">
+<div style="height: 3px; background: #E5484D"></div>
+<div style="height: 92px; display: grid; place-items: center; background: #1C2029; padding: 4px; box-sizing: border-box"><span style="font-size: 10px; color: #8B92A3; text-align: center">{{t.img}}</span></div>
+<div style="padding: 5px 6px; font-size: 11px; height: 28px; overflow: hidden">{{t.name}}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">3 · Nouveau catalogue disponible</span>
+<div style="height: 480px; box-sizing: border-box; background: #0D0F14; border: 1px solid #232838; border-radius: 8px; position: relative; display: grid; place-items: center; overflow: hidden">
+<div style="position: absolute; inset: 0; background: rgba(5, 6, 9, 0.6)"></div>
+<section role="dialog" aria-label="Mise à jour du catalogue" style="position: relative; width: 420px; background: #161922; border: 1px solid #2B3040; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Catalogue mis à jour</h2>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9">v2026-10-26.1 → [nouvelle version]</span>
+<ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: #D5D9E2">
+<li>[N] nouvelles cartes</li>
+<li>[N] nouvelles impressions, dont [nouveau tirage]</li>
+<li>[N] textes corrigés</li>
+</ul>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.45">Votre collection n'est pas modifiée.</p>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+<button style="height: 40px; padding: 0 16px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 14px; cursor: pointer">Plus tard</button>
+<button style="height: 40px; padding: 0 16px; border-radius: 8px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Mettre à jour</button>
+</div>
+</section>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">4 · Collection vide</span>
+<div style="height: 480px; box-sizing: border-box; background: #0D0F14; border: 1px solid #232838; border-radius: 8px; display: flex; overflow: hidden">
+<div style="width: 170px; flex-shrink: 0; background: #11141B; border-right: 1px solid #232838; padding: 16px 10px; display: flex; flex-direction: column; gap: 6px; box-sizing: border-box">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; padding: 0 8px 12px">NOVA PREEM</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Sets</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; border-radius: 6px; font-size: 13px; color: #0D0F14; background: {{accent}}; font-weight: 600">Collection</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Recherche</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Stats</span>
+<span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Réglages</span>
+</div>
+<div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 32px; text-align: center">
+<div style="display: flex; gap: 8px" aria-hidden="true">
+<div style="width: 52px; height: 72px; border-radius: 6px; border: 1px dashed #3A4152"></div>
+<div style="width: 52px; height: 72px; border-radius: 6px; border: 1px dashed #3A4152"></div>
+<div style="width: 52px; height: 72px; border-radius: 6px; border: 1px dashed {{accent}}"></div>
+</div>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 21px">Votre collection est vide</h2>
+<p style="margin: 0; max-width: 380px; font-size: 14px; color: #A3AAB9; line-height: 1.5">Ouvrez un set et cliquez sur chaque carte pour l'ajouter. Vous pouvez aussi importer une sauvegarde.</p>
+<div style="display: flex; gap: 8px">
+<button style="height: 42px; padding: 0 16px; border-radius: 8px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Ouvrir les sets</button>
+<button style="height: 42px; padding: 0 16px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 14px; cursor: pointer">Importer une sauvegarde</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1120}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const names = ['Acheveur De Légendes', 'Indétectable', "Rock'n'Rebelle", 'Psychoverdose', 'Gosse Des Rues', 'Gosse Des Rues', 'Recrues Des 6th Street', 'Destructeur Des Animals', 'Croc Chromé', 'El Sombrerón'];
+    return { accent, tiles: names.map((name, i) => ({ name, img: i % 3 === 2 ? 'Image non téléchargée' : 'Image en cache' })) };
+  }
+}
+</script>
+</body>
+</html>

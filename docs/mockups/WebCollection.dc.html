@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Collection (web)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+
+<nav aria-label="Navigation principale" style="flex: 1 1 220px; box-sizing: border-box; padding: 20px 14px; background: #11141B; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">NOVA PREEM</span>
+</div>
+<a href="WebSetList.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="WebCollection.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #0D0F14; background: {{accent}}; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="WebSearch.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="WebStats.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="WebSettings.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+<div style="margin-top: auto; padding: 16px 10px 0; font-size: 12px; color: #8B92A3">Fan-made, non officiel</div>
+</nav>
+
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
+<header style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; padding: 18px 24px; border-bottom: 1px solid #232838">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Collection</h1>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #A3AAB9">{{summary}}</span>
+<button style="margin-left: auto; height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Exporter en CSV</button>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; flex: 1">
+<aside aria-label="Filtres" style="flex: 1 1 220px; box-sizing: border-box; padding: 16px 20px; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 18px">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">Langue</legend>
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 36px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; text-align: left; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+</sc-for>
+</fieldset>
+<fieldset style="border: 0; margin: 0; padding: 0">
+<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">Doublons</legend>
+<button role="switch" aria-checked="{{dupsChecked}}" onClick="{{toggleDups}}" style="display: flex; align-items: center; gap: 10px; border: 0; background: transparent; color: #ECEEF3; cursor: pointer; padding: 0; font-size: 14px">
+<span style="width: 44px; height: 26px; border-radius: 999px; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{dupsJustify}}; background: {{dupsTrack}}"><span style="width: 20px; height: 20px; border-radius: 50%; background: #ECEEF3"></span></span>
+Au-delà de 1 ex.</button>
+</fieldset>
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
+<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">{{g.title}}</legend>
+<sc-for list="{{g.options}}" as="o" hint-placeholder-count="3">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 28px; font-size: 14px; color: #D5D9E2; cursor: pointer">
+<input type="checkbox" style="width: 18px; height: 18px; accent-color: #46E3C8">{{o}}</label>
+</sc-for>
+</fieldset>
+</sc-for>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 16px 20px">
+<div style="overflow-x: auto; border: 1px solid #232838; border-radius: 12px">
+<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px">
+<thead>
+<tr style="background: #161922">
+<sc-for list="{{cols}}" as="col" hint-placeholder-count="7">
+<th scope="col" aria-sort="{{col.ariaSort}}" style="text-align: {{col.align}}; padding: 0; border-bottom: 1px solid #232838; font-weight: 600; font-size: 12px; color: #A3AAB9">
+<button onClick="{{col.pick}}" style="width: 100%; height: 40px; padding: 0 12px; border: 0; background: transparent; cursor: pointer; font: inherit; color: {{col.fg}}; text-align: {{col.align}}; letter-spacing: 0.04em; text-transform: uppercase">{{col.label}}{{col.arrow}}</button>
+</th>
+</sc-for>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+<tr style="border-bottom: 1px solid #1C2029">
+<td style="padding: 8px 12px">
+<a href="WebCard.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ECEEF3">
+<span style="width: 26px; height: 36px; flex-shrink: 0; border-radius: 3px; background: #1C2029; border-top: 3px solid {{r.stripe}}"></span>
+<span style="display: flex; flex-direction: column"><span style="font-weight: 500">{{r.name}}</span><span style="font-size: 12px; color: #A3AAB9">{{r.other}}</span></span>
+</a>
+</td>
+<td style="padding: 8px 12px; color: #D5D9E2">{{r.rel}}</td>
+<td style="padding: 8px 12px; font-family: 'IBM Plex Mono', monospace; color: #D5D9E2">{{r.n}}</td>
+<td style="padding: 8px 12px"><span style="display: inline-flex; align-items: center; gap: 6px; color: #D5D9E2"><span style="width: 9px; height: 9px; border-radius: 2px; background: {{r.rColor}}"></span>{{r.rLabel}}</span></td>
+<td style="padding: 8px 12px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #FFB067">{{r.vf}}</td>
+<td style="padding: 8px 12px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #8FB4FF">{{r.vo}}</td>
+<td style="padding: 8px 12px; color: #A3AAB9; white-space: nowrap">{{r.added}}<sc-if value="{{r.hasExtra}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 8px; font-family: 'IBM Plex Mono', monospace; color: {{accent}}">+{{r.extra}}</span></sc-if></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</main>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+const RAR = { C: ['Commune', '#A3AAB9'], U: ['Peu commune', '#6FCF97'], R: ['Rare', '#5B9CFF'], E: ['Épique', '#B98CFF'], S: ['Secrète', '#FF5C8A'], IL: ['Iconic Legend', '#F2C94C'] };
+const STRIPE = { R: '#E5484D', Y: '#E8C547' };
+const OWNED = [
+  { n: '008', rel: 'Retail', fr: 'Croc Chromé', en: 'Chrome Fang', r: 'C', col: 'R', vf: 3, vo: 0, day: 0 },
+  { n: '144', rel: 'Retail', fr: 'V — Gosse Des Rues', en: 'V — Streetkid', r: 'IL', col: 'R', vf: 1, vo: 0, day: 0 },
+  { n: '025', rel: 'Retail', fr: 'Lames Mantis', en: 'Mantis Blades', r: 'C', col: 'R', vf: 2, vo: 1, day: 0 },
+  { n: '053', rel: 'Retail', fr: "Bombus d'Occasion", en: 'Secondhand Bombus', r: 'C', col: 'Y', vf: 3, vo: 0, day: 1 },
+  { n: '003', rel: 'Retail', fr: "Johnny Silverhand — Rock'n'Rebelle", en: 'Johnny Silverhand — Rocking Renegade', r: 'S', col: 'R', vf: 1, vo: 0, day: 1 },
+  { n: '020', rel: 'Retail', fr: 'V — Errance À Travers Les Badlands', en: 'V — Roamer of the Badlands', r: 'E', col: 'R', vf: 1, vo: 0, day: 1 },
+  { n: '017', rel: 'Retail', fr: 'Racaille Impitoyable', en: 'Ruthless Lowlife', r: 'C', col: 'R', vf: 2, vo: 0, day: 2 },
+  { n: '014', rel: 'Retail', fr: 'Meredith Stout — Corpo Sans Pitié', en: 'Meredith Stout — Stone Cold Corpo', r: 'R', col: 'R', vf: 1, vo: 1, day: 2 },
+  { n: '002', rel: 'Starter Embracing Power', fr: 'Croc Chromé', en: 'Chrome Fang', r: 'C', col: 'R', vf: 0, vo: 1, day: 3 },
+  { n: '044', rel: 'Retail', fr: 'Caliber — La Meilleure du Totentanz', en: "Caliber — Totentanz's Top Dog", r: 'R', col: 'Y', vf: 0, vo: 1, day: 3 },
+  { n: '029', rel: 'Retail', fr: 'Bonnie et Clyde', en: 'Bonnie and Clyde', r: 'U', col: 'R', vf: 2, vo: 0, day: 4 },
+  { n: '006', rel: 'Retail', fr: 'Recrues Des 6th Street', en: '6th Street Recruits', r: 'C', col: 'R', vf: 1, vo: 1, day: 4 },
+  { n: '012', rel: 'Retail', fr: 'Kerry Eurodyne — Le Dernier Rockerboy', en: 'Kerry Eurodyne — The Last Rockerboy', r: 'U', col: 'R', vf: 1, vo: 0, day: 5 }
+];
+const DAY = ["Aujourd'hui", 'Hier', 'Il y a 2 jours', 'Il y a 3 jours', 'Il y a 4 jours', 'Il y a 5 jours'];
+const RORDER = { C: 0, U: 1, R: 2, E: 3, S: 4, IL: 5 };
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { lang: 'all', dups: false, sort: 'added', dir: 1 }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state;
+    const qtyOf = (o) => (s.lang === 'fr' ? o.vf : (s.lang === 'en' ? o.vo : o.vf + o.vo));
+    let list = OWNED.filter((o) => qtyOf(o) > 0);
+    if (s.dups) list = list.filter((o) => qtyOf(o) > 1);
+    const nameOf = (o) => (s.lang === 'en' ? o.en : o.fr);
+    const KEY = {
+      name: (a, b) => nameOf(a).localeCompare(nameOf(b), 'fr'), rel: (a, b) => a.rel.localeCompare(b.rel, 'fr'),
+      n: (a, b) => a.n.localeCompare(b.n), r: (a, b) => RORDER[a.r] - RORDER[b.r],
+      vf: (a, b) => a.vf - b.vf, vo: (a, b) => a.vo - b.vo, added: (a, b) => a.day - b.day
+    };
+    const sorted = list.slice().sort((a, b) => KEY[s.sort](a, b) * s.dir);
+    let copies = 0; list.forEach((o) => { copies += qtyOf(o); });
+    const rows = sorted.map((o) => ({
+      name: nameOf(o), other: s.lang === 'en' ? o.fr : o.en, rel: o.rel, n: o.n, rLabel: RAR[o.r][0], rColor: RAR[o.r][1],
+      stripe: STRIPE[o.col], vf: o.vf || '—', vo: o.vo || '—', added: DAY[o.day], hasExtra: s.dups, extra: qtyOf(o) - 1
+    }));
+    const COLS = [['name', 'Carte', 'left'], ['rel', 'Tirage', 'left'], ['n', 'N°', 'left'], ['r', 'Rareté', 'left'], ['vf', 'VF', 'right'], ['vo', 'VO', 'right'], ['added', 'Ajoutée', 'left']];
+    const cols = COLS.map(([id, label, align]) => {
+      const on = s.sort === id;
+      return {
+        label, align, fg: on ? '#ECEEF3' : '#A3AAB9', arrow: on ? (s.dir === 1 ? ' ↑' : ' ↓') : '',
+        ariaSort: on ? (s.dir === 1 ? 'ascending' : 'descending') : 'none',
+        pick: () => this.setState({ sort: id, dir: on ? -s.dir : 1 })
+      };
+    });
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const langs = [['all', 'Toutes langues'], ['fr', 'VF seulement'], ['en', 'VO seulement']].map(([id, label]) => Object.assign({ label, pick: () => this.setState({ lang: id }) }, chip(s.lang === id)));
+    const groups = [
+      { title: 'Set', options: ['Welcome to Night City'] },
+      { title: 'Tirage', options: ['Retail', 'Beta', 'Starters', 'Démos', 'Promos'] },
+      { title: 'Rareté', options: ['Commune', 'Peu commune', 'Rare', 'Épique', 'Secrète', 'Iconic'] },
+      { title: 'Type', options: ['Legend', 'Unit', 'Gear', 'Program'] },
+      { title: 'Couleur', options: ['Rouge', 'Jaune', 'Bleu', 'Vert'] }
+    ];
+    return {
+      accent, rows, cols, langs, groups,
+      summary: copies + ' exemplaires · ' + list.length + ' impressions',
+      dupsChecked: s.dups ? 'true' : 'false', dupsJustify: s.dups ? 'flex-end' : 'flex-start', dupsTrack: s.dups ? accent : '#3A4152',
+      toggleDups: () => this.setState({ dups: !s.dups })
+    };
+  }
+}
+</script>
+</body>
+</html>

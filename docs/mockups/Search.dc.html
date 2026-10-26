@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Recherche</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+input::placeholder{color:#8B92A3}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="flex-shrink: 0; padding: 12px 16px 10px; border-bottom: 1px solid #232838; display: flex; flex-direction: column; gap: 10px; background: #11141B">
+<label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Rechercher une carte</label>
+<div style="display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 12px; background: #161922; border: 1px solid #2B3040; border-radius: 10px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3AAB9" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input id="q" type="search" value="{{query}}" onInput="{{onQuery}}" placeholder="Nom VF ou VO, texte, numéro…" style="flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; color: #ECEEF3; font-size: 15px; font-family: inherit">
+</div>
+<div style="display: flex; gap: 6px; overflow-x: auto">
+<sc-for list="{{types}}" as="t" hint-placeholder-count="5">
+<button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
+</sc-for>
+</div>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 32px; font-size: 13px; color: #D5D9E2; cursor: pointer">
+<input type="checkbox" style="width: 18px; height: 18px; accent-color: #46E3C8">Chercher aussi dans le texte de règles</label>
+<div style="display: flex; gap: 6px; overflow-x: auto">
+<sc-for list="{{menus}}" as="m" hint-placeholder-count="5">
+<button aria-haspopup="listbox" style="height: 32px; padding: 0 8px 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid #2B3040; background: #161922; color: #D5D9E2; display: flex; align-items: center; gap: 4px">{{m.label}}
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+</sc-for>
+</div>
+</header>
+
+<main style="flex: 1; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
+<p style="margin: 0 4px 2px; font-size: 12px; color: #A3AAB9">{{resultLabel}}</p>
+<sc-for list="{{results}}" as="r" hint-placeholder-count="8">
+<a href="CardDetail.dc.html" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 8px; background: #161922; border: 1px solid #232838; border-radius: 10px; color: #ECEEF3">
+<div style="width: 40px; height: 56px; flex-shrink: 0; border-radius: 4px; background: #1C2029; border-top: 3px solid {{r.stripe}}"></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 14px; font-weight: 500">{{r.primary}}</span>
+<span style="font-size: 12px; color: #A3AAB9">{{r.secondary}}</span>
+<span style="font-size: 11px; color: #8B92A3">{{r.meta}}</span>
+</div>
+<span style="font-size: 11px; font-weight: 600; white-space: nowrap; border-radius: 4px; padding: 2px 6px; color: {{r.ownFg}}; background: {{r.ownBg}}; border: 1px solid {{r.ownBorder}}">{{r.own}}</span>
+</a>
+</sc-for>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 32px 0; text-align: center; color: #A3AAB9; font-size: 14px">Aucune carte ne correspond.</p>
+</sc-if>
+</main>
+
+<nav aria-label="Navigation principale" style="height: 68px; flex-shrink: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #232838; background: #11141B">
+<a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="Collection.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="Search.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: {{accent}}">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="Completion.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+</nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+const CARDS = [
+  { fr: 'Croc Chromé', en: 'Chrome Fang', t: 'Unit', col: 'R', prints: 'Retail #008 · Beta · Starter Embracing Power #002', n: 4, owned: 4 },
+  { fr: "Johnny Silverhand — Rock'n'Rebelle", en: 'Johnny Silverhand — Rocking Renegade', t: 'Legend', col: 'R', prints: 'Retail #003 · Beta #β003 · Beta Iconic #β168', n: 4, owned: 1 },
+  { fr: "Johnny Silverhand — N'abandonne Jamais Le Combat", en: 'Johnny Silverhand — Never Stop Fighting', t: 'Unit', col: 'R', prints: 'Retail #011 · Retail Iconic #159', n: 0, owned: 0 },
+  { fr: 'V — Gosse Des Rues', en: 'V — Streetkid', t: 'Legend', col: 'R', prints: 'Retail #005a #005b #144 · Beta · Edgerunner Open S1', n: 14, owned: 1 },
+  { fr: 'V — Errance À Travers Les Badlands', en: 'V — Roamer of the Badlands', t: 'Unit', col: 'R', prints: 'Retail #020 · Beta #β020', n: 0, owned: 1 },
+  { fr: 'Lames Mantis', en: 'Mantis Blades', t: 'Gear', col: 'R', prints: 'Retail #025 · Beta #β025', n: 0, owned: 3 },
+  { fr: 'Tout Est Perdu', en: 'All is Lost', t: 'Program', col: 'R', prints: 'Retail #027 · Beta #β027', n: 0, owned: 0 },
+  { fr: 'Jackie Welles — Marche ou Crève', en: 'Jackie Welles — Ride or Die Choom', t: 'Unit', col: 'Y', prints: 'Retail #048 · Beta #β048', n: 0, owned: 0 },
+  { fr: "Charcudoc d'Heywood", en: 'Heywood Ripperdoc', t: 'Unit', col: 'Y', prints: 'Retail #047 · Beta #β047', n: 0, owned: 0 },
+  { fr: 'Hanako Arasaka — Mise en Cage Dorée', en: 'Hanako Arasaka — In a Gilded Cage', t: 'Unit', col: 'Y', prints: 'Retail #046 · Retail Iconic #162', n: 0, owned: 0 },
+  { fr: 'River Ward — Détective en Action', en: 'River Ward — Detective on the Hunt', t: 'Legend', col: 'Y', prints: 'Retail #039 · Retail Iconic #148', n: 0, owned: 0 },
+  { fr: 'Escouade de Répression de la MaxTac', en: 'MaxTac Suppression Team', t: 'Unit', col: 'Y', prints: 'Retail #050 · Beta #β050', n: 0, owned: 0 }
+];
+const STRIPE = { R: '#E5484D', Y: '#E8C547' };
+const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { query: 'chrom', type: 'all' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const s = this.state; const q = norm(s.query.trim());
+    const list = CARDS.filter((c) => (s.type === 'all' || c.t === s.type) && (!q || norm(c.fr).includes(q) || norm(c.en).includes(q)));
+    const results = list.map((c) => {
+      const matchEnOnly = q && !norm(c.fr).includes(q) && norm(c.en).includes(q);
+      return {
+        primary: c.fr, secondary: (matchEnOnly ? 'VO : ' : '') + c.en,
+        meta: c.t + ' · ' + c.prints, stripe: STRIPE[c.col],
+        own: c.owned > 0 ? 'Possédée ×' + c.owned : 'Manquante',
+        ownFg: c.owned > 0 ? '#0D0F14' : '#A3AAB9', ownBg: c.owned > 0 ? accent : 'transparent', ownBorder: c.owned > 0 ? accent : '#3A4152'
+      };
+    });
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const types = [['all', 'Tous types'], ['Legend', 'Legend'], ['Unit', 'Unit'], ['Gear', 'Gear'], ['Program', 'Program']].map(([id, label]) => Object.assign({ label, pick: () => this.setState({ type: id }) }, chip(s.type === id)));
+    return {
+      accent, query: s.query, results, types, empty: results.length === 0,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      resultLabel: results.length + ' carte' + (results.length > 1 ? 's' : '') + ' · tous sets, VF et VO',
+      menus: [{ label: 'Couleur' }, { label: 'Rareté' }, { label: 'Set' }, { label: 'Coût' }, { label: 'RAM' }, { label: 'Possession' }]
+    };
+  }
+}
+</script>
+</body>
+</html>
