@@ -13,6 +13,7 @@
 <style>
 body{margin:0;background:#0D0F14}
 a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+input::placeholder{color:#8B92A3}
 </style>
 </helmet>
 <div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
@@ -36,18 +37,27 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </nav>
 
 <div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column">
-<header style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; padding: 18px 24px; border-bottom: 1px solid #232838">
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 24px; border-bottom: 1px solid #232838">
 <h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Collection</h1>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #A3AAB9">{{summary}}</span>
-<button style="margin-left: auto; height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Exporter en CSV</button>
+<label for="cq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Filtrer par nom</label>
+<input id="cq" type="search" value="{{query}}" onInput="{{onQuery}}" placeholder="Nom VF ou VO…" style="flex: 0 1 260px; height: 38px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: #161922; color: #ECEEF3; font-size: 14px; font-family: inherit">
+<label for="csort" style="font-size: 13px; color: #A3AAB9">Trier</label>
+<select id="csort" onChange="{{onSort}}" style="height: 38px; padding: 0 10px; border-radius: 8px; border: 1px solid #2B3040; background: #161922; color: #ECEEF3; font-size: 14px; font-family: inherit">
+<option value="recent">Ajouts récents</option>
+<option value="number">Numéro</option>
+<option value="name">Nom</option>
+<option value="rarity">Rareté</option>
+<option value="qty">Quantité</option>
+</select>
+<span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #A3AAB9">{{summary}}</span>
 </header>
 
 <div style="display: flex; flex-wrap: wrap; flex: 1">
-<aside aria-label="Filtres" style="flex: 1 1 220px; box-sizing: border-box; padding: 16px 20px; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 18px">
-<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<aside aria-label="Filtres" style="flex: 1 1 220px; max-width: 260px; box-sizing: border-box; padding: 16px 20px; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 18px">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
 <legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">Langue</legend>
 <sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
-<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 36px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; text-align: left; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
+<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; text-align: left; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
 </sc-for>
 </fieldset>
 <fieldset style="border: 0; margin: 0; padding: 0">
@@ -56,8 +66,8 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <span style="width: 44px; height: 26px; border-radius: 999px; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{dupsJustify}}; background: {{dupsTrack}}"><span style="width: 20px; height: 20px; border-radius: 50%; background: #ECEEF3"></span></span>
 Au-delà de 1 ex.</button>
 </fieldset>
-<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
-<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
 <legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">{{g.title}}</legend>
 <sc-for list="{{g.options}}" as="o" hint-placeholder-count="3">
 <label style="display: flex; align-items: center; gap: 10px; min-height: 28px; font-size: 14px; color: #D5D9E2; cursor: pointer">
@@ -67,37 +77,41 @@ Au-delà de 1 ex.</button>
 </sc-for>
 </aside>
 
-<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 16px 20px">
-<div style="overflow-x: auto; border: 1px solid #232838; border-radius: 12px">
-<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px">
-<thead>
-<tr style="background: #161922">
-<sc-for list="{{cols}}" as="col" hint-placeholder-count="7">
-<th scope="col" aria-sort="{{col.ariaSort}}" style="text-align: {{col.align}}; padding: 0; border-bottom: 1px solid #232838; font-weight: 600; font-size: 12px; color: #A3AAB9">
-<button onClick="{{col.pick}}" style="width: 100%; height: 40px; padding: 0 12px; border: 0; background: transparent; cursor: pointer; font: inherit; color: {{col.fg}}; text-align: {{col.align}}; letter-spacing: 0.04em; text-transform: uppercase">{{col.label}}{{col.arrow}}</button>
-</th>
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 18px 22px 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax({{tileMin}}px, 1fr)); gap: 16px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="10">
+<a href="WebCard.dc.html" aria-label="{{c.aria}}" style="display: flex; flex-direction: column; gap: 6px; color: #ECEEF3">
+<div style="position: relative; aspect-ratio: 5 / 7; border-radius: 12px; overflow: hidden; background: #1C2029; border: 1px solid #2B3040">
+<div style="height: 8%; background: {{c.stripe}}; display: flex; align-items: center; padding: 0 8%"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 11px; color: #0D0F14; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.shortName}}</span></div>
+<div style="height: 52%; margin: 4% 6%; border-radius: 6px; background: #262B38; display: grid; place-items: center">
+<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3A4152" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>
+</div>
+<div style="margin: 0 6%; display: flex; flex-direction: column; gap: 5px">
+<span style="height: 6px; width: 90%; border-radius: 3px; background: #2B3040"></span>
+<span style="height: 6px; width: 70%; border-radius: 3px; background: #2B3040"></span>
+<span style="height: 6px; width: 80%; border-radius: 3px; background: #2B3040"></span>
+</div>
+<span style="position: absolute; top: 12%; left: 6px; font-size: 10px; font-weight: 600; color: #0D0F14; background: {{c.rColor}}; padding: 1px 5px; border-radius: 4px">{{c.rShort}}</span>
+<div style="position: absolute; left: 6px; right: 6px; bottom: 6px; display: flex; gap: 4px; justify-content: flex-end">
+<sc-for list="{{c.badges}}" as="b" hint-placeholder-count="1">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #0D0F14; background: {{b.color}}; border-radius: 4px; padding: 1px 6px">{{b.label}}</span>
 </sc-for>
-</tr>
-</thead>
-<tbody>
-<sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
-<tr style="border-bottom: 1px solid #1C2029">
-<td style="padding: 8px 12px">
-<a href="WebCard.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ECEEF3">
-<span style="width: 26px; height: 36px; flex-shrink: 0; border-radius: 3px; background: #1C2029; border-top: 3px solid {{r.stripe}}"></span>
-<span style="display: flex; flex-direction: column"><span style="font-weight: 500">{{r.name}}</span><span style="font-size: 12px; color: #A3AAB9">{{r.other}}</span></span>
+</div>
+<sc-if value="{{c.hasExtra}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; top: 12%; right: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: #0D0F14; background: {{accent}}; border-radius: 4px; padding: 1px 6px">+{{c.extra}} en trop</span>
+</sc-if>
+</div>
+<span style="font-size: 13px; font-weight: 500; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.name}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A3AAB9; margin-top: -4px">{{c.meta}}</span>
 </a>
-</td>
-<td style="padding: 8px 12px; color: #D5D9E2">{{r.rel}}</td>
-<td style="padding: 8px 12px; font-family: 'IBM Plex Mono', monospace; color: #D5D9E2">{{r.n}}</td>
-<td style="padding: 8px 12px"><span style="display: inline-flex; align-items: center; gap: 6px; color: #D5D9E2"><span style="width: 9px; height: 9px; border-radius: 2px; background: {{r.rColor}}"></span>{{r.rLabel}}</span></td>
-<td style="padding: 8px 12px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #FFB067">{{r.vf}}</td>
-<td style="padding: 8px 12px; text-align: right; font-family: 'IBM Plex Mono', monospace; color: #8FB4FF">{{r.vo}}</td>
-<td style="padding: 8px 12px; color: #A3AAB9; white-space: nowrap">{{r.added}}<sc-if value="{{r.hasExtra}}" hint-placeholder-val="{{ false }}"><span style="margin-left: 8px; font-family: 'IBM Plex Mono', monospace; color: {{accent}}">+{{r.extra}}</span></sc-if></td>
-</tr>
 </sc-for>
-</tbody>
-</table>
+</div>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 32px 0; text-align: center; color: #A3AAB9; font-size: 15px">Aucune carte possédée pour ces filtres.</p>
+</sc-if>
+<div style="position: sticky; bottom: 0; margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px; background: #0D0F14; border-top: 1px solid #232838">
+<label for="csize" style="font-size: 13px; color: #A3AAB9">Taille des cartes</label>
+<input id="csize" type="range" min="140" max="280" step="20" value="{{tileMin}}" onInput="{{onSize}}" style="width: 220px; accent-color: #46E3C8">
 </div>
 </main>
 </div>
@@ -105,53 +119,52 @@ Au-delà de 1 ex.</button>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
-const RAR = { C: ['Commune', '#A3AAB9'], U: ['Peu commune', '#6FCF97'], R: ['Rare', '#5B9CFF'], E: ['Épique', '#B98CFF'], S: ['Secrète', '#FF5C8A'], IL: ['Iconic Legend', '#F2C94C'] };
+const RAR = { C: ['C', '#A3AAB9', 0], U: ['PC', '#6FCF97', 1], R: ['R', '#5B9CFF', 2], E: ['É', '#B98CFF', 3], S: ['S', '#FF5C8A', 4], IL: ['IC', '#F2C94C', 5] };
 const STRIPE = { R: '#E5484D', Y: '#E8C547' };
 const OWNED = [
-  { n: '008', rel: 'Retail', fr: 'Croc Chromé', en: 'Chrome Fang', r: 'C', col: 'R', vf: 3, vo: 0, day: 0 },
   { n: '144', rel: 'Retail', fr: 'V — Gosse Des Rues', en: 'V — Streetkid', r: 'IL', col: 'R', vf: 1, vo: 0, day: 0 },
+  { n: '008', rel: 'Retail', fr: 'Croc Chromé', en: 'Chrome Fang', r: 'C', col: 'R', vf: 3, vo: 0, day: 0 },
   { n: '025', rel: 'Retail', fr: 'Lames Mantis', en: 'Mantis Blades', r: 'C', col: 'R', vf: 2, vo: 1, day: 0 },
-  { n: '053', rel: 'Retail', fr: "Bombus d'Occasion", en: 'Secondhand Bombus', r: 'C', col: 'Y', vf: 3, vo: 0, day: 1 },
   { n: '003', rel: 'Retail', fr: "Johnny Silverhand — Rock'n'Rebelle", en: 'Johnny Silverhand — Rocking Renegade', r: 'S', col: 'R', vf: 1, vo: 0, day: 1 },
   { n: '020', rel: 'Retail', fr: 'V — Errance À Travers Les Badlands', en: 'V — Roamer of the Badlands', r: 'E', col: 'R', vf: 1, vo: 0, day: 1 },
-  { n: '017', rel: 'Retail', fr: 'Racaille Impitoyable', en: 'Ruthless Lowlife', r: 'C', col: 'R', vf: 2, vo: 0, day: 2 },
+  { n: '053', rel: 'Retail', fr: "Bombus d'Occasion", en: 'Secondhand Bombus', r: 'C', col: 'Y', vf: 3, vo: 0, day: 1 },
+  { n: '048', rel: 'Retail', fr: 'Jackie Welles — Marche ou Crève', en: 'Jackie Welles — Ride or Die Choom', r: 'E', col: 'Y', vf: 1, vo: 0, day: 2 },
   { n: '014', rel: 'Retail', fr: 'Meredith Stout — Corpo Sans Pitié', en: 'Meredith Stout — Stone Cold Corpo', r: 'R', col: 'R', vf: 1, vo: 1, day: 2 },
+  { n: '017', rel: 'Retail', fr: 'Racaille Impitoyable', en: 'Ruthless Lowlife', r: 'C', col: 'R', vf: 2, vo: 0, day: 2 },
+  { n: '046', rel: 'Retail', fr: 'Hanako Arasaka — Mise en Cage Dorée', en: 'Hanako Arasaka — In a Gilded Cage', r: 'R', col: 'Y', vf: 1, vo: 0, day: 3 },
   { n: '002', rel: 'Starter Embracing Power', fr: 'Croc Chromé', en: 'Chrome Fang', r: 'C', col: 'R', vf: 0, vo: 1, day: 3 },
   { n: '044', rel: 'Retail', fr: 'Caliber — La Meilleure du Totentanz', en: "Caliber — Totentanz's Top Dog", r: 'R', col: 'Y', vf: 0, vo: 1, day: 3 },
   { n: '029', rel: 'Retail', fr: 'Bonnie et Clyde', en: 'Bonnie and Clyde', r: 'U', col: 'R', vf: 2, vo: 0, day: 4 },
   { n: '006', rel: 'Retail', fr: 'Recrues Des 6th Street', en: '6th Street Recruits', r: 'C', col: 'R', vf: 1, vo: 1, day: 4 },
-  { n: '012', rel: 'Retail', fr: 'Kerry Eurodyne — Le Dernier Rockerboy', en: 'Kerry Eurodyne — The Last Rockerboy', r: 'U', col: 'R', vf: 1, vo: 0, day: 5 }
+  { n: '012', rel: 'Retail', fr: 'Kerry Eurodyne — Le Dernier Rockerboy', en: 'Kerry Eurodyne — The Last Rockerboy', r: 'U', col: 'R', vf: 1, vo: 0, day: 5 },
+  { n: '057', rel: 'Retail', fr: 'Viktor Vektor — Oublie tes Illusions', en: 'Viktor Vektor — Drop Your Illusions', r: 'E', col: 'Y', vf: 1, vo: 0, day: 5 }
 ];
-const DAY = ["Aujourd'hui", 'Hier', 'Il y a 2 jours', 'Il y a 3 jours', 'Il y a 4 jours', 'Il y a 5 jours'];
-const RORDER = { C: 0, U: 1, R: 2, E: 3, S: 4, IL: 5 };
+const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { lang: 'all', dups: false, sort: 'added', dir: 1 }; }
+  constructor(props) { super(props); this.state = { lang: 'all', dups: false, sort: 'recent', query: '', size: 180 }; }
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
-    const s = this.state;
+    const s = this.state; const q = norm(s.query.trim());
     const qtyOf = (o) => (s.lang === 'fr' ? o.vf : (s.lang === 'en' ? o.vo : o.vf + o.vo));
-    let list = OWNED.filter((o) => qtyOf(o) > 0);
-    if (s.dups) list = list.filter((o) => qtyOf(o) > 1);
     const nameOf = (o) => (s.lang === 'en' ? o.en : o.fr);
-    const KEY = {
-      name: (a, b) => nameOf(a).localeCompare(nameOf(b), 'fr'), rel: (a, b) => a.rel.localeCompare(b.rel, 'fr'),
-      n: (a, b) => a.n.localeCompare(b.n), r: (a, b) => RORDER[a.r] - RORDER[b.r],
-      vf: (a, b) => a.vf - b.vf, vo: (a, b) => a.vo - b.vo, added: (a, b) => a.day - b.day
-    };
-    const sorted = list.slice().sort((a, b) => KEY[s.sort](a, b) * s.dir);
+    let list = OWNED.filter((o) => qtyOf(o) > 0 && (!q || norm(o.fr).includes(q) || norm(o.en).includes(q)));
+    if (s.dups) list = list.filter((o) => qtyOf(o) > 1);
+    const sorted = list.slice();
+    if (s.sort === 'number') sorted.sort((a, b) => a.n.localeCompare(b.n));
+    else if (s.sort === 'name') sorted.sort((a, b) => nameOf(a).localeCompare(nameOf(b), 'fr'));
+    else if (s.sort === 'rarity') sorted.sort((a, b) => RAR[b.r][2] - RAR[a.r][2]);
+    else if (s.sort === 'qty') sorted.sort((a, b) => qtyOf(b) - qtyOf(a));
+    else sorted.sort((a, b) => a.day - b.day);
     let copies = 0; list.forEach((o) => { copies += qtyOf(o); });
-    const rows = sorted.map((o) => ({
-      name: nameOf(o), other: s.lang === 'en' ? o.fr : o.en, rel: o.rel, n: o.n, rLabel: RAR[o.r][0], rColor: RAR[o.r][1],
-      stripe: STRIPE[o.col], vf: o.vf || '—', vo: o.vo || '—', added: DAY[o.day], hasExtra: s.dups, extra: qtyOf(o) - 1
-    }));
-    const COLS = [['name', 'Carte', 'left'], ['rel', 'Tirage', 'left'], ['n', 'N°', 'left'], ['r', 'Rareté', 'left'], ['vf', 'VF', 'right'], ['vo', 'VO', 'right'], ['added', 'Ajoutée', 'left']];
-    const cols = COLS.map(([id, label, align]) => {
-      const on = s.sort === id;
+    const cards = sorted.map((o) => {
+      const badges = [];
+      if (s.lang !== 'en' && o.vf > 0) badges.push({ label: 'VF ×' + o.vf, color: '#FFB067' });
+      if (s.lang !== 'fr' && o.vo > 0) badges.push({ label: 'VO ×' + o.vo, color: '#8FB4FF' });
+      const name = nameOf(o);
       return {
-        label, align, fg: on ? '#ECEEF3' : '#A3AAB9', arrow: on ? (s.dir === 1 ? ' ↑' : ' ↓') : '',
-        ariaSort: on ? (s.dir === 1 ? 'ascending' : 'descending') : 'none',
-        pick: () => this.setState({ sort: id, dir: on ? -s.dir : 1 })
+        name, shortName: name.split(' — ')[0], meta: o.rel + ' · #' + o.n, stripe: STRIPE[o.col], rShort: RAR[o.r][0], rColor: RAR[o.r][1],
+        badges, hasExtra: s.dups, extra: qtyOf(o) - 1, aria: 'Ouvrir ' + name + ', ' + o.rel + ' numéro ' + o.n
       };
     });
     const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
@@ -159,13 +172,16 @@ class Component extends DCLogic {
     const groups = [
       { title: 'Set', options: ['Welcome to Night City'] },
       { title: 'Tirage', options: ['Retail', 'Beta', 'Starters', 'Démos', 'Promos'] },
-      { title: 'Rareté', options: ['Commune', 'Peu commune', 'Rare', 'Épique', 'Secrète', 'Iconic'] },
+      { title: 'Rareté', options: ['Commune', 'Peu commune', 'Rare', 'Épique', 'Secrète', 'Iconic', 'Nova Rare'] },
       { title: 'Type', options: ['Legend', 'Unit', 'Gear', 'Program'] },
       { title: 'Couleur', options: ['Rouge', 'Jaune', 'Bleu', 'Vert'] }
     ];
     return {
-      accent, rows, cols, langs, groups,
+      accent, cards, langs, groups, query: s.query, tileMin: s.size, empty: cards.length === 0,
       summary: copies + ' exemplaires · ' + list.length + ' impressions',
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      onSort: (e) => this.setState({ sort: e.target.value }),
+      onSize: (e) => this.setState({ size: Number(e.target.value) }),
       dupsChecked: s.dups ? 'true' : 'false', dupsJustify: s.dups ? 'flex-end' : 'flex-start', dupsTrack: s.dups ? accent : '#3A4152',
       toggleDups: () => this.setState({ dups: !s.dups })
     };

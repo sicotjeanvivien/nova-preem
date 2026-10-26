@@ -1,11 +1,14 @@
 import type { Printing, Rarity, Release } from "./catalog.ts";
 import type { CatalogIndex } from "./catalogIndex.ts";
 import type { CollectionEntry } from "./collection.ts";
+import { normalizeText } from "./search.ts";
 import type { Variant } from "./variants.ts";
 
-// The Collection tab (docs/app-spec.md §5.5, §5.7): what is owned, filtered and sorted.
+// The Collection tab (docs/app-spec.md §5.5, §5.7): a gallery of what is owned, filtered and sorted.
 
 export interface CollectionFilters {
+  /** Filter by name, French or English, without accents. */
+  query: string;
   /** Only this language (VF / VO), or every language. */
   language: string | null;
   /** Only printings above the duplicate threshold (spec §5.5). */
@@ -19,21 +22,24 @@ export interface CollectionFilters {
   colors: string[];
 }
 
-export const NO_FILTERS: CollectionFilters = { language: null, duplicates: false, sets: [], releases: [], rarities: [], types: [], colors: [] };
+export const NO_FILTERS: CollectionFilters = { query: "", language: null, duplicates: false, sets: [], releases: [], rarities: [], types: [], colors: [] };
 
-export type CollectionSortKey = "recent" | "number" | "name" | "quantity" | "release" | "rarity" | `quantity-${string}`;
-export type SortDirection = "asc" | "desc";
-export interface CollectionSort {
-  key: CollectionSortKey;
-  direction: SortDirection;
+/**
+ * Sorts of the gallery (spec §5.7): recent entries first (default), number,
+ * name (French order), rarity (rarest first), quantity (largest first).
+ */
+export type CollectionSort = "recent" | "number" | "name" | "rarity" | "quantity";
+export const COLLECTION_SORTS: CollectionSort[] = ["recent", "number", "name", "rarity", "quantity"];
+export const DEFAULT_SORT: CollectionSort = "recent";
+
+/** Number of active filters, shown on the mobile "Filtres" button (the name filter has its own field). */
+export function activeFilterCount(filters: CollectionFilters): number {
+  return (
+    (filters.language ? 1 : 0) +
+    (filters.duplicates ? 1 : 0) +
+    [filters.sets, filters.releases, filters.rarities, filters.types, filters.colors].filter((list) => list.length > 0).length
+  );
 }
-
-/** Natural direction of each sort: most recent and largest quantities first, names and numbers ascending. */
-export function defaultDirection(key: CollectionSortKey): SortDirection {
-  return key === "recent" || key.startsWith("quantity") ? "desc" : "asc";
-}
-
-export const DEFAULT_SORT: CollectionSort = { key: "recent", direction: "desc" };
 
 /**
  * Release filter (same groups as the set page tabs): a main release on its own
@@ -79,12 +85,17 @@ export function collectionRows(
     byVariant.set(printing.variantKey, list);
   }
 
+  const words = normalizeText(filters.query).split(/\s+/).filter(Boolean);
   const rows: CollectionRow[] = [];
   for (const [key, list] of byVariant) {
     const first = list[0]!.printing;
     const card = index.cards.get(first.cardId);
     const release = index.releases.get(first.releaseId);
     if (!card || !release) continue;
+    if (words.length > 0) {
+      const names = Object.values(card.name).map(normalizeText);
+      if (!names.some((name) => words.every((word) => name.includes(word)))) continue;
+    }
     const rarity = index.rarities.get(first.rarityId);
     if (filters.sets.length > 0 && !filters.sets.includes(release.setId)) continue;
     if (filters.releases.length > 0 && !filters.releases.includes(releaseFilterKey(release))) continue;
@@ -141,39 +152,31 @@ export function sortRows(
   const byNumber = (a: CollectionRow, b: CollectionRow) =>
     a.variant.release.order - b.variant.release.order || compare(a.variant.sortKey, b.variant.sortKey);
   const primary = (a: CollectionRow, b: CollectionRow): number => {
-    switch (sort.key) {
+    switch (sort) {
       case "recent":
-        return compare(a.lastAddedAt, b.lastAddedAt);
+        return compare(b.lastAddedAt, a.lastAddedAt);
       case "number":
         return byNumber(a, b);
       case "name":
         return compareNames(name(a), name(b));
-      case "quantity":
-        return a.copies - b.copies;
-      case "release":
-        return a.variant.release.order - b.variant.release.order;
       case "rarity":
-        return (a.variant.rarity?.order ?? Infinity) - (b.variant.rarity?.order ?? Infinity);
-      default: {
-        const language = sort.key.slice("quantity-".length);
-        return quantityIn(a, language) - quantityIn(b, language);
-      }
+        return (b.variant.rarity?.order ?? -1) - (a.variant.rarity?.order ?? -1);
+      case "quantity":
+        return b.copies - a.copies;
     }
   };
-  const sign = sort.direction === "asc" ? 1 : -1;
-  return [...rows].sort((a, b) => sign * primary(a, b) || byNumber(a, b));
+  return [...rows].sort((a, b) => primary(a, b) || byNumber(a, b));
 }
 
 // URL parameters (the state survives a visit to a card page, spec §5.9).
 
 const LIST_PARAMS = { sets: "set", releases: "tirage", rarities: "rarete", types: "type", colors: "couleur" } as const;
-const SORT_PARAMS: Record<string, CollectionSortKey> = {
+const SORT_PARAMS: Record<string, CollectionSort> = {
   recents: "recent",
   numero: "number",
   nom: "name",
-  quantite: "quantity",
-  tirage: "release",
   rarete: "rarity",
+  quantite: "quantity",
 };
 
 /** URL parameters as plain key → value pairs (the domain does not depend on browser APIs). */
@@ -182,6 +185,7 @@ export type Params = Readonly<Record<string, string | undefined>>;
 export function parseCollectionParams(params: Params): { filters: CollectionFilters; sort: CollectionSort } {
   const list = (key: string) => params[key]?.split(",").filter(Boolean) ?? [];
   const filters: CollectionFilters = {
+    query: params.q ?? "",
     language: params.langue ?? null,
     duplicates: params.doublons === "1",
     sets: list(LIST_PARAMS.sets),
@@ -190,23 +194,18 @@ export function parseCollectionParams(params: Params): { filters: CollectionFilt
     types: list(LIST_PARAMS.types),
     colors: list(LIST_PARAMS.colors),
   };
-  const sortParam = params.tri ?? "";
-  const key: CollectionSortKey = SORT_PARAMS[sortParam] ?? (sortParam.startsWith("quantite-") ? `quantity-${sortParam.slice(9)}` : "recent");
-  const order = params.ordre;
-  return { filters, sort: { key, direction: order === "asc" || order === "desc" ? order : defaultDirection(key) } };
+  return { filters, sort: SORT_PARAMS[params.tri ?? ""] ?? DEFAULT_SORT };
 }
 
 export function collectionParams(filters: CollectionFilters, sort: CollectionSort): Record<string, string> {
   const params: Record<string, string> = {};
+  if (filters.query) params.q = filters.query;
   if (filters.language) params.langue = filters.language;
   if (filters.duplicates) params.doublons = "1";
   for (const [field, key] of Object.entries(LIST_PARAMS) as [keyof typeof LIST_PARAMS, string][]) {
     if (filters[field].length > 0) params[key] = filters[field].join(",");
   }
-  if (sort.key !== DEFAULT_SORT.key || sort.direction !== DEFAULT_SORT.direction) {
-    params.tri = Object.entries(SORT_PARAMS).find(([, value]) => value === sort.key)?.[0] ?? `quantite-${sort.key.slice("quantity-".length)}`;
-    if (sort.direction !== defaultDirection(sort.key)) params.ordre = sort.direction;
-  }
+  if (sort !== DEFAULT_SORT) params.tri = Object.entries(SORT_PARAMS).find(([, value]) => value === sort)![0];
   return params;
 }
 
