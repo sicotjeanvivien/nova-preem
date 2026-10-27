@@ -59,8 +59,10 @@ export default defineConfig(({ mode }) => {
         },
       }),
     ],
-    server: { port: 5173, strictPort: true },
-    preview: { port: 4173, strictPort: true },
+    // IPv4 loopback: WSL forwards it to Windows' 127.0.0.1, which the USB port forwarding
+    // to a phone (chrome://inspect, adb reverse) connects to. Not reachable from the network.
+    server: { host: "127.0.0.1", port: 5173, strictPort: true },
+    preview: { host: "127.0.0.1", port: 4173, strictPort: true },
   };
 });
 
