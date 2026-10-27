@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { indexCatalog } from "../../src/domain/catalogIndex.ts";
 import {
+  completedReleases,
   masterBreakdown,
   masterSet,
   percentFloor,
@@ -12,6 +14,16 @@ import {
 import { index, printingOf } from "../helpers-catalog.ts";
 
 const none = new Map<string, number>();
+
+/** One printing of each variant of the release, alternating languages when it has several. */
+function ownAll(releaseId: string, languages: readonly string[] = ["en"]) {
+  const byNumber = Map.groupBy(index.printingsByRelease.get(releaseId) ?? [], (printing) => printing.collectorNumber);
+  return [...byNumber.values()].map((printings, i) => {
+    const wanted = languages[i % languages.length];
+    return printings.find((printing) => printing.language === wanted) ?? printings[0]!;
+  });
+}
+const quantitiesOf = (...printings: { id: string }[][]) => new Map(printings.flat().map((printing) => [printing.id, 1]));
 
 describe("completion (spec §5.3)", () => {
   it("counts the playable set over the counted groups", () => {
@@ -40,6 +52,26 @@ describe("completion (spec §5.3)", () => {
     expect(releaseVariants(index, ["wnc-beta"], new Map([[iconic.id, 1]]))).toEqual({ owned: 1, total: 172 });
     expect(releaseVariants(index, ["wnc-retail"], new Map([[iconic.id, 1]])).owned).toBe(0);
     expect(releaseInLanguage(index, "wnc-beta", "fr", none)).toBeNull();
+  });
+
+  it("counts the completed releases of a set, all groups, over the releases that have printings", () => {
+    expect(completedReleases(index, "wnc", none)).toEqual({ owned: 0, total: 17 });
+    // Judge Promos (promo, not a counted group) and the Merc demo deck: both count.
+    expect(completedReleases(index, "wnc", quantitiesOf(ownAll("judge-promos"), ownAll("merc-demo")))).toEqual({ owned: 2, total: 17 });
+  });
+
+  it("completes a release when every variant is owned in any language", () => {
+    const mixed = ownAll("wnc-retail", ["fr", "en"]);
+    expect(new Set(mixed.map((printing) => printing.language))).toEqual(new Set(["fr", "en"]));
+    expect(completedReleases(index, "wnc", quantitiesOf(mixed)).owned).toBe(1);
+    // One variant missing: not completed.
+    expect(completedReleases(index, "wnc", quantitiesOf(mixed.slice(1))).owned).toBe(0);
+  });
+
+  it("ignores a release without any printing, as the releases page does", () => {
+    const retail = index.releases.get("wnc-retail")!;
+    const withEmpty = indexCatalog({ ...index.catalog, releases: [...index.catalog.releases, { ...retail, id: "wnc-empty" }] });
+    expect(completedReleases(withEmpty, "wnc", none).total).toBe(17);
   });
 
   it("rounds percentages down", () => {

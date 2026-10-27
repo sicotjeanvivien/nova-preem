@@ -26,7 +26,8 @@ const fr = {
   "sets.eyebrow": ({ order }) => `Set ${order}`,
   "sets.releases": ({ count }, plural) => `${count} ${plural(Number(count)) === "one" ? "tirage" : "tirages"}`,
   "sets.cards": ({ count }, plural) => `${count} ${plural(Number(count)) === "one" ? "carte" : "cartes"}`,
-  "sets.ratioCards": ({ owned, total }) => `${owned} / ${total} cartes`,
+  "sets.ratioReleases": ({ owned, total }, plural) =>
+    `${owned} / ${total} ${plural(Number(total)) === "one" ? "tirage complété" : "tirages complétés"}`,
   "sets.ratio": ({ owned, total }) => `${owned} / ${total}`,
   "group.starter": "Starters",
   "group.demo": "Démos",
@@ -322,7 +323,8 @@ const en: Record<MessageKey, Message> = {
   "sets.eyebrow": ({ order }) => `Set ${order}`,
   "sets.releases": ({ count }, plural) => `${count} ${plural(Number(count)) === "one" ? "release" : "releases"}`,
   "sets.cards": ({ count }, plural) => `${count} ${plural(Number(count)) === "one" ? "card" : "cards"}`,
-  "sets.ratioCards": ({ owned, total }) => `${owned} / ${total} cards`,
+  "sets.ratioReleases": ({ owned, total }, plural) =>
+    `${owned} / ${total} ${plural(Number(total)) === "one" ? "release completed" : "releases completed"}`,
   "sets.ratio": ({ owned, total }) => `${owned} / ${total}`,
   "group.starter": "Starters",
   "group.demo": "Demos",

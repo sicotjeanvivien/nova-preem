@@ -44,6 +44,19 @@ export function releaseVariants(index: CatalogIndex, releaseIds: readonly string
   return { owned: variants.filter((variant) => isVariantOwned(variant, quantities)).length, total: variants.length };
 }
 
+/**
+ * Releases of the set with at least one printing (the tiles of its page, all groups),
+ * and those whose variants are all owned in any language.
+ */
+export function completedReleases(index: CatalogIndex, setId: string, quantities: Quantities): Progress {
+  const releases = releasesOfSet(index, setId).filter((release) => index.printingsByRelease.has(release.id));
+  const completed = releases.filter((release) => {
+    const { owned, total } = releaseVariants(index, [release.id], quantities);
+    return owned === total;
+  });
+  return { owned: completed.length, total: releases.length };
+}
+
 /** Printings of a release in one language; null if the release does not exist in that language. */
 export function releaseInLanguage(index: CatalogIndex, releaseId: string, language: string, quantities: Quantities): Progress | null {
   const printings = (index.printingsByRelease.get(releaseId) ?? []).filter((printing) => printing.language === language);

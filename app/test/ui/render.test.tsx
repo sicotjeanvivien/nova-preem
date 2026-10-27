@@ -2,7 +2,7 @@ import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { I18nProvider } from "../../src/i18n/i18n.tsx";
 import { FirstLaunch } from "../../src/ui/FirstLaunch.tsx";
-import { printingOf } from "../helpers-catalog.ts";
+import { index, printingOf } from "../helpers-catalog.ts";
 import { entry, TestApp, text } from "./harness.tsx";
 
 // Server-side rendering of the screens with the real catalog: no browser needed.
@@ -26,16 +26,32 @@ describe("app shell", () => {
 });
 
 describe("Sets, level 1: set list", () => {
-  it("shows a tile per set with the cards owned, its releases and a name filter", () => {
+  it("shows a tile per set with its completed releases and a name filter", () => {
     const owned = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
     const content = text(render({ path: "/sets", entries: [entry(owned.id, 2)] }));
     expect(content).toMatch(/Sets 1 set/);
-    expect(content).toContain("Welcome to Night City 1 / 151 cartes · 17 tirages");
+    expect(content).toContain("Welcome to Night City 0 / 17 tirages complétés");
     expect(render({ path: "/sets" })).toContain('placeholder="Filtrer par nom"');
   });
 
+  it("counts as completed exactly the release tiles at 100 % on the set page", () => {
+    const releases = ["judge-promos", "night-city-showdown-s1", "set1-promos"];
+    const entries = releases.flatMap((id) => (index.printingsByRelease.get(id) ?? []).map((printing) => entry(printing.id, 1)));
+    // A nearly complete release (all but one variant) stays at 99 % and is not counted.
+    const retail = (index.printingsByRelease.get("wnc-retail") ?? []).filter((printing) => printing.language === "en");
+    entries.push(...retail.slice(1).map((printing) => entry(printing.id, 1)));
+    const setsHtml = render({ path: "/sets", entries });
+    const releasesHtml = render({ path: "/sets/wnc", entries });
+    expect(count(releasesHtml, "release-tile__percent release-tile__percent--complete")).toBe(3);
+    expect(text(releasesHtml)).toContain("Retail 167 / 168 VO VF 99 %");
+    expect(text(setsHtml)).toContain("Welcome to Night City 3 / 17 tirages complétés");
+    expect(count(releasesHtml, "release-tile\"")).toBe(17);
+    // The bar has the same ratio: 3 / 17 = 17 % (rounded down).
+    expect(setsHtml).toMatch(/aria-valuenow="17"/);
+  });
+
   it("is translated into English", () => {
-    expect(text(render({ path: "/sets", language: "en" }))).toContain("Welcome to Night City 0 / 151 cards · 17 releases");
+    expect(text(render({ path: "/sets", language: "en" }))).toContain("Welcome to Night City 0 / 17 releases completed");
   });
 });
 
