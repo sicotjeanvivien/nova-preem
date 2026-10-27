@@ -17,11 +17,12 @@ describe("app shell", () => {
     expect(links.map((l) => /href="([^"]+)"/.exec(l)![1])).toEqual(["/sets", "/collection", "/recherche", "/stats", "/reglages"]);
     expect(links[0]).toContain('aria-current="page"');
     expect(text(html)).toMatch(/Sets Collection Recherche Stats Réglages/);
-    expect(text(html)).toContain("Fan-made, non officiel");
+    expect(text(html)).toContain("Fan-made, non officiel ni approuvé ni soutenu par WeirdCo ou CD PROJEKT RED.");
   });
 
   it("shows the legal notice at the bottom of the settings", () => {
-    expect(text(render({ path: "/reglages" }))).toContain("outil de fan, non officiel");
+    const html = render({ path: "/reglages" });
+    expect(html).toMatch(/<p class="settings__legal"><span class="legal-line">[^<]*ni approuvé ni soutenu[^<]*<\/span><span class="legal-line">Noms, textes et images[^<]*ayants droit\.<\/span><\/p>/);
   });
 });
 

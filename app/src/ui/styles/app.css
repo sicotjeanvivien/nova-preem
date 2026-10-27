@@ -179,6 +179,11 @@ h2 {
   text-align: center;
 }
 
+/* The legal notices are written on two lines. */
+.legal-line {
+  display: block;
+}
+
 /* ---------- Generic controls ---------- */
 
 .icon-button {

@@ -40,6 +40,7 @@ export function AppLayout() {
         <div className="nav__footer">
           <StatusText />
           <span>{t("legal.fanMade")}</span>
+          <span>{t("legal.notEndorsed")}</span>
         </div>
       </nav>
       <main className="app__main">

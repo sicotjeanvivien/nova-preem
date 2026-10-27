@@ -86,7 +86,12 @@ export function SetsScreen() {
             );
           })}
         </div>
-        {!isDesktop && <p className="screen__legal">{t("legal.footer")}</p>}
+        {!isDesktop && (
+          <p className="screen__legal">
+            <span className="legal-line">{t("legal.fanMade")}</span>
+            <span className="legal-line">{t("legal.notEndorsed")}</span>
+          </p>
+        )}
       </div>
     </>
   );

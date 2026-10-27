@@ -256,7 +256,10 @@ export function SettingsScreen() {
           </div>
         </Section>
       </div>
-      <p className="settings__legal">{t("legal.settings")}</p>
+      <p className="settings__legal">
+        <span className="legal-line">{t("legal.settings")}</span>
+        <span className="legal-line">{t("legal.settingsRights")}</span>
+      </p>
 
       {message && <Toast key={message.id} text={message.text} />}
     </div>
