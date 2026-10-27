@@ -41,7 +41,7 @@ input::placeholder{color:#8B92A3}
 </div>
 <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: 16px; font-weight: 600">Welcome to Night City</span>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">{{owned}} / 151 cartes · 17 tirages</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">{{done}} / {{total}} tirages complétés</span>
 <div style="height: 5px; background: #232838; border-radius: 3px; overflow: hidden"><div style="height: 100%; width: {{pct}}%; background: {{accent}}"></div></div>
 </div>
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3AAB9" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
@@ -76,8 +76,8 @@ input::placeholder{color:#8B92A3}
 class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
-    const owned = 104;
-    return { accent, owned, pct: Math.floor((owned / 151) * 100) };
+    const done = 2; const total = 17;
+    return { accent, done, total, pct: Math.floor((done / total) * 100) };
   }
 }
 </script>

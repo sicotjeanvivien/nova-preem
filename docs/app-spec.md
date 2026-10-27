@@ -33,7 +33,7 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 
 ### 2.1 Sets : quatre niveaux (modèle UrzaGatherer : Blocs → extensions → cartes)
 
-1. **Liste des sets** (`/sets`) : une tuile par set (icône, nom, cartes possédées / total, nombre de tirages, barre de progression), avec un champ de filtre par nom. Un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration).
+1. **Liste des sets** (`/sets`) : une tuile par set (icône, nom, **tirages complétés / tirages** — ex. « 2 / 17 tirages complétés » —, barre de progression de la même proportion), avec un champ de filtre par nom. Un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration).
 2. **Tirages du set** (`/sets/:setId`) : **une tuile par tirage** (Retail, Beta, chaque starter, chaque deck démo, chaque série de promos), regroupées sous les titres « Set principal », « Starters », « Decks démo », « Promos » (groupes `main`, `starter`, `demo`, `promo`), dans l'ordre `release.order`. Chaque tuile : bandeau avec le nom du tirage et un ruban vertical indiquant le groupe, variantes possédées / total, pourcentage, barre de progression, langues disponibles (VO, VF). Champ de filtre par nom. Un tirage sans impression n'est pas affiché.
 3. **Cartes d'un tirage** (`/sets/:setId/:releaseId`) : la grille des cartes du tirage, dans l'ordre des numéros. C'est l'écran de **saisie** (§5.1) : chaque vignette a ses boutons **− quantité +** ; un clic sur l'image ou le nom ouvre la page carte. Filtres : toutes, manquantes, possédées, doublons ; « Copier la liste » avec le filtre Manquantes.
 4. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis les cartes d'un tirage, la Collection ou la Recherche (§5.9).
@@ -138,7 +138,9 @@ Une ligne par entrée, séparateur `;` (Excel FR), UTF-8 avec BOM : `set;tirage;
 
 ### 5.3 Complétion
 
-Les **groupes comptés** sont réglables (défaut : `main` + `starter`). Ils s'appliquent aux calculs « set jouable » et « master set » ; le calcul « par tirage » porte toujours sur le tirage choisi.
+Les **groupes comptés** sont réglables (défaut : `main` + `starter`). Ils s'appliquent aux calculs « set jouable » et « master set » (onglet Stats) ; le calcul « par tirage » porte toujours sur le tirage choisi, et « tirages complétés » sur tous les tirages du set.
+
+Chaque niveau de Sets résume celui d'en dessous : la liste des sets compte des **tirages** (pas des cartes), la page des tirages compte des **variantes**. Le nombre de cartes du set (151 pour Welcome to Night City, comme sur le site officiel) n'est pas une mesure de complétion de la liste des sets.
 
 | Mesure | Dénominateur | Numérateur |
 |---|---|---|
@@ -146,6 +148,7 @@ Les **groupes comptés** sont réglables (défaut : `main` + `starter`). Ils s'a
 | **Master set** | impressions du set dans les groupes comptés (chaque langue compte) | impressions possédées |
 | **Par tirage, toutes langues** | variantes du tirage | variantes possédées toutes langues |
 | **Par tirage, en VF / en VO** | impressions du tirage dans cette langue | impressions possédées dans cette langue |
+| **Tirages complétés** (tuile d'un set, liste des sets) | tirages du set ayant au moins une impression (tous groupes : ce sont les tuiles du niveau 2) | tirages dont la mesure « par tirage, toutes langues » est à 100 % |
 
 Conséquences :
 - Une impression **exclusive à un tirage** (ex. Iconic `β168`, Beta uniquement) n'entre que dans le dénominateur de ce tirage : elle n'est jamais « manquante » ailleurs.
