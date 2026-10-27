@@ -1,21 +1,22 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { localize } from "../../domain/catalog.ts";
-import { playableSet } from "../../domain/completion.ts";
+import { completedReleases } from "../../domain/completion.ts";
 import { normalizeText } from "../../domain/search.ts";
-import { RELEASE_GROUP_ORDER, summarizeSets } from "../../domain/sets.ts";
+import { summarizeSets } from "../../domain/sets.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
 import { ChevronRightIcon, LogoIcon, SetIcon } from "../icons.tsx";
 import { ProgressBar } from "../ProgressBar.tsx";
+import { SET_LOGOS } from "../setLogos.ts";
 import { StatusPill } from "../Status.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 /**
- * Sets, level 1 (Main / WebSetList, spec §2.1): one tile per set with the
- * cards owned, the number of releases and a progress bar; filter by name.
+ * Sets, level 1 (Main / WebSetList, spec §2.1): one tile per set with its
+ * completed releases and a progress bar of the same ratio; filter by name.
  */
 export function SetsScreen() {
   const { index } = useApp();
@@ -67,18 +68,17 @@ export function SetsScreen() {
           </>
         )}
         <div className="set-tiles">
-          {visible.map(({ set, releaseCount }) => {
-            const progress = playableSet(index, set.id, RELEASE_GROUP_ORDER, quantities);
+          {visible.map(({ set }) => {
+            const progress = completedReleases(index, set.id, quantities);
+            const logo = SET_LOGOS[set.id];
             return (
               <Link key={set.id} to={`/sets/${set.id}`} className="set-tile">
-                <span className="set-tile__icon">
-                  <SetIcon width={isDesktop ? 32 : 30} height={isDesktop ? 32 : 30} />
+                <span className={`set-tile__icon ${logo ? "set-tile__icon--logo" : ""}`}>
+                  {logo ? <img src={logo} alt="" className="set-tile__logo" /> : <SetIcon width={isDesktop ? 32 : 30} height={isDesktop ? 32 : 30} />}
                 </span>
                 <span className="set-tile__body">
                   <span className="set-tile__name">{localize(set.name, language)}</span>
-                  <span className="set-tile__counts">
-                    {t("sets.ratioCards", progress)} · {t("sets.releases", { count: releaseCount })}
-                  </span>
+                  <span className="set-tile__counts">{t("sets.ratioReleases", progress)}</span>
                   <ProgressBar progress={progress} color="var(--color-accent)" className="set-tile__bar" label={localize(set.name, language)} />
                 </span>
                 {!isDesktop && <ChevronRightIcon width={18} height={18} className="set-tile__chevron" />}
@@ -86,7 +86,12 @@ export function SetsScreen() {
             );
           })}
         </div>
-        {!isDesktop && <p className="screen__legal">{t("legal.footer")}</p>}
+        {!isDesktop && (
+          <p className="screen__legal">
+            <span className="legal-line">{t("legal.fanMade")}</span>
+            <span className="legal-line">{t("legal.notEndorsed")}</span>
+          </p>
+        )}
       </div>
     </>
   );

@@ -51,7 +51,7 @@ describe("catalog update (States 3)", () => {
     expect(dialog()).toBeNull();
     expect(catalogStore.saves).toBe(1);
     expect(catalogStore.stored?.manifest.version).toBe("2026-11-02.1");
-    expect(container.textContent).toContain("152 cartes");
+    expect(container.textContent).toContain("0 / 18 tirages complétés");
     expect(store.writes).toEqual([]);
   });
 
@@ -62,7 +62,7 @@ describe("catalog update (States 3)", () => {
     await act(async () => button("Plus tard", dialog()!).click());
     expect(dialog()).toBeNull();
     expect(catalogStore.saves).toBe(0);
-    expect(container.textContent).toContain("151 cartes");
+    expect(container.textContent).toContain("0 / 17 tirages complétés");
   });
 
   it("opens from the settings' Check button", async () => {

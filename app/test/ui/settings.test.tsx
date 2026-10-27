@@ -22,7 +22,7 @@ describe("Settings, server rendering", () => {
     expect(content).toMatch(/Affichage Noms des cartes Langue de saisie Toujours VF Toujours VO Langue de l'interface Français English/);
     expect(content).toMatch(/Données Catalogue des cartes v2026-10-26\.\d+ · 151 cartes · hors-ligne Vérifier Exporter Importer CSV/);
     expect(content).toMatch(/Synchronisation Google Drive Après le MVP Bientôt/);
-    expect(content).toContain("Nova Preem est un outil de fan, non officiel.");
+    expect(content).toContain("Nova Preem est un outil de fan, non officiel, ni approuvé ni soutenu par WeirdCo ou CD PROJEKT RED.");
   });
 });
 
