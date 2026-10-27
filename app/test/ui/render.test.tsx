@@ -50,6 +50,10 @@ describe("Sets, level 1: set list", () => {
     expect(setsHtml).toMatch(/aria-valuenow="17"/);
   });
 
+  it("shows the logo of the set on its tile, as decoration (the name is written next to it)", () => {
+    expect(render({ path: "/sets" })).toMatch(/<span class="set-tile__icon set-tile__icon--logo"><img src="[^"]*wnc[^"]*\.png" alt="" class="set-tile__logo"\/>/);
+  });
+
   it("is translated into English", () => {
     expect(text(render({ path: "/sets", language: "en" }))).toContain("Welcome to Night City 0 / 17 releases completed");
   });

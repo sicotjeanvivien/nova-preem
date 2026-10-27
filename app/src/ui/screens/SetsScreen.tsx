@@ -10,6 +10,7 @@ import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
 import { ChevronRightIcon, LogoIcon, SetIcon } from "../icons.tsx";
 import { ProgressBar } from "../ProgressBar.tsx";
+import { SET_LOGOS } from "../setLogos.ts";
 import { StatusPill } from "../Status.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
@@ -69,10 +70,11 @@ export function SetsScreen() {
         <div className="set-tiles">
           {visible.map(({ set }) => {
             const progress = completedReleases(index, set.id, quantities);
+            const logo = SET_LOGOS[set.id];
             return (
               <Link key={set.id} to={`/sets/${set.id}`} className="set-tile">
-                <span className="set-tile__icon">
-                  <SetIcon width={isDesktop ? 32 : 30} height={isDesktop ? 32 : 30} />
+                <span className={`set-tile__icon ${logo ? "set-tile__icon--logo" : ""}`}>
+                  {logo ? <img src={logo} alt="" className="set-tile__logo" /> : <SetIcon width={isDesktop ? 32 : 30} height={isDesktop ? 32 : 30} />}
                 </span>
                 <span className="set-tile__body">
                   <span className="set-tile__name">{localize(set.name, language)}</span>

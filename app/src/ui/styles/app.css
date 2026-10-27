@@ -569,6 +569,16 @@ h2 {
   color: var(--color-text-secondary);
 }
 
+.set-tile__icon--logo {
+  padding: 4px;
+}
+
+.set-tile__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .set-tile__body {
   flex: 1;
   min-width: 0;
