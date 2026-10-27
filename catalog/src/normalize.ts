@@ -171,13 +171,30 @@ function assertUniqueIds(cards: SourceCard[]): void {
 function buildReleases(entries: Entry[], languages: LanguageCode[]): Release[] {
   const editionOrder = new Map(EDITIONS.map((edition, index) => [edition.code, index]));
   const byRelease = groupBy(entries, (entry) => entry.release.id);
+  // Beta ↔ Retail pairs, in both directions, between releases that have printings.
+  const counterparts = new Map<string, string>();
+  for (const { id, retailReleaseId } of RELEASES) {
+    if (!retailReleaseId || !byRelease.has(id) || !byRelease.has(retailReleaseId)) continue;
+    counterparts.set(id, retailReleaseId);
+    counterparts.set(retailReleaseId, id);
+  }
   return [...byRelease.values()].map((list) => {
     const { id, setId, name, group, order } = list[0]!.release;
     const releaseLanguages = new Set(list.map((entry) => entry.printing.language));
     const sourceCodes = [...new Set(list.map((entry) => entry.source.editionCode))].sort(
       (a, b) => (editionOrder.get(a) ?? Infinity) - (editionOrder.get(b) ?? Infinity) || compareStrings(a, b),
     );
-    return { id, setId, name, group, languages: languages.filter((language) => releaseLanguages.has(language)), sourceCodes, order };
+    const counterpartReleaseId = counterparts.get(id);
+    return {
+      id,
+      setId,
+      name,
+      group,
+      languages: languages.filter((language) => releaseLanguages.has(language)),
+      sourceCodes,
+      order,
+      ...(counterpartReleaseId && { counterpartReleaseId }),
+    };
   });
 }
 

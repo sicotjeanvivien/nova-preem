@@ -1,74 +1,99 @@
 import { renderToString } from "react-dom/server";
-import { MemoryRouter, Route, Routes } from "react-router";
 import { describe, expect, it } from "vitest";
-import { catalogSchema, manifestSchema } from "../../src/domain/catalog.ts";
-import { DEFAULT_SETTINGS } from "../../src/domain/settings.ts";
 import { I18nProvider } from "../../src/i18n/i18n.tsx";
-import type { Services } from "../../src/platform/services.ts";
-import { AppContext } from "../../src/ui/AppContext.tsx";
-import { AppLayout } from "../../src/ui/AppLayout.tsx";
 import { FirstLaunch } from "../../src/ui/FirstLaunch.tsx";
-import { SettingsScreen } from "../../src/ui/screens/EmptyScreen.tsx";
-import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
-import { realCatalogText, realManifest } from "../helpers.ts";
+import { printingOf } from "../helpers-catalog.ts";
+import { entry, TestApp, text } from "./harness.tsx";
 
-// Smoke tests: the screens render with the real catalog, without a browser.
+// Server-side rendering of the screens with the real catalog: no browser needed.
 
-const context = {
-  services: {} as Services,
-  catalog: { manifest: manifestSchema.parse(realManifest), catalog: catalogSchema.parse(JSON.parse(realCatalogText)) },
-  settings: DEFAULT_SETTINGS,
-};
-
-function renderAt(path: string, language: "fr" | "en" = "fr") {
-  return renderToString(
-    <I18nProvider language={language}>
-      <AppContext.Provider value={context}>
-        <MemoryRouter initialEntries={[path]}>
-          <Routes>
-            <Route path="/" element={<AppLayout />}>
-              <Route path="sets" element={<SetsScreen />} />
-              <Route path="reglages" element={<SettingsScreen />} />
-            </Route>
-          </Routes>
-        </MemoryRouter>
-      </AppContext.Provider>
-    </I18nProvider>,
-  );
-}
-
-const text = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&#x27;/g, "'").replace(/\s+/g, " ");
+const render = (props: Parameters<typeof TestApp>[0]) => renderToString(<TestApp {...props} />);
+const count = (html: string, className: string) => html.split(`class="${className}`).length - 1;
 
 describe("app shell", () => {
   it("shows the five tabs in order, the current one marked", () => {
-    const html = renderAt("/sets");
-    const links = [...html.matchAll(/<a [^>]*href="([^"]+)"[^>]*>/g)].map((m) => m[0]);
+    const html = render({ path: "/sets" });
+    const links = [...html.matchAll(/<a [^>]*class="nav__link[^"]*"[^>]*>/g)].map((m) => m[0]);
     expect(links.map((l) => /href="([^"]+)"/.exec(l)![1])).toEqual(["/sets", "/collection", "/recherche", "/stats", "/reglages"]);
     expect(links[0]).toContain('aria-current="page"');
     expect(text(html)).toMatch(/Sets Collection Recherche Stats Réglages/);
-    expect(html).toContain('aria-label="Navigation principale"');
     expect(text(html)).toContain("Fan-made, non officiel");
   });
 
-  it("shows the set with the number of cards of the real catalog", () => {
-    const content = text(renderAt("/sets"));
-    expect(content).toContain("Welcome to Night City");
-    expect(content).toContain("17 tirages · 151 cartes · VO et VF");
+  it("shows the legal notice at the bottom of the settings", () => {
+    expect(text(render({ path: "/reglages" }))).toContain("outil de fan, non officiel");
+  });
+});
+
+describe("Sets, level 1: set list", () => {
+  it("shows a tile per set with the cards owned, its releases and a name filter", () => {
+    const owned = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
+    const content = text(render({ path: "/sets", entries: [entry(owned.id, 2)] }));
+    expect(content).toMatch(/Sets 1 set/);
+    expect(content).toContain("Welcome to Night City 1 / 151 cartes · 17 tirages");
+    expect(render({ path: "/sets" })).toContain('placeholder="Filtrer par nom"');
   });
 
   it("is translated into English", () => {
-    const content = text(renderAt("/sets", "en"));
-    expect(content).toContain("17 releases · 151 cards · EN and FR");
-    expect(content).toMatch(/Sets Collection Search Stats Settings/);
+    expect(text(render({ path: "/sets", language: "en" }))).toContain("Welcome to Night City 0 / 151 cards · 17 releases");
+  });
+});
+
+describe("Sets, level 2: releases of a set", () => {
+  it("shows one tile per release, grouped by type, with progress and languages", () => {
+    const owned = printingOf("Chrome Fang", "embracing-power-starter-retail", "en");
+    const content = text(render({ path: "/sets/wnc", entries: [entry(owned.id, 1)] }));
+    expect(content).toMatch(/Sets Welcome to Night City 17 tirages/);
+    expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 168 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
+    expect(content).toMatch(/Starters Starter Welcome to Night City The Heist — Retail 0 \/ 20/);
+    expect(content).toContain("Embracing Power — Retail 1 / 20 VO 5 %");
+    expect(content).toMatch(/Decks démo .*Merc 0 \/ 15 .*Arasaka 0 \/ 14/);
+    expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 VO 0 %/);
   });
 
-  it("shows the legal notice at the bottom of the settings", () => {
-    expect(text(renderAt("/reglages"))).toContain("Outil de fan, non officiel");
+  it("links each tile to the cards of its release", () => {
+    const html = render({ path: "/sets/wnc" });
+    expect(html).toContain('href="/sets/wnc/wnc-retail"');
+    expect(html).toContain('href="/sets/wnc/edgerunner-open-s1"');
+  });
+});
+
+describe("Sets, level 3: cards of a release", () => {
+  it("shows Retail with the VF/VO selector, one tile per variant with − quantity +", () => {
+    const html = render({ path: "/sets/wnc/wnc-retail" });
+    expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 168 variantes possédées/);
+    expect(text(html)).toMatch(/Quantités en VF VO Toutes Manquantes Possédées Doublons/);
+    expect(count(html, "tile ")).toBe(168);
+    expect(html).toContain('aria-label="Ouvrir la carte Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003"');
+    expect(html).toContain('aria-label="Ajouter un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle"');
+    expect(html).toMatch(/aria-label="Retirer un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle" disabled=""/);
+  });
+
+  it("shows Beta without language selector (VO only), with its exclusive Iconics", () => {
+    const html = render({ path: "/sets/wnc/wnc-beta" });
+    expect(text(html)).not.toContain("Quantités en");
+    expect(count(html, "tile ")).toBe(172);
+    expect(text(html)).toContain("β168");
+    expect(html).toContain('aria-label="Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade"');
+  });
+
+  it("filters the missing cards in the language of the quantities and offers to copy them", () => {
+    const johnny = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
+    const chrome = printingOf("Chrome Fang", "wnc-retail", "en");
+    const html = render({ path: "/sets/wnc/wnc-retail?filtre=manquantes", entries: [entry(johnny.id, 1), entry(chrome.id, 1)] });
+    expect(count(html, "tile ")).toBe(167);
+    expect(text(html)).toContain("167 variantes manquantes Copier la liste");
+    // Owned in VO only: missing in VF, with the VO badge on the image.
+    expect(text(html)).toMatch(/008 C VO 1 Croc Chromé − 0 \+/);
+  });
+
+  it("keeps the language from the URL", () => {
+    expect(render({ path: "/sets/wnc/wnc-retail?langue=en" })).toMatch(/aria-pressed="true"[^>]*>VO/);
   });
 });
 
 describe("first launch", () => {
-  const render = (props: Parameters<typeof FirstLaunch>[0]) =>
+  const renderLaunch = (props: Parameters<typeof FirstLaunch>[0]) =>
     renderToString(
       <I18nProvider language="fr">
         <FirstLaunch {...props} />
@@ -76,7 +101,7 @@ describe("first launch", () => {
     );
 
   it("shows the download progress, rounded down", () => {
-    const html = render({ progress: 0.629, error: null, onRetry: () => {} });
+    const html = renderLaunch({ progress: 0.629, error: null, onRetry: () => {} });
     expect(text(html)).toContain("Téléchargement du catalogue");
     expect(html).toMatch(/62\s?%/);
     expect(html).toContain('aria-valuenow="62"');
@@ -84,7 +109,7 @@ describe("first launch", () => {
   });
 
   it("offers to try again after a failure", () => {
-    const html = render({ progress: 0, error: "network", onRetry: () => {} });
+    const html = renderLaunch({ progress: 0, error: "network", onRetry: () => {} });
     expect(text(html)).toContain("Impossible de télécharger le catalogue");
     expect(text(html)).toContain("Réessayer");
   });

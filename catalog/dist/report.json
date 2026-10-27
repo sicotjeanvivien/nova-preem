@@ -222,13 +222,13 @@
     {
       "code": "divergent-rules-text",
       "severity": "warning",
-      "message": "Overwatch — Panam's Gift : textes imprimés différents en « en » (impressions non-Iconic β093, 093)",
+      "message": "Overwatch — Panam's Gift : textes imprimés différents en « en » (impressions non-Iconic 093, β093)",
       "context": {
         "cardId": "78ea68b3-1260-416b-9f88-d6be4586232b",
         "language": "en",
         "printingIds": [
-          "0f825d0d-be91-4f42-9e97-5d87488ee2fc",
-          "336131d1-3bc8-4b39-b893-5fce9be8ce7f"
+          "336131d1-3bc8-4b39-b893-5fce9be8ce7f",
+          "0f825d0d-be91-4f42-9e97-5d87488ee2fc"
         ]
       }
     },

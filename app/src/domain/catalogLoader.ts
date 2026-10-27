@@ -1,4 +1,4 @@
-import { catalogSchema, manifestSchema } from "./catalog.ts";
+import { catalogSchema, manifestSchema, type CatalogManifest } from "./catalog.ts";
 import type { CatalogStore, StoredCatalog } from "./stores.ts";
 
 /** Where the catalog is downloaded from (HTTP in the browser, anything in tests). */
@@ -32,12 +32,11 @@ export interface CatalogDependencies {
 }
 
 /**
- * First launch (spec §6): downloads manifest.json then catalog.json, checks the
- * catalog against the manifest (hash and counts) and its format, then stores it.
- * Nothing is stored if any check fails.
+ * Downloads manifest.json then catalog.json and checks the catalog against the
+ * manifest (hash and counts) and its format. Nothing is stored.
  */
-export async function downloadCatalog(
-  { store, source, hasher }: CatalogDependencies,
+export async function fetchCatalog(
+  { source, hasher }: Pick<CatalogDependencies, "source" | "hasher">,
   onProgress: (fraction: number | null) => void = () => {},
 ): Promise<StoredCatalog> {
   let rawManifest: unknown;
@@ -69,9 +68,32 @@ export async function downloadCatalog(
   if (catalog.data.cards.length !== counts.cards || catalog.data.printings.length !== counts.printings) {
     throw new CatalogError("integrity", "catalog.json does not match its manifest (counts)");
   }
-
-  const stored = { manifest: manifest.data, catalog: catalog.data };
-  await store.save(stored);
   onProgress(1);
+  return { manifest: manifest.data, catalog: catalog.data };
+}
+
+/** First launch (spec §6): downloads and checks the catalog, then stores it. */
+export async function downloadCatalog(
+  deps: CatalogDependencies,
+  onProgress: (fraction: number | null) => void = () => {},
+): Promise<StoredCatalog> {
+  const stored = await fetchCatalog(deps, onProgress);
+  await deps.store.save(stored);
   return stored;
+}
+
+export type CatalogCheck =
+  | { status: "up-to-date" }
+  | { status: "available"; manifest: CatalogManifest }
+  | { status: "error" };
+
+/** Compares the remote manifest with the stored one (spec §6): a different hash means a new catalog. */
+export async function checkCatalogUpdate(source: CatalogSource, current: CatalogManifest): Promise<CatalogCheck> {
+  try {
+    const manifest = manifestSchema.safeParse(await source.fetchManifest());
+    if (!manifest.success) return { status: "error" };
+    return manifest.data.hash === current.hash ? { status: "up-to-date" } : { status: "available", manifest: manifest.data };
+  } catch {
+    return { status: "error" };
+  }
 }

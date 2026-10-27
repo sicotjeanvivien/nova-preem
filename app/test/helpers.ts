@@ -1,13 +1,16 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { CatalogSource, Hasher } from "../src/domain/catalogLoader.ts";
 import type { CatalogStore, StoredCatalog } from "../src/domain/stores.ts";
 
-const CATALOG_DIST = new URL("../../catalog/dist/", import.meta.url);
+// Plain paths: in the happy-dom environment, the global URL class is not Node's.
+const CATALOG_DIST = join(dirname(fileURLToPath(import.meta.url)), "../../catalog/dist");
 
 /** The real catalog produced by the pipeline (catalog/dist/), as served to the app. */
-export const realCatalogText = readFileSync(new URL("catalog.json", CATALOG_DIST), "utf8");
-export const realManifest = JSON.parse(readFileSync(new URL("manifest.json", CATALOG_DIST), "utf8"));
+export const realCatalogText = readFileSync(join(CATALOG_DIST, "catalog.json"), "utf8");
+export const realManifest = JSON.parse(readFileSync(join(CATALOG_DIST, "manifest.json"), "utf8"));
 
 export const nodeHasher: Hasher = {
   async sha256(text) {

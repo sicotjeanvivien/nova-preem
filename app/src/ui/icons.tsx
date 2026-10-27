@@ -63,3 +63,58 @@ export const SettingsIcon = (props: IconProps) => (
     <circle cx="17" cy="18" r="2" />
   </Icon>
 );
+
+export const ChevronLeftIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M15 18l-6-6 6-6" />
+  </Icon>
+);
+
+export const ChevronRightIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M9 6l6 6-6 6" />
+  </Icon>
+);
+
+/** Placeholder of a card image (not downloaded yet, or offline). */
+export const CardPlaceholderIcon = (props: IconProps) => (
+  <Icon strokeWidth={1.5} {...props}>
+    <rect x="5" y="2" width="14" height="20" rx="2" />
+    <path d="M9 8h6M9 12h6" />
+  </Icon>
+);
+
+export const ChevronDownIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M6 9l6 6 6-6" />
+  </Icon>
+);
+
+export const WifiOffIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5" />
+  </Icon>
+);
+
+/** Generic set icon of the mockups (buildings). */
+export const SetIcon = (props: IconProps) => (
+  <Icon strokeWidth={1.4} {...props}>
+    <path d="M3 21V9l5-3v15M8 21V4l6 3v14M14 21V10l7 3v8M2 21h20" />
+  </Icon>
+);
+
+/** "Filtres" button of the mobile Collection. */
+export const FiltersIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 6h16M7 12h10M10 18h4" />
+  </Icon>
+);
+
+/** Art placeholder of a gallery card whose image is not available. */
+export const ImageIcon = (props: IconProps) => (
+  <Icon strokeWidth={1.4} {...props}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <circle cx="9" cy="10" r="2" />
+    <path d="M21 16l-5-5-8 8" />
+  </Icon>
+);

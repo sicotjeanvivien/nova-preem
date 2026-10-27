@@ -30,6 +30,24 @@
   --color-rarity-secret: #ff5c8a;
   --color-rarity-iconic: #f2c94c;
 
+  /* Card color stripes. Red and yellow come from the mockups (which only had
+     those two); blue and green are chosen to match them. */
+  --color-card-red: #e5484d;
+  --color-card-yellow: #e8c547;
+  --color-card-blue: #3e8ef7;
+  --color-card-green: #3fbf7f;
+  --color-card-red-text: #ff8a8e;
+  --color-card-yellow-text: #f2d776;
+  --color-card-blue-text: #8db8ff;
+  --color-card-green-text: #7fd9a8;
+  --color-stepper: #1f2330;
+
+  --color-toast: #262b38;
+  --color-remove-bg: #3a1c25;
+  --color-remove-text: #ff8fab;
+  --color-remove-border: #ff5c8a;
+  --color-selected-pill: #eceef3;
+
   --font-display: "Chakra Petch", sans-serif;
   --font-text: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;

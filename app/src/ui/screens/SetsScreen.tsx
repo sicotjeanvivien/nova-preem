@@ -1,55 +1,92 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { Link } from "react-router";
 import { localize } from "../../domain/catalog.ts";
-import { summarizeSets } from "../../domain/sets.ts";
+import { playableSet } from "../../domain/completion.ts";
+import { normalizeText } from "../../domain/search.ts";
+import { RELEASE_GROUP_ORDER, summarizeSets } from "../../domain/sets.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
-import type { MessageKey } from "../../i18n/messages.ts";
+import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
-import { LogoIcon } from "../icons.tsx";
+import { useCollection } from "../CollectionContext.tsx";
+import { ChevronRightIcon, LogoIcon, SetIcon } from "../icons.tsx";
+import { ProgressBar } from "../ProgressBar.tsx";
 import { StatusPill } from "../Status.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 /**
- * Sets, level 1 (Main / WebSetList). Step 1: the set blocks with their real
- * counts; progress bars and the link to the set page come with step 2.
+ * Sets, level 1 (Main / WebSetList, spec §2.1): one tile per set with the
+ * cards owned, the number of releases and a progress bar; filter by name.
  */
 export function SetsScreen() {
-  const { catalog } = useApp();
+  const { index } = useApp();
+  const { quantities } = useCollection();
   const { t, language } = useI18n();
+  const isDesktop = useIsDesktop();
+  const [query, setQuery] = useState("");
   useDocumentTitle(t("sets.title"));
-  const summaries = useMemo(() => summarizeSets(catalog.catalog), [catalog]);
 
-  const languageList = (languages: string[]) => {
-    const labels = languages.map((code) => t(`language.short.${code}` as MessageKey));
-    return labels.length === 2 ? t("language.and", { a: labels[0]!, b: labels[1]! }) : labels.join(", ");
-  };
+  const summaries = useMemo(() => summarizeSets(index.catalog), [index]);
+  const visible = summaries.filter(({ set }) => normalizeText(localize(set.name, language)).includes(normalizeText(query.trim())));
+
+  const filter = (
+    <>
+      <label htmlFor="sets-filter" className="visually-hidden">
+        {t("sets.filterLabel")}
+      </label>
+      <input id="sets-filter" type="search" className="name-filter" placeholder={t("sets.filter")} value={query} onChange={(event) => setQuery(event.target.value)} />
+    </>
+  );
+  const count = <span className="level-header__count">{t("sets.count", { count: summaries.length })}</span>;
 
   return (
     <>
-      <header className="topbar mobile-only">
-        <div className="brand">
-          <LogoIcon width={22} height={22} />
-          <span className="brand__name">{t("app.name")}</span>
-        </div>
-        <StatusPill />
-      </header>
-      <div className="screen">
-        <h1 className="screen__title">{t("sets.title")}</h1>
-        <div className="set-grid">
-          {summaries.map(({ set, releaseCount, cardCount, languages }) => (
-            <section key={set.id} className="set-card" aria-labelledby={`set-${set.id}`}>
-              <div className="set-card__heading">
-                <span className="set-card__eyebrow">{t("sets.eyebrow", { order: set.order })}</span>
-                <h2 id={`set-${set.id}`} className="set-card__name">
-                  {localize(set.name, language)}
-                </h2>
-                <span className="set-card__summary">
-                  {[t("sets.releases", { count: releaseCount }), t("sets.cards", { count: cardCount }), languageList(languages)].join(" · ")}
+      {!isDesktop && (
+        <header className="topbar">
+          <div className="brand">
+            <LogoIcon width={22} height={22} />
+            <span className="brand__name">{t("app.name")}</span>
+          </div>
+          <StatusPill />
+        </header>
+      )}
+      {isDesktop ? (
+        <header className="level-header">
+          <h1 className="level-header__title">{t("sets.title")}</h1>
+          {filter}
+          {count}
+        </header>
+      ) : null}
+      <div className="screen sets-screen">
+        {!isDesktop && (
+          <>
+            <div className="sets-screen__title">
+              <h1 className="screen__title">{t("sets.title")}</h1>
+              {count}
+            </div>
+            {filter}
+          </>
+        )}
+        <div className="set-tiles">
+          {visible.map(({ set, releaseCount }) => {
+            const progress = playableSet(index, set.id, RELEASE_GROUP_ORDER, quantities);
+            return (
+              <Link key={set.id} to={`/sets/${set.id}`} className="set-tile">
+                <span className="set-tile__icon">
+                  <SetIcon width={isDesktop ? 32 : 30} height={isDesktop ? 32 : 30} />
                 </span>
-              </div>
-            </section>
-          ))}
+                <span className="set-tile__body">
+                  <span className="set-tile__name">{localize(set.name, language)}</span>
+                  <span className="set-tile__counts">
+                    {t("sets.ratioCards", progress)} · {t("sets.releases", { count: releaseCount })}
+                  </span>
+                  <ProgressBar progress={progress} color="var(--color-accent)" className="set-tile__bar" label={localize(set.name, language)} />
+                </span>
+                {!isDesktop && <ChevronRightIcon width={18} height={18} className="set-tile__chevron" />}
+              </Link>
+            );
+          })}
         </div>
-        <p className="screen__legal mobile-only">{t("legal.footer")}</p>
+        {!isDesktop && <p className="screen__legal">{t("legal.footer")}</p>}
       </div>
     </>
   );

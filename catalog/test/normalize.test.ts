@@ -55,6 +55,9 @@ describe("normalize (real fixture)", () => {
       sourceCodes: ["welcometonightcityretail", "welcometonightcityretail-fr"],
     });
     expect(catalog.releases.map((r) => r.order)).toEqual([...catalog.releases.map((r) => r.order)].sort((a, b) => a - b));
+    expect(retail.counterpartReleaseId).toBe("wnc-beta");
+    expect(catalog.releases.find((release) => release.id === "wnc-beta")!.counterpartReleaseId).toBe("wnc-retail");
+    expect(catalog.releases.find((release) => release.id === "set1-promos")).not.toHaveProperty("counterpartReleaseId");
   });
 
   it("links the English and French printings of the same card through the variant key", () => {
@@ -112,12 +115,12 @@ describe("normalize (real fixture)", () => {
     const overwatch = cardBySlug(catalog, "overwatch-panam-s-gift");
     const withOwnText = overwatch.printings.filter((p) => p.printedRulesText !== undefined);
     expect(withOwnText.map((p) => [p.sourceCode, p.collectorNumber])).toEqual([
-      ["welcometonightcitybeta", "β165"],
       ["welcometonightcityretail", "093"],
       ["welcometonightcityretail-fr", "165"],
+      ["welcometonightcitybeta", "β165"],
     ]);
     expect(overwatch.card.rulesText.en).toMatch(/^\(Equip to/);
-    expect(withOwnText[1]!.printedRulesText).toMatch(/^\{Quick\}/);
+    expect(withOwnText[0]!.printedRulesText).toMatch(/^\{Quick\}/);
   });
 
   it("reports a localized name that differs between printings, keeping the regular one", () => {

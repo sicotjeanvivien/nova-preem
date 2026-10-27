@@ -204,7 +204,8 @@ interface Release {
   group: ReleaseGroup;
   languages: LanguageCode[];    // langues dans lesquelles cette release existe
   sourceCodes: string[];        // codes Netdeck rattachés, ex. ["welcometonightcityretail", "welcometonightcityretail-fr"]
-  order: number;
+  order: number;                // ordre d'affichage (onglets et sous-filtres de l'app) : Retail avant Beta
+  counterpartReleaseId?: string; // tirage Beta ↔ Retail aux mêmes cartes et numéros (β mis à part), ex. "wnc-beta" pour "wnc-retail"
 }
 
 interface Rarity {

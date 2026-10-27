@@ -1,9 +1,13 @@
 import type { ComponentType, SVGProps } from "react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, ScrollRestoration, useMatch } from "react-router";
 import { useI18n } from "../i18n/i18n.tsx";
 import type { MessageKey } from "../i18n/messages.ts";
 import { CollectionIcon, LogoIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
+import { useOnline } from "../platform/connectivity.ts";
+import { useIsDesktop } from "../platform/media.ts";
+import { CatalogUpdateDialog } from "./CatalogUpdate.tsx";
 import { StatusText } from "./Status.tsx";
+import { WifiOffIcon } from "./icons.tsx";
 
 const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVGElement>> }[] = [
   { to: "/sets", label: "nav.sets", Icon: SetsIcon },
@@ -16,8 +20,12 @@ const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVG
 /** Five tabs (spec §2): bottom bar on mobile, sidebar from 900 px (same markup, CSS layout). */
 export function AppLayout() {
   const { t } = useI18n();
+  // The card page is full screen on mobile (CardDetail): no bottom bar there.
+  const onCardPage = useMatch("/cartes/:slug") !== null;
+  const online = useOnline();
+  const isDesktop = useIsDesktop();
   return (
-    <div className="app">
+    <div className={`app ${onCardPage ? "app--full-page" : ""}`}>
       <nav className="nav" aria-label={t("nav.label")}>
         <div className="nav__brand brand">
           <LogoIcon width={22} height={22} />
@@ -35,8 +43,16 @@ export function AppLayout() {
         </div>
       </nav>
       <main className="app__main">
+        {!online && (
+          <div role="status" className="offline-banner">
+            <WifiOffIcon width={18} height={18} />
+            {t(isDesktop ? "offline.browser" : "offline.device")}
+          </div>
+        )}
         <Outlet />
       </main>
+      <CatalogUpdateDialog />
+      <ScrollRestoration />
     </div>
   );
 }

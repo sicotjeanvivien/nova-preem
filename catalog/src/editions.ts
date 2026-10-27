@@ -28,24 +28,25 @@ export const SETS: CatalogSet[] = [
 ];
 
 export const RELEASES: ReleaseDefinition[] = withOrder([
-  { id: "wnc-beta", setId: "wnc", name: sameInAllLanguages("Welcome to Night City — Beta"), group: "main", retailReleaseId: "wnc-retail" },
+  // Display order (tabs and sub-filters of the app): Retail before Beta, as in the mockups.
   { id: "wnc-retail", setId: "wnc", name: sameInAllLanguages("Welcome to Night City — Retail"), group: "main" },
-  { id: "heist-starter-beta", setId: "wnc", name: sameInAllLanguages("The Heist — Beta Starter Deck"), group: "starter", retailReleaseId: "heist-starter-retail" },
+  { id: "wnc-beta", setId: "wnc", name: sameInAllLanguages("Welcome to Night City — Beta"), group: "main", retailReleaseId: "wnc-retail" },
   { id: "heist-starter-retail", setId: "wnc", name: sameInAllLanguages("The Heist — Retail Starter Deck"), group: "starter" },
-  { id: "embracing-power-starter-beta", setId: "wnc", name: sameInAllLanguages("Embracing Power — Beta Starter Deck"), group: "starter", retailReleaseId: "embracing-power-starter-retail" },
+  { id: "heist-starter-beta", setId: "wnc", name: sameInAllLanguages("The Heist — Beta Starter Deck"), group: "starter", retailReleaseId: "heist-starter-retail" },
   { id: "embracing-power-starter-retail", setId: "wnc", name: sameInAllLanguages("Embracing Power — Retail Starter Deck"), group: "starter" },
+  { id: "embracing-power-starter-beta", setId: "wnc", name: sameInAllLanguages("Embracing Power — Beta Starter Deck"), group: "starter", retailReleaseId: "embracing-power-starter-retail" },
   { id: "merc-demo", setId: "wnc", name: sameInAllLanguages("Merc Demo Deck"), group: "demo" },
   { id: "arasaka-demo", setId: "wnc", name: sameInAllLanguages("Arasaka Demo Deck"), group: "demo" },
-  { id: "box-toppers-beta", setId: "wnc", name: sameInAllLanguages("Box Toppers — Beta"), group: "promo", retailReleaseId: "box-toppers-retail" },
-  { id: "box-toppers-retail", setId: "wnc", name: sameInAllLanguages("Box Toppers — Retail"), group: "promo" },
   // Pre-release Beta and Retail have different contents and numbering: no retailReleaseId.
-  { id: "prerelease-beta", setId: "wnc", name: sameInAllLanguages("Pre-Release — Beta"), group: "promo" },
   { id: "prerelease-retail", setId: "wnc", name: sameInAllLanguages("Pre-Release — Retail"), group: "promo" },
-  { id: "set1-promos", setId: "wnc", name: sameInAllLanguages("Set 1 Promos"), group: "promo" },
-  { id: "judge-promos", setId: "wnc", name: sameInAllLanguages("Judge Promos"), group: "promo" },
+  { id: "prerelease-beta", setId: "wnc", name: sameInAllLanguages("Pre-Release — Beta"), group: "promo" },
+  { id: "box-toppers-retail", setId: "wnc", name: sameInAllLanguages("Box Toppers — Retail"), group: "promo" },
+  { id: "box-toppers-beta", setId: "wnc", name: sameInAllLanguages("Box Toppers — Beta"), group: "promo", retailReleaseId: "box-toppers-retail" },
   { id: "edgerunner-open-s1", setId: "wnc", name: sameInAllLanguages("Edgerunner Open S1"), group: "promo" },
   { id: "night-city-brawl-s1", setId: "wnc", name: sameInAllLanguages("Night City Brawl S1"), group: "promo" },
   { id: "night-city-showdown-s1", setId: "wnc", name: sameInAllLanguages("Night City Showdown S1"), group: "promo" },
+  { id: "set1-promos", setId: "wnc", name: sameInAllLanguages("Set 1 Promos"), group: "promo" },
+  { id: "judge-promos", setId: "wnc", name: sameInAllLanguages("Judge Promos"), group: "promo" },
 ]);
 
 export const EDITIONS: EditionMapping[] = [
