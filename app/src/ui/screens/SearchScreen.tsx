@@ -14,6 +14,7 @@ import { useCollection } from "../CollectionContext.tsx";
 import { FilterFieldsets, FilterMenus, type FilterGroup } from "../FilterControls.tsx";
 import { SearchIcon } from "../icons.tsx";
 import { cardColor, cardColorLabel, cardTypeLabel, languageLabel } from "../labels.ts";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 type ListField = "possession" | "colors" | "rarities" | "sets" | "costs" | "rams";
@@ -171,7 +172,10 @@ export function SearchScreen() {
   return (
     <div className="search">
       <header className="collection-header">
-        {searchField}
+        <div className="search-header__row">
+          {searchField}
+          <SyncPill />
+        </div>
         <div className="chip-row">
           {typeOptions.map((option) => (
             <button

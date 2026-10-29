@@ -4138,3 +4138,122 @@ h2 {
     white-space: nowrap;
   }
 }
+
+/* Sync indicators (SyncIndicators mockup): header pill on mobile, sidebar line on desktop, pause banner. */
+
+.topbar {
+  gap: 10px;
+}
+
+.topbar__end,
+.collection-header__end {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-header__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-header__row .search-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.sync-pill--header {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  text-decoration: none;
+}
+
+.sync-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.sync-line--up-to-date {
+  color: var(--color-sync-ok-text);
+}
+
+.sync-line--pending {
+  color: var(--color-sync-pending-text);
+}
+
+.sync-line--syncing {
+  color: var(--color-sync-running-text);
+}
+
+.sync-line--paused {
+  color: var(--color-sync-paused-text);
+}
+
+.sync-line--error {
+  color: var(--color-sync-error-text);
+}
+
+.sync-resume-button,
+.sync-banner__button {
+  border: 1px solid var(--color-warning-text);
+  border-radius: var(--radius-small);
+  background: transparent;
+  color: var(--color-warning-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sync-resume-button {
+  height: 32px;
+  font-size: 12px;
+}
+
+.sync-banner {
+  padding: 8px 8px 8px 14px;
+}
+
+.sync-banner__text {
+  flex: 1;
+}
+
+.sync-banner__button {
+  min-height: 36px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+/* With a worded pill ("En pause"), the collection summary gives way, not the title. */
+.collection-header__title {
+  gap: 10px;
+}
+
+.collection-header__end {
+  min-width: 0;
+}
+
+.collection-header__end .collection-header__summary {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sync-resume-button {
+  height: auto;
+  min-height: 32px;
+  padding: 4px 8px;
+}
+
+.collection-header__title h1 {
+  flex-shrink: 0;
+}

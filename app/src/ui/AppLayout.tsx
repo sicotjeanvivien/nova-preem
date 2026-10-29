@@ -8,6 +8,7 @@ import { useIsDesktop } from "../platform/media.ts";
 import { CatalogUpdateDialog } from "./CatalogUpdate.tsx";
 import { StatusText } from "./Status.tsx";
 import { SyncFirstDialog } from "./SyncFirstDialog.tsx";
+import { SyncPauseBanner, SyncSidebarLine } from "./SyncIndicators.tsx";
 import { WifiOffIcon } from "./icons.tsx";
 
 const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVGElement>> }[] = [
@@ -43,6 +44,7 @@ export function AppLayout() {
         ))}
         <div className="nav__footer">
           <StatusText />
+          <SyncSidebarLine />
           <span>{t("legal.fanMade")}</span>
           <span>{t("legal.notEndorsed")}</span>
         </div>
@@ -54,6 +56,7 @@ export function AppLayout() {
             {t(isDesktop ? "offline.browser" : "offline.device")}
           </div>
         )}
+        <SyncPauseBanner variant={isDesktop ? "browser" : "device"} />
         <Outlet />
       </main>
       <CatalogUpdateDialog />

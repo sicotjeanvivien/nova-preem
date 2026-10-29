@@ -8,6 +8,7 @@ import { useApp } from "./AppContext.tsx";
 import { LogoIcon } from "./icons.tsx";
 import { languageLabel } from "./labels.ts";
 import { Toast } from "./Toast.tsx";
+import { SyncPill } from "./SyncIndicators.tsx";
 import { useImportFlow } from "./useImportFlow.tsx";
 
 /** Empty collection (States 4 / WebStates 4): start entering cards, or import a backup. */
@@ -33,6 +34,7 @@ export function EmptyCollection() {
             <LogoIcon width={22} height={22} />
             <span className="brand__name">{t("app.name")}</span>
           </div>
+          <SyncPill />
         </header>
       )}
       <div className="empty-collection__body">

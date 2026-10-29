@@ -145,3 +145,9 @@ export const text = (html: string) =>
 export function setViewportWidth(width: number) {
   (window as unknown as { happyDOM?: { setViewport(size: { width: number; height: number }): void } }).happyDOM?.setViewport({ width, height: 900 });
 }
+
+/** Simulated network. Offline, the automatic sync leaves the displayed state alone. */
+export function setOnline(value: boolean) {
+  Object.defineProperty(navigator, "onLine", { value, configurable: true });
+  window.dispatchEvent(new Event(value ? "online" : "offline"));
+}

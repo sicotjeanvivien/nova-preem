@@ -28,6 +28,7 @@ import { EmptyCollection } from "../EmptyCollection.tsx";
 import { FilterFieldsets, type FilterGroup } from "../FilterControls.tsx";
 import { FiltersIcon, ImageIcon } from "../icons.tsx";
 import { cardColor, cardColorLabel, cardTypeLabel, languageLabel, rarityColor, rarityShort } from "../labels.ts";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 import { useTabLabel } from "./useTabLabel.ts";
 
@@ -181,7 +182,10 @@ function CollectionGallery() {
       <header className="collection-header">
         <div className="collection-header__title">
           <h1>{t("collection.title")}</h1>
-          <span className="collection-header__summary">{t("collection.summary", summary)}</span>
+          <span className="collection-header__end">
+            <span className="collection-header__summary">{t("collection.summary", summary)}</span>
+            <SyncPill />
+          </span>
         </div>
         {nameFilter}
         <div className="collection-header__controls">

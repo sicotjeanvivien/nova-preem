@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { useLocation } from "react-router";
 import { localize, type ReleaseGroup } from "../../domain/catalog.ts";
 import { releasesOfSet } from "../../domain/catalogIndex.ts";
 import type { CatalogCheck } from "../../domain/catalogLoader.ts";
@@ -16,6 +17,7 @@ import { useSync } from "../SyncContext.tsx";
 import { useImportFlow } from "../useImportFlow.tsx";
 import { languageLabel } from "../labels.ts";
 import { Toast } from "../Toast.tsx";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 const GROUPS: ReleaseGroup[] = ["main", "starter", "demo", "promo"];
@@ -38,6 +40,12 @@ export function SettingsScreen() {
   const [message, setMessage] = useState<{ id: number; text: string } | null>(null);
   const importFlow = useImportFlow((text) => setMessage({ id: Date.now(), text }));
   useDocumentTitle(t("settings.title"));
+
+  // The sync indicators lead here (/reglages#sync): show the sync card.
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash === "#sync") document.getElementById("sync")?.scrollIntoView?.({ block: "start" });
+  }, [hash]);
 
   const set = [...index.catalog.sets].sort((a, b) => a.order - b.order)[0];
   const setName = set ? localize(set.name, uiLanguage) : "";
@@ -84,6 +92,7 @@ export function SettingsScreen() {
       ) : (
         <header className="topbar">
           <h1>{t("settings.title")}</h1>
+          <SyncPill />
         </header>
       )}
       <div className="settings__grid">

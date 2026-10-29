@@ -96,7 +96,7 @@ export function SyncCard() {
   );
 
   return (
-    <section aria-labelledby="sync-title" className={`sync-card sync-card--${status}`}>
+    <section id="sync" aria-labelledby="sync-title" className={`sync-card sync-card--${status}`}>
       <div className="sync-card__header">
         <span className="sync-card__icon">
           <SyncCloudIcon width={20} height={20} />

@@ -132,3 +132,10 @@ export const ExternalLinkIcon = (props: IconProps) => (
     <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
   </Icon>
 );
+
+/** Plain cloud (sync status pill and sidebar line). */
+export const CloudIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z" />
+  </Icon>
+);

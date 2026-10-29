@@ -8,7 +8,7 @@ import { connectedState, type SyncState } from "../../src/domain/sync.ts";
 import { AuthError } from "../../src/domain/syncEngine.ts";
 import { printingOf } from "../helpers-catalog.ts";
 import { fakeSyncServices, MemoryDrive, MemorySyncStore, SYNC_SETTINGS } from "../helpers-sync.ts";
-import { MemoryCollectionStore, setViewportWidth, TestApp } from "./harness.tsx";
+import { MemoryCollectionStore, setOnline, setViewportWidth, TestApp } from "./harness.tsx";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -46,6 +46,7 @@ describe("Google Drive sync in Settings (sync spec §8, screens 1 to 3)", () => 
     act(() => root.unmount());
     container.remove();
     setViewportWidth(1024);
+    setOnline(true);
   });
 
   const card = () => container.querySelector<HTMLElement>(".sync-card")!;
@@ -132,7 +133,8 @@ describe("Google Drive sync in Settings (sync spec §8, screens 1 to 3)", () => 
     const store = new MemoryCollectionStore();
     const sync = fakeSyncServices(drive, new MemorySyncStore(state));
     await render({ path: "/reglages", entries: [e(johnny, 1), e(chrome, 1)], store, services: { sync } });
-    expect(card().textContent).toContain("À jourDernière synchronisation : il y a 2 min");
+    // Synced at launch (step 3).
+    expect(card().textContent).toContain("À jourDernière synchronisation : à l'instant");
 
     // The other device removed Chrome Fang and added a copy of Johnny.
     drive.files.get("file-1")!.text = JSON.stringify({ ...JSON.parse(drive.files.get("file-1")!.text), entries: [e(johnny, 2)] });
@@ -157,13 +159,15 @@ describe("Google Drive sync in Settings (sync spec §8, screens 1 to 3)", () => 
   it("counts the pending changes", async () => {
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await syncedState(drive, [e(johnny, 1)])));
+    setOnline(false);
     await render({ path: "/reglages", entries: [e(johnny, 2), e(chrome, 1)], settings: { ...DEFAULT_SETTINGS, duplicateThreshold: 2 }, services: { sync } });
-    expect(card().textContent).toContain("En attente3 modifications pas encore envoyées.");
+    expect(card().textContent).toContain("En attente3 modifications pas encore envoyées. Elles partiront au retour du réseau.");
   });
 
   it("explains a damaged Drive file and offers to retry", async () => {
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await syncedState(drive, [e(johnny, 1)], { lastError: "invalid-file" })));
+    setOnline(false);
     await render({ path: "/reglages", entries: [e(johnny, 1)], services: { sync } });
     expect(card().textContent).toContain("ErreurRien n'a été modifié, ni sur l'appareil ni dans Drive.");
     expect(card().querySelector('[role="alert"]')?.textContent).toBe(
@@ -175,6 +179,7 @@ describe("Google Drive sync in Settings (sync spec §8, screens 1 to 3)", () => 
   it("shows the warning of the last sync", async () => {
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await syncedState(drive, [e(johnny, 1)], { notice: { kind: "other-files", count: 2 } })));
+    setOnline(false);
     await render({ path: "/reglages", entries: [e(johnny, 1)], services: { sync } });
     expect(card().textContent).toContain("Votre Drive contient 2 autres fichiers de collection Nova Preem.");
   });
@@ -209,6 +214,7 @@ describe("Google Drive sync in Settings (sync spec §8, screens 1 to 3)", () => 
     setViewportWidth(1280);
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await syncedState(drive, [e(johnny, 1)])));
+    setOnline(false);
     await render({ path: "/reglages", entries: [e(johnny, 1), e(chrome, 1)], services: { sync } });
     expect(card().querySelector(".sync-pill")?.textContent).toBe("En attente · 1");
     await click(button("Se déconnecter"));
