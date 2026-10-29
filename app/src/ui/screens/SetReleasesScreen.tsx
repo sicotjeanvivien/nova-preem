@@ -14,6 +14,7 @@ import { useCollection } from "../CollectionContext.tsx";
 import { ChevronLeftIcon } from "../icons.tsx";
 import { languageLabel } from "../labels.ts";
 import { ProgressBar } from "../ProgressBar.tsx";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 const RIBBON_COLORS: Record<string, string> = {
@@ -89,6 +90,7 @@ export function SetReleasesScreen() {
             <h1 className="level-bar__title">{setName}</h1>
           </div>
           {count}
+          <SyncPill />
         </header>
       )}
       <div className="releases-screen__body">

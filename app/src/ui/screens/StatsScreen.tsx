@@ -22,6 +22,7 @@ import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
 import { cardTypeLabel, languageLabel, rarityColor } from "../labels.ts";
 import { ProgressBar } from "../ProgressBar.tsx";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 type Mode = "playable" | "master" | "release";
@@ -223,6 +224,7 @@ export function StatsScreen() {
       <header className="topbar">
         <h1>{t("stats.title")}</h1>
         <span className="topbar__aside">{setName}</span>
+        <SyncPill />
       </header>
       <div className="screen stats-body">
         {setSelect}

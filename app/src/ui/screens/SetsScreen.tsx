@@ -12,6 +12,7 @@ import { ChevronRightIcon, LogoIcon, SetIcon } from "../icons.tsx";
 import { ProgressBar } from "../ProgressBar.tsx";
 import { SET_LOGOS } from "../setLogos.ts";
 import { StatusPill } from "../Status.tsx";
+import { SyncPill } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 /**
@@ -47,7 +48,10 @@ export function SetsScreen() {
             <LogoIcon width={22} height={22} />
             <span className="brand__name">{t("app.name")}</span>
           </div>
-          <StatusPill />
+          <span className="topbar__end">
+            <StatusPill />
+            <SyncPill />
+          </span>
         </header>
       )}
       {isDesktop ? (

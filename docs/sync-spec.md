@@ -187,6 +187,7 @@ Maquetté dans le canevas, rangée « Synchronisation » (copie : `docs/mockups/
 2. **Réglages → Données, synchronisation active** : compte connecté, état (§5.3) et heure de la dernière synchronisation, « Synchroniser maintenant », lien « Voir le fichier dans Drive », « Se déconnecter ». Les avertissements du §7 s'affichent ici.
 3. **Choix de la première synchronisation** (§3.3) : résumé et trois choix, dans la forme du dialogue d'import.
 4. **Indicateur d'état** visible hors de Réglages, discret : barre latérale sur bureau (à côté de « Hors-ligne prêt »), et un équivalent sur mobile. En pause : un bandeau ou un bouton « Reprendre la synchronisation », dans l'esprit du bandeau hors-ligne.
+   Mise en œuvre : la pastille est dans l'en-tête mobile de chaque onglet (Sets et liste des tirages, Collection, Recherche, Stats, Réglages, collection vide), pas dans l'en-tête des cartes d'un tirage (déjà occupé par la progression) ni sur la page carte (plein écran). Le bandeau de pause est à la place du bandeau hors-ligne, juste après lui.
 5. Les messages d'erreur du §7.
 
 Tous les textes en français et en anglais.
