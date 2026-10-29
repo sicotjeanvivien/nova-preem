@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Synchronisation : indicateur et messages</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+td,th{vertical-align:top;text-align:left}
+</style>
+</helmet>
+<div style="width: 1600px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; padding: 32px; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 40px">
+
+<section style="display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Mobile : pastille dans l'en-tête</h2>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">À droite de l'en-tête de chaque onglet. « À jour » : icône seule (libellé pour les lecteurs d'écran). Les autres états ajoutent un mot. Un tap ouvre Réglages → Données. Rien quand la synchro est désactivée.</p>
+<sc-for list="{{mobile}}" as="m" hint-placeholder-count="6">
+<div style="width: 390px; height: 52px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: 1px solid #232838; border-radius: 10px; background: #0D0F14">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">Sets</span>
+<span style="display: flex; align-items: center; gap: 10px">
+<span style="font-size: 11px; color: #8B92A3">{{m.state}}</span>
+<span aria-label="{{m.aria}}" style="display: inline-flex; align-items: center; gap: 6px; height: 28px; box-sizing: border-box; padding: 0 8px; font-size: 12px; color: {{m.fg}}; border: 1px solid {{m.border}}; border-radius: 999px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>{{m.label}}</span>
+</span>
+</div>
+</sc-for>
+
+<h3 style="margin: 10px 0 0; font-size: 14px; font-weight: 600">En pause : bandeau sous l'en-tête</h3>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Même place et même style que le bandeau hors-ligne. S'il y a les deux, le bandeau hors-ligne passe en premier.</p>
+<div style="width: 390px; border: 1px solid #232838; border-radius: 10px; overflow: hidden">
+<div style="height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #232838">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">Collection</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 28px; box-sizing: border-box; padding: 0 8px; font-size: 12px; color: #FFD99A; border: 1px solid #5A4520; border-radius: 999px">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>En pause</span>
+</div>
+<div role="status" style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; background: #2A2213; border-bottom: 1px solid #5A4520; font-size: 13px; color: #FFD99A">
+<span style="flex: 1">Synchronisation en pause. Vos saisies restent sur l'appareil.</span>
+<button style="height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid #FFD99A; background: transparent; color: #FFD99A; font-size: 13px; font-weight: 600">Reprendre</button>
+</div>
+<div style="height: 40px; background: #0D0F14"></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Bureau : bas de la barre latérale</h2>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Une ligne sous « Hors-ligne prêt ». Un clic ouvre Réglages. En pause, un bouton « Reprendre la synchronisation » s'ajoute, et le bandeau apparaît en haut de la page comme sur mobile.</p>
+<div style="display: grid; grid-template-columns: repeat(4, 248px); gap: 16px">
+<sc-for list="{{desktop}}" as="d" hint-placeholder-count="7">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; color: #8B92A3">{{d.state}}</span>
+<div style="width: 248px; box-sizing: border-box; padding: 14px 20px 16px; background: #11141B; border: 1px solid #232838; border-radius: 10px; display: flex; flex-direction: column; gap: 8px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A3AAB9">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: {{d.offDot}}"></span>{{d.offline}}</span>
+<sc-if value="{{d.show}}" hint-placeholder-val="{{ true }}">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: {{d.fg}}">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>{{d.label}}</span>
+</sc-if>
+<sc-if value="{{d.resume}}" hint-placeholder-val="{{ false }}">
+<button style="height: 32px; border-radius: 8px; border: 1px solid #FFD99A; background: transparent; color: #FFD99A; font-size: 12px; font-weight: 600">Reprendre la synchronisation</button>
+</sc-if>
+<span style="font-size: 12px; color: #8B92A3">Fan-made, non officiel</span>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+
+<section style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Textes (FR / EN)</h2>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">« l'appareil » / « device » devient « ce navigateur » / « this browser » dans un navigateur, comme pour le bandeau hors-ligne (<span style="font-family: 'IBM Plex Mono', monospace">offline.device</span> / <span style="font-family: 'IBM Plex Mono', monospace">offline.browser</span>).</p>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.45">
+<thead>
+<tr style="color: #A3AAB9; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em">
+<th style="padding: 8px 12px; border-bottom: 1px solid #2B3040; width: 210px">Cas</th>
+<th style="padding: 8px 12px; border-bottom: 1px solid #2B3040">Français</th>
+<th style="padding: 8px 12px; border-bottom: 1px solid #2B3040">English</th>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{texts}}" as="t" hint-placeholder-count="20">
+<tr>
+<td style="padding: 7px 12px; border-bottom: 1px solid #232838; color: {{t.caseColor}}; font-weight: 600">{{t.case}}</td>
+<td style="padding: 7px 12px; border-bottom: 1px solid #232838">{{t.fr}}</td>
+<td style="padding: 7px 12px; border-bottom: 1px solid #232838; color: #D5D9E2">{{t.en}}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1600,"height":1500}}'>
+const S = {
+  ok: ['Synchronisé', '#8AF0DD', '#2B6B60'],
+  pending: ['En attente · 3', '#FFD3A3', '#6B4A26'],
+  running: ['Synchronisation…', '#C2D5FF', '#34466B'],
+  paused: ['En pause', '#FFD99A', '#5A4520'],
+  error: ['Erreur', '#FFB3C4', '#6B2A3B']
+};
+const ERR = '#FFB3C4'; const WARN = '#FFD99A'; const PLAIN = '#ECEEF3';
+const TEXTS = [
+  ['État : désactivée', 'Désactivée', 'Off', PLAIN],
+  ['État : à jour', 'À jour · Dernière synchronisation : il y a 2 min (19:43).', 'Up to date · Last synced 2 min ago (19:43).', PLAIN],
+  ['État : en attente', 'En attente · 3 modifications pas encore envoyées. Elles partiront au retour du réseau.', 'Pending · 3 changes not sent yet. They will be sent when you are back online.', PLAIN],
+  ['État : en cours', 'Synchronisation… Vous pouvez continuer à saisir des cartes.', 'Syncing… You can keep adding cards.', PLAIN],
+  ['État : en pause', 'En pause · L’autorisation Google a expiré (au bout d’une heure). Un tap suffit pour reprendre.', 'Paused · Google authorization expired (after one hour). One tap to resume.', WARN],
+  ['Bandeau pause', 'Synchronisation en pause. Vos saisies restent sur l’appareil. [Reprendre]', 'Sync paused. Your entries stay on this device. [Resume]', WARN],
+  ['Désactivée : présentation', 'Retrouvez votre collection sur tous vos appareils. Le fichier est enregistré dans votre Google Drive, dans un dossier « Nova Preem ». Nova Preem n’a accès qu’à ce fichier, jamais au reste de votre Drive, et le projet ne voit rien passer. Facultatif : sans synchronisation, l’app fonctionne normalement. [Synchroniser avec Google Drive]', 'Get your collection on all your devices. The file is saved in your Google Drive, in a “Nova Preem” folder. Nova Preem can only access this file, never the rest of your Drive, and the project never sees your data. Optional: the app works normally without sync. [Sync with Google Drive]', PLAIN],
+  ['Active : actions', 'Connecté à … · [Synchroniser maintenant] · [Réessayer] · Voir le fichier dans Drive · [Se déconnecter]', 'Signed in as … · [Sync now] · [Retry] · View the file in Drive · [Sign out]', PLAIN],
+  ['Déconnexion', 'Se déconnecter de Google Drive ? La synchronisation s’arrête sur cet appareil. Votre collection reste sur l’appareil, et le fichier reste dans votre Drive.', 'Sign out of Google Drive? Sync stops on this device. Your collection stays on the device, and the file stays in your Drive.', PLAIN],
+  ['§7 Fichier introuvable', 'Le fichier de synchronisation était introuvable dans Drive : il a été recréé depuis cet appareil.', 'The sync file could not be found in Drive: it was recreated from this device.', WARN],
+  ['§7 Plusieurs fichiers', 'Votre Drive contient 2 autres fichiers de collection Nova Preem. Seul le plus ancien est utilisé ; les autres ne sont pas modifiés.', 'Your Drive contains 2 other Nova Preem collection files. Only the oldest one is used; the others are left untouched.', WARN],
+  ['§7 Fichier invalide', 'Le fichier de Drive est incomplet ou abîmé (modifié à la main ?) : rien n’a été modifié, ni sur l’appareil ni dans Drive. Supprimez-le dans Drive : il sera recréé depuis cet appareil.', 'The Drive file is incomplete or damaged (edited by hand?): nothing was changed, on this device or in Drive. Delete it in Drive and it will be recreated from this device.', ERR],
+  ['§7 Autorisation retirée', 'Google Drive n’est plus autorisé. Reconnectez-vous pour reprendre la synchronisation.', 'Google Drive is no longer authorized. Sign in again to resume syncing.', ERR],
+  ['§7 Drive plein', 'Votre Google Drive est plein : la collection ne peut plus y être enregistrée. Libérez de l’espace dans Drive ; vos saisies restent sur l’appareil.', 'Your Google Drive is full: your collection can no longer be saved there. Free up space in Drive; your entries stay on this device.', ERR],
+  ['§7 Réseau, serveur', 'État En attente (pas d’erreur affichée) · nouvel essai automatique.', 'Pending state (no error shown) · retried automatically.', PLAIN],
+  ['Erreur : détail', 'Dernière synchronisation réussie : hier à 21:14. Nouvel essai à la prochaine occasion.', 'Last successful sync: yesterday at 21:14. Will retry at the next opportunity.', PLAIN],
+  ['Première synchro : titre', 'Une collection existe déjà dans votre Drive · Choisissez comment réunir les deux.', 'A collection already exists in your Drive · Choose how to combine them.', PLAIN],
+  ['Première synchro : choix', 'Fusionner (recommandé) : pour chaque impression, la plus grande quantité est gardée. Rien n’est perdu. · Garder Google Drive : la collection de cet appareil est remplacée par celle du Drive. · Garder cet appareil : le fichier du Drive est remplacé par la collection de cet appareil.', 'Merge (recommended): for each printing, the highest quantity is kept. Nothing is lost. · Keep Google Drive: this device’s collection is replaced by the Drive one. · Keep this device: the Drive file is replaced by this device’s collection.', PLAIN],
+  ['Première synchro : boutons', '[Annuler] · [Fusionner et synchroniser] / [Remplacer cet appareil] / [Remplacer le Drive] · Annuler : la synchronisation n’est pas activée, rien n’est modifié.', '[Cancel] · [Merge and sync] / [Replace this device] / [Replace Drive] · Cancel: sync is not turned on, nothing is changed.', PLAIN],
+  ['Barre latérale, pastille', 'Drive : Synchronisé / En attente · 3 / Synchronisation… / En pause / Erreur', 'Drive: Synced / Pending · 3 / Syncing… / Paused / Error', PLAIN]
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const mobile = [
+      ['À jour', 'ok', ''], ['En attente', 'pending'], ['En cours', 'running'], ['En pause', 'paused'], ['Erreur', 'error']
+    ].map(([state, k, lbl]) => ({
+      state, label: lbl !== undefined ? lbl : S[k][0], aria: 'Google Drive : ' + S[k][0], fg: S[k][1], border: S[k][2]
+    }));
+    const desktop = [
+      ['Désactivée', null, false, false], ['À jour', 'ok', false, false], ['En attente (hors-ligne)', 'pending', false, true],
+      ['En cours', 'running', false, false], ['En pause', 'paused', true, false], ['Erreur', 'error', false, false]
+    ].map(([state, k, resume, offline]) => ({
+      state, show: !!k, resume,
+      label: k ? 'Drive : ' + S[k][0] : '', fg: k ? S[k][1] : '#A3AAB9',
+      offline: offline ? 'Hors-ligne' : 'Hors-ligne prêt', offDot: offline ? '#FFB067' : '#6FCF97'
+    }));
+    const texts = TEXTS.map(([c, fr, en, color]) => ({ case: c, fr, en, caseColor: color }));
+    return { mobile, desktop, texts };
+  }
+}
+</script>
+</body>
+</html>

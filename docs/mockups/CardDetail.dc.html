@@ -44,8 +44,10 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px">
 
 <div style="display: flex; gap: 14px">
-<div style="width: 128px; height: 179px; flex-shrink: 0; border-radius: 8px; background: #1C2029; border-top: 5px solid #E5484D; display: grid; place-items: center">
+<div style="position: relative; width: 128px; height: 179px; flex-shrink: 0; border-radius: 8px; background: #1C2029; border-top: 5px solid #E5484D; display: grid; place-items: center">
 <span style="font-size: 11px; color: #8B92A3; text-align: center; padding: 0 8px">Image : {{selLabel}}</span>
+<a href="CardViewer.dc.html" aria-label="Voir la carte en 3D" style="position: absolute; right: 6px; bottom: 6px; height: 44px; padding: 0 10px; box-sizing: border-box; border-radius: 10px; background: #0D0F14; border: 1px solid #2B3040; display: flex; align-items: center; gap: 5px; color: #46E3C8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="8" height="12" rx="1.5"></rect><path d="M3.5 12.5c-.5 3.5 3.6 6.5 8.5 6.5 2.9 0 5.4-1 7-2.5"></path><path d="M17 14l2.5 2.5L17 19"></path></svg>3D</a>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
 <h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.15">{{title}}</h1>

@@ -179,9 +179,9 @@ Aucune erreur de synchronisation ne supprime de données locales.
 
 ---
 
-## 8. Interface (à maquetter)
+## 8. Interface
 
-Écrans et éléments à ajouter au canevas avant l'implémentation, en mobile et en bureau :
+Maquetté dans le canevas, rangée « Synchronisation » (copie : `docs/mockups/`) : `Settings` / `WebSettings` (écrans 1 et 2 dans la section Données ; tous les états via le réglage « etat »), `SyncFirst` / `WebSyncFirst` (écran 3), `SyncIndicators` (éléments 4 et 5, avec tous les textes en français et en anglais). Écrans et éléments, en mobile et en bureau :
 
 1. **Réglages → Données, synchronisation désactivée** : la ligne « Synchronisation Google Drive — Bientôt » devient un bouton « Synchroniser avec Google Drive », avec une phrase d'explication (le fichier est dans ton Drive, le projet n'y a pas accès, la synchronisation est facultative).
 2. **Réglages → Données, synchronisation active** : compte connecté, état (§5.3) et heure de la dernière synchronisation, « Synchroniser maintenant », lien « Voir le fichier dans Drive », « Se déconnecter ». Les avertissements du §7 s'affichent ici.

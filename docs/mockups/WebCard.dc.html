@@ -54,6 +54,8 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <div style="aspect-ratio: 5 / 7; width: 100%; border-radius: 14px; background: #1C2029; border-top: 7px solid #E5484D; display: grid; place-items: center">
 <span style="font-size: 13px; color: #8B92A3; text-align: center; padding: 0 16px">Image : {{selLabel}}</span>
 </div>
+<a href="WebCardViewer.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 44px; border: 1px solid #2B3040; border-radius: 10px; color: #ECEEF3; font-size: 14px; font-weight: 500">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="8" height="12" rx="1.5"></rect><path d="M3.5 12.5c-.5 3.5 3.6 6.5 8.5 6.5 2.9 0 5.4-1 7-2.5"></path><path d="M17 14l2.5 2.5L17 19"></path></svg>Voir en 3D</a>
 <div role="group" aria-label="Impression affichée" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
 <sc-for list="{{thumbs}}" as="t" hint-placeholder-count="4">
 <button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" aria-label="{{t.aria}}" style="display: flex; flex-direction: column; gap: 4px; padding: 0; border: 0; background: transparent; cursor: pointer; color: #D5D9E2">

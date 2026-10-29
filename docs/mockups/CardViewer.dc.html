@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Vue 3D de la carte</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+
+<header style="flex-shrink: 0; display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; border-bottom: 1px solid #232838">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Johnny Silverhand</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9">{{selLabel}}</span>
+</span>
+<a href="CardDetail.dc.html" aria-label="Fermer la vue 3D et revenir à la carte" style="width: 44px; height: 44px; box-sizing: border-box; display: grid; place-items: center; border-radius: 10px; border: 1px solid #2B3040; color: #ECEEF3">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</a>
+</header>
+
+<div onPointerDown="{{down}}" onPointerMove="{{move}}" onPointerUp="{{up}}" onPointerCancel="{{up}}" style="position: relative; flex: 1; min-height: 0; display: grid; place-items: center; perspective: 1100px; touch-action: none; cursor: grab; user-select: none; background: radial-gradient(60% 45% at 50% 46%, #1A1E29 0%, #0D0F14 100%)">
+<div style="position: absolute; left: 50%; top: 50%; width: 220px; height: 26px; margin: 196px 0 0 -110px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,0.55), rgba(0,0,0,0))"></div>
+<div style="position: relative; width: 260px; height: 364px; transform-style: preserve-3d; transform: {{cardTransform}}">
+
+<div style="position: absolute; inset: 0; border-radius: 14px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #1C2029; border-top: 7px solid #E5484D; box-shadow: 0 0 0 1px #2B3040 inset; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px">
+<span style="font-size: 12px; color: #8B92A3; text-align: center; padding: 0 16px">Image : {{selLabel}}</span>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 15px; color: #D5D9E2">Johnny Silverhand</span>
+<div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(0,0,0,0) 22%, #FF5C8A 36%, #46E3C8 50%, #F2C94C 64%, rgba(0,0,0,0) 78%); background-size: 260% 260%; background-position: {{foilPos}}; mix-blend-mode: color-dodge; opacity: {{foilOpacity}}"></div>
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at {{glarePos}}, rgba(255,255,255,0.4), rgba(255,255,255,0) 45%); mix-blend-mode: overlay; opacity: {{glareOpacity}}"></div>
+</div>
+
+<div style="position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); background: #11141B; box-shadow: 0 0 0 1px #2B3040 inset; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px">
+<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#46E3C8" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.3em; color: #A3AAB9">NOVA PREEM</span>
+</div>
+
+</div>
+<sc-if value="{{showHint}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 13px; color: #8B92A3; pointer-events: none">Glissez pour faire tourner la carte</span>
+</sc-if>
+</div>
+
+<div style="flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; padding: 12px 16px 20px; border-top: 1px solid #232838; background: #11141B">
+<div role="group" aria-label="Impression affichée" style="display: flex; gap: 8px; overflow-x: auto">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+<button onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="flex-shrink: 0; height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid {{c.ring}}; background: transparent; color: #D5D9E2; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; cursor: pointer">{{c.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<div role="group" aria-label="Finition" style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid #2B3040; border-radius: 10px; overflow: hidden">
+<sc-for list="{{finishes}}" as="f" hint-placeholder-count="2">
+<button onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="height: 44px; border: 0; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 500; background: {{f.bg}}; color: {{f.fg}}">{{f.label}}</button>
+</sc-for>
+</div>
+<button onClick="{{flip}}" aria-label="Retourner la carte" title="Retourner la carte" style="width: 44px; height: 44px; flex-shrink: 0; display: grid; place-items: center; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9"></path><path d="M20 4v5h-5"></path><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15"></path><path d="M4 20v-5h5"></path></svg>
+</button>
+<button onClick="{{reset}}" aria-label="Recentrer la carte" title="Recentrer la carte" style="width: 44px; height: 44px; flex-shrink: 0; display: grid; place-items: center; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+const PRINTS = [
+  { key: 'retail-003:fr', chip: '003 VF', label: 'Retail 003 VF' },
+  { key: 'retail-003:en', chip: '003 VO', label: 'Retail 003 VO' },
+  { key: 'beta-003:en', chip: 'β003 VO', label: 'Beta β003 VO' },
+  { key: 'beta-168:en', chip: 'β168 VO', label: 'Beta β168 VO' }
+];
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { rx: -8, ry: -22, foil: true, sel: 'retail-003:fr', touched: false };
+    this.v = { x: 0, y: 0 };
+    this.drag = null;
+    this.target = null;
+    this.last = Date.now();
+    this.raf = 0;
+  }
+  componentDidMount() {
+    this.reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const tick = () => { this.raf = requestAnimationFrame(tick); this.step(); };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  step() {
+    if (this.drag) return;
+    let rx = this.state.rx, ry = this.state.ry, moved = false;
+    if (this.target) {
+      rx += (this.target.rx - rx) * 0.14;
+      ry += (this.target.ry - ry) * 0.14;
+      moved = true;
+      if (Math.abs(this.target.rx - rx) < 0.15 && Math.abs(this.target.ry - ry) < 0.15) {
+        rx = this.target.rx; ry = this.target.ry; this.target = null; this.last = Date.now();
+      }
+    } else if (Math.abs(this.v.x) > 0.02 || Math.abs(this.v.y) > 0.02) {
+      ry += this.v.x; rx -= this.v.y;
+      this.v.x *= 0.95; this.v.y *= 0.95;
+      moved = true;
+    } else if (!this.reduce && Date.now() - this.last > 3500) {
+      ry += 0.12; moved = true;
+    }
+    if (moved) this.setState({ rx, ry });
+  }
+  renderVals() {
+    const s = this.state;
+    const a = s.ry * Math.PI / 180, b = s.rx * Math.PI / 180;
+    const sa = Math.sin(a), sb = Math.sin(b);
+    const tilt = Math.min(1, Math.abs(sa) + Math.abs(sb));
+    const sel = PRINTS.find((p) => p.key === s.sel) || PRINTS[0];
+    return {
+      cardTransform: 'rotateX(' + s.rx.toFixed(2) + 'deg) rotateY(' + s.ry.toFixed(2) + 'deg)',
+      foilPos: (50 + 50 * sa).toFixed(1) + '% ' + (50 - 50 * sb).toFixed(1) + '%',
+      foilOpacity: s.foil ? (0.25 + 0.6 * tilt).toFixed(3) : '0',
+      glarePos: (50 - 60 * sa).toFixed(1) + '% ' + (50 + 60 * sb).toFixed(1) + '%',
+      glareOpacity: (0.35 + 0.4 * tilt).toFixed(3),
+      selLabel: sel.label,
+      showHint: !s.touched,
+      chips: PRINTS.map((p) => ({
+        label: p.chip, pressed: s.sel === p.key ? 'true' : 'false', ring: s.sel === p.key ? '#46E3C8' : '#2B3040',
+        pick: () => this.setState({ sel: p.key })
+      })),
+      finishes: [['Standard', false], ['Foil', true]].map(([label, on]) => ({
+        label, pressed: s.foil === on ? 'true' : 'false',
+        bg: s.foil === on ? '#ECEEF3' : 'transparent', fg: s.foil === on ? '#0D0F14' : '#D5D9E2',
+        pick: () => this.setState({ foil: on })
+      })),
+      down: (e) => {
+        this.drag = { x: e.clientX, y: e.clientY }; this.v = { x: 0, y: 0 }; this.target = null;
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+        if (!this.state.touched) this.setState({ touched: true });
+      },
+      move: (e) => {
+        if (!this.drag) return;
+        const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
+        this.drag = { x: e.clientX, y: e.clientY };
+        this.v = { x: dx * 0.45, y: dy * 0.45 };
+        this.last = Date.now();
+        this.setState({ ry: this.state.ry + dx * 0.45, rx: this.state.rx - dy * 0.45 });
+      },
+      up: () => { this.drag = null; this.last = Date.now(); },
+      flip: () => { this.v = { x: 0, y: 0 }; this.target = { rx: 0, ry: Math.round(this.state.ry / 180) * 180 + 180 }; },
+      reset: () => { this.v = { x: 0, y: 0 }; this.target = { rx: 0, ry: Math.round(this.state.ry / 360) * 360 }; }
+    };
+  }
+}
+</script>
+</body>
+</html>
