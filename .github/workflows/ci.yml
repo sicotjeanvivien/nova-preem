@@ -76,6 +76,8 @@ jobs:
       APP_PROJECT: ${{ vars.APP_PROJECT || 'nova-preem' }}
     steps:
       - name: Check configuration
+        # Runs before the checkout: app/ does not exist yet.
+        working-directory: .
         run: |
           for name in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID CATALOG_BASE_URL; do
             if [ -z "${!name}" ]; then echo "::error::$name is not set (repository secrets / variables)"; exit 1; fi
