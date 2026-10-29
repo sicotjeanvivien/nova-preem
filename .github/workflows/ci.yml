@@ -95,6 +95,8 @@ jobs:
       - run: pnpm build
         env:
           VITE_CATALOG_BASE_URL: ${{ vars.CATALOG_BASE_URL }}
+          # Google Drive sync (docs/sync-spec.md §9); empty: the sync stays off ("Bientôt").
+          VITE_GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
       - id: deploy
         # pipefail: without it, the step takes tee's exit status and a failed deploy looks green.
         run: |

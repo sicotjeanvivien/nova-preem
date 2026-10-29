@@ -21,6 +21,7 @@ import { SearchScreen } from "../../src/ui/screens/SearchScreen.tsx";
 import { ReleaseCardsScreen } from "../../src/ui/screens/ReleaseCardsScreen.tsx";
 import { SetReleasesScreen } from "../../src/ui/screens/SetReleasesScreen.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
+import { SyncProvider } from "../../src/ui/SyncContext.tsx";
 import { index } from "../helpers-catalog.ts";
 import { fakeSource, MemoryCatalogStore, nodeHasher, realManifest } from "../helpers.ts";
 
@@ -100,6 +101,7 @@ export function TestApp({
       catalog: { store: catalogStore, source: catalogSource, hasher: nodeHasher },
       imageBaseUrl: "http://localhost/catalog/images/",
       appVersion: "0.1.0",
+      sync: null,
       ...extraServices,
     } as Services,
     catalog,
@@ -118,7 +120,9 @@ export function TestApp({
           }}
         >
           <CollectionProvider store={store} initial={entries}>
-            <RouterProvider router={router} />
+            <SyncProvider>
+              <RouterProvider router={router} />
+            </SyncProvider>
           </CollectionProvider>
         </CatalogUpdateProvider>
       </AppContext.Provider>

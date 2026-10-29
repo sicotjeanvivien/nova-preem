@@ -36,7 +36,8 @@ export type FileSettings = z.infer<typeof fileSettingsSchema>;
 
 export function buildCollectionFile(input: {
   entries: readonly CollectionEntry[];
-  settings: Settings;
+  /** The full settings, or the file's own (sync): only the file's are written. */
+  settings: Settings | FileSettings;
   appVersion: string;
   catalogVersion: string;
   now: string;

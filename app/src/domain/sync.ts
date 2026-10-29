@@ -14,8 +14,10 @@ export interface SyncContent {
 /** The remote file's content: its settings may be partial or missing (a hand-edited file, an older app). */
 export interface RemoteContent {
   entries: readonly CollectionEntry[];
-  settings?: Partial<FileSettings> | undefined;
+  settings?: RemoteSettings | undefined;
 }
+
+export type RemoteSettings = { [K in keyof FileSettings]?: FileSettings[K] | undefined };
 
 const byPrintingId = (a: CollectionEntry, b: CollectionEntry) => (a.printingId < b.printingId ? -1 : a.printingId > b.printingId ? 1 : 0);
 
@@ -54,7 +56,7 @@ export function mergeEntries(
  * the side that changed since the base wins; if both did, the device wins.
  * A setting missing from the remote file counts as unchanged.
  */
-export function mergeSettings(base: FileSettings, local: FileSettings, remote: Partial<FileSettings> | undefined): FileSettings {
+export function mergeSettings(base: FileSettings, local: FileSettings, remote: RemoteSettings | undefined): FileSettings {
   const merged: Record<string, unknown> = {};
   for (const key of Object.keys(fileSettingsSchema.shape) as (keyof FileSettings)[]) {
     const remoteValue = remote?.[key] ?? base[key];
@@ -95,6 +97,11 @@ function changeCount(a: SyncContent, b: SyncContent): number {
   return count;
 }
 
+/** The settings the remote file actually holds. */
+function definedOnly(settings: RemoteSettings | undefined): Partial<FileSettings> {
+  return Object.fromEntries(Object.entries(settings ?? {}).filter(([, value]) => value !== undefined));
+}
+
 function sameValue(a: unknown, b: unknown): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
 }
@@ -128,7 +135,7 @@ export function resolveFirstSync(choice: FirstSyncChoice, local: SyncContent, re
     case "keep-local":
       return { entries: [...local.entries].sort(byPrintingId), settings: local.settings };
     case "keep-remote":
-      return { entries: [...remote.entries].sort(byPrintingId), settings: fileSettingsSchema.parse({ ...local.settings, ...remote.settings }) };
+      return { entries: [...remote.entries].sort(byPrintingId), settings: fileSettingsSchema.parse({ ...local.settings, ...definedOnly(remote.settings) }) };
     case "merge": {
       const merged = new Map(local.entries.map((entry) => [entry.printingId, entry]));
       for (const entry of remote.entries) {

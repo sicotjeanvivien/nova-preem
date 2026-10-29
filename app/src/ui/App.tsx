@@ -14,6 +14,7 @@ import { CollectionProvider } from "./CollectionContext.tsx";
 import { FirstLaunch } from "./FirstLaunch.tsx";
 import { CollectionScreen } from "./screens/CollectionScreen.tsx";
 import { SettingsScreen } from "./screens/SettingsScreen.tsx";
+import { SyncProvider } from "./SyncContext.tsx";
 import { StatsScreen } from "./screens/StatsScreen.tsx";
 import { SearchScreen } from "./screens/SearchScreen.tsx";
 import { CardScreen } from "./screens/CardScreen.tsx";
@@ -112,7 +113,9 @@ export function App({ services }: { services: Services }) {
         <AppContext.Provider value={context}>
           <CatalogUpdateProvider onUpdated={(catalog) => setBoot({ status: "ready", catalog })} checkAtLaunch={navigator.onLine}>
             <CollectionProvider store={services.collection} initial={entries}>
-              <RouterProvider router={router} />
+              <SyncProvider>
+                <RouterProvider router={router} />
+              </SyncProvider>
             </CollectionProvider>
           </CatalogUpdateProvider>
         </AppContext.Provider>

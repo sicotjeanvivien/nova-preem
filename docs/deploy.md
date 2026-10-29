@@ -35,7 +35,24 @@ L'app trouve le catalogue grâce à `VITE_CATALOG_BASE_URL`, fixée au build par
    - secrets : `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` ;
    - variable : `CATALOG_BASE_URL` = adresse du site du catalogue, **avec la barre finale** (`https://nova-preem-catalog.pages.dev/`) ;
    - variable facultative : `APP_PROJECT`, si le projet de l'app ne s'appelle pas `nova-preem`.
+   - variable `GOOGLE_CLIENT_ID` : identifiant client OAuth de la synchronisation Google Drive (ci-dessous). Sans elle, la synchronisation reste désactivée (ligne « Bientôt » dans Réglages).
 5. Relancer le dernier workflow de `main` (ou pousser sur `main`) : l'app est déployée.
+
+## Synchronisation Google Drive (une seule fois)
+
+Détail : `docs/sync-spec.md` §4 et §9. L'app n'utilise qu'un **identifiant client** OAuth, public ; aucun secret.
+
+1. Sur https://console.cloud.google.com, créer un projet `Nova Preem` et y activer l'**API Google Drive** (APIs et services → Bibliothèque).
+2. **Google Auth Platform** (ou « Écran de consentement OAuth ») :
+   - *Branding* : nom `Nova Preem`, adresse d'assistance et de contact ;
+   - *Audience* : type **Externe**, mode **Test**, et chaque compte qui doit pouvoir se connecter dans les **utilisateurs test** (100 au plus) ;
+   - *Accès aux données* : `.../auth/drive.file`, `openid`, `.../auth/userinfo.email` (aucune n'est « sensible »).
+3. *Clients* → créer un client OAuth de type **Application Web**, origines JavaScript autorisées : `https://nova-preem.pages.dev`, `http://localhost:5173`, `http://localhost:4173`. Pas d'URI de redirection.
+4. Copier l'**ID client** :
+   - en développement, dans `app/.env.local` : `VITE_GOOGLE_CLIENT_ID=<ID client>` (fichier ignoré par git) ;
+   - pour la mise en ligne : `gh variable set GOOGLE_CLIENT_ID --body "<ID client>"`.
+
+En mode Test, Google affiche « Google n'a pas validé cette application » à la connexion : c'est attendu. Le passage en production demandera un domaine vérifié et une politique de confidentialité (`docs/sync-spec.md` §9).
 
 ## Au quotidien
 
