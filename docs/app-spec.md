@@ -219,7 +219,7 @@ Une seule page par carte (`/cartes/:slug`), la même quel que soit l'écran d'o�
 - À chaque lancement, en ligne : comparaison du `hash` du manifeste distant avec celui stocké. S'il diffère, proposer la mise à jour (maquette États 3) ; la collection n'est jamais modifiée par une mise à jour.
 - **Images** : mises en cache par le service worker au fil de la navigation (stratégie cache-first). Réglage « Télécharger toutes les images » (Wi-Fi recommandé). Une image absente hors-ligne affiche un emplacement neutre avec le nom et le numéro.
 - Hors-ligne : bandeau discret (maquette États 2), toutes les fonctions restent disponibles sauf la mise à jour du catalogue.
-- En développement, le catalogue est servi depuis `catalog/dist/` ; l'URL de base est configurable (variable d'environnement), pour passer ensuite sur un CDN.
+- En développement, le catalogue est servi depuis `catalog/dist/` ; l'URL de base est configurable (variable d'environnement). En production, il est sur son propre site, sur une autre origine que l'app (voir `docs/deploy.md`) : les images de cartes sont donc chargées en CORS (`crossorigin="anonymous"`), comme le téléchargement complet.
 
 ---
 

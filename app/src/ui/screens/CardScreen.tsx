@@ -199,7 +199,7 @@ export function CardScreen() {
                 onClick={() => setParam({ impression: printing.id })}
               >
                 <span className="card-thumb__image">
-                  {printing.image && <img src={new URL(printing.image.thumbPath, services.imageBaseUrl).href} alt="" loading="lazy" decoding="async" />}
+                  {printing.image && <img src={new URL(printing.image.thumbPath, services.imageBaseUrl).href} alt="" crossOrigin="anonymous" loading="lazy" decoding="async" />}
                 </span>
                 <span className="card-thumb__label">
                   {printing.collectorNumber} {languageLabel(t, printing.language)}
@@ -340,7 +340,7 @@ function CardImage({ printing, color, baseUrl, alt, missing }: { printing: Print
   return (
     <div className="card-image" style={{ borderTopColor: cardColor(color) }}>
       {src ? (
-        <img src={src} alt={alt} width={printing.image?.width} height={printing.image?.height} onError={() => setFailed(printing.id)} />
+        <img src={src} alt={alt} crossOrigin="anonymous" width={printing.image?.width} height={printing.image?.height} onError={() => setFailed(printing.id)} />
       ) : (
         <span className="card-image__missing">
           <CardPlaceholderIcon width={28} height={28} />

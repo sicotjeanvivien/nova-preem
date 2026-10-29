@@ -260,6 +260,7 @@ function GalleryCard({
             srcSet={`${url(image.thumbPath)} 256w, ${url(image.path)} ${image.width}w`}
             sizes={imageWidth}
             alt=""
+            crossOrigin="anonymous"
             loading="lazy"
             decoding="async"
             onError={() => setFailed(true)}

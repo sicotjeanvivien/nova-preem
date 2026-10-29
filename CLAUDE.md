@@ -37,6 +37,7 @@ docs/      spécifications ; docs/mockups/ = copie du canevas de maquettes
 
 Documents de référence :
 - `docs/catalog-spec.md` : le pipeline du catalogue (source, normalisation, format de sortie).
+- `docs/deploy.md` : mise en ligne (Cloudflare Pages) et CI.
 - `docs/app-spec.md` : l'app MVP (écrans, fichier de collection, règles de complétion, doublons, recherche, étapes). **Lire avant toute modification de `app/`**, et suivre ses étapes dans l'ordre.
 
 Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src/domain/` n'importe ni React, ni Dexie, ni API du navigateur ; tout stockage passe par une interface (`CollectionStore`…) dont Dexie n'est qu'une implémentation. Distribution : PWA, puis TWA pour le Play Store, Capacitor seulement si besoin natif.
