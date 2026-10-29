@@ -49,7 +49,7 @@ export function CardTile({ variant, language, name, quantities, onChange }: Card
         <span className="tile__stripe" style={{ background: cardColor(variant.card.color) }} />
         <span className="tile__image">
           {thumb ? (
-            <img src={thumb} alt="" loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
+            <img src={thumb} alt="" crossOrigin="anonymous" loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
           ) : (
             <span className="tile__placeholder">
               <CardPlaceholderIcon width={26} height={26} />

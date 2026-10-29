@@ -149,7 +149,7 @@ export function SearchScreen() {
                   <Link key={result.card.id} {...link(result)} className="result-card">
                     <span className="result-card__stripe" style={{ background: cardColor(result.card.color) }} />
                     <span className="result-card__image">
-                      {thumb && <img src={thumb} alt="" loading="lazy" decoding="async" />}
+                      {thumb && <img src={thumb} alt="" crossOrigin="anonymous" loading="lazy" decoding="async" />}
                       {ownership(result)}
                     </span>
                     <span className="result-card__body">
@@ -196,7 +196,7 @@ export function SearchScreen() {
           return (
             <Link key={result.card.id} {...link(result)} className="collection-row">
               <span className="mini-card" style={{ borderTopColor: cardColor(result.card.color) }}>
-                {thumb && <img src={thumb} alt="" loading="lazy" decoding="async" />}
+                {thumb && <img src={thumb} alt="" crossOrigin="anonymous" loading="lazy" decoding="async" />}
               </span>
               <span className="collection-row__body">
                 <span className="collection-row__name">{primary}</span>

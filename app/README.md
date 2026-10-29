@@ -13,7 +13,7 @@ pnpm test       # tests Vitest (domaine, stockage IndexedDB simulé, rendu des �
 pnpm icons      # régénère les icônes de public/ (sharp)
 ```
 
-Le catalogue n'est pas copié dans l'app : en développement et en preview, `/catalog/` est servi depuis `../catalog/dist/` (voir `build/serve-catalog.ts`). En production, `VITE_CATALOG_BASE_URL` (fichier `.env`) pointera vers l'hébergement du catalogue.
+Le catalogue n'est pas copié dans l'app : en développement et en preview, `/catalog/` est servi depuis `../catalog/dist/` (voir `build/serve-catalog.ts`). En production, la CI fixe `VITE_CATALOG_BASE_URL` sur le site du catalogue (voir [`docs/deploy.md`](../docs/deploy.md)).
 
 ## Organisation
 

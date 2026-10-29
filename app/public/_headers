@@ -1,0 +1,9 @@
+# Cloudflare Pages. Everything else keeps the default (revalidated on each request),
+# which the service worker (sw.js) and index.html need to update.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Built files carry a content hash in their name.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

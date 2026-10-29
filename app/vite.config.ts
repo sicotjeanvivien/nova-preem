@@ -42,9 +42,12 @@ export default defineConfig(({ mode }) => {
           // is stored in IndexedDB by the app, so the service worker never caches it.
           globPatterns: ["**/*.{html,js,css,woff2,svg,png,webmanifest}"],
           navigateFallback: "index.html",
-          navigateFallbackDenylist: [new RegExp(`^${escapeRegExp(catalogBase)}`)],
+          // In production the catalog is on another origin, whose navigations the service worker never sees.
+          navigateFallbackDenylist: catalogBase.startsWith("/") ? [new RegExp(`^${escapeRegExp(catalogBase)}`)] : [],
           cleanupOutdatedCaches: true,
           // Card images are cached as they are displayed (spec §6): an image seen once stays available offline.
+          // Every card <img> is crossOrigin="anonymous", like the fetch() of the full download: the cache only
+          // holds CORS responses, never opaque ones that a fetch() could not read.
           runtimeCaching: [
             {
               urlPattern: new RegExp(`${escapeRegExp(catalogBase)}images/`),
@@ -52,7 +55,7 @@ export default defineConfig(({ mode }) => {
               options: {
                 cacheName: "card-images",
                 expiration: { maxEntries: 3000 },
-                cacheableResponse: { statuses: [0, 200] },
+                cacheableResponse: { statuses: [200] },
               },
             },
           ],
