@@ -12,6 +12,7 @@ export class NovaPreemDatabase extends Dexie {
   entries!: EntityTable<CollectionEntry, "printingId">;
   settings!: EntityTable<KeyValue, "key">;
   catalog!: EntityTable<KeyValue, "key">;
+  sync!: EntityTable<KeyValue, "key">;
 
   constructor(name = "nova-preem") {
     super(name);
@@ -19,6 +20,10 @@ export class NovaPreemDatabase extends Dexie {
       entries: "printingId",
       settings: "key",
       catalog: "key",
+    });
+    // Google Drive sync (docs/sync-spec.md §6). A new table: the existing data is untouched.
+    this.version(2).stores({
+      sync: "key",
     });
   }
 }

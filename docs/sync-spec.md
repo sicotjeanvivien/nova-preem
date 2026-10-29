@@ -73,12 +73,15 @@ Il n'y a pas encore de base :
 |---|---|---|
 | pas de fichier | quelconque | créer le fichier à partir de l'appareil |
 | fichier | collection vide | prendre le fichier |
-| fichier | collection non vide | **demander** (ci-dessous) |
+| fichier sans entrée | collection non vide | garder l'appareil (fusionner ne changerait aucune quantité) |
+| fichier avec entrées | collection non vide | **demander** (ci-dessous) |
 
 Le choix reprend le résumé de l'import (impressions ajoutées, modifiées, inconnues) et propose :
-- **Fusionner** (par défaut) : la plus grande quantité de chaque impression, comme l'import ;
-- **Garder Google Drive** : la collection de l'appareil est remplacée par celle du fichier ;
-- **Garder cet appareil** : le fichier est remplacé par la collection de l'appareil.
+- **Fusionner** (par défaut) : la plus grande quantité de chaque impression, comme l'import ; les réglages de l'appareil ;
+- **Garder Google Drive** : la collection de l'appareil est remplacée par celle du fichier, ainsi que les réglages présents dans le fichier ;
+- **Garder cet appareil** : le fichier est remplacé par la collection et les réglages de l'appareil.
+
+Le résultat devient la base des deux côtés.
 
 ### 3.4 Import pendant la synchronisation
 
