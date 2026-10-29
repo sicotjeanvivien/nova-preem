@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Réglages, synchronisation (web)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap; position: relative">
+
+<nav aria-label="Navigation principale" style="flex: 1 1 220px; box-sizing: border-box; padding: 20px 14px; background: #11141B; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">NOVA PREEM</span>
+</div>
+<a href="WebSetList.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
+<a href="WebCollection.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path><path d="M9.5 10l2 2 3.5-3.5"></path></svg>Collection</a>
+<a href="WebSearch.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>Recherche</a>
+<a href="WebStats.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Stats</a>
+<a href="WebSettings.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #0D0F14; background: {{accent}}; font-weight: 600">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
+
+<div style="margin-top: auto; padding: 16px 10px 0; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #232838">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A3AAB9">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #6FCF97"></span>Hors-ligne prêt</span>
+<sc-if value="{{connected}}" hint-placeholder-val="{{ true }}">
+<span role="status" style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: {{pill.fg}}">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>Drive : {{pill.label}}</span>
+</sc-if>
+<sc-if value="{{isPaused}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{resume}}" style="height: 32px; border-radius: 8px; border: 1px solid #FFD99A; background: transparent; color: #FFD99A; font-size: 12px; font-weight: 600; cursor: pointer">Reprendre la synchronisation</button>
+</sc-if>
+<span style="font-size: 12px; color: #8B92A3">Fan-made, non officiel</span>
+</div>
+</nav>
+
+<div style="flex: 999 1 640px; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column">
+<sc-if value="{{isPaused}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 24px; background: #2A2213; border-bottom: 1px solid #5A4520; font-size: 14px; color: #FFD99A">
+<span style="flex: 1">Synchronisation en pause : l'autorisation Google a expiré. Vos saisies restent dans ce navigateur.</span>
+<button onClick="{{resume}}" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #FFD99A; background: transparent; color: #FFD99A; font-size: 13px; font-weight: 600; cursor: pointer">Reprendre</button>
+</div>
+</sc-if>
+
+<div style="padding: 20px 24px 32px; display: flex; flex-direction: column; gap: 20px">
+<h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 26px">Réglages</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 16px; align-items: start; max-width: 1100px">
+
+<section aria-labelledby="sync-title" style="background: #161922; border: 1px solid {{cardBorder}}; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 36px; height: 36px; flex-shrink: 0; border-radius: 9px; background: #1F2330; display: grid; place-items: center; color: #D5D9E2">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path><path d="M12 11v5M9.5 13.5 12 11l2.5 2.5"></path></svg>
+</div>
+<h2 id="sync-title" style="margin: 0; flex: 1; font-size: 16px; font-weight: 600">Synchronisation Google Drive</h2>
+<sc-if value="{{connected}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 12px; color: {{pill.fg}}; padding: 3px 9px; border: 1px solid {{pill.border}}; border-radius: 999px">{{pill.label}}</span>
+</sc-if>
+</div>
+
+<sc-if value="{{isOff}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-if value="{{revoked}}" hint-placeholder-val="{{ false }}">
+<p role="alert" style="margin: 0; padding: 10px 12px; border-radius: 8px; background: #3A1C25; color: #FFB3C4; font-size: 13px; line-height: 1.45">Google Drive n'est plus autorisé. Reconnectez-vous pour reprendre la synchronisation.</p>
+</sc-if>
+<p style="margin: 0; font-size: 14px; color: #D5D9E2; line-height: 1.5">Retrouvez votre collection sur tous vos appareils.</p>
+<ul style="margin: 0; padding-left: 18px; font-size: 13px; color: #A3AAB9; line-height: 1.6">
+<li>Le fichier est enregistré dans <strong style="color: #D5D9E2">votre</strong> Google Drive, dans un dossier « Nova Preem ».</li>
+<li>Nova Preem n'a accès qu'à ce fichier, jamais au reste de votre Drive, et le projet ne voit rien passer.</li>
+<li>Facultatif : sans synchronisation, l'app fonctionne normalement.</li>
+</ul>
+<button onClick="{{connect}}" style="align-self: flex-start; height: 42px; padding: 0 18px; border-radius: 10px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Synchroniser avec Google Drive</button>
+</div>
+</sc-if>
+
+<sc-if value="{{connected}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #1F2330">
+<span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: #3A4152; display: grid; place-items: center; font-weight: 600; font-size: 13px">C</span>
+<span style="flex: 1; min-width: 0; font-size: 14px"><span style="color: #A3AAB9">Connecté à </span>compte@gmail.com</span>
+<button onClick="{{askDisconnect}}" style="height: 34px; padding: 0 10px; border: 0; border-radius: 8px; background: transparent; color: #FF8FAB; font-size: 13px; cursor: pointer">Se déconnecter</button>
+</div>
+
+<div role="status" style="display: flex; align-items: flex-start; gap: 10px">
+<span style="width: 10px; height: 10px; margin-top: 5px; flex-shrink: 0; border-radius: 50%; background: {{st.dot}}"></span>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px; font-weight: 600">{{st.label}}</span>
+<span style="font-size: 13px; color: #A3AAB9; line-height: 1.45">{{st.detail}}</span>
+</span>
+</div>
+
+<sc-if value="{{hasError}}" hint-placeholder-val="{{ false }}">
+<p role="alert" style="margin: 0; padding: 10px 12px; border-radius: 8px; background: #3A1C25; color: #FFB3C4; font-size: 13px; line-height: 1.45">{{st.error}}</p>
+</sc-if>
+<sc-if value="{{hasWarning}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; padding: 10px 12px; border-radius: 8px; background: #2A2213; color: #FFD99A; font-size: 13px; line-height: 1.45">{{warning}}</p>
+</sc-if>
+
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<sc-if value="{{isPaused}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{resume}}" style="height: 40px; padding: 0 16px; border-radius: 10px; border: 0; background: #F2C94C; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Reprendre la synchronisation</button>
+</sc-if>
+<sc-if value="{{showSyncNow}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{syncNow}}" disabled="{{busy}}" style="height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid #2B3040; background: #1F2330; color: {{syncNowFg}}; font-weight: 600; font-size: 14px; cursor: pointer">{{syncNowLabel}}</button>
+</sc-if>
+<a href="https://drive.google.com/" style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px">Voir le fichier dans Drive
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"></path></svg></a>
+</div>
+</div>
+</sc-if>
+</section>
+
+<section aria-labelledby="w4" style="background: #161922; border: 1px solid #232838; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="w4" style="margin: 0; font-size: 13px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Données</h2>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px">Catalogue des cartes</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9">v2026-10-26.1 · 151 cartes · hors-ligne</span>
+</span>
+<button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Vérifier</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<button style="height: 42px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">Exporter</button>
+<button style="height: 42px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">Importer</button>
+<button style="height: 42px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 13px; cursor: pointer">CSV</button>
+</div>
+<p style="margin: 0; font-size: 12px; color: #A3AAB9; line-height: 1.45">{{dataNote}}</p>
+</section>
+</div>
+<p style="margin: 0; max-width: 1100px; font-size: 12px; color: #8B92A3">Les sections Saisie, Complétion et Affichage sont inchangées (voir la maquette Réglages web) : elles s'affichent au-dessus de ces deux cartes.</p>
+</div>
+</div>
+
+<sc-if value="{{confirmOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: rgba(5, 6, 9, 0.72); display: grid; place-items: center">
+<section role="dialog" aria-modal="true" aria-labelledby="dc-title" style="width: 440px; background: #161922; border: 1px solid #2B3040; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<h2 id="dc-title" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Se déconnecter de Google Drive ?</h2>
+<p style="margin: 0; font-size: 14px; color: #D5D9E2; line-height: 1.5">La synchronisation s'arrête sur cet appareil. Votre collection reste sur l'appareil, et le fichier reste dans votre Drive.</p>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+<button onClick="{{cancelDisconnect}}" style="height: 40px; padding: 0 16px; border-radius: 10px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 14px; cursor: pointer">Annuler</button>
+<button onClick="{{disconnect}}" style="height: 40px; padding: 0 16px; border-radius: 10px; border: 0; background: #FF5C8A; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Se déconnecter</button>
+</div>
+</section>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"etat":{"editor":"enum","default":"ok","options":["off","revoked","ok","pending","running","paused","error-full","error-invalid"]},"avertissement":{"editor":"enum","default":"aucun","options":["aucun","plusieurs-fichiers","fichier-recree"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+const STATES = {
+  ok: { label: 'À jour', detail: 'Dernière synchronisation : il y a 2 min (19:43).', dot: '#46E3C8', pill: ['Synchronisé', '#8AF0DD', '#2B6B60'] },
+  pending: { label: 'En attente', detail: '3 modifications pas encore envoyées · hors-ligne. Elles partiront au retour du réseau.', dot: '#FFB067', pill: ['En attente · 3', '#FFD3A3', '#6B4A26'] },
+  running: { label: 'Synchronisation…', detail: 'Vous pouvez continuer à saisir des cartes.', dot: '#8FB4FF', pill: ['Synchronisation…', '#C2D5FF', '#34466B'] },
+  paused: { label: 'En pause', detail: "L'autorisation Google a expiré (au bout d'une heure). Un clic suffit pour reprendre.", dot: '#F2C94C', pill: ['En pause', '#FFD99A', '#5A4520'] },
+  'error-full': { label: 'Erreur', detail: 'Dernière synchronisation réussie : hier à 21:14. Nouvel essai à la prochaine occasion.', dot: '#FF5C8A', error: 'Votre Google Drive est plein : la collection ne peut plus y être enregistrée. Libérez de l’espace dans Drive ; vos saisies restent sur l’appareil.', pill: ['Erreur', '#FFB3C4', '#6B2A3B'] },
+  'error-invalid': { label: 'Erreur', detail: 'Rien n’a été modifié, ni sur l’appareil ni dans Drive.', dot: '#FF5C8A', error: 'Le fichier de Drive est incomplet ou abîmé (modifié à la main ?). Supprimez-le dans Drive : il sera recréé depuis cet appareil.', pill: ['Erreur', '#FFB3C4', '#6B2A3B'] }
+};
+const WARNINGS = {
+  'plusieurs-fichiers': 'Votre Drive contient 2 autres fichiers de collection Nova Preem. Seul le plus ancien est utilisé ; les autres ne sont pas modifiés.',
+  'fichier-recree': 'Le fichier de synchronisation était introuvable dans Drive : il a été recréé depuis cet appareil.'
+};
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { etat: props.etat ?? 'ok', confirm: false }; }
+  componentDidUpdate(prev) { if (prev.etat !== this.props.etat) this.setState({ etat: this.props.etat ?? 'ok' }); }
+  go(etat) { this.setState({ etat }); }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const etat = this.state.etat;
+    const off = etat === 'off' || etat === 'revoked';
+    const err = etat.indexOf('error') === 0;
+    const st = STATES[etat] || STATES.ok;
+    const warn = this.props.avertissement ?? 'aucun';
+    const finish = () => { this.go('running'); setTimeout(() => this.go('ok'), 1200); };
+    return {
+      accent, st, connected: !off, isOff: off, revoked: etat === 'revoked',
+      isPaused: etat === 'paused', hasError: err,
+      hasWarning: !off && etat === 'ok' && warn !== 'aucun', warning: WARNINGS[warn] || '',
+      pill: { label: st.pill[0], fg: st.pill[1], border: st.pill[2] },
+      cardBorder: etat === 'paused' ? '#5A4520' : (err ? '#6B2A3B' : '#232838'),
+      showSyncNow: !off && etat !== 'paused', busy: etat === 'running',
+      syncNowLabel: etat === 'running' ? 'Synchronisation…' : (err ? 'Réessayer' : 'Synchroniser maintenant'),
+      syncNowFg: etat === 'running' ? '#8B92A3' : '#ECEEF3',
+      dataNote: off
+        ? 'Votre collection reste dans ce navigateur. Exporter crée un fichier nova-preem-collection.json à garder en sauvegarde.'
+        : 'Exporter et Importer restent disponibles : une sauvegarde locale ne remplace pas la synchronisation, et inversement.',
+      connect: () => this.go('ok'), syncNow: finish, resume: finish,
+      confirmOpen: this.state.confirm,
+      askDisconnect: () => this.setState({ confirm: true }), cancelDisconnect: () => this.setState({ confirm: false }),
+      disconnect: () => this.setState({ confirm: false, etat: 'off' })
+    };
+  }
+}
+</script>
+</body>
+</html>

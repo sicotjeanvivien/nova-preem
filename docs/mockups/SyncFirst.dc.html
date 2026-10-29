@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Nova Preem — Première synchronisation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0D0F14}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
+
+<header style="height: 60px; flex-shrink: 0; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid #232838">
+<span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Réglages</span>
+</header>
+<div style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px" aria-hidden="true">
+<div style="height: 160px; border-radius: 12px; background: #161922; border: 1px solid #232838"></div>
+<div style="height: 120px; border-radius: 12px; background: #161922; border: 1px solid #232838"></div>
+</div>
+
+<div style="position: absolute; inset: 0; background: rgba(5, 6, 9, 0.75); display: flex; flex-direction: column; justify-content: flex-end">
+<section role="dialog" aria-modal="true" aria-labelledby="fs-title" style="max-height: 800px; overflow-y: auto; background: #161922; border-top: 1px solid #2B3040; border-radius: 16px 16px 0 0; padding: 18px 16px 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="fs-title" style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.2">Une collection existe déjà dans votre Drive</h2>
+<span style="font-size: 13px; color: #A3AAB9">Choisissez comment réunir les deux.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="padding: 10px 12px; border-radius: 10px; background: #1F2330; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 12px; color: #A3AAB9">Google Drive</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">168 impressions</span>
+<span style="font-size: 12px; color: #8B92A3">Fichier du 28 octobre 2026</span>
+</div>
+<div style="padding: 10px 12px; border-radius: 10px; background: #1F2330; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 12px; color: #A3AAB9">Cet appareil</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">29 impressions</span>
+<span style="font-size: 12px; color: #8B92A3">Saisies depuis 3 jours</span>
+</div>
+</div>
+
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Comment réunir les collections</legend>
+<sc-for list="{{options}}" as="o" hint-placeholder-count="3">
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 10px; cursor: pointer; border: 1px solid {{o.border}}; background: {{o.bg}}">
+<input type="radio" name="first-sync" checked="{{o.checked}}" onChange="{{o.pick}}" style="width: 20px; height: 20px; margin: 1px 0 0; accent-color: #46E3C8">
+<span style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 15px; font-weight: 600">{{o.title}}</span>
+<span style="font-size: 13px; color: #A3AAB9; line-height: 1.4">{{o.hint}}</span>
+</span>
+</label>
+</sc-for>
+</fieldset>
+
+<div aria-live="polite" style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{summary}}" as="g" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.05em; text-transform: uppercase">{{g.where}}</span>
+<ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.55; color: #D5D9E2">
+<sc-for list="{{g.lines}}" as="l" hint-placeholder-count="2">
+<li style="color: {{l.color}}">{{l.text}}</li>
+</sc-for>
+</ul>
+</div>
+</sc-for>
+<span style="font-size: 12px; color: #8B92A3">2 impressions inconnues du catalogue actuel sont conservées.</span>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button style="height: 46px; border-radius: 10px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 14px; cursor: pointer">Annuler</button>
+<button style="height: 46px; border-radius: 10px; border: 0; background: {{confirmBg}}; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">{{confirmLabel}}</button>
+</div>
+<span style="font-size: 12px; color: #8B92A3; text-align: center">Annuler : la synchronisation n'est pas activée, rien n'est modifié.</span>
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"choix":{"editor":"enum","default":"merge","options":["merge","drive","device"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+const OPTIONS = [
+  ['merge', 'Fusionner (recommandé)', 'Pour chaque impression, la plus grande quantité est gardée. Rien n’est perdu.'],
+  ['drive', 'Garder Google Drive', 'La collection de cet appareil est remplacée par celle du Drive.'],
+  ['device', 'Garder cet appareil', 'Le fichier du Drive est remplacé par la collection de cet appareil.']
+];
+const OK = '#D5D9E2'; const LOSS = '#FF8FAB';
+const SUMMARY = {
+  merge: [
+    { where: 'Sur cet appareil', lines: [['151 impressions ajoutées', OK], ['6 impressions modifiées', OK]] },
+    { where: 'Dans Google Drive', lines: [['12 impressions ajoutées', OK], ['6 impressions modifiées', OK]] }
+  ],
+  drive: [
+    { where: 'Sur cet appareil', lines: [['151 impressions ajoutées', OK], ['6 impressions modifiées', OK], ['12 impressions supprimées', LOSS]] }
+  ],
+  device: [
+    { where: 'Dans Google Drive', lines: [['12 impressions ajoutées', OK], ['6 impressions modifiées', OK], ['151 impressions supprimées', LOSS]] }
+  ]
+};
+
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { choix: props.choix ?? 'merge' }; }
+  componentDidUpdate(prev) { if (prev.choix !== this.props.choix) this.setState({ choix: this.props.choix ?? 'merge' }); }
+  renderVals() {
+    const accent = this.props.accent ?? '#46E3C8';
+    const c = this.state.choix;
+    const options = OPTIONS.map(([id, title, hint]) => ({
+      title, hint, checked: c === id, border: c === id ? accent : '#2B3040', bg: c === id ? '#1C2A2A' : 'transparent',
+      pick: () => this.setState({ choix: id })
+    }));
+    const summary = SUMMARY[c].map((g) => ({ where: g.where, lines: g.lines.map(([text, color]) => ({ text, color })) }));
+    const destructive = c !== 'merge';
+    return {
+      accent, options, summary,
+      confirmLabel: c === 'merge' ? 'Fusionner et synchroniser' : (c === 'drive' ? 'Remplacer cet appareil' : 'Remplacer le Drive'),
+      confirmBg: destructive ? '#FF5C8A' : accent
+    };
+  }
+}
+</script>
+</body>
+</html>
