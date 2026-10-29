@@ -1,10 +1,12 @@
 import "fake-indexeddb/auto";
+import { Dexie } from "dexie";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { catalogSchema, manifestSchema } from "../../src/domain/catalog.ts";
 import type { CollectionEntry } from "../../src/domain/collection.ts";
 import { DEFAULT_SETTINGS } from "../../src/domain/settings.ts";
+import { connectedState } from "../../src/domain/sync.ts";
 import { NovaPreemDatabase } from "../../src/storage/db.ts";
-import { DexieCatalogStore, DexieCollectionStore, DexieSettingsStore } from "../../src/storage/dexieStores.ts";
+import { DexieCatalogStore, DexieCollectionStore, DexieSettingsStore, DexieSyncStore } from "../../src/storage/dexieStores.ts";
 import { realCatalogText, realManifest } from "../helpers.ts";
 
 let db: NovaPreemDatabase;
@@ -67,5 +69,45 @@ describe("DexieSettingsStore", () => {
     await expect(store.update({ duplicateThreshold: 12 })).rejects.toThrow();
     await db.settings.put({ key: "duplicateThreshold", value: "beaucoup" });
     expect((await store.load()).duplicateThreshold).toBe(1);
+  });
+});
+
+describe("DexieSyncStore", () => {
+  const state = connectedState("someone@example.com", { value: "token", expiresAt: "2026-10-29T11:00:00.000Z" });
+
+  it("is empty while sync is off, keeps the state, and forgets it on disconnection", async () => {
+    const store = new DexieSyncStore(db);
+    expect(await store.load()).toBeUndefined();
+    const synced = { ...state, fileId: "file", base: { entries: [entry("a", 2)], settings: { ...DEFAULT_SETTINGS } }, baseVersion: "7", lastSyncAt: "2026-10-29T10:00:00.000Z" };
+    await store.save(synced);
+    expect(await new DexieSyncStore(db).load()).toEqual({
+      ...synced,
+      // Only the synced settings are part of the base.
+      base: { entries: [entry("a", 2)], settings: { entryReleaseId: "wnc-retail", entryLanguage: "fr", duplicateThreshold: 1, completionGroups: ["main", "starter"], cardNameLanguage: "entry" } },
+    });
+    await store.clear();
+    expect(await store.load()).toBeUndefined();
+  });
+
+  it("ignores an invalid stored state, as if sync were off", async () => {
+    await db.sync.put({ key: "state", value: { provider: "dropbox" } });
+    expect(await new DexieSyncStore(db).load()).toBeUndefined();
+  });
+});
+
+describe("migration to version 2 (sync table)", () => {
+  it("keeps the collection, settings and catalog of a version 1 database", async () => {
+    const name = db.name;
+    await db.delete();
+    const v1 = new Dexie(name);
+    v1.version(1).stores({ entries: "printingId", settings: "key", catalog: "key" });
+    await v1.table("entries").put(entry("kept", 3));
+    await v1.table("settings").put({ key: "duplicateThreshold", value: 2 });
+    v1.close();
+
+    db = new NovaPreemDatabase(name);
+    expect(await new DexieCollectionStore(db).list()).toEqual([entry("kept", 3)]);
+    expect((await new DexieSettingsStore(db).load()).duplicateThreshold).toBe(2);
+    expect(await new DexieSyncStore(db).load()).toBeUndefined();
   });
 });

@@ -7,8 +7,11 @@ import { settingsSchema, type Settings } from "./settings.ts";
 export const COLLECTION_FORMAT = "nova-preem/collection";
 export const COLLECTION_SCHEMA_VERSION = 1;
 
-/** Settings saved in the file (spec §4.3 example): those that describe how the collection is entered and counted. */
-const fileSettingsSchema = settingsSchema.pick({
+/**
+ * Settings saved in the file (spec §4.3 example): those that describe how the
+ * collection is entered and counted. They are also the synced settings (docs/sync-spec.md §2.1).
+ */
+export const fileSettingsSchema = settingsSchema.pick({
   entryReleaseId: true,
   entryLanguage: true,
   duplicateThreshold: true,
@@ -29,6 +32,7 @@ const collectionFileSchema = z.object({
 });
 
 export type CollectionFile = z.infer<typeof collectionFileSchema>;
+export type FileSettings = z.infer<typeof fileSettingsSchema>;
 
 export function buildCollectionFile(input: {
   entries: readonly CollectionEntry[];
@@ -82,6 +86,16 @@ export function parseCollectionFile(text: string): { ok: true; file: CollectionF
 
 export type ImportMode = "replace" | "merge";
 
+/** Merge of two entries of the same printing: the largest quantity and the extreme dates (spec §4.3). */
+export function mergeLargest(a: CollectionEntry, b: CollectionEntry): CollectionEntry {
+  return {
+    printingId: a.printingId,
+    quantity: Math.max(a.quantity, b.quantity),
+    firstAddedAt: a.firstAddedAt < b.firstAddedAt ? a.firstAddedAt : b.firstAddedAt,
+    lastAddedAt: a.lastAddedAt > b.lastAddedAt ? a.lastAddedAt : b.lastAddedAt,
+  };
+}
+
 export interface ImportPlan {
   /** The collection after the import. */
   entries: CollectionEntry[];
@@ -107,17 +121,7 @@ export function planImport(
   const after = new Map(mode === "replace" ? [] : before);
   for (const entry of incoming) {
     const existing = after.get(entry.printingId);
-    after.set(
-      entry.printingId,
-      mode === "merge" && existing
-        ? {
-            printingId: entry.printingId,
-            quantity: Math.max(existing.quantity, entry.quantity),
-            firstAddedAt: existing.firstAddedAt < entry.firstAddedAt ? existing.firstAddedAt : entry.firstAddedAt,
-            lastAddedAt: existing.lastAddedAt > entry.lastAddedAt ? existing.lastAddedAt : entry.lastAddedAt,
-          }
-        : { ...entry },
-    );
+    after.set(entry.printingId, mode === "merge" && existing ? mergeLargest(existing, entry) : { ...entry });
   }
   const same = (a: CollectionEntry, b: CollectionEntry) =>
     a.quantity === b.quantity && a.firstAddedAt === b.firstAddedAt && a.lastAddedAt === b.lastAddedAt;

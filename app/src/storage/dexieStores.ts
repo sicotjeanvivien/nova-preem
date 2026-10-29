@@ -1,7 +1,8 @@
 import type { Catalog, CatalogManifest } from "../domain/catalog.ts";
 import type { CollectionEntry } from "../domain/collection.ts";
 import { DEFAULT_SETTINGS, settingsSchema, type Settings } from "../domain/settings.ts";
-import type { CatalogStore, CollectionStore, SettingsStore, StoredCatalog } from "../domain/stores.ts";
+import type { CatalogStore, CollectionStore, SettingsStore, StoredCatalog, SyncStore } from "../domain/stores.ts";
+import { syncStateSchema, type SyncState } from "../domain/sync.ts";
 import type { NovaPreemDatabase } from "./db.ts";
 
 // IndexedDB implementations of the domain storage interfaces.
@@ -78,5 +79,24 @@ export class DexieSettingsStore implements SettingsStore {
     const validated = settingsSchema.partial().parse(changes);
     await this.db.settings.bulkPut(Object.entries(validated).map(([key, value]) => ({ key, value })));
     return this.load();
+  }
+}
+
+export class DexieSyncStore implements SyncStore {
+  constructor(private readonly db: NovaPreemDatabase) {}
+
+  /** A single row; an invalid stored state is ignored, as if sync were off. */
+  async load(): Promise<SyncState | undefined> {
+    const row = await this.db.sync.get("state");
+    const parsed = syncStateSchema.safeParse(row?.value);
+    return parsed.success ? parsed.data : undefined;
+  }
+
+  async save(state: SyncState): Promise<void> {
+    await this.db.sync.put({ key: "state", value: syncStateSchema.parse(state) });
+  }
+
+  async clear(): Promise<void> {
+    await this.db.sync.clear();
   }
 }

@@ -73,12 +73,15 @@ Il n'y a pas encore de base :
 |---|---|---|
 | pas de fichier | quelconque | créer le fichier à partir de l'appareil |
 | fichier | collection vide | prendre le fichier |
-| fichier | collection non vide | **demander** (ci-dessous) |
+| fichier sans entrée | collection non vide | garder l'appareil (fusionner ne changerait aucune quantité) |
+| fichier avec entrées | collection non vide | **demander** (ci-dessous) |
 
-Le choix reprend le résumé de l'import (impressions ajoutées, modifiées, inconnues) et propose :
-- **Fusionner** (par défaut) : la plus grande quantité de chaque impression, comme l'import ;
-- **Garder Google Drive** : la collection de l'appareil est remplacée par celle du fichier ;
-- **Garder cet appareil** : le fichier est remplacé par la collection de l'appareil.
+Le dialogue montre le nombre d'impressions de chaque côté, puis, pour le choix en cours, le résumé de l'import **de chaque côté touché** (sur cet appareil, dans Google Drive : impressions ajoutées, modifiées, supprimées) et les impressions inconnues du catalogue, conservées. Il propose :
+- **Fusionner** (par défaut) : la plus grande quantité de chaque impression, comme l'import ; les réglages de l'appareil ;
+- **Garder Google Drive** : la collection de l'appareil est remplacée par celle du fichier, ainsi que les réglages présents dans le fichier ;
+- **Garder cet appareil** : le fichier est remplacé par la collection et les réglages de l'appareil.
+
+Le résultat devient la base des deux côtés. **Annuler** n'active pas la synchronisation : rien n'est modifié, l'appareil est déconnecté.
 
 ### 3.4 Import pendant la synchronisation
 
@@ -135,7 +138,7 @@ L'interface ne se fige jamais pendant une synchronisation. Si une saisie arrive 
 | En pause | jeton expiré : « Reprendre la synchronisation » |
 | Erreur | voir §7 ; l'app réessaie à la prochaine occasion |
 
-« Modifications en attente » se déduit de la comparaison entre la collection locale et la base : pas de drapeau à maintenir.
+« Modifications en attente » se déduit de la comparaison entre la collection locale et la base : pas de drapeau à maintenir. Leur **nombre** est affiché (« En attente · 3 ») : chaque impression dont l'entrée diffère de la base compte pour une, chaque réglage synchronisé qui diffère aussi ; avant la première synchronisation, chaque entrée compte.
 
 ---
 
@@ -167,7 +170,7 @@ Mêmes règles que `docs/app-spec.md` §9.1.
 |---|---|
 | Fichier mémorisé introuvable ou dans la corbeille | rechercher par propriété d'app ; sinon, recréer le fichier depuis l'appareil et le signaler (« Le fichier de synchronisation a été recréé ») |
 | Plusieurs fichiers trouvés | utiliser le plus ancien ; signaler dans Réglages qu'il y en a d'autres, sans les toucher |
-| Fichier invalide ou d'un format inconnu (modifié à la main…) | ne rien écrire, ni localement ni dans Drive ; état Erreur avec le message de l'import |
+| Fichier invalide ou d'un format inconnu (modifié à la main…) | ne rien écrire, ni localement ni dans Drive ; état Erreur. Le message propose de **supprimer le fichier dans Drive** : la synchronisation suivante le recrée depuis l'appareil (cas « introuvable » ci-dessus) |
 | Autorisation refusée ou retirée par l'utilisateur | état Désactivée, message « Google Drive n'est plus autorisé » |
 | Drive plein | état Erreur, message dédié ; les saisies restent locales |
 | Réseau ou serveur (5xx, 429) | état En attente ; nouvel essai à la prochaine occasion (§5.1), avec un délai croissant |

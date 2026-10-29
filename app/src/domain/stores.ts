@@ -1,6 +1,7 @@
 import type { Catalog, CatalogManifest } from "./catalog.ts";
 import type { CollectionEntry } from "./collection.ts";
 import type { Settings } from "./settings.ts";
+import type { SyncState } from "./sync.ts";
 
 // Storage interfaces (docs/app-spec.md §9.1). The domain and the interface
 // only know these; IndexedDB (Dexie) is one implementation among others.
@@ -33,4 +34,12 @@ export interface SettingsStore {
   /** Stored settings merged with the defaults. */
   load(): Promise<Settings>;
   update(changes: Partial<Settings>): Promise<Settings>;
+}
+
+export interface SyncStore {
+  /** The sync state of this device; undefined when sync is off (never connected, or disconnected). */
+  load(): Promise<SyncState | undefined>;
+  save(state: SyncState): Promise<void>;
+  /** Forgets everything about the sync (disconnection, sync spec §4.2). */
+  clear(): Promise<void>;
 }
