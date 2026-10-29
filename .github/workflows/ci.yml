@@ -96,7 +96,9 @@ jobs:
         env:
           VITE_CATALOG_BASE_URL: ${{ vars.CATALOG_BASE_URL }}
       - id: deploy
+        # pipefail: without it, the step takes tee's exit status and a failed deploy looks green.
         run: |
+          set -o pipefail
           pnpm dlx wrangler@4.155.0 pages deploy dist --project-name="$APP_PROJECT" --branch=main \
             --commit-hash="$GITHUB_SHA" --commit-message="$(git log -1 --format=%s)" | tee deploy.log
           echo "url=$(grep -oE 'https://[a-z0-9.-]+\.pages\.dev' deploy.log | tail -1)" >> "$GITHUB_OUTPUT"
