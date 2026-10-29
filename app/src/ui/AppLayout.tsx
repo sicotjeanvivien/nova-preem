@@ -27,9 +27,12 @@ export function AppLayout() {
   return (
     <div className={`app ${onCardPage ? "app--full-page" : ""}`}>
       <nav className="nav" aria-label={t("nav.label")}>
-        <div className="nav__brand brand">
-          <LogoIcon width={22} height={22} />
-          <span className="brand__name">{t("app.name")}</span>
+        {/* Two elements: on a single one, .brand's display would override the hiding of .nav__brand on mobile. */}
+        <div className="nav__brand">
+          <div className="brand">
+            <LogoIcon width={22} height={22} />
+            <span className="brand__name">{t("app.name")}</span>
+          </div>
         </div>
         {TABS.map(({ to, label, Icon }) => (
           <NavLink key={to} to={to} className="nav__link">
