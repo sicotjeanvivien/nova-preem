@@ -310,7 +310,7 @@ Chaque étape se termine par une app qui fonctionne. Ne pas commencer la suivant
 
 ## 11. Hors périmètre du MVP
 
-Synchronisation Google Drive (juste après le MVP, en s'appuyant sur le fichier du §4.3), journal d'ouverture de boosters, classeur virtuel 3×3, liste d'échange partageable, état et gradation des cartes, deck builder, prix et valeur, scan de carte, comptes utilisateurs, backend.
+Synchronisation Google Drive (juste après le MVP, en s'appuyant sur le fichier du §4.3 : voir `docs/sync-spec.md`), journal d'ouverture de boosters, classeur virtuel 3×3, liste d'échange partageable, état et gradation des cartes, deck builder, prix et valeur, scan de carte, comptes utilisateurs, backend.
 
 ---
 
