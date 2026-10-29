@@ -307,7 +307,7 @@ Le pipeline **échoue** (code de sortie non nul) seulement si : la validation Zo
 - Générer aussi une miniature de 256 px de large pour les grilles : `images/thumbs/{printingId}.webp` (sharp, WebP qualité 80, environ 18 Ko). Une image source qui ne serait pas en WebP est convertie.
 - `images/index.json` associe chaque impression à la version source de son image (`render-<hash>.webp`) et à ses dimensions. `pnpm build` le lit pour remplir `image`. Une image absente donne une anomalie `missing-image`, une image dont l'illustration a changé à la source une anomalie `outdated-image`.
 - En développement, l'app sert `catalog/dist/` : la base d'URL des images est alors `images/`.
-- Phase 2 (plus tard) : publication des images sur un stockage objet (Cloudflare R2 ou équivalent). Le champ `image.path` reste relatif pour que seule la base d'URL change.
+- Phase 2 : publication du catalogue et des images sur Cloudflare Pages par `pnpm publish-catalog` (seulement les images référencées par le catalogue, avec en-têtes CORS ; voir `docs/deploy.md`). Le champ `image.path` reste relatif pour que seule la base d'URL change.
 
 ---
 
