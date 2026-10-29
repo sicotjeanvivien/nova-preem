@@ -7,9 +7,10 @@ import {
   mergeCollections,
   mergeEntries,
   mergeSettings,
+  pendingChangeCount,
+  planFirstSync,
   resolveFirstSync,
   sameContent,
-  syncHasLocalChanges,
   syncStateSchema,
   syncStatus,
   tokenValid,
@@ -139,17 +140,35 @@ describe("first sync of a device (sync spec §3.3)", () => {
   it("keep local: the device's content", () => {
     expect(resolveFirstSync("keep-local", local, remote)).toEqual(local);
   });
+
+  it("summarizes what each side gains and loses, for each choice", () => {
+    const known = (id: string) => id !== "c";
+    expect(planFirstSync("merge", local, remote, known)).toMatchObject({
+      device: { added: 1, modified: 1, removed: 0 },
+      drive: { added: 1, modified: 1, removed: 0 },
+      unknown: 1,
+    });
+    expect(planFirstSync("keep-remote", local, remote, known)).toMatchObject({
+      device: { added: 1, modified: 1, removed: 1 },
+      drive: { added: 0, modified: 0, removed: 0 },
+    });
+    expect(planFirstSync("keep-local", local, remote, known)).toMatchObject({
+      device: { added: 0, modified: 0, removed: 0 },
+      drive: { added: 1, modified: 1, removed: 1 },
+      unknown: 0,
+    });
+  });
 });
 
 describe("status (sync spec §5.3)", () => {
-  const facts: SyncFacts = { connected: true, tokenValid: true, syncing: false, lastError: null, localChanges: false };
+  const facts: SyncFacts = { connected: true, tokenValid: true, syncing: false, lastError: null, pendingChanges: 0 };
 
   it("is up to date, pending, syncing or paused depending on the facts", () => {
     expect(syncStatus(facts)).toBe("up-to-date");
-    expect(syncStatus({ ...facts, localChanges: true })).toBe("pending");
-    expect(syncStatus({ ...facts, localChanges: true, syncing: true })).toBe("syncing");
+    expect(syncStatus({ ...facts, pendingChanges: 3 })).toBe("pending");
+    expect(syncStatus({ ...facts, pendingChanges: 3, syncing: true })).toBe("syncing");
     expect(syncStatus({ ...facts, tokenValid: false })).toBe("paused");
-    expect(syncStatus({ ...facts, tokenValid: false, localChanges: true })).toBe("paused");
+    expect(syncStatus({ ...facts, tokenValid: false, pendingChanges: 3 })).toBe("paused");
   });
 
   it("is disabled without an account, or once Google Drive access was withdrawn", () => {
@@ -162,13 +181,13 @@ describe("status (sync spec §5.3)", () => {
     expect(syncStatus({ ...facts, lastError: "storage-full", tokenValid: false })).toBe("error");
   });
 
-  it("deduces local changes from the base", () => {
-    const base = content([e("a", 1)]);
-    expect(syncHasLocalChanges(base, content([e("a", 1)]))).toBe(false);
-    expect(syncHasLocalChanges(base, content([e("a", 2)]))).toBe(true);
-    expect(syncHasLocalChanges(base, content([e("a", 1)], { duplicateThreshold: 2 }))).toBe(true);
-    expect(syncHasLocalChanges(null, content([]))).toBe(false);
-    expect(syncHasLocalChanges(null, content([e("a", 1)]))).toBe(true);
+  it("counts the pending changes from the base: printings and settings that differ", () => {
+    const base = content([e("a", 1), e("b", 1)]);
+    expect(pendingChangeCount(base, content([e("a", 1), e("b", 1)]))).toBe(0);
+    expect(pendingChangeCount(base, content([e("a", 2), e("c", 1)]))).toBe(3);
+    expect(pendingChangeCount(base, content([e("a", 1), e("b", 1)], { duplicateThreshold: 2 }))).toBe(1);
+    expect(pendingChangeCount(null, content([]))).toBe(0);
+    expect(pendingChangeCount(null, content([e("a", 1), e("b", 2)]))).toBe(2);
   });
 });
 
@@ -176,7 +195,13 @@ describe("state kept on the device", () => {
   it("starts without a file nor a base after connecting", () => {
     const state = connectedState("someone@example.com", { value: "token", expiresAt: T3 });
     expect(syncStateSchema.parse(state)).toEqual(state);
-    expect(state).toMatchObject({ fileId: null, base: null, lastSyncAt: null, lastError: null });
+    expect(state).toMatchObject({ fileId: null, base: null, lastSyncAt: null, lastError: null, notice: null });
+  });
+
+  it("keeps the warning of the last sync", () => {
+    const state = connectedState(null, null);
+    expect(syncStateSchema.parse({ ...state, notice: { kind: "other-files", count: 2 } }).notice).toEqual({ kind: "other-files", count: 2 });
+    expect(syncStateSchema.safeParse({ ...state, notice: { kind: "other-files", count: 0 } }).success).toBe(false);
   });
 
   it("considers the token valid until it expires", () => {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { collectionEntrySchema, type CollectionEntry } from "./collection.ts";
-import { fileSettingsSchema, mergeLargest, type FileSettings } from "./collectionFile.ts";
+import { fileSettingsSchema, mergeLargest, planImport, type FileSettings } from "./collectionFile.ts";
 
 // Synchronization of the collection with a file in the user's cloud
 // (docs/sync-spec.md): three-way merge, first sync, status.
@@ -73,18 +73,26 @@ export function mergeCollections(base: SyncContent, local: SyncContent, remote: 
 
 /** Same entries (whatever their order) and same settings. */
 export function sameContent(a: SyncContent, b: SyncContent): boolean {
-  if (a.entries.length !== b.entries.length || !sameValue(a.settings, b.settings)) return false;
-  const sortedA = [...a.entries].sort(byPrintingId);
-  const sortedB = [...b.entries].sort(byPrintingId);
-  return sortedA.every((entry, i) => {
-    const other = sortedB[i]!;
-    return (
-      entry.printingId === other.printingId &&
-      entry.quantity === other.quantity &&
-      entry.firstAddedAt === other.firstAddedAt &&
-      entry.lastAddedAt === other.lastAddedAt
-    );
-  });
+  return changeCount(a, b) === 0;
+}
+
+/**
+ * Number of differences between two contents: each printing whose entry
+ * differs (added, removed, or changed) and each setting that differs.
+ */
+function changeCount(a: SyncContent, b: SyncContent): number {
+  const aById = new Map(a.entries.map((entry) => [entry.printingId, entry]));
+  const bById = new Map(b.entries.map((entry) => [entry.printingId, entry]));
+  let count = 0;
+  for (const printingId of new Set([...aById.keys(), ...bById.keys()])) {
+    const x = aById.get(printingId);
+    const y = bById.get(printingId);
+    if (!x || !y || x.quantity !== y.quantity || x.firstAddedAt !== y.firstAddedAt || x.lastAddedAt !== y.lastAddedAt) count++;
+  }
+  for (const key of Object.keys(fileSettingsSchema.shape) as (keyof FileSettings)[]) {
+    if (!sameValue(a.settings[key], b.settings[key])) count++;
+  }
+  return count;
 }
 
 function sameValue(a: unknown, b: unknown): boolean {
@@ -132,6 +140,41 @@ export function resolveFirstSync(choice: FirstSyncChoice, local: SyncContent, re
   }
 }
 
+/** What one side gains and loses (the import summary, sync spec §3.3). */
+export interface SideChanges {
+  added: number;
+  modified: number;
+  removed: number;
+}
+
+export interface FirstSyncPlan {
+  result: SyncContent;
+  device: SideChanges;
+  drive: SideChanges;
+  /** Printings of the result unknown to the current catalog: kept, and reported. */
+  unknown: number;
+}
+
+/** The first sync's choice and its summary on each side (SyncFirst mockups). */
+export function planFirstSync(
+  choice: FirstSyncChoice,
+  local: SyncContent,
+  remote: RemoteContent,
+  isKnownPrinting: (printingId: string) => boolean,
+): FirstSyncPlan {
+  const result = resolveFirstSync(choice, local, remote);
+  const changes = (before: readonly CollectionEntry[]): SideChanges => {
+    const { added, modified, removed } = planImport(before, result.entries, "replace", isKnownPrinting);
+    return { added, modified, removed };
+  };
+  return {
+    result,
+    device: changes(local.entries),
+    drive: changes(remote.entries),
+    unknown: result.entries.filter((entry) => !isKnownPrinting(entry.printingId)).length,
+  };
+}
+
 // ---------- Status (sync spec §5.3) ----------
 
 /**
@@ -150,8 +193,8 @@ export interface SyncFacts {
   tokenValid: boolean;
   syncing: boolean;
   lastError: SyncError | null;
-  /** The local content differs from the base (syncHasLocalChanges). */
-  localChanges: boolean;
+  /** Local changes not yet sent (pendingChangeCount). */
+  pendingChanges: number;
 }
 
 /** The status shown to the user, derived from the facts rather than stored. */
@@ -160,15 +203,17 @@ export function syncStatus(facts: SyncFacts): SyncStatus {
   if (facts.syncing) return "syncing";
   if (facts.lastError) return "error";
   if (!facts.tokenValid) return "paused";
-  return facts.localChanges ? "pending" : "up-to-date";
+  return facts.pendingChanges > 0 ? "pending" : "up-to-date";
 }
 
 /**
- * Local changes not yet sent (sync spec §5.3): deduced from the base, no flag
- * to maintain. Before the first sync, any collection counts as a change.
+ * Number of local changes not yet sent (sync spec §5.3, "En attente · 3"):
+ * deduced from the base, no flag to maintain. A change is a printing whose
+ * entry differs from the base, or a synced setting. Before the first sync,
+ * each entry of the collection counts.
  */
-export function syncHasLocalChanges(base: SyncContent | null, local: SyncContent): boolean {
-  return base ? !sameContent(base, local) : local.entries.length > 0;
+export function pendingChangeCount(base: SyncContent | null, local: SyncContent): number {
+  return base ? changeCount(base, local) : local.entries.length;
 }
 
 // ---------- State kept on the device ----------
@@ -193,13 +238,17 @@ export const syncStateSchema = z.object({
   /** Access token and its expiry (sync spec §4.1); null once expired or revoked. */
   token: z.object({ value: z.string(), expiresAt: z.string() }).nullable(),
   lastError: z.enum(syncErrors).nullable(),
+  /** Warning of the last sync, shown in Settings (sync spec §7): file recreated, other files left untouched. */
+  notice: z
+    .discriminatedUnion("kind", [z.object({ kind: z.literal("recreated") }), z.object({ kind: z.literal("other-files"), count: z.number().int().min(1) })])
+    .nullable(),
 });
 
 export type SyncState = z.infer<typeof syncStateSchema>;
 
 /** The state right after connecting an account, before the first sync. */
 export function connectedState(account: string | null, token: SyncState["token"]): SyncState {
-  return { provider: "google-drive", account, fileId: null, base: null, baseVersion: null, lastSyncAt: null, token, lastError: null };
+  return { provider: "google-drive", account, fileId: null, base: null, baseVersion: null, lastSyncAt: null, token, lastError: null, notice: null };
 }
 
 export function tokenValid(token: SyncState["token"], now: string): boolean {
