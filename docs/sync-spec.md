@@ -118,11 +118,11 @@ Seulement si l'appareil est en ligne et le jeton valide ; sinon, la synchronisat
 
 ### 5.2 Une synchronisation
 
-1. Trouver le fichier : l'identifiant mémorisé, sinon une recherche par propriété d'app. Plusieurs fichiers trouvés : prendre le plus ancien et signaler les autres (§7).
+1. Trouver le fichier : une recherche par propriété d'app, à chaque synchronisation (le fichier a pu être déplacé, mis à la corbeille ou doublé par un autre appareil) ; le fichier mémorisé s'il est parmi les résultats, sinon le plus ancien. Les autres fichiers trouvés sont signalés (§7).
 2. Télécharger le fichier et sa version Drive ; le valider (Zod, `docs/app-spec.md` §4.3).
 3. Fusionner base, local et Drive (§3).
-4. Si le résultat diffère du fichier : vérifier que la version Drive n'a pas changé depuis l'étape 2, puis envoyer le fichier. Si elle a changé, recommencer à l'étape 2 (trois fois au plus). À vérifier lors de l'implémentation : si l'API Drive accepte une précondition d'écriture (`If-Match`), l'utiliser plutôt que cette vérification.
-5. Si le résultat diffère de la collection locale : l'écrire localement, en une transaction.
+4. Si le résultat diffère du fichier (ou s'il lui manque des réglages) : vérifier que la version Drive n'a pas changé depuis l'étape 2, juste avant d'envoyer le fichier. Si elle a changé, recommencer à l'étape 1 (trois fois au plus). Une écriture d'un autre appareil entre cette vérification et l'envoi reste possible : la fenêtre est courte, et le cas est jugé acceptable pour un seul utilisateur.
+5. Si le résultat diffère de la collection locale : l'écrire localement, en une transaction. Les saisies faites pendant la synchronisation sont gardées : le résultat est fusionné à trois points avec la collection actuelle, en prenant pour base celle du début de la synchronisation.
 6. Le résultat devient la nouvelle base.
 
 L'interface ne se fige jamais pendant une synchronisation. Si une saisie arrive pendant les étapes 2 à 5, elle est conservée et déclenche une nouvelle synchronisation.
@@ -149,15 +149,15 @@ Mêmes règles que `docs/app-spec.md` §9.1.
 - **Domaine** (`app/src/domain/`, pur) : la fusion à trois points, l'état de synchronisation et ses transitions, l'interface `SyncStore` (base, identifiant du fichier, version, jeton, dernière synchronisation), et l'interface **`RemoteFileProvider`** :
   ```ts
   interface RemoteFileProvider {
-    /** The collection file, if it exists. */
-    find(): Promise<RemoteFileRef | undefined>;
-    download(ref: RemoteFileRef): Promise<{ text: string; version: string }>;
+    /** The collection file (`knownId` if still there, otherwise the oldest), and the number of other files found. */
+    find(knownId: string | null): Promise<{ file: RemoteFileRef | undefined; others: number }>;
+    download(file: RemoteFileRef): Promise<{ text: string; version: string }>;
     create(text: string): Promise<RemoteFileRef>;
-    /** Fails with a "changed" error if the remote version is no longer `expectedVersion`. */
-    update(ref: RemoteFileRef, text: string, expectedVersion: string): Promise<RemoteFileRef>;
+    /** Fails with a "changed" error if the remote version is no longer `file.version`. */
+    update(file: RemoteFileRef, text: string): Promise<RemoteFileRef>;
   }
   ```
-  Un autre fournisseur (OneDrive…) n'aurait qu'à implémenter cette interface.
+  Un autre fournisseur (OneDrive…) n'aurait qu'à implémenter cette interface. La synchronisation elle-même (`synchronize`, §5.2) est aussi dans le domaine, écrite contre ces interfaces, et testée avec un Drive en mémoire.
 - **Plateforme** (`app/src/platform/`) : l'authentification Google (Identity Services) et l'implémentation Google Drive de `RemoteFileProvider` (API REST v3, `fetch`, sans SDK Google).
 - **Stockage** (`app/src/storage/`) : `SyncStore` dans Dexie, nouvelle table `sync` (version 2 de la base, migration sans perte).
 - **Interface** : un contexte React qui déclenche les synchronisations (§5.1) et expose l'état (§5.3).

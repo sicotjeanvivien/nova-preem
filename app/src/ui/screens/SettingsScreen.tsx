@@ -11,6 +11,8 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCatalogUpdate } from "../CatalogUpdate.tsx";
 import { useDataActions } from "../dataActions.ts";
+import { SyncCard } from "../SyncCard.tsx";
+import { useSync } from "../SyncContext.tsx";
 import { useImportFlow } from "../useImportFlow.tsx";
 import { languageLabel } from "../labels.ts";
 import { Toast } from "../Toast.tsx";
@@ -30,6 +32,8 @@ export function SettingsScreen() {
   const { exportCollection, exportCsv } = useDataActions();
   const images = useImageDownload();
   const catalogUpdate = useCatalogUpdate();
+  const sync = useSync();
+  const syncOn = sync.available && sync.status !== "disabled";
   const [check, setCheck] = useState<CatalogCheck | "checking" | null>(null);
   const [message, setMessage] = useState<{ id: number; text: string } | null>(null);
   const importFlow = useImportFlow((text) => setMessage({ id: Date.now(), text }));
@@ -209,7 +213,9 @@ export function SettingsScreen() {
           </div>
         </Section>
 
-        <Section id="data" title={t("settings.section.data")}>
+        {/* Desktop: the sync is a card of its own, before Data (WebSettings). */}
+        {sync.available && isDesktop && <SyncCard />}
+        <Section id="data" title={t("settings.section.data")} before={sync.available && !isDesktop ? <SyncCard /> : null}>
           <div className="settings-row">
             <span className="settings-row__text">
               <span>{t("settings.catalog")}</span>
@@ -243,17 +249,26 @@ export function SettingsScreen() {
             {importFlow.element}
           </div>
           <p className="settings__note settings__note--data">
-            {t("settings.dataNoteBefore")}
-            <span className="mono">nova-preem-collection.json</span>
-            {t("settings.dataNoteAfter")}
+            {syncOn ? (
+              t("settings.dataNoteSync")
+            ) : (
+              <>
+                {t("settings.dataNoteBefore")}
+                <span className="mono">nova-preem-collection.json</span>
+                {t("settings.dataNoteAfter")}
+              </>
+            )}
           </p>
-          <div className="settings-row settings-row--disabled" aria-disabled="true">
-            <span className="settings-row__text">
-              <span>{t("settings.sync")}</span>
-              <span className="settings-row__hint">{t("settings.syncLater")}</span>
-            </span>
-            <span className="soon-badge">{t("settings.soon")}</span>
-          </div>
+          {/* A build without a Google client ID keeps the MVP's "Bientôt" row. */}
+          {!sync.available && (
+            <div className="settings-row settings-row--disabled" aria-disabled="true">
+              <span className="settings-row__text">
+                <span>{t("settings.sync")}</span>
+                <span className="settings-row__hint">{t("settings.syncLater")}</span>
+              </span>
+              <span className="soon-badge">{t("settings.soon")}</span>
+            </div>
+          )}
         </Section>
       </div>
       <p className="settings__legal">
@@ -266,12 +281,13 @@ export function SettingsScreen() {
   );
 }
 
-function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+function Section({ id, title, before, children }: { id: string; title: string; before?: ReactNode; children: ReactNode }) {
   return (
     <section aria-labelledby={`settings-${id}`} className="settings-section">
       <h2 id={`settings-${id}`} className="settings-section__title">
         {title}
       </h2>
+      {before}
       <div className="settings-card">{children}</div>
     </section>
   );

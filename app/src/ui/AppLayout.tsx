@@ -7,6 +7,7 @@ import { useOnline } from "../platform/connectivity.ts";
 import { useIsDesktop } from "../platform/media.ts";
 import { CatalogUpdateDialog } from "./CatalogUpdate.tsx";
 import { StatusText } from "./Status.tsx";
+import { SyncFirstDialog } from "./SyncFirstDialog.tsx";
 import { WifiOffIcon } from "./icons.tsx";
 
 const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVGElement>> }[] = [
@@ -56,6 +57,7 @@ export function AppLayout() {
         <Outlet />
       </main>
       <CatalogUpdateDialog />
+      <SyncFirstDialog />
       <ScrollRestoration />
     </div>
   );

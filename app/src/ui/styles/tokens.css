@@ -21,6 +21,27 @@
   --color-warning-bg: #2a2213;
   --color-warning-border: #5a4520;
   --color-warning-text: #ffd99a;
+  --color-error-bg: #3a1c25;
+  --color-error-border: #6b2a3b;
+  --color-error-text: #ffb3c4;
+
+  /* Google Drive sync states (SyncIndicators mockup): dot, pill text, pill border. */
+  --color-sync-ok: #46e3c8;
+  --color-sync-ok-text: #8af0dd;
+  --color-sync-ok-border: #2b6b60;
+  --color-sync-pending: #ffb067;
+  --color-sync-pending-text: #ffd3a3;
+  --color-sync-pending-border: #6b4a26;
+  --color-sync-running: #8fb4ff;
+  --color-sync-running-text: #c2d5ff;
+  --color-sync-running-border: #34466b;
+  --color-sync-paused: #f2c94c;
+  --color-sync-paused-text: #ffd99a;
+  --color-sync-paused-border: #5a4520;
+  --color-sync-error: #ff5c8a;
+  --color-sync-error-text: #ffb3c4;
+  --color-sync-error-border: #6b2a3b;
+  --color-avatar: #3a4152;
 
   --color-rarity-common: #a3aab9;
   --color-rarity-uncommon: #6fcf97;
