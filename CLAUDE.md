@@ -68,7 +68,7 @@ Règles importantes :
 ## Stack et conventions
 
 - Node 22+, TypeScript strict, ESM, gestionnaire de paquets **pnpm**.
-- Code, identifiants et commits en **anglais**. Documentation et textes d'interface en **français** (l'interface sera aussi traduite en anglais).
+- Code, identifiants, commits et **README** en **anglais**. Documentation (`docs/`) et textes d'interface en **français** (l'interface est aussi traduite en anglais).
 - Validation des données entrantes avec un schéma (Zod) : si la source change de format, le pipeline doit échouer clairement, pas produire un catalogue corrompu.
 - Tests avec Vitest, notamment sur la normalisation (fixtures tirées de vraies réponses de l'API).
 - Pas de dépendance lourde sans raison. Pas de Rails, pas de jQuery.
