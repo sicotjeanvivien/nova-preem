@@ -92,3 +92,57 @@ describe("browsing from the cards of a release (step 3 criterion)", () => {
     expect(store.entries.get(printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr").id)?.quantity).toBe(1);
   });
 });
+
+describe("3D view (§5.10)", () => {
+  let container: HTMLDivElement;
+  let root: Root;
+
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.append(container);
+    root = createRoot(container);
+  });
+
+  afterEach(() => {
+    act(() => root.unmount());
+    container.remove();
+  });
+
+  const byLabel = (label: string) => {
+    const found = container.querySelector<HTMLElement>(`[aria-label="${label}"]`);
+    if (!found) throw new Error(`nothing labelled "${label}"`);
+    return found;
+  };
+  const click = (element: HTMLElement) => act(async () => element.click());
+
+  it("opens on the printing shown, in Standard finish, full screen, with a neutral back", async () => {
+    const beta = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-beta", "en", "β168");
+    await act(async () => root.render(<TestApp path={`${JOHNNY}?impression=${beta.id}`} />));
+    await click(container.querySelector<HTMLElement>(".card-3d-button")!);
+
+    expect(container.querySelector(".app--immersive")).not.toBeNull();
+    expect(container.querySelector(".viewer__printing")?.textContent).toBe("Beta β168 VO");
+    expect(byLabel("Afficher Beta β168 VO").getAttribute("aria-pressed")).toBe("true");
+    expect(container.querySelector(".viewer-card--foil")).toBeNull();
+    expect(container.querySelector(".viewer-card__back")?.textContent).toBe("NOVA PREEM");
+    expect(container.textContent).toContain("Glissez pour faire tourner la carte");
+    expect(container.textContent).not.toContain("Ajouter");
+
+    await click(container.querySelector<HTMLElement>('.viewer__finish button:last-child')!);
+    expect(container.querySelector(".viewer-card--foil")).not.toBeNull();
+
+    await click(byLabel("Fermer la vue 3D et revenir à la carte"));
+    expect(container.querySelector(".viewer")).toBeNull();
+    expect(container.querySelector("h1")?.textContent).toBe("Johnny Silverhand");
+    expect(byLabel("Afficher Beta β168 VO").getAttribute("aria-pressed")).toBe("true");
+  });
+
+  it("closes to the card page of the printing shown when opened from a direct link", async () => {
+    const vo = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "en");
+    await act(async () => root.render(<TestApp path={`${JOHNNY}/3d?impression=${vo.id}&langue=en`} />));
+    expect(container.querySelector(".viewer__name")?.textContent).toBe("Johnny Silverhand — Rocking Renegade");
+    await click(byLabel("Fermer la vue 3D et revenir à la carte"));
+    expect(container.querySelector("h1")?.textContent).toBe("Johnny Silverhand");
+    expect(byLabel("Afficher Retail 003 VO").getAttribute("aria-pressed")).toBe("true");
+  });
+});
