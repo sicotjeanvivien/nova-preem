@@ -2,6 +2,7 @@
   "name": "nova-preem-catalog",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "Catalog pipeline for Nova Preem",
   "type": "module",
   "engines": {
