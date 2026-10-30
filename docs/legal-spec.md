@@ -18,7 +18,7 @@ Les textes ont été rédigés hors avocat, d'après le fonctionnement réel de 
 - Les fichiers de `docs/legal/` sont **la source** : l'app les affiche tels quels (pas de réécriture dans le code). Les déplacer dans `app/` si c'est plus simple pour le build, mais garder un seul exemplaire de chaque texte.
 - Deux marqueurs à remplacer au build, définis à **un seul endroit** (configuration de l'app, variables `VITE_SITE_DOMAIN` et `VITE_CONTACT_EMAIL` par exemple) :
   - `{{domain}}` : le domaine public. **Pas encore choisi** : en attendant, `nova-preem.pages.dev`.
-  - `{{contactEmail}}` : l'adresse de contact, affichée comme lien `mailto:`. **À fournir par le propriétaire** ; le build échoue clairement si elle manque en production.
+  - `{{contactEmail}}` : l'adresse de contact, affichée comme lien `mailto:` : **`awsd.contact@gmail.com`** (valeur par défaut de la configuration).
 - La langue suit la langue de l'interface. Les liens internes des textes (`/confidentialite`…) restent les mêmes dans les deux langues.
 - Les textes français font foi (dit à la fin des CGU anglaises).
 
