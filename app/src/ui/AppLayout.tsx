@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import { NavLink, Outlet, ScrollRestoration, useMatch } from "react-router";
+import { NavLink, Outlet, ScrollRestoration, useLocation, useMatch } from "react-router";
 import { useI18n } from "../i18n/i18n.tsx";
 import type { MessageKey } from "../i18n/messages.ts";
 import { CollectionIcon, LogoIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
@@ -9,6 +9,8 @@ import { CatalogUpdateDialog } from "./CatalogUpdate.tsx";
 import { StatusText } from "./Status.tsx";
 import { SyncFirstDialog } from "./SyncFirstDialog.tsx";
 import { SyncPauseBanner, SyncSidebarLine } from "./SyncIndicators.tsx";
+import { LEGAL_PAGES } from "./legalPages.ts";
+import { LegalLinks } from "./screens/LegalScreen.tsx";
 import { WifiOffIcon } from "./icons.tsx";
 
 const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVGElement>> }[] = [
@@ -24,7 +26,9 @@ export function AppLayout() {
   const { t } = useI18n();
   // The card page is full screen on mobile (CardDetail): no bottom bar there.
   // The 3D view is full screen at every width (CardViewer / WebCardViewer).
-  const onCardPage = useMatch("/cartes/:slug") !== null;
+  // So are the legal pages (Legal mockup).
+  const location = useLocation();
+  const onCardPage = useMatch("/cartes/:slug") !== null || LEGAL_PAGES.some((page) => page.path === location.pathname);
   const onViewer = useMatch("/cartes/:slug/3d") !== null;
   const online = useOnline();
   const isDesktop = useIsDesktop();
@@ -49,6 +53,7 @@ export function AppLayout() {
           <SyncSidebarLine />
           <span>{t("legal.fanMade")}</span>
           <span>{t("legal.notEndorsed")}</span>
+          <LegalLinks />
         </div>
       </nav>
       <main className="app__main">

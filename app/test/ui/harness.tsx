@@ -15,6 +15,8 @@ import { CatalogUpdateProvider } from "../../src/ui/CatalogUpdate.tsx";
 import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
 import { CardViewerScreen } from "../../src/ui/screens/CardViewerScreen.tsx";
+import { LegalScreen } from "../../src/ui/screens/LegalScreen.tsx";
+import { LEGAL_PAGES } from "../../src/ui/legalPages.ts";
 import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
 import { SettingsScreen } from "../../src/ui/screens/SettingsScreen.tsx";
 import { StatsScreen } from "../../src/ui/screens/StatsScreen.tsx";
@@ -67,6 +69,7 @@ const routes: RouteObject[] = [
       { path: "recherche", element: <SearchScreen /> },
       { path: "stats", element: <StatsScreen /> },
       { path: "reglages", element: <SettingsScreen /> },
+      ...LEGAL_PAGES.map((page) => ({ path: page.path.slice(1), element: <LegalScreen id={page.id} /> })),
     ],
   },
 ];

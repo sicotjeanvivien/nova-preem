@@ -1,7 +1,8 @@
+import { MemoryRouter } from "react-router";
 import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { I18nProvider } from "../../src/i18n/i18n.tsx";
-import { FirstLaunch } from "../../src/ui/FirstLaunch.tsx";
+import { FirstLaunch, FirstLaunchContext, type FirstLaunchProps } from "../../src/ui/FirstLaunch.tsx";
 import { index, printingOf } from "../helpers-catalog.ts";
 import { entry, TestApp, text } from "./harness.tsx";
 
@@ -114,10 +115,14 @@ describe("Sets, level 3: cards of a release", () => {
 });
 
 describe("first launch", () => {
-  const renderLaunch = (props: Parameters<typeof FirstLaunch>[0]) =>
+  const renderLaunch = (props: FirstLaunchProps) =>
     renderToString(
       <I18nProvider language="fr">
-        <FirstLaunch {...props} />
+        <FirstLaunchContext.Provider value={props}>
+          <MemoryRouter>
+            <FirstLaunch />
+          </MemoryRouter>
+        </FirstLaunchContext.Provider>
       </I18nProvider>,
     );
 

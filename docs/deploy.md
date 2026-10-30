@@ -59,6 +59,15 @@ En mode Test, Google affiche « Google n'a pas validé cette application » à l
 - **App** : merger sur `main` suffit.
 - **Catalogue** : `pnpm crawl && pnpm build && pnpm publish-catalog` dans `catalog/`. L'app détecte la nouvelle version par `manifest.json` et propose la mise à jour. `CATALOG_PROJECT=<nom>` change le projet visé.
 
+## Pages légales
+
+Les textes de `docs/legal/` sont convertis en HTML au build (`app/build/legal.ts`, voir `docs/legal-spec.md`). Deux variables, avec leur valeur par défaut dans `app/.env` :
+
+- `VITE_SITE_DOMAIN` : le domaine public, sans `https://` (`nova-preem.pages.dev` tant qu'il n'y a pas de domaine propre) ;
+- `VITE_CONTACT_EMAIL` : l'adresse de contact (`awsd.contact@gmail.com`).
+
+Pour les changer en production, modifier `app/.env` (ou les définir comme variables d'environnement du build). Le build échoue si l'une est vide ou si un texte contient un autre marqueur `{{…}}`. Le build écrit aussi `dist/a-propos.html`, `confidentialite.html`, `mentions-legales.html` et `cgu.html`, lisibles sans JavaScript : `curl https://nova-preem.pages.dev/confidentialite` doit renvoyer le texte complet.
+
 ## Points d'attention
 
 - **Changer l'adresse de l'app** (domaine personnel plus tard) : une PWA installée reste attachée à son origine, et les collections locales (IndexedDB) aussi. Il faudra un export / import pour migrer.

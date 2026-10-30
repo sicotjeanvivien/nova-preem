@@ -40,7 +40,7 @@ Les textes ont été rédigés hors avocat, d'après le fonctionnement réel de 
 ## 4. Contraintes techniques
 
 - **Hors-ligne** : les textes font partie du bundle (précachés), aucun chargement réseau.
-- **Lisibles sans JavaScript** : les vérificateurs de Google et les moteurs de recherche lisent le HTML brut. Générer au build un HTML statique par route (`/a-propos/index.html`…, version française, avec le style de l'app), que l'app remplace au chargement. Vérifier que Cloudflare Pages sert bien ces fichiers avant le repli SPA, et que le service worker ne les masque pas.
+- **Lisibles sans JavaScript** : les vérificateurs de Google et les moteurs de recherche lisent le HTML brut. Générer au build un HTML statique par route (`dist/a-propos.html`…, version française, avec le style de l'app), que l'app remplace au chargement. Cloudflare Pages sert `a-propos.html` à l'adresse `/a-propos` (et redirige `/a-propos.html` et `/a-propos/` vers elle) avant le repli SPA ; le service worker les précache et ne les masque pas (vérifié le 30/10/2026 sur un déploiement de prévisualisation).
 - La conversion Markdown → HTML se fait **au build**, sans bibliothèque à l'exécution. Une petite dépendance de build est acceptable.
 - `<title>` et `meta description` propres à chaque page.
 
