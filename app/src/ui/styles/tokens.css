@@ -62,6 +62,8 @@
   --color-card-blue-text: #8db8ff;
   --color-card-green-text: #7fd9a8;
   --color-stepper: #1f2330;
+  /* Light behind the card in the 3D view (CardViewer). */
+  --color-viewer-glow: #1a1e29;
 
   --color-toast: #262b38;
   --color-remove-bg: #3a1c25;

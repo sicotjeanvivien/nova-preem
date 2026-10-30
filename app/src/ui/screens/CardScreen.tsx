@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router";
+import { useMemo, useState, type ReactNode } from "react";
+import { Link, Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 import { localize, type Printing } from "../../domain/catalog.ts";
 import { copiesOwned, defaultPrinting, exclusiveCounterpart, printingsOfVariants, splitCardName, variantsOfCard } from "../../domain/cardView.ts";
 import { computeReleaseView, neighbors } from "../../domain/releaseView.ts";
@@ -9,8 +9,9 @@ import { useI18n } from "../../i18n/i18n.tsx";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState, readCardLinkState } from "../cardLink.ts";
 import { useCollection } from "../CollectionContext.tsx";
-import { CardPlaceholderIcon, ChevronLeftIcon, ChevronRightIcon } from "../icons.tsx";
+import { CardPlaceholderIcon, ChevronLeftIcon, ChevronRightIcon, RotateCardIcon } from "../icons.tsx";
 import { cardColor, cardColorLabel, cardColorText, cardTypeLabel, languageLabel, languageName, rarityColor } from "../labels.ts";
+import { FROM_CARD_PAGE } from "./CardViewerScreen.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 /** The cards of a release (Sets, level 3): the only origin with previous / next. */
@@ -88,6 +89,8 @@ export function CardScreen() {
     const sibling = variantOf(selected).printings.get(code);
     setParam({ langue: code, ...(sibling && { impression: sibling.id }) });
   };
+
+  const viewerUrl = `/cartes/${card.slug}/3d?impression=${selected.id}&langue=${language}`;
 
   const { title, subtitle } = splitCardName(name, card.baseName[language]);
   const otherLanguage = nameLanguages.find((code) => code !== language);
@@ -187,7 +190,16 @@ export function CardScreen() {
             baseUrl={services.imageBaseUrl}
             alt={t("card.imageAlt", { name, ...printingLabel(selected) })}
             missing={t("card.imageMissing", printingLabel(selected))}
-          />
+          >
+            <Link to={viewerUrl} state={FROM_CARD_PAGE} className="card-image__3d" aria-label={t("card.view3d")}>
+              <RotateCardIcon width={18} height={18} />
+              3D
+            </Link>
+          </CardImage>
+          <Link to={viewerUrl} state={FROM_CARD_PAGE} className="card-3d-button">
+            <RotateCardIcon width={20} height={20} />
+            {t("card.view3dShort")}
+          </Link>
           <div role="group" aria-label={t("card.shownPrinting")} className="card-thumbs">
             {printings.map((printing) => (
               <button
@@ -334,7 +346,21 @@ export function CardScreen() {
   );
 }
 
-function CardImage({ printing, color, baseUrl, alt, missing }: { printing: Printing; color: string | null; baseUrl: string; alt: string; missing: string }) {
+function CardImage({
+  printing,
+  color,
+  baseUrl,
+  alt,
+  missing,
+  children,
+}: {
+  printing: Printing;
+  color: string | null;
+  baseUrl: string;
+  alt: string;
+  missing: string;
+  children: ReactNode;
+}) {
   const [failed, setFailed] = useState<string | null>(null);
   const src = printing.image && failed !== printing.id ? new URL(printing.image.path, baseUrl).href : null;
   return (
@@ -347,6 +373,7 @@ function CardImage({ printing, color, baseUrl, alt, missing }: { printing: Print
           {missing}
         </span>
       )}
+      {children}
     </div>
   );
 }

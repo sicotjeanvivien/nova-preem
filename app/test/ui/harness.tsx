@@ -14,6 +14,7 @@ import type { StoredCatalog } from "../../src/domain/stores.ts";
 import { CatalogUpdateProvider } from "../../src/ui/CatalogUpdate.tsx";
 import { CollectionProvider } from "../../src/ui/CollectionContext.tsx";
 import { CardScreen } from "../../src/ui/screens/CardScreen.tsx";
+import { CardViewerScreen } from "../../src/ui/screens/CardViewerScreen.tsx";
 import { CollectionScreen } from "../../src/ui/screens/CollectionScreen.tsx";
 import { SettingsScreen } from "../../src/ui/screens/SettingsScreen.tsx";
 import { StatsScreen } from "../../src/ui/screens/StatsScreen.tsx";
@@ -61,6 +62,7 @@ const routes: RouteObject[] = [
       { path: "sets/:setId", element: <SetReleasesScreen /> },
       { path: "sets/:setId/:releaseId", element: <ReleaseCardsScreen /> },
       { path: "cartes/:slug", element: <CardScreen /> },
+      { path: "cartes/:slug/3d", element: <CardViewerScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },
       { path: "stats", element: <StatsScreen /> },

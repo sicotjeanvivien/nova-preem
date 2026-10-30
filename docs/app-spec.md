@@ -25,7 +25,7 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 
 | Onglet | Rôle | Maquettes (mobile / web) |
 |---|---|---|
-| Sets | Tout le catalogue, en quatre niveaux (ci-dessous) ; c'est là qu'on saisit | `Main`, `SetReleases`, `SetGrid`, `CardDetail` / `WebSetList`, `WebSetReleases`, `WebSets`, `WebCard` |
+| Sets | Tout le catalogue, en quatre niveaux (ci-dessous) ; c'est là qu'on saisit | `Main`, `SetReleases`, `SetGrid`, `CardDetail`, `CardViewer` / `WebSetList`, `WebSetReleases`, `WebSets`, `WebCard`, `WebCardViewer` |
 | Collection | Uniquement ce qui est possédé, avec filtres et tri | `Collection` / `WebCollection` |
 | Recherche | Recherche dans tous les sets et toutes les langues | `Search` / `WebSearch` |
 | Stats | Complétion et chiffres de la collection | `Completion` / `WebStats` |
@@ -36,7 +36,7 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 1. **Liste des sets** (`/sets`) : une tuile par set (icône, nom, **tirages complétés / tirages** — ex. « 2 / 17 tirages complétés » —, barre de progression de la même proportion), avec un champ de filtre par nom. Un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration).
 2. **Tirages du set** (`/sets/:setId`) : **une tuile par tirage** (Retail, Beta, chaque starter, chaque deck démo, chaque série de promos), regroupées sous les titres « Set principal », « Starters », « Decks démo », « Promos » (groupes `main`, `starter`, `demo`, `promo`), dans l'ordre `release.order`. Chaque tuile : bandeau avec le nom du tirage et un ruban vertical indiquant le groupe, variantes possédées / total, pourcentage, barre de progression, langues disponibles (VO, VF). Champ de filtre par nom. Un tirage sans impression n'est pas affiché.
 3. **Cartes d'un tirage** (`/sets/:setId/:releaseId`) : la grille des cartes du tirage, dans l'ordre des numéros. C'est l'écran de **saisie** (§5.1) : chaque vignette a ses boutons **− quantité +** ; un clic sur l'image ou le nom ouvre la page carte. Filtres : toutes, manquantes, possédées, doublons ; « Copier la liste » avec le filtre Manquantes.
-4. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis les cartes d'un tirage, la Collection ou la Recherche (§5.9).
+4. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis les cartes d'un tirage, la Collection ou la Recherche (§5.9). Son bouton « 3D » ouvre la **vue 3D** de la carte (`/cartes/:slug/3d`, §5.10).
 
 Le fil d'Ariane (bureau) et le bouton retour (mobile) remontent d'un niveau : page carte → cartes du tirage → tirages du set → liste des sets.
 
@@ -210,6 +210,19 @@ Une seule page par carte (`/cartes/:slug`), la même quel que soit l'écran d'o�
 - **Retour contextuel** : le bouton retour ramène à l'écran d'origine, dans le même état (filtres, langue, position de défilement) ; son libellé nomme cet écran (« Welcome to Night City · Retail », « Collection », « Recherche »). Arrivé par un lien direct, il ramène aux cartes du tirage de l'impression affichée.
 - **Précédente / suivante** : uniquement en venant de la page des cartes d'un tirage, pour parcourir les cartes **dans l'ordre et avec les filtres de cette page** (ex. seulement les manquantes du Retail). Libellés avec numéro et nom de la carte voisine.
 - Textes divergents entre impressions d'une même langue (cas réels, voir `catalog-spec.md` §9) : afficher le texte de l'impression sélectionnée, c'est-à-dire `printing.printedRulesText` s'il existe, sinon `card.rulesText[langue]`.
+
+### 5.10 Vue 3D
+
+Ajoutée après le MVP. Maquettes `CardViewer` / `WebCardViewer`. Pour admirer une carte, sans saisie (ni − ni +).
+
+- **Ouverture** : bouton « 3D » sur l'image de la page carte (mobile), « Voir en 3D » sous l'image (bureau). URL : `/cartes/:slug/3d?impression=…&langue=…`, avec l'impression affichée sur la page carte. **Plein écran** sur mobile comme sur bureau : ni barre du bas, ni barre latérale.
+- **Carte** : l'image en grand de l'impression choisie ; des puces pour changer d'impression (mêmes impressions, même ordre que les vignettes de la page carte). Une image absente hors-ligne affiche l'emplacement neutre avec le nom et le numéro.
+- **Rotation** : glisser (doigt ou souris) fait tourner la carte, avec de l'inertie ; les flèches du clavier la tournent par pas de 15°. Laissée au repos 3,5 s, elle tourne lentement d'elle-même, sauf si le système demande moins d'animations (`prefers-reduced-motion`). « Glissez pour faire tourner la carte » s'affiche jusqu'au premier geste.
+- **Retourner** montre le dos, puis de nouveau la face ; **Recentrer** remet la carte de face.
+- **Dos** : un dos neutre aux couleurs de l'app (logo et nom Nova Preem), **jamais le dos officiel** (propriété intellectuelle).
+- **Finition Standard / Foil** : le reflet foil est un effet d'affichage, **désactivé à l'ouverture** : le catalogue ne dit pas encore quelles impressions sont foil (`finish` toujours `null`, voir `catalog-spec.md`), et la vue ne doit pas suggérer une finition que l'impression n'a peut-être pas. Quand le catalogue le saura, Foil sera actif d'office pour ces impressions. Le reflet de lumière, qui suit l'inclinaison, est présent dans les deux cas.
+- **Fermer** (et le retour d'Android) ramène à la page carte telle qu'on l'a laissée. Arrivé par un lien direct, Fermer ouvre la page carte de l'impression affichée.
+- Pas de bibliothèque 3D : des transformations CSS suffisent.
 
 ---
 

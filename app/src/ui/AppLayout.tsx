@@ -23,11 +23,13 @@ const TABS: { to: string; label: MessageKey; Icon: ComponentType<SVGProps<SVGSVG
 export function AppLayout() {
   const { t } = useI18n();
   // The card page is full screen on mobile (CardDetail): no bottom bar there.
+  // The 3D view is full screen at every width (CardViewer / WebCardViewer).
   const onCardPage = useMatch("/cartes/:slug") !== null;
+  const onViewer = useMatch("/cartes/:slug/3d") !== null;
   const online = useOnline();
   const isDesktop = useIsDesktop();
   return (
-    <div className={`app ${onCardPage ? "app--full-page" : ""}`}>
+    <div className={`app ${onCardPage ? "app--full-page" : ""} ${onViewer ? "app--immersive" : ""}`}>
       <nav className="nav" aria-label={t("nav.label")}>
         {/* Two elements: on a single one, .brand's display would override the hiding of .nav__brand on mobile. */}
         <div className="nav__brand">

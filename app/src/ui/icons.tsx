@@ -139,3 +139,33 @@ export const CloudIcon = (props: IconProps) => (
     <path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z" />
   </Icon>
 );
+
+export const RotateCardIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="8" y="3" width="8" height="12" rx="1.5" />
+    <path d="M3.5 12.5c-.5 3.5 3.6 6.5 8.5 6.5 2.9 0 5.4-1 7-2.5" />
+    <path d="M17 14l2.5 2.5L17 19" />
+  </Icon>
+);
+
+export const CloseIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </Icon>
+);
+
+export const FlipIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 12a8 8 0 0 1 13.7-5.6L20 9" />
+    <path d="M20 4v5h-5" />
+    <path d="M20 12a8 8 0 0 1-13.7 5.6L4 15" />
+    <path d="M4 20v-5h5" />
+  </Icon>
+);
+
+export const RecenterIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+  </Icon>
+);

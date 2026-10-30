@@ -4257,3 +4257,430 @@ h2 {
 .collection-header__title h1 {
   flex-shrink: 0;
 }
+
+/* ---------- 3D view (CardViewer / WebCardViewer, spec §5.10) ---------- */
+
+.card-image {
+  position: relative;
+}
+
+.card-image__3d {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: var(--touch-target);
+  padding: 0 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.card-3d-button {
+  display: none;
+}
+
+.app--immersive .nav {
+  display: none;
+}
+
+.app--immersive .app__main {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.viewer__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.viewer__titles {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewer__name {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.viewer__printing {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.viewer__close {
+  order: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.viewer__stage {
+  --card-width: min(260px, 68vw, 46dvh);
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px 0 48px;
+  perspective: 1100px;
+  background: radial-gradient(60% 45% at 50% 46%, var(--color-viewer-glow) 0%, var(--color-bg) 100%);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.viewer__stage:active {
+  cursor: grabbing;
+}
+
+.viewer__shadow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--card-width) * 0.85);
+  height: 26px;
+  margin-top: calc(var(--card-width) * 0.75);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 55%), transparent);
+}
+
+.viewer-card {
+  --rx: -8deg;
+  --ry: -22deg;
+  position: relative;
+  width: var(--card-width);
+  aspect-ratio: 733 / 1024;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+}
+
+.viewer-card__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 0 0 1px var(--color-border-strong) inset;
+}
+
+.viewer-card__front {
+  background: var(--color-surface-raised);
+}
+
+.viewer-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.viewer-card__missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border-top: 7px solid;
+  font-size: 12px;
+  color: var(--color-text-faint);
+  text-align: center;
+}
+
+.viewer-card__missing-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.viewer-card__foil,
+.viewer-card__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.viewer-card__foil {
+  display: none;
+  background: linear-gradient(
+    115deg,
+    transparent 22%,
+    var(--color-rarity-secret) 36%,
+    var(--color-accent) 50%,
+    var(--color-rarity-iconic) 64%,
+    transparent 78%
+  );
+  background-size: 260% 260%;
+  background-position: var(--foil-position, 50% 50%);
+  mix-blend-mode: color-dodge;
+  opacity: var(--foil-opacity, 0.4);
+}
+
+.viewer-card--foil .viewer-card__foil {
+  display: block;
+}
+
+.viewer-card__glare {
+  background: radial-gradient(circle at var(--glare-position, 50% 50%), rgb(255 255 255 / 40%), transparent 45%);
+  mix-blend-mode: overlay;
+  opacity: var(--glare-opacity, 0.4);
+}
+
+.viewer-card__back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  transform: rotateY(180deg);
+  background: var(--color-nav);
+}
+
+.viewer-card__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: var(--color-text-muted);
+}
+
+.viewer__hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  font-size: 13px;
+  color: var(--color-text-faint);
+  text-align: center;
+  pointer-events: none;
+}
+
+.viewer__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 20px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-nav);
+}
+
+.viewer__chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.viewer__chip {
+  flex-shrink: 0;
+  height: var(--touch-target);
+  padding: 0 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.viewer__chip[aria-pressed="true"] {
+  border-color: var(--color-accent);
+}
+
+.viewer__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.viewer__finish {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+}
+
+.viewer__finish button {
+  height: var(--touch-target);
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.viewer__finish button[aria-pressed="true"] {
+  background: var(--color-text);
+  color: var(--color-on-accent);
+}
+
+.viewer__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  background: var(--color-stepper);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  .card-image__3d {
+    display: none;
+  }
+
+  .card-3d-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: var(--touch-target);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-medium);
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .card-3d-button svg {
+    color: var(--color-accent);
+  }
+
+  .app--immersive .nav {
+    display: none;
+  }
+
+  .viewer__header {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 12px 24px;
+  }
+
+  .viewer__titles {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .viewer__name {
+    font-size: 20px;
+  }
+
+  .viewer__printing {
+    font-size: 13px;
+  }
+
+  .viewer__close {
+    order: 0;
+    padding: 0 14px 0 10px;
+  }
+
+  .viewer__stage {
+    --card-width: min(340px, 52dvh);
+    min-height: 640px;
+    perspective: 1400px;
+    background: radial-gradient(45% 50% at 50% 46%, var(--color-viewer-glow) 0%, var(--color-bg) 100%);
+  }
+
+  .viewer__shadow {
+    height: 34px;
+  }
+
+  .viewer-card__face {
+    border-radius: 18px;
+  }
+
+  .viewer-card__brand {
+    font-size: 18px;
+  }
+
+  .viewer__hint {
+    bottom: 20px;
+    font-size: 14px;
+  }
+
+  .viewer__controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 16px 24px 24px;
+  }
+
+  .viewer__chips {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .viewer__chip {
+    padding: 0 16px;
+    font-size: 13px;
+  }
+
+  .viewer__finish {
+    flex: 0 0 220px;
+  }
+
+  .viewer__action {
+    padding: 0 14px;
+  }
+}

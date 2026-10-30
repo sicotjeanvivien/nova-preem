@@ -18,6 +18,7 @@ import { SyncProvider } from "./SyncContext.tsx";
 import { StatsScreen } from "./screens/StatsScreen.tsx";
 import { SearchScreen } from "./screens/SearchScreen.tsx";
 import { CardScreen } from "./screens/CardScreen.tsx";
+import { CardViewerScreen } from "./screens/CardViewerScreen.tsx";
 import { ReleaseCardsScreen } from "./screens/ReleaseCardsScreen.tsx";
 import { SetReleasesScreen } from "./screens/SetReleasesScreen.tsx";
 import { SetsScreen } from "./screens/SetsScreen.tsx";
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "sets/:setId", element: <SetReleasesScreen /> },
       { path: "sets/:setId/:releaseId", element: <ReleaseCardsScreen /> },
       { path: "cartes/:slug", element: <CardScreen /> },
+      { path: "cartes/:slug/3d", element: <CardViewerScreen /> },
       { path: "collection", element: <CollectionScreen /> },
       { path: "recherche", element: <SearchScreen /> },
       { path: "stats", element: <StatsScreen /> },
