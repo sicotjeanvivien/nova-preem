@@ -36,8 +36,14 @@ Environment variables, read at build time. Defaults are in [`.env`](.env); put l
 |---|---|---|
 | `VITE_CATALOG_BASE_URL` | Base URL of `catalog.json`, `manifest.json` and `images/`, with a trailing slash | `/catalog/` |
 | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID for the Drive sync. Public value, no secret. Empty: sync is off. | empty |
+| `VITE_SITE_DOMAIN` | Public domain, without `https://`: replaces `{{domain}}` in the legal pages | `nova-preem.pages.dev` |
+| `VITE_CONTACT_EMAIL` | Contact address: replaces `{{contactEmail}}` in the legal pages | `awsd.contact@gmail.com` |
 
 Setting up the Google project: [`docs/deploy.md`](../docs/deploy.md).
+
+## Legal pages
+
+About, privacy policy, legal notice and terms (`/a-propos`, `/confidentialite`, `/mentions-legales`, `/cgu`; spec: [`docs/legal-spec.md`](../docs/legal-spec.md)). Their texts live in [`docs/legal/`](../docs/legal/), in French and English: edit them there, never in the code. [`build/legal.ts`](build/legal.ts) fills the markers and converts the Markdown to HTML at build time, and writes `dist/<route>.html` so the pages are readable without JavaScript. The build fails if a setting is empty or a text has an unknown `{{…}}` marker.
 
 ## Code layout
 
@@ -47,6 +53,7 @@ src/storage/    Dexie implementations of the CatalogStore, CollectionStore and S
 src/platform/   browser services: HTTP, hashing, connectivity, service worker, Google sign-in and Drive
 src/i18n/       interface strings, French and English
 src/ui/         React: layout, screens, styles (CSS variables in ui/styles/tokens.css)
+build/          Vite plugins: local catalog server, legal pages
 test/           Vitest, mirroring src/ (domain, storage, ui)
 ```
 
