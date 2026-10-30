@@ -2,6 +2,7 @@
   "name": "nova-preem-app",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "Nova Preem: card collection manager (PWA). Fan-made, unofficial.",
   "type": "module",
   "engines": {

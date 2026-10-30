@@ -1,37 +1,73 @@
-# Nova Preem — app (PWA)
+# Nova Preem app
 
-Application de collection, hors-ligne d'abord. Spécification : [`docs/app-spec.md`](../docs/app-spec.md) ; maquettes : [`docs/mockups/`](../docs/mockups/).
+The collection app: a Progressive Web App, offline first, built with Vite, React 19, TypeScript, Dexie (IndexedDB), Zod and React Router.
 
-## Commandes
+Behavior and rules are specified in [`docs/app-spec.md`](../docs/app-spec.md) (in French) and [`docs/sync-spec.md`](../docs/sync-spec.md) for the Google Drive sync. The design mockups are in [`docs/mockups/`](../docs/mockups/).
+
+## Requirements
+
+- Node 22 or later
+- pnpm
+
+## Commands
 
 ```bash
 pnpm install
-pnpm dev        # serveur de développement, http://localhost:5173 (sans service worker)
-pnpm build      # vérification des types (app, domaine, tests) puis build de production dans dist/
-pnpm preview    # sert le build de production, http://localhost:4173 (avec service worker)
-pnpm test       # tests Vitest (domaine, stockage IndexedDB simulé, rendu des écrans)
-pnpm icons      # régénère les icônes de public/ (sharp)
+pnpm dev        # development server, http://localhost:5173 (no service worker)
+pnpm test       # Vitest: domain rules, IndexedDB storage (simulated), screen rendering
+pnpm typecheck  # types of the app, the domain on its own, and the build scripts
+pnpm build      # typecheck, then production build in dist/
+pnpm preview    # serves the production build, http://localhost:4173 (with service worker)
+pnpm icons      # regenerates the icons in public/ (sharp)
 ```
 
-Le catalogue n'est pas copié dans l'app : en développement et en preview, `/catalog/` est servi depuis `../catalog/dist/` (voir `build/serve-catalog.ts`). En production, la CI fixe `VITE_CATALOG_BASE_URL` sur le site du catalogue (voir [`docs/deploy.md`](../docs/deploy.md)).
+## Catalog
 
-## Organisation
+The catalog is not bundled into the app: the app downloads `manifest.json` and `catalog.json` at first launch, stores them in IndexedDB, and checks the manifest for updates at each launch.
+
+- In development and preview, `/catalog/` is served from `../catalog/dist/` (see [`build/serve-catalog.ts`](build/serve-catalog.ts)). The JSON files are committed; the card images only exist after you run the pipeline in [`catalog/`](../catalog/README.md). Without them, cards show a neutral placeholder.
+- In production, the catalog is a separate site on another origin. Images are loaded with CORS.
+
+## Configuration
+
+Environment variables, read at build time. Defaults are in [`.env`](.env); put local values in `.env.local` (ignored by git).
+
+| Variable | Purpose | Default |
+|---|---|---|
+| `VITE_CATALOG_BASE_URL` | Base URL of `catalog.json`, `manifest.json` and `images/`, with a trailing slash | `/catalog/` |
+| `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID for the Drive sync. Public value, no secret. Empty: sync is off. | empty |
+
+Setting up the Google project: [`docs/deploy.md`](../docs/deploy.md).
+
+## Code layout
 
 ```
-src/domain/     règles, types et schémas (Zod) ; pur : ni React, ni Dexie, ni API du navigateur
-src/storage/    implémentations IndexedDB (Dexie) des interfaces CatalogStore, CollectionStore, SettingsStore
-src/platform/   navigateur : téléchargement HTTP, hachage, réseau, service worker, assemblage des services
-src/i18n/       textes de l'interface (FR, EN)
-src/ui/         React : mise en page, écrans, styles (variables CSS dans ui/styles/tokens.css)
+src/domain/     rules, types and Zod schemas; pure: no React, no Dexie, no browser API
+src/storage/    Dexie implementations of the CatalogStore, CollectionStore and SettingsStore interfaces
+src/platform/   browser services: HTTP, hashing, connectivity, service worker, Google sign-in and Drive
+src/i18n/       interface strings, French and English
+src/ui/         React: layout, screens, styles (CSS variables in ui/styles/tokens.css)
+test/           Vitest, mirroring src/ (domain, storage, ui)
 ```
 
-La pureté du domaine est vérifiée deux fois : `tsconfig.domain.json` compile `src/domain/` sans les types du navigateur, et `test/domain/purity.test.ts` contrôle ses imports.
+Two rules keep the app portable to a native shell later (spec §9.1):
 
-## Tester sur Android (USB)
+1. **The domain is pure.** `src/domain/` imports neither React, Dexie nor any browser API. This is checked twice: `tsconfig.domain.json` compiles it without the DOM types, and `test/domain/purity.test.ts` checks its imports.
+2. **Storage sits behind interfaces.** Screens and rules use `CatalogStore`, `CollectionStore` and `SettingsStore`; Dexie is only one implementation.
 
-1. Sur le téléphone : activer les options pour les développeurs et le **débogage USB**, brancher le câble, accepter l'empreinte du PC.
-2. Sous Windows, dans Chrome : `chrome://inspect/#devices`, cocher **Discover USB devices** ; le téléphone apparaît.
-3. **Port forwarding** : `4173` → `localhost:4173` (et `5173` → `localhost:5173` pour le dev). WSL 2 relaie `localhost` vers Windows.
-4. Dans WSL : `pnpm build && pnpm preview`.
-5. Sur le téléphone, dans Chrome : `http://localhost:4173`. Comme l'adresse est `localhost`, Chrome la traite comme sécurisée : le service worker et l'installation fonctionnent sans HTTPS.
-6. Menu ⋮ → **Installer l'application** (ou « Ajouter à l'écran d'accueil »).
+## Collection file
+
+Export, import and the Drive sync share one JSON format (`nova-preem/collection`, schema version 1): printing IDs, quantities, dates and settings, sorted by printing ID. See spec §4.3.
+
+## Deployment
+
+The CI (`.github/workflows/ci.yml`) tests and builds on every push, and deploys `dist/` to Cloudflare Pages on each push to `main`. Details: [`docs/deploy.md`](../docs/deploy.md).
+
+## Testing on an Android phone (USB)
+
+1. On the phone, enable the developer options and **USB debugging**, plug the cable in and accept the computer's key.
+2. On the computer, in Chrome: open `chrome://inspect/#devices` and check **Discover USB devices**. The phone appears.
+3. **Port forwarding**: `4173` → `localhost:4173` (and `5173` → `localhost:5173` for development). On Windows with WSL 2, `localhost` is forwarded to WSL.
+4. Run `pnpm build && pnpm preview`.
+5. On the phone, in Chrome, open `http://localhost:4173`. Chrome treats `localhost` as secure, so the service worker and installation work without HTTPS.
+6. Menu ⋮ → **Install app** (or **Add to Home screen**).
