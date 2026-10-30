@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { localize, type ReleaseGroup } from "../../domain/catalog.ts";
 import { releasesOfSet } from "../../domain/catalogIndex.ts";
 import type { CatalogCheck } from "../../domain/catalogLoader.ts";
@@ -18,6 +18,9 @@ import { useImportFlow } from "../useImportFlow.tsx";
 import { languageLabel } from "../labels.ts";
 import { Toast } from "../Toast.tsx";
 import { SyncPill } from "../SyncIndicators.tsx";
+import { ChevronRightIcon } from "../icons.tsx";
+import { LEGAL_PAGES } from "../legalPages.ts";
+import { legalLinkState } from "./LegalScreen.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 const GROUPS: ReleaseGroup[] = ["main", "starter", "demo", "promo"];
@@ -278,6 +281,19 @@ export function SettingsScreen() {
               <span className="soon-badge">{t("settings.soon")}</span>
             </div>
           )}
+        </Section>
+
+        <Section id="about" title={t("settings.about")}>
+          {LEGAL_PAGES.map((page) => (
+            <Link key={page.id} className="settings-row settings-row--link" to={page.path} state={legalLinkState("nav.settings")}>
+              {t(page.settingsLabel)}
+              <ChevronRightIcon width={16} height={16} />
+            </Link>
+          ))}
+          <div className="settings-row settings-row--version">
+            <span>{t("settings.appVersion")}</span>
+            <span className="mono">{services.appVersion}</span>
+          </div>
         </Section>
       </div>
       <p className="settings__legal">

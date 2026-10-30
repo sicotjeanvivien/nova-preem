@@ -1,16 +1,27 @@
+import { createContext, useContext } from "react";
+import { Link } from "react-router";
 import type { CatalogErrorCode } from "../domain/catalogLoader.ts";
 import { useI18n } from "../i18n/i18n.tsx";
 import { LogoIcon } from "./icons.tsx";
+import { legalPage } from "./legalPages.ts";
+import { legalLinkState } from "./screens/LegalScreen.tsx";
 
-interface FirstLaunchProps {
+export interface FirstLaunchProps {
   /** Fraction downloaded, or null when the size is unknown. */
   progress: number | null;
   error: CatalogErrorCode | null;
   onRetry: () => void;
 }
 
-/** First launch (States 1 / WebStates 1): only the catalog download, no navigation. */
-export function FirstLaunch({ progress, error, onRetry }: FirstLaunchProps) {
+/** The download state, for the first-launch route. */
+export const FirstLaunchContext = createContext<FirstLaunchProps | null>(null);
+
+/**
+ * First launch (States 1 / WebStates 1): only the catalog download, no navigation,
+ * except the privacy policy and legal notice (docs/legal-spec.md §2).
+ */
+export function FirstLaunch() {
+  const { progress, error, onRetry } = useContext(FirstLaunchContext)!;
   const { t, percent } = useI18n();
   return (
     <div className="first-launch">
@@ -47,6 +58,13 @@ export function FirstLaunch({ progress, error, onRetry }: FirstLaunchProps) {
         )}
       </div>
       <div className="first-launch__note">{t("firstLaunch.images")}</div>
+      <nav className="first-launch__legal" aria-label={t("legal.links")}>
+        {(["privacy", "legal"] as const).map((id) => (
+          <Link key={id} to={legalPage(id).path} state={legalLinkState("legal.firstLaunch")}>
+            {t(legalPage(id).label)}
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

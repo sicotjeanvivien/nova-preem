@@ -4684,3 +4684,251 @@ h2 {
     padding: 0 14px;
   }
 }
+
+/* ---------- Legal pages (Legal / WebLegal, docs/legal-spec.md) ---------- */
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+}
+
+.legal-links a {
+  color: var(--color-text-muted);
+}
+
+.legal-links a:hover {
+  color: var(--color-accent-hover);
+}
+
+.first-launch__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 18px;
+  font-size: 13px;
+}
+
+.first-launch__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  color: var(--color-text-muted);
+}
+
+.sync-card__learn-more {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 32px;
+  font-size: 13px;
+}
+
+.settings-row--link {
+  min-height: var(--touch-target);
+  color: var(--color-text);
+}
+
+.settings-row--link svg {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.settings-row--link:hover {
+  color: var(--color-accent-hover);
+}
+
+.settings-row--version {
+  min-height: 0;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.legal-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px 8px 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-header__titles {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.legal-header__back {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.legal-header__title {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.legal {
+  max-width: 720px;
+  padding: 16px 18px 28px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Mobile: the header holds the back button and the title (rules after .mobile-only / .desktop-only). */
+.legal__back,
+.legal__title {
+  display: none;
+}
+
+.legal__back {
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.legal__back:hover {
+  color: var(--color-accent-hover);
+}
+
+.legal__title {
+  margin: 8px 0 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.legal__text h2 {
+  margin: 28px 0 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-text);
+  scroll-margin-top: 16px;
+}
+
+.legal__text p {
+  margin: 8px 0;
+}
+
+.legal__text ul {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+
+.legal__text li {
+  margin: 3px 0;
+}
+
+.legal__text li > ul {
+  margin: 4px 0;
+}
+
+.legal__text strong {
+  color: var(--color-text);
+}
+
+.legal__text code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--color-stepper);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.legal__text a {
+  overflow-wrap: anywhere;
+}
+
+.legal__text .legal__updated {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--color-text-faint);
+}
+
+.legal__others {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.legal__others a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+}
+
+.legal__footer {
+  margin: 16px 0 0;
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+/* The static page written at build time, before the app starts (or without JavaScript). */
+.legal-static__header {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-static__header .brand {
+  color: var(--color-text);
+}
+
+.legal-static__header svg {
+  color: var(--color-accent);
+}
+
+.legal-static .legal {
+  margin: 0 auto;
+}
+
+.legal-static .legal__title {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .legal-header {
+    display: none;
+  }
+
+  .legal__back {
+    display: inline-flex;
+  }
+
+  .legal__title {
+    display: block;
+  }
+
+  .legal {
+    padding: 28px 32px 40px;
+    font-size: 15px;
+  }
+
+  .legal__title {
+    font-size: 30px;
+  }
+
+  .legal__text h2 {
+    font-size: 19px;
+  }
+}

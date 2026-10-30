@@ -4,5 +4,5 @@
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "types": ["node", "vite/client"]
   },
-  "include": ["vite.config.ts", "vitest.config.ts", "build", "test"]
+  "include": ["vite.config.ts", "vitest.config.ts", "build", "test", "src/legal-pages.d.ts"]
 }

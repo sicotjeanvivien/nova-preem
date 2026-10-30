@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import type { SyncStatus } from "../domain/sync.ts";
 import type { Translator } from "../i18n/i18n.tsx";
 import { useI18n } from "../i18n/i18n.tsx";
@@ -6,6 +7,8 @@ import type { MessageKey } from "../i18n/messages.ts";
 import { useOnline } from "../platform/connectivity.ts";
 import { useIsDesktop } from "../platform/media.ts";
 import { ExternalLinkIcon, SyncCloudIcon } from "./icons.tsx";
+import { legalPage } from "./legalPages.ts";
+import { legalLinkState } from "./screens/LegalScreen.tsx";
 import { useSync } from "./SyncContext.tsx";
 
 /** "il y a 2 min (19:43)", "hier à 21:14"… (SyncIndicators texts). */
@@ -124,6 +127,9 @@ export function SyncCard() {
             <li>{t("sync.pointAccess")}</li>
             <li>{t("sync.pointOptional")}</li>
           </ul>
+          <Link className="sync-card__learn-more" to={`${legalPage("privacy").path}#google-drive`} state={legalLinkState("nav.settings")}>
+            {t("sync.learnMore")}
+          </Link>
           <button type="button" className="sync-card__connect" onClick={() => void sync.connect()}>
             {t("sync.connect")}
           </button>
