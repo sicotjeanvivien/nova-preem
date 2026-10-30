@@ -39,6 +39,7 @@ Documents de référence :
 - `docs/catalog-spec.md` : le pipeline du catalogue (source, normalisation, format de sortie).
 - `docs/deploy.md` : mise en ligne (Cloudflare Pages) et CI.
 - `docs/sync-spec.md` : synchronisation Google Drive (après le MVP) : fusion à trois points, connexion sans backend, étapes. **Lire avant d'y toucher**, et suivre ses étapes dans l'ordre.
+- `docs/legal-spec.md` : pages À propos, Confidentialité, Mentions légales, CGU (textes FR/EN dans `docs/legal/`). **Toute évolution qui change les données traitées doit mettre à jour la politique de confidentialité avant d'être livrée.**
 - `docs/app-spec.md` : l'app MVP (écrans, fichier de collection, règles de complétion, doublons, recherche, étapes). **Lire avant toute modification de `app/`**, et suivre ses étapes dans l'ordre.
 
 Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src/domain/` n'importe ni React, ni Dexie, ni API du navigateur ; tout stockage passe par une interface (`CollectionStore`…) dont Dexie n'est qu'une implémentation. Distribution : PWA, puis TWA pour le Play Store, Capacitor seulement si besoin natif.
@@ -79,4 +80,4 @@ Deck builder, prix et valeur de collection, scan de carte, comptes utilisateurs,
 
 ## Propriété intellectuelle
 
-Les noms, textes et images des cartes appartiennent à WeirdCo / CD Projekt Red. Ne jamais utiliser « Cyberpunk », « Night City », « Netrunner » ou d'autres marques dans le nom ou l'identité de l'app. Afficher une mention « fan-made, non officiel » dans l'app.
+Les noms, textes et images des cartes appartiennent à WeirdCo / CD Projekt Red. Ne jamais utiliser « Cyberpunk », « Night City », « Netrunner » ou d'autres marques dans le nom ou l'identité de l'app. Afficher une mention « fan-made, non officiel » dans l'app. Le code est sous licence MIT (`LICENSE`), qui ne couvre pas les données ni les images des cartes.
