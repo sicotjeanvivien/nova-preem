@@ -1,6 +1,6 @@
 # Privacy policy
 
-Last updated: October 30, 2026
+Last updated: November 2, 2026
 
 ## In short
 
@@ -49,13 +49,17 @@ Google processes this data under its own rules: [policies.google.com/privacy](ht
 
 Exporting creates a file (JSON or CSV) on your device. You alone decide what to do with it.
 
+## When you support us
+
+The "Support on Ko-fi" button in Settings opens AWSD's Ko-fi page. The donation is processed by Ko-fi and its payment provider (card or PayPal), under their own privacy rules. AWSD receives the amount and what Ko-fi passes on (name or nickname, email address, optional message), and keeps it as long as its accounting obligations require. The app does not know who donated: nothing changes in it for donors.
+
 ## When you write to us
 
 If you email us, your message and address are kept as long as needed to answer and follow up on your request. Our email is handled by Google.
 
 ## Links to other sites
 
-Nova Preem links to other sites (cyberpunktcg.com, GitHub, Google Drive). They have their own privacy rules.
+Nova Preem links to other sites (cyberpunktcg.com, GitHub, Google Drive, Ko-fi). They have their own privacy rules.
 
 ## Cookies
 

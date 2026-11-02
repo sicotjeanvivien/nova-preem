@@ -1,6 +1,6 @@
 # Politique de confidentialité
 
-Dernière mise à jour : 30 octobre 2026
+Dernière mise à jour : 2 novembre 2026
 
 ## En bref
 
@@ -49,13 +49,17 @@ Google traite ces données selon ses propres règles : [policies.google.com/priv
 
 Exporter crée un fichier (JSON ou CSV) sur votre appareil. Vous seul décidez de ce que vous en faites.
 
+## Quand vous nous soutenez
+
+Le bouton « Soutenir sur Ko-fi » de Réglages ouvre la page Ko-fi d'AWSD. Le don est traité par Ko-fi et par son prestataire de paiement (carte ou PayPal), selon leurs propres règles de confidentialité. AWSD reçoit le montant et ce que Ko-fi lui transmet (nom ou pseudonyme, adresse e-mail, message éventuel), et le conserve le temps exigé par ses obligations comptables. L'application ne sait pas qui a donné : rien n'y change pour les donateurs.
+
 ## Quand vous nous écrivez
 
 Si vous nous écrivez par e-mail, votre message et votre adresse sont conservés le temps de vous répondre et de suivre votre demande. Notre messagerie est gérée par Google.
 
 ## Liens vers d'autres sites
 
-Nova Preem contient des liens vers d'autres sites (cyberpunktcg.com, GitHub, Google Drive). Ils ont leurs propres règles de confidentialité.
+Nova Preem contient des liens vers d'autres sites (cyberpunktcg.com, GitHub, Google Drive, Ko-fi). Ils ont leurs propres règles de confidentialité.
 
 ## Cookies
 
