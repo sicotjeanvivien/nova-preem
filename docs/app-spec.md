@@ -233,7 +233,7 @@ Ajoutée après le MVP. Maquettes `CardViewer` / `WebCardViewer`. Pour admirer u
 - **Images** : mises en cache par le service worker au fil de la navigation (stratégie cache-first). Réglage « Télécharger toutes les images » (Wi-Fi recommandé). Une image absente hors-ligne affiche un emplacement neutre avec le nom et le numéro.
 - Hors-ligne (maquettes États 2 et Sets — 1, révisé le 02/11/2026) : **pas de bandeau ni d'indicateur permanent**, rien ne décale la page.
   - Quand l'app devient utilisable sans réseau (app et catalogue en cache), un toast **une seule fois** : « Nova Preem fonctionne maintenant sans réseau. »
-  - Sans réseau : une icône wifi barré ambre dans l'en-tête mobile, à gauche du nuage de la synchro (même taille, zone de tap de 44 px), et une pastille « Hors-ligne » sous le logo de la barre latérale sur bureau (à côté de la pastille de la synchro, voir `docs/sync-spec.md` §8). Un toast « Hors-ligne. Vos saisies sont enregistrées sur l'appareil / dans ce navigateur. » à la perte du réseau, et à chaque tap sur l'icône ; il disparaît seul.
+  - Sans réseau : une icône wifi barré ambre dans l'en-tête mobile, à gauche du nuage de la synchro (même taille, zone de tap de 44 px), et une pastille « Hors-ligne » en bas de la barre latérale sur bureau, au-dessus de la mention fan-made (à côté de la pastille de la synchro, voir `docs/sync-spec.md` §8). Un toast « Hors-ligne. Vos saisies sont enregistrées sur l'appareil / dans ce navigateur. » à la perte du réseau, et à chaque tap sur l'icône ; il disparaît seul.
   - Toutes les fonctions restent disponibles sauf la mise à jour du catalogue.
 - En développement, le catalogue est servi depuis `catalog/dist/` ; l'URL de base est configurable (variable d'environnement). En production, il est sur son propre site, sur une autre origine que l'app (voir `docs/deploy.md`) : les images de cartes sont donc chargées en CORS (`crossorigin="anonymous"`), comme le téléchargement complet.
 
@@ -261,7 +261,7 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
 
 - Mobile d'abord, largeur de référence 390 px. **Une seule app** : la mise en page s'adapte à la largeur, il n'y a pas de version web séparée.
 - **Bureau (à partir d'environ 900 px)**, voir les maquettes `Web*` :
-  - la barre de navigation du bas devient une **barre latérale** à gauche (logo, pastilles de la synchro et du hors-ligne sous le logo, cinq onglets, mention fan-made et pages légales en bas) ;
+  - la barre de navigation du bas devient une **barre latérale** à gauche (logo, cinq onglets ; en bas : pastilles de la synchro et du hors-ligne, puis mention fan-made et pages légales) ;
   - **liste des sets** et **tirages du set** : tuiles en grille (colonnes automatiques), fil d'Ariane en haut ;
   - **cartes d'un tirage** : grille de vignettes plus large (colonnes automatiques d'environ 150 px minimum), barre de filtres et sélecteur de langue sous l'en-tête, − quantité + sous chaque vignette comme sur mobile ;
   - **page carte** : en pleine page, image et vignettes des impressions à gauche, informations et tableau des impressions à droite ; précédente / suivante dans la barre du haut ;

@@ -51,14 +51,13 @@ td,th{vertical-align:top;text-align:left}
 </section>
 
 <section style="display: flex; flex-direction: column; gap: 14px">
-<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Bureau : pastilles sous le logo</h2>
-<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Mêmes pastilles que sur mobile, en haut de la barre latérale, sous le logo. Sur bureau le libellé est toujours affiché (la place ne manque pas). Sans réseau, la pastille « Hors-ligne » s'ajoute avant ; un clic affiche le toast. Un clic sur la pastille Drive ouvre Réglages. En pause, le bandeau « Reprendre » apparaît en haut de la page. Le bas de la barre ne garde que la mention fan-made et les pages légales.</p>
+<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Bureau : pastilles en bas de la barre latérale</h2>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Mêmes pastilles que sur mobile, en bas de la barre latérale, juste au-dessus de la mention fan-made (le haut reste au logo et aux onglets). Sur bureau le libellé est toujours affiché (la place ne manque pas). Sans réseau, la pastille « Hors-ligne » s'ajoute avant ; un clic affiche le toast. Un clic sur la pastille Drive ouvre Réglages. En pause, le bandeau « Reprendre » apparaît en haut de la page. Le bas de la barre ne garde que la mention fan-made et les pages légales.</p>
 <div style="display: grid; grid-template-columns: repeat(4, 248px); gap: 16px">
 <sc-for list="{{desktop}}" as="d" hint-placeholder-count="7">
 <div style="display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: 11px; color: #8B92A3">{{d.state}}</span>
 <div style="width: 248px; box-sizing: border-box; padding: 16px 20px 18px; background: #11141B; border: 1px solid #232838; border-radius: 10px; display: flex; flex-direction: column; gap: 12px">
-<span style="display: flex; align-items: center; gap: 10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#46E3C8" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.08em">NOVA PREEM</span></span>
 <span style="display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px">
 <sc-if value="{{d.isOffline}}" hint-placeholder-val="{{ false }}">
 <span style="display: inline-flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid #5A4520; color: #FFD99A"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path></svg>Hors-ligne</span>
@@ -67,6 +66,7 @@ td,th{vertical-align:top;text-align:left}
 <span style="display: inline-flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid {{d.border}}; color: {{d.fg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>{{d.label}}</span>
 </sc-if>
 </span>
+<span style="font-size: 11px; color: #8B92A3">Fan-made, non officiel · À propos · CGU…</span>
 </div>
 </div>
 </sc-for>
