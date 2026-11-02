@@ -16,13 +16,24 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 input::placeholder{color:#8B92A3}
 </style>
 </helmet>
-<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap">
+<div style="min-height: 100vh; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-wrap: wrap; position: relative">
 
 <nav aria-label="Navigation principale" style="flex: 1 1 220px; box-sizing: border-box; padding: 20px 14px; background: #11141B; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 4px">
-<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px">
+<div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 12px">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
 <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em">NOVA PREEM</span>
 </div>
+<sc-if value="{{syncOn}}" hint-placeholder-val="{{ true }}">
+<div role="status" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 0 10px 18px">
+<sc-if value="{{offline}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{showToast}}" aria-label="Hors-ligne : afficher le détail" style="display: inline-flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid #5A4520; background: transparent; color: #FFD99A; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path></svg>Hors-ligne</button>
+</sc-if>
+<a href="WebSettings.dc.html" aria-label="Google Drive : {{cloud.label}}" style="display: inline-flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid {{cloud.border}}; color: {{cloud.fg}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>{{cloud.label}}</a>
+</div>
+</sc-if>
+<sc-if value="{{syncOffOffline}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; padding: 0 10px 18px"><button onClick="{{showToast}}" aria-label="Hors-ligne : afficher le détail" style="display: inline-flex; align-items: center; gap: 6px; height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid #5A4520; background: transparent; color: #FFD99A; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path></svg>Hors-ligne</button></div>
+</sc-if>
 <a href="WebSetList.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #0D0F14; background: {{accent}}; font-weight: 600">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="3" width="12" height="15" rx="2"></rect><path d="M4 7v11a3 3 0 0 0 3 3h9"></path></svg>Sets</a>
 <a href="WebCollection.dc.html" style="display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; border-radius: 8px; font-size: 14px; color: #D5D9E2">
@@ -71,14 +82,35 @@ input::placeholder{color:#8B92A3}
 </div>
 </main>
 </div>
+<sc-if value="{{toastOpen}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; right: 24px; bottom: 24px; width: 380px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #1F2330; border: 1px solid #5A4520; box-shadow: 0 8px 24px rgba(0,0,0,0.45); font-size: 13px; color: #ECEEF3; line-height: 1.4"><span style="color: #FFD99A; display: grid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path></svg></span><span style="flex: 1">Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.</span></div>
+</sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"synchro":{"editor":"enum","default":"ok","options":["off","ok","pending","running","paused","error"]},"reseau":{"editor":"enum","default":"en-ligne","options":["en-ligne","hors-ligne"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":900}}'>
+
+const SYNC = {
+  ok: ['Synchronisé', '#8AF0DD', '#2B6B60'],
+  pending: ['En attente · 3', '#FFD3A3', '#6B4A26'],
+  running: ['Synchronisation…', '#C2D5FF', '#34466B'],
+  paused: ['En pause', '#FFD99A', '#5A4520'],
+  error: ['Erreur', '#FFB3C4', '#6B2A3B']
+};
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: props.reseau === 'hors-ligne' }; }
+  componentDidUpdate(prev) { if (prev.reseau !== this.props.reseau) this.setState({ toast: this.props.reseau === 'hors-ligne' }); }
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
     const done = 2; const total = 17;
-    return { accent, done, total, pct: Math.floor((done / total) * 100) };
+    const sy = this.props.synchro ?? 'ok';
+    const offline = this.props.reseau === 'hors-ligne';
+    const c = SYNC[sy] || SYNC.ok;
+    return {
+      accent, done, total, pct: Math.floor((done / total) * 100),
+      syncOn: sy !== 'off', syncOffOffline: sy === 'off' && offline, offline,
+      cloud: { label: c[0], fg: c[1], border: c[2] },
+      toastOpen: offline && this.state.toast, showToast: () => this.setState({ toast: true })
+    };
   }
 }
 </script>
