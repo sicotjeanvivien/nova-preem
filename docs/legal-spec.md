@@ -56,7 +56,7 @@ Les quatre pages s'ouvrent en FR et en EN depuis Réglages (mobile et bureau), d
 ## 7. Nous soutenir (dons)
 
 - Seul revenu prévu : des dons, via la page **Ko-fi** d'AWSD. Les règles de CD PROJEKT RED pour les contenus de fans acceptent les « dons raisonnables » et interdisent tout paywall et toute publicité.
-- Une carte « Nous soutenir » en bas de Réglages, juste avant « À propos », mobile et bureau (planches `Settings` et `WebSettings`) : une phrase, un bouton « Soutenir sur Ko-fi » (lien externe, nouvel onglet), une note « paiement par carte ou PayPal sur Ko-fi (en anglais), aucune fonction réservée aux donateurs ».
+- Une carte « Nous soutenir » en bas de Réglages, juste avant « À propos », mobile et bureau (planches `Settings` et `WebSettings`) : une phrase sobre (« Nova Preem est et restera un outil gratuit, sans publicité. Vous pouvez soutenir le projet via le lien ci-dessous. » ; EN : « Nova Preem is and will remain a free tool, with no ads. You can support the project through the link below. »), sans mendier ni évoquer de besoin d'argent, un bouton « Soutenir sur Ko-fi » (lien externe, nouvel onglet), une note « paiement par carte ou PayPal sur Ko-fi (en anglais), aucune fonction réservée aux donateurs ».
 - L'adresse de la page Ko-fi est définie à un seul endroit de la configuration (`VITE_KOFI_URL` par exemple). **Pas encore créée** : tant qu'elle manque, la carte n'est pas affichée.
 - **Interdit** : pop-up, rappel, compteur, badge « donateur », fonction ou apparence réservée aux donateurs. L'app ne sait pas qui a donné.
 - La politique de confidentialité a une section « Quand vous nous soutenez ».
