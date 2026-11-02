@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import texts from "virtual:legal-pages";
 import { useI18n } from "../../i18n/i18n.tsx";
@@ -108,10 +108,13 @@ export function LegalLinks() {
   const label = TAB_LABELS.find(([prefix]) => location.pathname.startsWith(prefix))?.[1] ?? null;
   return (
     <nav className="legal-links" aria-label={t("legal.links")}>
-      {LEGAL_PAGES.map((page) => (
-        <Link key={page.id} to={page.path} replace={onLegalPage} state={onLegalPage ? location.state : legalLinkState(label)}>
-          {t(page.label)}
-        </Link>
+      {LEGAL_PAGES.map((page, i) => (
+        <Fragment key={page.id}>
+          {i > 0 && <span aria-hidden="true"> · </span>}
+          <Link to={page.path} replace={onLegalPage} state={onLegalPage ? location.state : legalLinkState(label)}>
+            {t(page.label)}
+          </Link>
+        </Fragment>
       ))}
     </nav>
   );

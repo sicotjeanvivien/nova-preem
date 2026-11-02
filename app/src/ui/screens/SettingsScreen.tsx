@@ -17,7 +17,7 @@ import { useSync } from "../SyncContext.tsx";
 import { useImportFlow } from "../useImportFlow.tsx";
 import { languageLabel } from "../labels.ts";
 import { Toast } from "../Toast.tsx";
-import { SyncPill } from "../SyncIndicators.tsx";
+import { HeaderIndicators } from "../SyncIndicators.tsx";
 import { ChevronRightIcon } from "../icons.tsx";
 import { LEGAL_PAGES } from "../legalPages.ts";
 import { legalLinkState } from "./LegalScreen.tsx";
@@ -95,7 +95,7 @@ export function SettingsScreen() {
       ) : (
         <header className="topbar">
           <h1>{t("settings.title")}</h1>
-          <SyncPill />
+          <HeaderIndicators />
         </header>
       )}
       <div className="settings__grid">

@@ -74,7 +74,7 @@ describe("legal pages (docs/legal-spec.md)", () => {
   it("has the four links in the desktop sidebar, back to the screen they were opened from", async () => {
     await render({ path: "/collection" });
     const sidebar = container.querySelector<HTMLElement>(".legal-links")!;
-    expect(sidebar.textContent).toBe("À proposConfidentialitéMentions légalesCGU");
+    expect(sidebar.textContent).toBe("À propos · Confidentialité · Mentions légales · CGU");
     await click(link("CGU", sidebar));
     expect(title()).toBe("Conditions générales d'utilisation");
     expect(container.querySelector(".legal__back")?.textContent).toBe("Collection");

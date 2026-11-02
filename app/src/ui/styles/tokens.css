@@ -13,6 +13,7 @@
   --color-text-secondary: #d5d9e2;
   --color-text-muted: #a3aab9;
   --color-text-faint: #8b92a3;
+  --color-text-dim: #5e6577;
   --color-accent: #46e3c8;
   --color-accent-hover: #8af0dd;
   --color-on-accent: #0d0f14;
@@ -66,6 +67,7 @@
   --color-viewer-glow: #1a1e29;
 
   --color-toast: #262b38;
+  --color-toast-floating: #1f2330;
   --color-remove-bg: #3a1c25;
   --color-remove-text: #ff8fab;
   --color-remove-border: #ff5c8a;

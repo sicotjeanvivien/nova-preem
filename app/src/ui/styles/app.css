@@ -119,33 +119,6 @@ h2 {
   letter-spacing: 0.08em;
 }
 
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-pill);
-  font-size: 12px;
-  color: var(--color-text-muted);
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  flex-shrink: 0;
-}
-
-.status--offline {
-  color: var(--color-warning-text);
-}
-
-.status--offline .status-dot {
-  background: var(--color-vf);
-}
-
 /* ---------- Screens ---------- */
 
 .topbar {
@@ -2817,7 +2790,8 @@ h2 {
 
 /* ---------- States (step 8) ---------- */
 
-.offline-banner {
+/* Page banner: only the sync pause one is left (no offline banner since 2026-11-02). */
+.page-banner {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -2826,10 +2800,6 @@ h2 {
   border-bottom: 1px solid var(--color-warning-border);
   font-size: 13px;
   color: var(--color-warning-text);
-}
-
-.offline-banner svg {
-  flex-shrink: 0;
 }
 
 .tile__placeholder {
@@ -3107,21 +3077,24 @@ h2 {
     font-weight: 600;
   }
 
+  /* Same on every screen: pills, fan-made notice, legal pages (WebSetList mockup). */
   .nav__footer {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 12px;
     margin-top: auto;
     padding: 16px 10px 0;
-    font-size: 12px;
+    font-size: 11px;
     color: var(--color-text-faint);
   }
 
-  .nav__footer .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+  .nav__notice {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    line-height: 1.45;
   }
+
 
   .topbar {
     height: auto;
@@ -3585,7 +3558,7 @@ h2 {
     justify-content: flex-end;
   }
 
-  .offline-banner {
+  .page-banner {
     padding: 10px 16px;
   }
 
@@ -4139,13 +4112,16 @@ h2 {
   }
 }
 
-/* Sync indicators (SyncIndicators mockup): header pill on mobile, sidebar line on desktop, pause banner. */
+/*
+ * Sync and network indicators ("Éléments communs" note, SyncIndicators mockup):
+ * the same group in every tab header on mobile, the same pills at the bottom
+ * of the sidebar on desktop; offline toasts; the sync pause banner.
+ */
 
 .topbar {
   gap: 10px;
 }
 
-.topbar__end,
 .collection-header__end {
   display: flex;
   align-items: center;
@@ -4163,46 +4139,143 @@ h2 {
   min-width: 0;
 }
 
-.sync-pill--header {
-  display: inline-flex;
+/* Mobile header: 44 px tap areas, overlapping the header padding so they do not make it taller. */
+.header-indicators {
+  display: flex;
   flex-shrink: 0;
   align-items: center;
-  gap: 6px;
-  height: 28px;
+  margin: -6px -6px -6px 0;
+}
+
+/*
+ * Not the "border" shorthand on the link: it would reset the border color set
+ * by .sync-pill--<status> (defined earlier), which the circle and pill inherit.
+ */
+.header-indicator {
+  display: grid;
+  place-items: center;
+  min-width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border-style: none;
+  background: transparent;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-indicator--offline {
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-border);
+}
+
+.header-indicator__circle,
+.header-indicator__pill {
   box-sizing: border-box;
-  padding: 0 8px;
+  height: 34px;
+  border: 1px solid;
+  border-color: inherit;
+  border-radius: var(--radius-pill);
+}
+
+.header-indicator__circle {
+  display: grid;
+  place-items: center;
+  width: 34px;
+}
+
+.header-indicator__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Desktop sidebar: sync and offline pills above the fan-made notice, always worded. */
+.sidebar-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sidebar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  /* Not the "border" shorthand: it would reset the border color set by .sync-pill--<status>, defined earlier. */
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  white-space: nowrap;
   text-decoration: none;
 }
 
-.sync-line {
+.sidebar-pill svg {
+  flex-shrink: 0;
+}
+
+.sidebar-pill--offline {
+  color: var(--color-warning-text);
+  border-color: var(--color-warning-border);
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Offline toasts (Main / WebSetList mockups, "reseau" tweak): above the bottom bar, bottom right on desktop. */
+.offline-toast {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom) + 16px);
+  z-index: 20;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  text-decoration: none;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid var(--color-warning-border);
+  border-radius: 12px;
+  background: var(--color-toast-floating);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-text);
 }
 
-.sync-line--up-to-date {
-  color: var(--color-sync-ok-text);
+.offline-toast svg {
+  flex-shrink: 0;
+  color: var(--color-warning-text);
 }
 
-.sync-line--pending {
-  color: var(--color-sync-pending-text);
+.offline-toast--ready {
+  border-color: var(--color-sync-ok-border);
 }
 
-.sync-line--syncing {
-  color: var(--color-sync-running-text);
+.offline-toast--ready svg {
+  color: var(--color-accent);
 }
 
-.sync-line--paused {
-  color: var(--color-sync-paused-text);
+.offline-toast__text {
+  flex: 1;
 }
 
-.sync-line--error {
-  color: var(--color-sync-error-text);
+@media (min-width: 900px) {
+  .offline-toast {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: 380px;
+    max-width: calc(100% - 48px);
+  }
 }
 
-.sync-resume-button,
 .sync-banner__button {
   border: 1px solid var(--color-warning-text);
   border-radius: var(--radius-small);
@@ -4211,11 +4284,6 @@ h2 {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-}
-
-.sync-resume-button {
-  height: 32px;
-  font-size: 12px;
 }
 
 .sync-banner {
@@ -4246,12 +4314,6 @@ h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.sync-resume-button {
-  height: auto;
-  min-height: 32px;
-  padding: 4px 8px;
 }
 
 .collection-header__title h1 {
@@ -4687,14 +4749,15 @@ h2 {
 
 /* ---------- Legal pages (Legal / WebLegal, docs/legal-spec.md) ---------- */
 
+/* Sidebar footer: "À propos · Confidentialité · …", the separators dimmer than the links. */
 .legal-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 8px;
+  line-height: 1.7;
+  color: var(--color-text-dim);
 }
 
 .legal-links a {
   color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .legal-links a:hover {
