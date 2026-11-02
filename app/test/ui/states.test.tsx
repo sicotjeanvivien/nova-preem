@@ -4,6 +4,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { DEFAULT_SETTINGS } from "../../src/domain/settings.ts";
+import { markAppShellCached } from "../../src/platform/connectivity.ts";
 import { MemoryCatalogStore } from "../helpers.ts";
 import { printingOf } from "../helpers-catalog.ts";
 import { newerCatalogSource } from "../helpers-update.ts";
@@ -82,24 +83,45 @@ describe("catalog update (States 3)", () => {
   });
 });
 
-describe("offline (States 2)", () => {
-  it("shows the offline banner, the entries keep working", async () => {
+describe("offline (States 2, revised 2026-11-02): toasts and indicators, no banner", () => {
+  it("opens without network: offline toast and header icon, no banner; the entries keep working", async () => {
     Object.defineProperty(navigator, "onLine", { value: false, configurable: true });
     setViewportWidth(390);
     const store = new MemoryCollectionStore();
     await mount({ path: "/sets/wnc/wnc-retail", store });
-    expect(container.querySelector(".offline-banner")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées sur l'appareil.");
+    expect(container.querySelector(".offline-toast")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées sur l'appareil.");
+    expect(container.querySelector(".page-banner")).toBeNull();
     await act(async () => container.querySelector<HTMLButtonElement>(".tile__plus")!.click());
     await settle();
     expect(store.writes).toHaveLength(1);
+
+    act(() => root.unmount());
+    root = createRoot(container);
+    await mount({ path: "/sets", store });
+    expect(container.querySelector(".header-indicator--offline")?.getAttribute("aria-label")).toBe("Hors-ligne : afficher le détail");
+    expect(container.textContent).not.toContain("Hors-ligne prêt");
   });
 
-  it("says 'in this browser' on desktop, with the offline status in the sidebar", async () => {
+  it("says 'in this browser' on desktop, with the offline pill in the sidebar", async () => {
     Object.defineProperty(navigator, "onLine", { value: false, configurable: true });
     setViewportWidth(1280);
     await mount({ path: "/sets" });
-    expect(container.querySelector(".offline-banner")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.");
-    expect(container.querySelector(".nav__footer")?.textContent).toContain("Hors-ligne");
+    expect(container.querySelector(".offline-toast")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.");
+    expect(container.querySelector(".nav__footer .sidebar-pill--offline")?.textContent).toBe("Hors-ligne");
+    expect(container.querySelector(".page-banner")).toBeNull();
+  });
+
+  it("tells once that the app now works offline", async () => {
+    setViewportWidth(390);
+    await mount({ path: "/sets" });
+    expect(container.querySelector(".offline-toast")).toBeNull();
+    await act(async () => markAppShellCached());
+    expect(container.querySelector(".offline-toast--ready")?.textContent).toBe("Nova Preem fonctionne maintenant sans réseau.");
+
+    act(() => root.unmount());
+    root = createRoot(container);
+    await mount({ path: "/sets", settings: { ...DEFAULT_SETTINGS, offlineReadyNotified: true } });
+    expect(container.querySelector(".offline-toast")).toBeNull();
   });
 });
 

@@ -18,6 +18,8 @@ export const settingsSchema = z.object({
   downloadAllImages: z.boolean(),
   /** Minimum width of the Collection gallery cards on desktop, in pixels (spec §5.7). */
   collectionCardSize: z.number().int().min(140).max(280),
+  /** The one-time "works offline now" toast was shown on this device (spec §8). Not synced. */
+  offlineReadyNotified: z.boolean(),
 });
 
 export type Settings = z.infer<typeof settingsSchema>;
@@ -31,6 +33,7 @@ export const DEFAULT_SETTINGS: Settings = {
   interfaceLanguage: null,
   downloadAllImages: false,
   collectionCardSize: 180,
+  offlineReadyNotified: false,
 };
 
 /**

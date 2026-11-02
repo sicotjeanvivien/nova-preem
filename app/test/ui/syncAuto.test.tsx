@@ -61,7 +61,7 @@ describe("automatic sync (sync spec §5.1, step 3)", () => {
   };
   const advance = (ms: number) => act(async () => vi.advanceTimersByTimeAsync(ms));
   const button = (name: string) => [...container.querySelectorAll("button")].find((b) => b.textContent === name);
-  const pill = () => container.querySelector<HTMLAnchorElement>(".sync-pill--header");
+  const pill = () => container.querySelector<HTMLAnchorElement>(".header-indicators a");
   const fileEntries = (drive: MemoryDrive) => drive.entriesOf("file-1");
 
   it("syncs at launch: local changes leave, remote ones arrive", async () => {
@@ -158,7 +158,7 @@ describe("automatic sync (sync spec §5.1, step 3)", () => {
     expect(fileEntries(drive)).toEqual([e(johnny, 2)]);
   });
 
-  it("pauses when the token expires: pill, banner after the offline one, resume", async () => {
+  it("pauses when the token expires: pill, the only banner, resume", async () => {
     vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await synced(drive, [e(johnny, 1)], 60_000)));
@@ -171,8 +171,7 @@ describe("automatic sync (sync spec §5.1, step 3)", () => {
     expect(banner.textContent).toBe("Synchronisation en pause. Vos saisies restent sur l'appareil.Reprendre");
 
     await act(async () => setOnline(false));
-    const banners = [...container.querySelectorAll(".offline-banner")].map((b) => b.classList.contains("sync-banner"));
-    expect(banners).toEqual([false, true]);
+    expect([...container.querySelectorAll(".page-banner")].map((b) => b.className)).toEqual(["page-banner sync-banner"]);
     await act(async () => setOnline(true));
 
     await act(async () => button("Reprendre")!.click());
@@ -192,18 +191,70 @@ describe("automatic sync (sync spec §5.1, step 3)", () => {
     expect(pill()?.textContent).toBe("");
   });
 
-  it("adds a line to the desktop sidebar, with the resume button while paused", async () => {
+  it("puts the same indicators in every tab header on mobile: wifi icon when offline, cloud icon or worded pill", async () => {
+    const drive = new MemoryDrive();
+    const store = new MemorySyncStore(await synced(drive, [e(johnny, 1)]));
+    const indicators = () =>
+      [...container.querySelectorAll(".header-indicators > *")].map((el) => `${el.getAttribute("aria-label")}|${el.textContent}`);
+    for (const path of ["/sets", "/sets/wnc", "/collection", "/recherche", "/stats", "/reglages"]) {
+      await render({ path, entries: [e(johnny, 1)], services: { sync: fakeSyncServices(drive, store) } });
+      expect(indicators(), path).toEqual(["Google Drive : Synchronisé|"]);
+      await act(async () => root.render(<></>));
+    }
+    await render({ path: "/collection", services: { sync: fakeSyncServices(drive, store) } });
+    expect(container.querySelector(".empty-collection .header-indicators")).not.toBeNull();
+    await act(async () => root.render(<></>));
+    await render({ path: "/sets/wnc/wnc-retail", entries: [e(johnny, 1)], services: { sync: fakeSyncServices(drive, store) } });
+    expect(container.querySelector(".header-indicators")).toBeNull();
+    await act(async () => root.render(<></>));
+
+    await render({ path: "/collection", entries: [e(johnny, 1)], services: { sync: fakeSyncServices(drive, store) } });
+    await act(async () => setOnline(false));
+    expect(indicators()[0]).toBe("Hors-ligne : afficher le détail|");
+    expect(container.querySelector(".offline-toast")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées sur l'appareil.");
+    expect(container.querySelector(".page-banner")).toBeNull();
+  });
+
+  const sidebarPills = () => [...container.querySelectorAll(".nav__footer .sidebar-pill")].map((p) => p.textContent);
+
+  it("shows only the offline pill in the desktop sidebar while the sync is off; a click shows the toast", async () => {
+    setViewportWidth(1280);
+    vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
+    await render({ path: "/stats", services: { sync: fakeSyncServices() } });
+    expect(container.querySelector(".sidebar-pills")).toBeNull();
+    await act(async () => setOnline(false));
+    expect(sidebarPills()).toEqual(["Hors-ligne"]);
+    await advance(5_000);
+    expect(container.querySelector(".offline-toast")).toBeNull();
+
+    const offline = container.querySelector<HTMLButtonElement>("button.sidebar-pill--offline")!;
+    expect(offline.getAttribute("aria-label")).toBe("Hors-ligne : afficher le détail");
+    await act(async () => offline.click());
+    expect(container.querySelector(".offline-toast")?.textContent).toBe("Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.");
+    await advance(5_000);
+    expect(container.querySelector(".offline-toast")).toBeNull();
+  });
+
+  it("puts worded pills at the bottom of the desktop sidebar, resuming only from the banner", async () => {
     setViewportWidth(1280);
     vi.useFakeTimers({ toFake: ["setTimeout", "clearTimeout", "Date"] });
     const drive = new MemoryDrive();
     const sync = fakeSyncServices(drive, new MemorySyncStore(await synced(drive, [e(johnny, 1)], 60_000)));
     await render({ path: "/stats", entries: [e(johnny, 1)], services: { sync } });
-    expect(container.querySelector(".sync-line")?.textContent).toBe("Drive : Synchronisé");
-    expect(button("Reprendre la synchronisation")).toBeUndefined();
+    const footer = container.querySelector(".nav__footer")!;
+    expect(footer.firstElementChild?.className).toBe("sidebar-pills");
+    expect(sidebarPills()).toEqual(["Synchronisé"]);
+    const cloud = footer.querySelector<HTMLAnchorElement>("a.sidebar-pill")!;
+    expect(cloud.getAttribute("href")).toBe("/reglages#sync");
+    expect(cloud.getAttribute("aria-label")).toBe("Google Drive : Synchronisé");
+    expect(footer.textContent).not.toContain("Drive :");
 
     await advance(62_000);
-    expect(container.querySelector(".sync-line")?.textContent).toBe("Drive : En pause");
-    expect(button("Reprendre la synchronisation")).toBeDefined();
+    expect(sidebarPills()).toEqual(["En pause"]);
+    expect([...footer.querySelectorAll("button")].map((b) => b.textContent)).toEqual([]);
     expect(container.querySelector(".sync-banner")?.textContent).toContain("Vos saisies restent dans ce navigateur.");
+
+    await act(async () => setOnline(false));
+    expect(sidebarPills()).toEqual(["Hors-ligne", "En pause"]);
   });
 });

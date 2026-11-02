@@ -12,6 +12,7 @@ describe("settings", () => {
       interfaceLanguage: null,
       downloadAllImages: false,
       collectionCardSize: 180,
+      offlineReadyNotified: false,
     });
     expect(settingsSchema.parse(DEFAULT_SETTINGS)).toEqual(DEFAULT_SETTINGS);
   });
