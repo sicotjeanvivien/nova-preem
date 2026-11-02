@@ -231,7 +231,10 @@ Ajoutée après le MVP. Maquettes `CardViewer` / `WebCardViewer`. Pour admirer u
 - Au premier lancement : téléchargement de `manifest.json` puis `catalog.json`, avec une barre de progression (maquette États 1). Tant que ce n'est pas fait, l'app n'affiche rien d'autre.
 - À chaque lancement, en ligne : comparaison du `hash` du manifeste distant avec celui stocké. S'il diffère, proposer la mise à jour (maquette États 3) ; la collection n'est jamais modifiée par une mise à jour.
 - **Images** : mises en cache par le service worker au fil de la navigation (stratégie cache-first). Réglage « Télécharger toutes les images » (Wi-Fi recommandé). Une image absente hors-ligne affiche un emplacement neutre avec le nom et le numéro.
-- Hors-ligne : bandeau discret (maquette États 2), toutes les fonctions restent disponibles sauf la mise à jour du catalogue.
+- Hors-ligne (maquettes États 2 et Sets — 1, révisé le 02/11/2026) : **pas de bandeau ni d'indicateur permanent**, rien ne décale la page.
+  - Quand l'app devient utilisable sans réseau (app et catalogue en cache), un toast **une seule fois** : « Nova Preem fonctionne maintenant sans réseau. »
+  - Sans réseau : une icône wifi barré ambre dans l'en-tête mobile, à gauche du nuage de la synchro (même taille, zone de tap de 44 px), et une ligne « Hors-ligne » dans la barre latérale sur bureau. Un toast « Hors-ligne. Vos saisies sont enregistrées sur l'appareil / dans ce navigateur. » à la perte du réseau, et à chaque tap sur l'icône ; il disparaît seul.
+  - Toutes les fonctions restent disponibles sauf la mise à jour du catalogue.
 - En développement, le catalogue est servi depuis `catalog/dist/` ; l'URL de base est configurable (variable d'environnement). En production, il est sur son propre site, sur une autre origine que l'app (voir `docs/deploy.md`) : les images de cartes sont donc chargées en CORS (`crossorigin="anonymous"`), comme le téléchargement complet.
 
 ---
@@ -258,7 +261,7 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
 
 - Mobile d'abord, largeur de référence 390 px. **Une seule app** : la mise en page s'adapte à la largeur, il n'y a pas de version web séparée.
 - **Bureau (à partir d'environ 900 px)**, voir les maquettes `Web*` :
-  - la barre de navigation du bas devient une **barre latérale** à gauche (logo, cinq onglets, état hors-ligne, mention fan-made) ;
+  - la barre de navigation du bas devient une **barre latérale** à gauche (logo, cinq onglets, état de la synchro, ligne « Hors-ligne » seulement sans réseau, mention fan-made) ;
   - **liste des sets** et **tirages du set** : tuiles en grille (colonnes automatiques), fil d'Ariane en haut ;
   - **cartes d'un tirage** : grille de vignettes plus large (colonnes automatiques d'environ 150 px minimum), barre de filtres et sélecteur de langue sous l'en-tête, − quantité + sous chaque vignette comme sur mobile ;
   - **page carte** : en pleine page, image et vignettes des impressions à gauche, informations et tableau des impressions à droite ; précédente / suivante dans la barre du haut ;

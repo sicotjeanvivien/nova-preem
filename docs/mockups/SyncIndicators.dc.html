@@ -21,6 +21,7 @@ td,th{vertical-align:top;text-align:left}
 
 <section style="display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Mobile : pastille dans l'en-tête</h2>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Sans réseau, une icône wifi barré ambre s'ajoute à gauche de la pastille (même taille, zone de tap 44 px) ; un tap affiche le toast hors-ligne. Voir la planche Sets — 1 (Tweak « reseau »).</p>
 <p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">À droite de l'en-tête de chaque onglet. « À jour » : icône seule (libellé pour les lecteurs d'écran). Les autres états ajoutent un mot. Un tap ouvre Réglages → Données. Rien quand la synchro est désactivée.</p>
 <sc-for list="{{mobile}}" as="m" hint-placeholder-count="6">
 <div style="width: 390px; height: 52px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border: 1px solid #232838; border-radius: 10px; background: #0D0F14">
@@ -34,7 +35,7 @@ td,th{vertical-align:top;text-align:left}
 </sc-for>
 
 <h3 style="margin: 10px 0 0; font-size: 14px; font-weight: 600">En pause : bandeau sous l'en-tête</h3>
-<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Même place et même style que le bandeau hors-ligne. S'il y a les deux, le bandeau hors-ligne passe en premier.</p>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">C'est le seul bandeau qui reste : il demande une action. Le hors-ligne passe par une icône et un toast, sans décaler la page.</p>
 <div style="width: 390px; border: 1px solid #232838; border-radius: 10px; overflow: hidden">
 <div style="height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #232838">
 <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">Collection</span>
@@ -51,14 +52,16 @@ td,th{vertical-align:top;text-align:left}
 
 <section style="display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 20px">Bureau : bas de la barre latérale</h2>
-<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Une ligne sous « Hors-ligne prêt ». Un clic ouvre Réglages. En pause, un bouton « Reprendre la synchronisation » s'ajoute, et le bandeau apparaît en haut de la page comme sur mobile.</p>
+<p style="margin: 0; font-size: 13px; color: #A3AAB9; line-height: 1.5">Une ligne « Drive : … » au-dessus de la mention fan-made, et une ligne « Hors-ligne » seulement sans réseau (plus de « Hors-ligne prêt »). Un clic ouvre Réglages. En pause, un bouton « Reprendre la synchronisation » s'ajoute, et le bandeau apparaît en haut de la page comme sur mobile.</p>
 <div style="display: grid; grid-template-columns: repeat(4, 248px); gap: 16px">
 <sc-for list="{{desktop}}" as="d" hint-placeholder-count="7">
 <div style="display: flex; flex-direction: column; gap: 6px">
 <span style="font-size: 11px; color: #8B92A3">{{d.state}}</span>
 <div style="width: 248px; box-sizing: border-box; padding: 14px 20px 16px; background: #11141B; border: 1px solid #232838; border-radius: 10px; display: flex; flex-direction: column; gap: 8px">
-<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #A3AAB9">
-<span style="width: 8px; height: 8px; border-radius: 50%; background: {{d.offDot}}"></span>{{d.offline}}</span>
+<sc-if value="{{d.isOffline}}" hint-placeholder-val="{{ false }}">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #FFD99A">
+<span style="width: 8px; height: 8px; border-radius: 50%; background: #FFB067"></span>Hors-ligne</span>
+</sc-if>
 <sc-if value="{{d.show}}" hint-placeholder-val="{{ true }}">
 <span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: {{d.fg}}">
 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg>{{d.label}}</span>
@@ -127,6 +130,9 @@ const TEXTS = [
   ['Première synchro : titre', 'Une collection existe déjà dans votre Drive · Choisissez comment réunir les deux.', 'A collection already exists in your Drive · Choose how to combine them.', PLAIN],
   ['Première synchro : choix', 'Fusionner (recommandé) : pour chaque impression, la plus grande quantité est gardée. Rien n’est perdu. · Garder Google Drive : la collection de cet appareil est remplacée par celle du Drive. · Garder cet appareil : le fichier du Drive est remplacé par la collection de cet appareil.', 'Merge (recommended): for each printing, the highest quantity is kept. Nothing is lost. · Keep Google Drive: this device’s collection is replaced by the Drive one. · Keep this device: the Drive file is replaced by this device’s collection.', PLAIN],
   ['Première synchro : boutons', '[Annuler] · [Fusionner et synchroniser] / [Remplacer cet appareil] / [Remplacer le Drive] · Annuler : la synchronisation n’est pas activée, rien n’est modifié.', '[Cancel] · [Merge and sync] / [Replace this device] / [Replace Drive] · Cancel: sync is not turned on, nothing is changed.', PLAIN],
+  ['Toast hors-ligne prêt (une fois)', 'Nova Preem fonctionne maintenant sans réseau.', 'Nova Preem now works offline.', PLAIN],
+  ['Toast hors-ligne', 'Hors-ligne. Vos saisies sont enregistrées sur l\u2019appareil.', 'Offline. Your entries are saved on this device.', WARN],
+  ['Icône hors-ligne (lecteur d\u2019écran)', 'Hors-ligne : afficher le détail', 'Offline: show details', PLAIN],
   ['Barre latérale, pastille', 'Drive : Synchronisé / En attente · 3 / Synchronisation… / En pause / Erreur', 'Drive: Synced / Pending · 3 / Syncing… / Paused / Error', PLAIN]
 ];
 
@@ -143,7 +149,7 @@ class Component extends DCLogic {
     ].map(([state, k, resume, offline]) => ({
       state, show: !!k, resume,
       label: k ? 'Drive : ' + S[k][0] : '', fg: k ? S[k][1] : '#A3AAB9',
-      offline: offline ? 'Hors-ligne' : 'Hors-ligne prêt', offDot: offline ? '#FFB067' : '#6FCF97'
+      isOffline: offline
     }));
     const texts = TEXTS.map(([c, fr, en, color]) => ({ case: c, fr, en, caseColor: color }));
     return { mobile, desktop, texts };

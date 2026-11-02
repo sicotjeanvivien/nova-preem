@@ -16,15 +16,19 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 input::placeholder{color:#8B92A3}
 </style>
 </helmet>
-<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0D0F14; color: #ECEEF3; font-family: 'IBM Plex Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
 
 <header style="height: 60px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #232838">
 <div style="display: flex; align-items: center; gap: 10px">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"></path></svg>
 <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.08em">NOVA PREEM</span>
 </div>
-<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #A3AAB9; padding: 4px 8px; border: 1px solid #2B3040; border-radius: 999px">
-<span style="width: 7px; height: 7px; border-radius: 50%; background: #46E3C8"></span>Hors-ligne prêt</span>
+<div style="display: flex; align-items: center; margin-right: -6px">
+<sc-if value="{{offline}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{showToast}}" aria-label="Hors-ligne : afficher le détail" style="width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: #FFD99A; cursor: pointer"><span style="width: 34px; height: 34px; box-sizing: border-box; border-radius: 50%; border: 1px solid #5A4520; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path><circle cx="12" cy="20" r="0.6" fill="currentColor"></circle></svg></span></button>
+</sc-if>
+<a href="Settings.dc.html" aria-label="Google Drive : synchronisé" style="width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: #8AF0DD; cursor: pointer"><span style="width: 34px; height: 34px; box-sizing: border-box; border-radius: 50%; border: 1px solid #2B6B60; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg></span></a>
+</div>
 </header>
 
 <main style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px">
@@ -70,14 +74,34 @@ input::placeholder{color:#8B92A3}
 <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
 </nav>
+<sc-if value="{{toastOpen}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 16px; right: 16px; bottom: 84px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #1F2330; border: 1px solid {{toastBorder}}; box-shadow: 0 8px 24px rgba(0,0,0,0.45); font-size: 13px; color: #ECEEF3; line-height: 1.4">
+<span style="color: {{toastColor}}; display: grid"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path><circle cx="12" cy="20" r="0.6" fill="currentColor"></circle></svg></span><span style="flex: 1">{{toastText}}</span>
+</div>
+</sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"reseau":{"editor":"enum","default":"en-ligne","options":["en-ligne","pret","hors-ligne"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+
+const NET = {
+  'en-ligne': null,
+  'pret': ['Nova Preem fonctionne maintenant sans réseau.', '#46E3C8', '#2B6B60'],
+  'hors-ligne': ['Hors-ligne. Vos saisies sont enregistrées sur l\u2019appareil.', '#FFD99A', '#5A4520']
+};
 class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { toast: (props.reseau ?? 'en-ligne') !== 'en-ligne' }; }
+  componentDidUpdate(prev) { if (prev.reseau !== this.props.reseau) this.setState({ toast: (this.props.reseau ?? 'en-ligne') !== 'en-ligne' }); }
   renderVals() {
     const accent = this.props.accent ?? '#46E3C8';
     const done = 2; const total = 17;
-    return { accent, done, total, pct: Math.floor((done / total) * 100) };
+    const net = this.props.reseau ?? 'en-ligne';
+    const t = NET[net] || NET['hors-ligne'];
+    return {
+      accent, done, total, pct: Math.floor((done / total) * 100),
+      offline: net === 'hors-ligne', toastOpen: this.state.toast && !!NET[net],
+      toastText: t ? t[0] : '', toastColor: t ? t[1] : '', toastBorder: t ? t[2] : '',
+      showToast: () => this.setState({ toast: true })
+    };
   }
 }
 </script>

@@ -31,7 +31,7 @@ body{margin:0;background:#07080B}
 </div>
 
 <div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">2 · Hors-ligne</span>
+<span style="font-size: 15px; font-weight: 600; color: #A3AAB9">2 · Hors-ligne : ligne dans la barre latérale + toast, sans bandeau</span>
 <div style="height: 480px; box-sizing: border-box; background: #0D0F14; border: 1px solid #232838; border-radius: 8px; display: flex; overflow: hidden">
 <div style="width: 170px; flex-shrink: 0; background: #11141B; border-right: 1px solid #232838; padding: 16px 10px; display: flex; flex-direction: column; gap: 6px; box-sizing: border-box">
 <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; padding: 0 8px 12px">NOVA PREEM</span>
@@ -42,10 +42,7 @@ body{margin:0;background:#07080B}
 <span style="height: 34px; display: flex; align-items: center; padding: 0 10px; font-size: 13px; color: #D5D9E2">Réglages</span>
 <span style="margin-top: auto; display: inline-flex; align-items: center; gap: 6px; padding: 0 8px; font-size: 12px; color: #FFD99A"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FFB067"></span>Hors-ligne</span>
 </div>
-<div style="flex: 1; display: flex; flex-direction: column; min-width: 0">
-<div role="status" style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #2A2213; border-bottom: 1px solid #5A4520; font-size: 13px; color: #FFD99A">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6"></path></svg>
-Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.</div>
+<div style="flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative">
 <div style="padding: 14px 16px; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">Welcome to Night City</div>
 <div style="padding: 0 16px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px">
 <sc-for list="{{tiles}}" as="t" hint-placeholder-count="10">
@@ -56,6 +53,7 @@ Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.</div>
 </div>
 </sc-for>
 </div>
+<div role="status" style="position: absolute; right: 16px; bottom: 16px; width: 360px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #1F2330; border: 1px solid #5A4520; box-shadow: 0 8px 24px rgba(0,0,0,0.45); font-size: 13px; line-height: 1.4"><span style="color: #FFD99A; display: grid"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5.2-2.8M19 13a10 10 0 0 0-2.2-1.6M2 8.8a15 15 0 0 1 4.2-2.6M22 8.8A15 15 0 0 0 11 5"></path><circle cx="12" cy="20" r="0.6" fill="currentColor"></circle></svg></span><span style="flex: 1">Hors-ligne. Vos saisies sont enregistrées dans ce navigateur.</span></div>
 </div>
 </div>
 </div>
