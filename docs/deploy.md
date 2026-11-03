@@ -54,6 +54,24 @@ Détail : `docs/sync-spec.md` §4 et §9. L'app n'utilise qu'un **identifiant cl
 
 En mode Test, Google affiche « Google n'a pas validé cette application » à la connexion : c'est attendu. Le passage en production demandera un domaine vérifié et une politique de confidentialité (`docs/sync-spec.md` §9).
 
+## Domaine propre : `nova-preem.app` (une seule fois)
+
+Acheté le 03/11/2026 par AWSD (Cloudflare Registrar, compte de la société). **À brancher avant toute annonce publique** : une PWA installée et sa collection locale restent attachées à leur origine (voir « Points d'attention »).
+
+1. **App** : projet Pages `nova-preem` → *Custom domains* → *Set up a custom domain* → `nova-preem.app`.
+   - Si le domaine est dans le **même compte** Cloudflare que le projet Pages, Cloudflare crée l'enregistrement DNS et le certificat tout seul.
+   - Si le domaine est dans **un autre compte** (compte de la société, projets Pages dans un compte perso) : dans la zone `nova-preem.app`, créer un enregistrement `CNAME` `@` → `nova-preem.pages.dev`, puis ajouter le domaine dans le projet Pages, qui le vérifie. À terme, regrouper domaine et projets dans le compte de la société.
+   - Facultatif : `www` en `CNAME` vers `nova-preem.pages.dev`, avec une règle de redirection `www.nova-preem.app` → `nova-preem.app`.
+2. **Catalogue** (facultatif, plus propre) : `catalog.nova-preem.app` sur le projet `nova-preem-catalog`, puis la variable GitHub `CATALOG_BASE_URL` = `https://catalog.nova-preem.app/` (barre finale), et un nouveau déploiement.
+3. **Pages légales** : `VITE_SITE_DOMAIN=nova-preem.app` dans `app/.env`.
+4. **Google** (§ Synchronisation) :
+   - ajouter `https://nova-preem.app` aux origines JavaScript autorisées du client OAuth (garder `pages.dev` et `localhost`) ;
+   - vérifier le domaine dans Google Search Console (enregistrement `TXT` dans la zone Cloudflare) ;
+   - *Branding* : page d'accueil `https://nova-preem.app/a-propos`, règles de confidentialité `https://nova-preem.app/confidentialite`, conditions `https://nova-preem.app/cgu`, domaine autorisé `nova-preem.app` ;
+   - *Audience* : **Publier l'application** (passage en production). Sans permission sensible, pas d'audit de sécurité ; Google peut demander une vérification de la marque (quelques jours).
+5. **Ancienne adresse** : `nova-preem.pages.dev` reste en ligne. Tant que personne d'autre n'a installé l'app, rien à migrer ; pour soi, exporter la collection depuis l'ancienne adresse et l'importer sur la nouvelle.
+6. Facultatif : e-mail `contact@nova-preem.app` avec Cloudflare Email Routing (transfert vers l'adresse de contact), puis `VITE_CONTACT_EMAIL`.
+
 ## Au quotidien
 
 - **App** : merger sur `main` suffit.
@@ -63,10 +81,10 @@ En mode Test, Google affiche « Google n'a pas validé cette application » à l
 
 Les textes de `docs/legal/` sont convertis en HTML au build (`app/build/legal.ts`, voir `docs/legal-spec.md`). Deux variables, avec leur valeur par défaut dans `app/.env` :
 
-- `VITE_SITE_DOMAIN` : le domaine public, sans `https://` (`nova-preem.pages.dev` tant qu'il n'y a pas de domaine propre) ;
+- `VITE_SITE_DOMAIN` : le domaine public, sans `https://` (`nova-preem.app` depuis le 03/11/2026) ;
 - `VITE_CONTACT_EMAIL` : l'adresse de contact (`awsd.contact@gmail.com`).
 
-Pour les changer en production, modifier `app/.env` (ou les définir comme variables d'environnement du build). Le build échoue si l'une est vide ou si un texte contient un autre marqueur `{{…}}`. Le build écrit aussi `dist/a-propos.html`, `confidentialite.html`, `mentions-legales.html` et `cgu.html`, lisibles sans JavaScript : `curl https://nova-preem.pages.dev/confidentialite` doit renvoyer le texte complet.
+Pour les changer en production, modifier `app/.env` (ou les définir comme variables d'environnement du build). Le build échoue si l'une est vide ou si un texte contient un autre marqueur `{{…}}`. Le build écrit aussi `dist/a-propos.html`, `confidentialite.html`, `mentions-legales.html` et `cgu.html`, lisibles sans JavaScript : `curl https://nova-preem.app/confidentialite` doit renvoyer le texte complet.
 
 ## Points d'attention
 

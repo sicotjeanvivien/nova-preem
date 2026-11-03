@@ -296,7 +296,7 @@ L'app doit pouvoir passer un jour à React Native ou dans une coquille native sa
 
 | Étape | Moyen | Quand |
 |---|---|---|
-| MVP | **PWA** installable depuis `novapreem.app` (Android, PC ; iPhone via « Sur l'écran d'accueil ») | dès l'étape 1 |
+| MVP | **PWA** installable depuis `nova-preem.app` (Android, PC ; iPhone via « Sur l'écran d'accueil ») | dès l'étape 1 |
 | Play Store | **TWA** générée avec Bubblewrap, plus `/.well-known/assetlinks.json` sur le site | après le MVP, quand l'app est stable |
 | Fonctions natives (scan de carte…) ou App Store | **Capacitor** | seulement si un besoin réel apparaît |
 

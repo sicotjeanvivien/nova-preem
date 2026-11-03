@@ -200,10 +200,10 @@ Tous les textes en français et en anglais.
 
 - Un projet Google Cloud, avec l'**API Google Drive** activée.
 - Un écran de consentement OAuth (type « Externe », nom « Nova Preem », adresse de contact), avec les permissions `drive.file`, `openid` et `email`, qui ne sont pas « sensibles » au sens de Google.
-- Un identifiant client OAuth de type « Application Web », origines autorisées : `https://nova-preem.pages.dev`, `http://localhost:5173`, `http://localhost:4173`.
+- Un identifiant client OAuth de type « Application Web », origines autorisées : `https://nova-preem.app`, `https://nova-preem.pages.dev`, `http://localhost:5173`, `http://localhost:4173`.
 - La variable GitHub `GOOGLE_CLIENT_ID`, passée au build comme `VITE_GOOGLE_CLIENT_ID`.
 
-**Avant l'ouverture au public** : en mode « Test », l'écran de consentement est limité à 100 comptes déclarés à la main. Passer en production demande une page d'accueil et une **politique de confidentialité** publiques, sur un **domaine vérifié appartenant au projet** (un sous-domaine `pages.dev` ne convient pas). Ce sera à prévoir avec le domaine propre de `docs/app-spec.md` §9.2.
+**Avant l'ouverture au public** : en mode « Test », l'écran de consentement est limité à 100 comptes déclarés à la main. Passer en production demande une page d'accueil et une **politique de confidentialité** publiques, sur un **domaine vérifié appartenant au projet** (un sous-domaine `pages.dev` ne convient pas). Domaine propre : `nova-preem.app` (marche à suivre : `docs/deploy.md`, « Domaine propre »).
 
 ---
 
