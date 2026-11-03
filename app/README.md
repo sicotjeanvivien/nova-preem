@@ -36,7 +36,7 @@ Environment variables, read at build time. Defaults are in [`.env`](.env); put l
 |---|---|---|
 | `VITE_CATALOG_BASE_URL` | Base URL of `catalog.json`, `manifest.json` and `images/`, with a trailing slash | `/catalog/` |
 | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID for the Drive sync. Public value, no secret. Empty: sync is off. | empty |
-| `VITE_SITE_DOMAIN` | Public domain, without `https://`: replaces `{{domain}}` in the legal pages | `nova-preem.pages.dev` |
+| `VITE_SITE_DOMAIN` | Public domain, without `https://`: replaces `{{domain}}` in the legal pages | `nova-preem.app` |
 | `VITE_CONTACT_EMAIL` | Contact address: replaces `{{contactEmail}}` in the legal pages | `awsd.contact@gmail.com` |
 
 Setting up the Google project: [`docs/deploy.md`](../docs/deploy.md).
