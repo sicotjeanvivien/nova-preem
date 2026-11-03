@@ -33,7 +33,7 @@ L'app trouve le catalogue grâce à `VITE_CATALOG_BASE_URL`, fixée au build par
 3. Dans Cloudflare : **My Profile → API Tokens → Create Token**, modèle « Edit Cloudflare Workers » ou jeton personnalisé avec la seule permission **Account → Cloudflare Pages → Edit**. Relever aussi l'**Account ID** (page d'accueil du compte, ou `wrangler whoami`).
 4. Dans GitHub, **Settings → Secrets and variables → Actions** :
    - secrets : `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` ;
-   - variable : `CATALOG_BASE_URL` = adresse du site du catalogue, **avec la barre finale** (`https://nova-preem-catalog.pages.dev/`) ;
+   - variable : `CATALOG_BASE_URL` = adresse du site du catalogue, **avec la barre finale** (`https://catalog.nova-preem.app/` ; avant le domaine propre : `https://nova-preem-catalog.pages.dev/`, toujours en ligne) ;
    - variable facultative : `APP_PROJECT`, si le projet de l'app ne s'appelle pas `nova-preem`.
    - variable `GOOGLE_CLIENT_ID` : identifiant client OAuth de la synchronisation Google Drive (ci-dessous). Sans elle, la synchronisation reste désactivée (ligne « Bientôt » dans Réglages).
 5. Relancer le dernier workflow de `main` (ou pousser sur `main`) : l'app est déployée.
@@ -47,7 +47,7 @@ Détail : `docs/sync-spec.md` §4 et §9. L'app n'utilise qu'un **identifiant cl
    - *Branding* : nom `Nova Preem`, adresse d'assistance et de contact ;
    - *Audience* : type **Externe**, mode **Test**, et chaque compte qui doit pouvoir se connecter dans les **utilisateurs test** (100 au plus) ;
    - *Accès aux données* : `.../auth/drive.file`, `openid`, `.../auth/userinfo.email` (aucune n'est « sensible »).
-3. *Clients* → créer un client OAuth de type **Application Web**, origines JavaScript autorisées : `https://nova-preem.pages.dev`, `http://localhost:5173`, `http://localhost:4173`. Pas d'URI de redirection.
+3. *Clients* → créer un client OAuth de type **Application Web**, origines JavaScript autorisées : `https://nova-preem.app`, `https://nova-preem.pages.dev` (ancienne adresse, toujours en ligne), `http://localhost:5173`, `http://localhost:4173`. Pas d'URI de redirection.
 4. Copier l'**ID client** :
    - en développement, dans `app/.env.local` : `VITE_GOOGLE_CLIENT_ID=<ID client>` (fichier ignoré par git) ;
    - pour la mise en ligne : `gh variable set GOOGLE_CLIENT_ID --body "<ID client>"`.
@@ -89,4 +89,5 @@ Pour les changer en production, modifier `app/.env` (ou les définir comme varia
 ## Points d'attention
 
 - **Changer l'adresse de l'app** (domaine personnel plus tard) : une PWA installée reste attachée à son origine, et les collections locales (IndexedDB) aussi. Il faudra un export / import pour migrer.
+- **Changer l'adresse du catalogue** : le catalogue enregistré (IndexedDB) ne dépend pas de l'adresse, qui est fixée au build. Mais le service worker range les images sous leur adresse complète : celles déjà en cache sous l'ancienne adresse ne servent plus, et manquent hors-ligne jusqu'à leur prochain affichage en ligne (ou un nouveau « Télécharger toutes les images » dans Réglages).
 - Les images de cartes gardent leur chemin quand l'illustration change à la source : elles sont mises en cache un jour par le navigateur, sans limite par le service worker une fois vues.

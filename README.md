@@ -2,7 +2,7 @@
 
 A collection manager for the **Cyberpunk Trading Card Game**: record the cards you own, printing by printing, and see what you are missing. It works offline and installs on your phone as an app.
 
-**Use it:** https://nova-preem.pages.dev (Android, iPhone, PC; French and English)
+**Use it:** https://nova-preem.app (Android, iPhone, PC; French and English)
 
 > Fan-made and unofficial. Nova Preem is not approved or endorsed by WeirdCo or CD PROJEKT RED.
 

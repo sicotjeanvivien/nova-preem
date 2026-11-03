@@ -53,7 +53,7 @@ describe("legal pages (docs/legal-spec.md)", () => {
     // From one legal page to another, back still returns to Settings.
     await click(link("Mentions légales", container.querySelector(".legal__others")!));
     expect(title()).toBe("Mentions légales");
-    expect(container.textContent).toContain("Nova Preem (nova-preem.pages.dev) est édité par AWSD");
+    expect(container.textContent).toContain("Nova Preem (nova-preem.app) est édité par AWSD");
     await click(link("Réglages", container.querySelector(".legal")!));
     expect(container.querySelector("h1")?.textContent).toBe("Réglages");
   });
