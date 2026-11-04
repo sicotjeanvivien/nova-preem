@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { Link } from "react-router";
 import type { CatalogErrorCode } from "../domain/catalogLoader.ts";
 import { useI18n } from "../i18n/i18n.tsx";
-import { LogoIcon } from "./icons.tsx";
+import { LogoName, LogoSymbol } from "./Logo.tsx";
 import { legalPage } from "./legalPages.ts";
 import { legalLinkState } from "./screens/LegalScreen.tsx";
 
@@ -25,8 +25,10 @@ export function FirstLaunch() {
   const { t, percent } = useI18n();
   return (
     <div className="first-launch">
-      <LogoIcon className="first-launch__logo" strokeWidth={1.4} />
-      <h1 className="first-launch__name">{t("app.name")}</h1>
+      <LogoSymbol className="first-launch__logo" />
+      <h1 className="first-launch__name">
+        <LogoName />
+      </h1>
       <div className="first-launch__body">
         {error ? (
           <>

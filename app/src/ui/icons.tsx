@@ -22,12 +22,6 @@ function Icon({ children, strokeWidth = 1.8, ...props }: IconProps) {
   );
 }
 
-export const LogoIcon = (props: IconProps) => (
-  <Icon stroke="var(--color-accent)" {...props}>
-    <path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z" />
-  </Icon>
-);
-
 export const SetsIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="8" y="3" width="12" height="15" rx="2" />

@@ -28,7 +28,7 @@ The idea comes from UrzaGatherer, the go-to app for Magic: The Gathering collect
 
 - Card data (names, texts, artwork) comes from the official database at [cyberpunktcg.com](https://cyberpunktcg.com/cards), powered by Netdeck. It is updated regularly and may contain errors.
 - The source code is public, under the MIT license: [github.com/sicotjeanvivien/nova-preem](https://github.com/sicotjeanvivien/nova-preem).
-- Fonts: Chakra Petch and IBM Plex, under the SIL Open Font License.
+- Fonts: Chakra Petch, IBM Plex and Oxanium, under the SIL Open Font License.
 
 ## Who is behind it
 

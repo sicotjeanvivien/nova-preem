@@ -6,7 +6,8 @@ import { releaseShortName } from "../../domain/setTabs.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import { useApp } from "../AppContext.tsx";
 import { aim, drag, flipTarget, initialMotion, KEY_STEP, lighting, recenterTarget, step, type Motion } from "../cardMotion.ts";
-import { CardPlaceholderIcon, CloseIcon, FlipIcon, LogoIcon, RecenterIcon } from "../icons.tsx";
+import { CardPlaceholderIcon, CloseIcon, FlipIcon, RecenterIcon } from "../icons.tsx";
+import { LogoName, LogoSymbol } from "../Logo.tsx";
 import { cardColor, languageLabel } from "../labels.ts";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
@@ -157,8 +158,8 @@ export function CardViewerScreen() {
             <span className="viewer-card__glare" />
           </div>
           <div className="viewer-card__face viewer-card__back">
-            <LogoIcon width={56} height={56} strokeWidth={1.2} />
-            <span className="viewer-card__brand">{t("app.name")}</span>
+            <LogoSymbol className="viewer-card__logo" />
+            <LogoName className="viewer-card__brand" />
           </div>
         </div>
         {!touched && <span className="viewer__hint">{t("viewer.hint")}</span>}

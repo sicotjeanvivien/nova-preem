@@ -106,17 +106,57 @@ h2 {
 
 /* ---------- Brand and status ---------- */
 
+/* Logo (Logo.tsx): the outline around the rare card takes the colour of what is behind it. */
+
+.logo-symbol {
+  flex-shrink: 0;
+}
+
+.logo-symbol__filled {
+  fill: var(--color-logo-filled);
+}
+
+.logo-symbol__empty {
+  fill: var(--color-logo-empty);
+}
+
+.logo-symbol__gap {
+  fill: var(--logo-gap, var(--color-bg));
+  stroke: var(--logo-gap, var(--color-bg));
+}
+
+.logo-symbol__card {
+  fill: var(--color-logo);
+}
+
+.logo-name {
+  font-family: var(--font-logo);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.logo-name__first {
+  font-weight: 800;
+}
+
+.logo-name__rest {
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.brand__symbol {
+  width: 26px;
+  height: 26px;
+}
+
 .brand__name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 19px;
-  letter-spacing: 0.08em;
+  font-size: 20px;
 }
 
 /* ---------- Screens ---------- */
@@ -2954,15 +2994,12 @@ h2 {
 }
 
 .first-launch__logo {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
 }
 
 .first-launch__name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: 0.08em;
+  font-size: 27px;
 }
 
 .first-launch__body {
@@ -3105,12 +3142,13 @@ h2 {
   }
 
   .nav__brand {
+    --logo-gap: var(--color-nav);
     display: flex;
     padding: 4px 10px 20px;
   }
 
   .nav__brand .brand__name {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .nav__link {
@@ -3653,12 +3691,12 @@ h2 {
   }
 
   .first-launch__logo {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
   }
 
   .first-launch__name {
-    font-size: 24px;
+    font-size: 25px;
   }
 }
 
@@ -4595,6 +4633,7 @@ h2 {
 }
 
 .viewer-card__back {
+  --logo-gap: var(--color-nav);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4602,14 +4641,16 @@ h2 {
   gap: 14px;
   transform: rotateY(180deg);
   background: var(--color-nav);
+  color: var(--color-text);
+}
+
+.viewer-card__logo {
+  width: 64px;
+  height: 64px;
 }
 
 .viewer-card__brand {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.3em;
-  color: var(--color-text-muted);
+  font-size: 16px;
 }
 
 .viewer__hint {
@@ -4773,8 +4814,17 @@ h2 {
     border-radius: 18px;
   }
 
+  .viewer-card__back {
+    gap: 16px;
+  }
+
+  .viewer-card__logo {
+    width: 80px;
+    height: 80px;
+  }
+
   .viewer-card__brand {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .viewer__hint {

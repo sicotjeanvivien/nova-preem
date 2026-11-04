@@ -5,7 +5,7 @@ import { releaseShortName } from "../domain/setTabs.ts";
 import { useI18n } from "../i18n/i18n.tsx";
 import { useIsDesktop } from "../platform/media.ts";
 import { useApp } from "./AppContext.tsx";
-import { LogoIcon } from "./icons.tsx";
+import { LogoName, LogoSymbol } from "./Logo.tsx";
 import { languageLabel } from "./labels.ts";
 import { Toast } from "./Toast.tsx";
 import { HeaderIndicators } from "./SyncIndicators.tsx";
@@ -31,8 +31,8 @@ export function EmptyCollection() {
       {!isDesktop && (
         <header className="topbar">
           <div className="brand">
-            <LogoIcon width={22} height={22} />
-            <span className="brand__name">{t("app.name")}</span>
+            <LogoSymbol className="brand__symbol" />
+            <LogoName className="brand__name" />
           </div>
           <HeaderIndicators />
         </header>

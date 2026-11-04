@@ -28,7 +28,7 @@ L'idée vient d'UrzaGatherer, l'application de référence des collectionneurs d
 
 - Les données des cartes (noms, textes, illustrations) viennent de la base officielle [cyberpunktcg.com](https://cyberpunktcg.com/cards), propulsée par Netdeck. Elles sont mises à jour régulièrement et peuvent contenir des erreurs.
 - Le code source est public, sous licence MIT : [github.com/sicotjeanvivien/nova-preem](https://github.com/sicotjeanvivien/nova-preem).
-- Polices : Chakra Petch et IBM Plex, sous licence SIL Open Font License.
+- Polices : Chakra Petch, IBM Plex et Oxanium, sous licence SIL Open Font License.
 
 ## Qui est derrière
 

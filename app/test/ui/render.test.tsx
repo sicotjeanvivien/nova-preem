@@ -27,6 +27,35 @@ describe("app shell", () => {
   });
 });
 
+describe("logo (canvas note \"Logo\", 2026-11-04)", () => {
+  it("draws the binder-page symbol with its coral card, and the name in two weights, read as one name", () => {
+    const html = render({ path: "/sets" });
+    const symbol = /<svg class="logo-symbol brand__symbol"[^>]*aria-hidden="true"[^>]*>(.*?)<\/svg>/.exec(html)![1]!;
+    expect(symbol.match(/class="logo-symbol__filled"/g)).toHaveLength(5);
+    expect(symbol.match(/class="logo-symbol__empty"/g)).toHaveLength(4);
+    expect(symbol).toContain('class="logo-symbol__card"');
+    expect(html).toContain(
+      '<span class="logo-name brand__name"><span aria-hidden="true"><span class="logo-name__first">NOVA</span><span class="logo-name__rest">PREEM</span></span><span class="visually-hidden">NOVA PREEM</span></span>',
+    );
+    // The old four-pointed star is gone.
+    expect(html).not.toContain("M12 2l2.6 7.4");
+  });
+
+  it("is the title of the first launch", () => {
+    const html = renderToString(
+      <I18nProvider language="fr">
+        <FirstLaunchContext.Provider value={{ progress: 0, error: null, onRetry: () => {} }}>
+          <MemoryRouter>
+            <FirstLaunch />
+          </MemoryRouter>
+        </FirstLaunchContext.Provider>
+      </I18nProvider>,
+    );
+    expect(html).toMatch(/<svg class="logo-symbol first-launch__logo"/);
+    expect(html).toMatch(/<h1 class="first-launch__name"><span class="logo-name">.*<span class="visually-hidden">NOVA PREEM<\/span><\/span><\/h1>/);
+  });
+});
+
 describe("Sets, level 1: set list", () => {
   it("shows a tile per set with its completed releases and a name filter", () => {
     const owned = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");

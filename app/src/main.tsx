@@ -9,6 +9,8 @@ import "@fontsource/ibm-plex-sans/latin-500.css";
 import "@fontsource/ibm-plex-sans/latin-600.css";
 import "@fontsource/ibm-plex-sans/latin-ext-400.css";
 import "@fontsource/ibm-plex-mono/latin-500.css";
+import "@fontsource/oxanium/latin-500.css";
+import "@fontsource/oxanium/latin-800.css";
 import "./ui/styles/tokens.css";
 import "./ui/styles/app.css";
 import { createBrowserServices } from "./platform/services.ts";

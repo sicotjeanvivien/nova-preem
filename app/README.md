@@ -18,7 +18,6 @@ pnpm test       # Vitest: domain rules, IndexedDB storage (simulated), screen re
 pnpm typecheck  # types of the app, the domain on its own, and the build scripts
 pnpm build      # typecheck, then production build in dist/
 pnpm preview    # serves the production build, http://localhost:4173 (with service worker)
-pnpm icons      # regenerates the icons in public/ (sharp)
 ```
 
 ## Catalog
@@ -57,6 +56,8 @@ src/ui/         React: layout, screens, styles (CSS variables in ui/styles/token
 build/          Vite plugins: local catalog server, legal pages
 test/           Vitest, mirroring src/ (domain, storage, ui)
 ```
+
+The logo is drawn by `src/ui/Logo.tsx`. The favicons and PWA icons in `public/` are copied as they are from the logo kit, [`docs/nova-preem-logo-kit/web/`](../docs/nova-preem-logo-kit/web/): to change them, replace the files there and copy them again.
 
 Two rules keep the app portable to a native shell later (spec §9.1):
 
