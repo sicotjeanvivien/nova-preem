@@ -38,6 +38,7 @@ Environment variables, read at build time. Defaults are in [`.env`](.env); put l
 | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID for the Drive sync. Public value, no secret. Empty: sync is off. | empty |
 | `VITE_SITE_DOMAIN` | Public domain, without `https://`: replaces `{{domain}}` in the legal pages | `nova-preem.app` |
 | `VITE_CONTACT_EMAIL` | Contact address: replaces `{{contactEmail}}` in the legal pages | `awsd.contact@gmail.com` |
+| `VITE_KOFI_URL` | Ko-fi page of the "Nous soutenir" card in Settings, opened in a new tab. Empty: no card. | `https://ko-fi.com/awsd` |
 
 Setting up the Google project: [`docs/deploy.md`](../docs/deploy.md).
 

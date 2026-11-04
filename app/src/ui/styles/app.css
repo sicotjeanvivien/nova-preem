@@ -2788,6 +2788,69 @@ h2 {
   padding: 0;
 }
 
+/* "Nous soutenir" (docs/legal-spec.md §7): a card with its title inside, on mobile too. */
+
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.support-card__body {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.support-card__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--color-support-icon-bg);
+  color: var(--color-support);
+}
+
+.support-card__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.support-card__link {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--touch-target);
+  padding: 0 16px;
+  border: 1px solid var(--color-support-border);
+  border-radius: var(--radius-medium);
+  color: var(--color-support-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.settings--desktop .support-card {
+  padding: 18px;
+  border-radius: var(--radius-card);
+}
+
+.settings--desktop .support-card .settings-section__title {
+  font-size: 13px;
+}
+
+.settings--desktop .support-card__link {
+  min-height: 40px;
+}
+
 /* ---------- States (step 8) ---------- */
 
 /* Page banner: only the sync pause one is left (no offline banner since 2026-11-02). */

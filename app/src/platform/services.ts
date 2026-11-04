@@ -19,6 +19,8 @@ export interface Services {
   appVersion: string;
   /** Google Drive sync (docs/sync-spec.md); null when the build has no Google client ID. */
   sync: SyncServices | null;
+  /** The Ko-fi page of the "Nous soutenir" card (docs/legal-spec.md §7); null hides the card. */
+  supportUrl: string | null;
 }
 
 export interface SyncServices {
@@ -35,6 +37,7 @@ export function createBrowserServices(): Services {
   const db = new NovaPreemDatabase();
   const catalogBaseUrl = import.meta.env.VITE_CATALOG_BASE_URL ?? "/catalog/";
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || null;
+  const supportUrl = import.meta.env.VITE_KOFI_URL?.trim() || null;
   return {
     catalog: {
       store: new DexieCatalogStore(db),
@@ -48,5 +51,6 @@ export function createBrowserServices(): Services {
     sync: googleClientId
       ? { store: new DexieSyncStore(db), auth: new GoogleAuth(googleClientId), remote: (token) => new GoogleDriveFiles(token), fileUrl: driveFileUrl }
       : null,
+    supportUrl,
   };
 }

@@ -133,6 +133,15 @@ export const ExternalLinkIcon = (props: IconProps) => (
   </Icon>
 );
 
+/** Mug with a heart ("Nous soutenir" card). */
+export const SupportIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" />
+    <path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17" />
+    <path d="M10.5 12.2c-.9-.9-2.3-.2-2 .9.3.9 2 2 2 2s1.7-1.1 2-2c.3-1.1-1.1-1.8-2-.9z" fill="currentColor" stroke="none" />
+  </Icon>
+);
+
 /** Plain cloud (sync status pill and sidebar line). */
 export const CloudIcon = (props: IconProps) => (
   <Icon strokeWidth={2} {...props}>

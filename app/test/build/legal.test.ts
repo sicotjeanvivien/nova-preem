@@ -41,6 +41,9 @@ describe("legal texts (docs/legal-spec.md)", () => {
       expect(texts[language].legal.html).toContain("example.test");
     }
     expect(texts.fr.privacy.title).toBe("Politique de confidentialité");
+    // Donations through Ko-fi (spec §7).
+    expect(texts.fr.privacy.html).toContain('<h2 id="quand-vous-nous-soutenez">Quand vous nous soutenez</h2>');
+    expect(texts.en.privacy.html).toContain('<h2 id="when-you-support-us">When you support us</h2>');
   });
 
   it("writes a static page from index.html: title, description, canonical address, text, no <noscript>", () => {
