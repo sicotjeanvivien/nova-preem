@@ -8,7 +8,8 @@ import { useI18n } from "../../i18n/i18n.tsx";
 import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
-import { ChevronRightIcon, LogoIcon, SetIcon } from "../icons.tsx";
+import { ChevronRightIcon, SetIcon } from "../icons.tsx";
+import { LogoName, LogoSymbol } from "../Logo.tsx";
 import { ProgressBar } from "../ProgressBar.tsx";
 import { SET_LOGOS } from "../setLogos.ts";
 import { HeaderIndicators } from "../SyncIndicators.tsx";
@@ -44,8 +45,8 @@ export function SetsScreen() {
       {!isDesktop && (
         <header className="topbar">
           <div className="brand">
-            <LogoIcon width={22} height={22} />
-            <span className="brand__name">{t("app.name")}</span>
+            <LogoSymbol className="brand__symbol" />
+            <LogoName className="brand__name" />
           </div>
           <HeaderIndicators />
         </header>

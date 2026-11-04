@@ -124,7 +124,9 @@ describe("3D view (§5.10)", () => {
     expect(container.querySelector(".viewer__printing")?.textContent).toBe("Beta β168 VO");
     expect(byLabel("Afficher Beta β168 VO").getAttribute("aria-pressed")).toBe("true");
     expect(container.querySelector(".viewer-card--foil")).toBeNull();
-    expect(container.querySelector(".viewer-card__back")?.textContent).toBe("NOVA PREEM");
+    const back = container.querySelector(".viewer-card__back")!;
+    expect(back.querySelector(".logo-symbol")).not.toBeNull();
+    expect(back.querySelector(".logo-name .visually-hidden")?.textContent).toBe("NOVA PREEM");
     expect(container.textContent).toContain("Glissez pour faire tourner la carte");
     expect(container.textContent).not.toContain("Ajouter");
 

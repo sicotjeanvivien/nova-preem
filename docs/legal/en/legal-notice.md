@@ -23,7 +23,7 @@ Phone: +1 650 319 8930
 - Nova Preem's source code is published under the MIT license: [github.com/sicotjeanvivien/nova-preem](https://github.com/sicotjeanvivien/nova-preem).
 - The Nova Preem name and logo belong to AWSD.
 - Card names, texts and images belong to WeirdCo and CD PROJEKT RED. They come from the official database at [cyberpunktcg.com](https://cyberpunktcg.com/cards) and are shown to help collectors identify their cards. Nova Preem is an unofficial fan project, not endorsed or supported by WeirdCo or CD PROJEKT RED.
-- Fonts: Chakra Petch and IBM Plex, under the SIL Open Font License.
+- Fonts: Chakra Petch, IBM Plex and Oxanium, under the SIL Open Font License.
 
 A rights holder who wants content removed can write to {{contactEmail}}.
 

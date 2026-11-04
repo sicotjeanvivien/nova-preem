@@ -75,12 +75,18 @@
   --color-support-border: #6b4a26;
   --color-support-icon-bg: #1f2330;
 
+  /* Logo (canvas note "Logo", 2026-11-04): the coral is reserved for it, never for the interface. */
+  --color-logo: #ff4d3d;
+  --color-logo-filled: #eceef3;
+  --color-logo-empty: #3a3f4e;
+
   --color-remove-bg: #3a1c25;
   --color-remove-text: #ff8fab;
   --color-remove-border: #ff5c8a;
   --color-selected-pill: #eceef3;
 
   --font-display: "Chakra Petch", sans-serif;
+  --font-logo: "Oxanium", "Chakra Petch", sans-serif;
   --font-text: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 

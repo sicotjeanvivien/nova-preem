@@ -2,7 +2,8 @@ import type { ComponentType, SVGProps } from "react";
 import { NavLink, Outlet, ScrollRestoration, useLocation, useMatch } from "react-router";
 import { useI18n } from "../i18n/i18n.tsx";
 import type { MessageKey } from "../i18n/messages.ts";
-import { CollectionIcon, LogoIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
+import { CollectionIcon, SearchIcon, SetsIcon, SettingsIcon, StatsIcon } from "./icons.tsx";
+import { LogoName, LogoSymbol } from "./Logo.tsx";
 import { useIsDesktop } from "../platform/media.ts";
 import { CatalogUpdateDialog } from "./CatalogUpdate.tsx";
 import { OfflineNoticeProvider } from "./OfflineNotice.tsx";
@@ -40,8 +41,8 @@ export function AppLayout() {
           {/* Two elements: on a single one, .brand's display would override the hiding of .nav__brand on mobile. */}
           <div className="nav__brand">
             <div className="brand">
-              <LogoIcon width={22} height={22} />
-              <span className="brand__name">{t("app.name")}</span>
+              <LogoSymbol className="brand__symbol" />
+              <LogoName className="brand__name" />
             </div>
           </div>
           {TABS.map(({ to, label, Icon }) => (

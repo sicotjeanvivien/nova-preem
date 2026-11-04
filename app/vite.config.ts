@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: false,
-        includeAssets: ["favicon.svg", "apple-touch-icon.png"],
+        includeAssets: ["favicon.ico", "favicon.svg", "apple-touch-icon.png"],
         manifest: {
           id: "/",
           name: "Nova Preem",
@@ -36,13 +36,14 @@ export default defineConfig(({ mode }) => {
           icons: [
             { src: "icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
             { src: "icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+            { src: "icons/icon-maskable-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
             { src: "icons/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
           ],
         },
         workbox: {
           // The app shell (code, styles, fonts, icons) is precached. The catalog itself
           // is stored in IndexedDB by the app, so the service worker never caches it.
-          globPatterns: ["**/*.{html,js,css,woff2,svg,png,webmanifest}"],
+          globPatterns: ["**/*.{html,js,css,woff2,svg,png,ico,webmanifest}"],
           navigateFallback: "index.html",
           // In production the catalog is on another origin, whose navigations the service worker never sees.
           navigateFallbackDenylist: catalogBase.startsWith("/") ? [new RegExp(`^${escapeRegExp(catalogBase)}`)] : [],
