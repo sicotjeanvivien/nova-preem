@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Catalog } from "../src/model.ts";
-import { deriveBaseName, normalize, sortKey, stripBetaPrefix } from "../src/normalize.ts";
+import { deriveBaseName, normalize, padCollectorNumber, sortKey, stripBetaPrefix } from "../src/normalize.ts";
 import { Report } from "../src/report.ts";
 import { loadSamplePage, normalizeSample, snapshotFrom } from "./helpers.ts";
 
@@ -25,6 +25,12 @@ describe("collector numbers", () => {
     expect(sortKey("005a")).toBe("0005a");
     expect(sortKey("X-12")).toBe("~X-12");
     expect(["005b", "006", "005", "005a", "10", "X"].map(sortKey).sort()).toEqual(["0005", "0005a", "0005b", "0006", "0010", "~X"]);
+  });
+
+  it("pads numbers with fewer than 3 digits, Beta prefix and suffix kept", () => {
+    expect(["10", "β7", "5a", "010", "β010", "005b", "1234", "X-12"].map(padCollectorNumber)).toEqual([
+      "010", "β007", "005a", "010", "β010", "005b", "1234", "X-12",
+    ]);
   });
 });
 
@@ -129,11 +135,12 @@ describe("normalize (real fixture)", () => {
     expect(report.byCode("divergent-localized-name").map((a) => a.context.cardId)).toEqual([card.id]);
   });
 
-  it("reports the malformed number without fixing it", () => {
+  it("pads a number with fewer than 3 digits, and reports it", () => {
     const { printings } = cardBySlug(catalog, "over-the-edge");
     const starter = printings.find((p) => p.releaseId === "embracing-power-starter-retail")!;
-    expect(starter).toMatchObject({ collectorNumber: "10", variantKey: "embracing-power-starter-retail#10", sortKey: "0010" });
-    expect(report.byCode("malformed-collector-number").map((a) => a.context.collectorNumber)).toEqual(["10"]);
+    expect(starter).toMatchObject({ collectorNumber: "010", variantKey: "embracing-power-starter-retail#010", sortKey: "0010" });
+    expect(report.byCode("padded-collector-number").map((a) => a.context.collectorNumber)).toEqual(["10"]);
+    expect(report.byCode("malformed-collector-number")).toEqual([]);
   });
 
   it("keeps a non-legal card without rules text", () => {

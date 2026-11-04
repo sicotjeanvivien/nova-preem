@@ -18,34 +18,19 @@
       "count": 14
     },
     {
-      "code": "malformed-collector-number",
-      "severity": "warning",
-      "count": 1
-    },
-    {
-      "code": "missing-beta-counterpart",
-      "severity": "info",
-      "count": 1
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
-      "count": 1
-    },
-    {
       "code": "missing-rules-text",
       "severity": "info",
       "count": 1
     },
     {
-      "code": "missing-translation",
-      "severity": "warning",
-      "count": 2
-    },
-    {
       "code": "numbering-gap",
       "severity": "info",
       "count": 2
+    },
+    {
+      "code": "padded-collector-number",
+      "severity": "info",
+      "count": 1
     },
     {
       "code": "placeholder-artist",
@@ -500,74 +485,12 @@
       }
     },
     {
-      "code": "malformed-collector-number",
-      "severity": "warning",
-      "message": "Over the Edge [embracingpowerretailstarterdeck 10 en] : numéro « 10 » hors du format attendu (β?000, suffixe a/b éventuel)",
-      "context": {
-        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
-        "printingId": "9e5a152e-6105-44a4-8db0-9cbf6cda2252",
-        "sourceCode": "embracingpowerretailstarterdeck",
-        "collectorNumber": "10",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-beta-counterpart",
-      "severity": "info",
-      "message": "Over the Edge [embracingpowerretailstarterdeck 10 en] : pas d'équivalent dans embracing-power-starter-beta",
-      "context": {
-        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
-        "printingId": "9e5a152e-6105-44a4-8db0-9cbf6cda2252",
-        "sourceCode": "embracingpowerretailstarterdeck",
-        "collectorNumber": "10",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
-      "message": "Over the Edge [embracingpowerbetastarterdeck β010 en] : pas d'équivalent dans embracing-power-starter-retail",
-      "context": {
-        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
-        "printingId": "de9b7361-6d1c-4a27-bcfb-50ec7a78e518",
-        "sourceCode": "embracingpowerbetastarterdeck",
-        "collectorNumber": "β010",
-        "language": "en"
-      }
-    },
-    {
       "code": "missing-rules-text",
       "severity": "info",
       "message": "Rebecca — Having a Moment : pas de texte de règles anglais",
       "context": {
         "cardId": "4acee220-f0ae-4bdc-85c9-f8e70ba99673",
         "card": "Rebecca — Having a Moment"
-      }
-    },
-    {
-      "code": "missing-translation",
-      "severity": "warning",
-      "message": "Over the Edge embracing-power-starter-retail#010 : pas d'impression en « en »",
-      "context": {
-        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
-        "variantKey": "embracing-power-starter-retail#010",
-        "language": "en",
-        "printingIds": [
-          "2c41626a-3fd6-4510-b75b-c42c6edd8f42"
-        ]
-      }
-    },
-    {
-      "code": "missing-translation",
-      "severity": "warning",
-      "message": "Over the Edge embracing-power-starter-retail#10 : pas d'impression en « fr »",
-      "context": {
-        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
-        "variantKey": "embracing-power-starter-retail#10",
-        "language": "fr",
-        "printingIds": [
-          "9e5a152e-6105-44a4-8db0-9cbf6cda2252"
-        ]
       }
     },
     {
@@ -592,6 +515,18 @@
           "002",
           "003"
         ]
+      }
+    },
+    {
+      "code": "padded-collector-number",
+      "severity": "info",
+      "message": "Over the Edge [embracingpowerretailstarterdeck 10 en] : numéro « 10 » complété en « 010 »",
+      "context": {
+        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
+        "printingId": "9e5a152e-6105-44a4-8db0-9cbf6cda2252",
+        "sourceCode": "embracingpowerretailstarterdeck",
+        "collectorNumber": "10",
+        "language": "en"
       }
     },
     {

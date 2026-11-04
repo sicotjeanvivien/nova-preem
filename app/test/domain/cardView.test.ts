@@ -39,10 +39,10 @@ describe("variants of a card", () => {
     expect(exclusiveCounterpart(index, betaIconic)).toBeNull();
   });
 
-  it("is not fooled by the malformed number 10 of Over the Edge (β010 in Beta)", () => {
+  it("matches Over the Edge 010 with β010 (the source numbers it 10 in EN; the pipeline pads it)", () => {
     const variants = variantsOfCard(index, cardNamed("Over the Edge"));
     const starter = variants.find((v) => v.release.id === "embracing-power-starter-retail")!;
-    expect(starter.collectorNumber).toBe("10");
+    expect(starter.collectorNumber).toBe("010");
     expect(exclusiveCounterpart(index, starter)).toBeNull();
   });
 
