@@ -8,6 +8,8 @@ export const PRIMARY_LANGUAGES: LanguageCode[] = ["en", "fr"];
 export const SUBTITLE_SEPARATOR = " — ";
 const BETA_PREFIX = "β";
 const COLLECTOR_NUMBER_FORMAT = /^β?\d{3}[a-z]?$/;
+/** A number with fewer than 3 digits (Over the Edge "10" in EN, "010" in FR and "β010" in Beta). */
+const SHORT_COLLECTOR_NUMBER = /^(β?)(\d{1,2})([a-z]?)$/;
 const KNOWN_TYPES = new Set(["legend", "unit", "gear", "program"]);
 const KNOWN_COLORS = new Set(["red", "yellow", "blue", "green"]);
 const KNOWN_LEGALITIES = new Set(["legal", "not-legal"]);
@@ -73,7 +75,14 @@ export function normalize(snapshot: SourceSnapshot, report: Report): NormalizedC
         unknownRarities.set(source.rarity, (unknownRarities.get(source.rarity) ?? 0) + 1);
       }
 
-      if (!COLLECTOR_NUMBER_FORMAT.test(source.collectorNumber)) {
+      const collectorNumber = padCollectorNumber(source.collectorNumber);
+      if (collectorNumber !== source.collectorNumber) {
+        report.info(
+          "padded-collector-number",
+          `${describe(card, source)} : numéro « ${source.collectorNumber} » complété en « ${collectorNumber} »`,
+          printingContext(card, source),
+        );
+      } else if (!COLLECTOR_NUMBER_FORMAT.test(source.collectorNumber)) {
         report.warn(
           "malformed-collector-number",
           `${describe(card, source)} : numéro « ${source.collectorNumber} » hors du format attendu (β?000, suffixe a/b éventuel)`,
@@ -84,7 +93,7 @@ export function normalize(snapshot: SourceSnapshot, report: Report): NormalizedC
         report.warn("placeholder-artist", `${describe(card, source)} : artiste « ${source.artist} »`, printingContext(card, source));
       }
 
-      const number = stripBetaPrefix(source.collectorNumber);
+      const number = stripBetaPrefix(collectorNumber);
       entries.push({
         card,
         source,
@@ -97,7 +106,7 @@ export function normalize(snapshot: SourceSnapshot, report: Report): NormalizedC
           releaseId: release.id,
           variantKey: `${release.id}#${number}`,
           language: source.language,
-          collectorNumber: source.collectorNumber,
+          collectorNumber,
           sortKey: sortKey(number),
           rarityId: rarity.id,
           artist: source.artist,
@@ -147,6 +156,12 @@ export function normalize(snapshot: SourceSnapshot, report: Report): NormalizedC
 }
 
 /** Collector number without the Beta prefix: "β003" → "003". */
+/** Pads a number with fewer than 3 digits ("10" → "010", "β7a" → "β007a"); any other number is kept as-is. */
+export function padCollectorNumber(collectorNumber: string): string {
+  const short = SHORT_COLLECTOR_NUMBER.exec(collectorNumber);
+  return short ? `${short[1]}${short[2]!.padStart(3, "0")}${short[3]}` : collectorNumber;
+}
+
 export function stripBetaPrefix(collectorNumber: string): string {
   return collectorNumber.startsWith(BETA_PREFIX) ? collectorNumber.slice(BETA_PREFIX.length) : collectorNumber;
 }

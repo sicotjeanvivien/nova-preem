@@ -148,6 +148,7 @@ Règles :
 
 - **Chaque release a sa propre numérotation.** Les starters sont numérotés dans le deck (`001`, `002`…), les promos dans leur série. Exemple : Chrome Fang = `008` en Retail, `002` dans le starter Embracing Power.
 - **Beta et Retail ont la même numérotation**, au préfixe `β` près (`β003` ↔ `003`), y compris pour les starters et les Box Toppers.
+- **Numéros à moins de 3 chiffres** : le pipeline les complète par des zéros (`10` → `010`, préfixe `β` et suffixe conservés) et le signale dans le rapport (`padded-collector-number`, information). Ce n'est pas un rattachement deviné : le numéro imprimé est le même, seule son écriture dans la source diffère. Tout autre numéro hors du format `β?\d{3}[a-z]?` reste tel quel et donne un avertissement `malformed-collector-number`.
 - **Retail EN et Retail FR ont exactement les mêmes numéros** : vérifié sur les 60 cartes (67 impressions de chaque côté).
 - Certaines impressions n'existent que dans **un seul tirage** : ex. l'Iconic `β168` de Johnny Silverhand existe en Beta, pas en Retail.
 - Certaines cartes **n'existent que dans un starter** (ex. *Yorinobu Arasaka — Embracing Destruction*), sans impression dans le set principal.
@@ -391,7 +392,7 @@ Commandes attendues :
 
 1. **Expiration des URL d'image (~5 min).** Télécharger les images « pendant le crawl » ne suffit pas : une page de 60 cartes contient environ 300 impressions, soit environ 300 s à 1 requête/s. Il faut des pages plus petites, avec les images téléchargées juste après chaque page, et/ou re-demander la page quand une URL a expiré.
 2. **Les Prerelease Beta et Retail ne suivent pas la règle Beta/Retail** : pas de préfixe `β`, et un contenu différent. Sur 11 impressions de chaque côté, 2 coïncident (même carte, même numéro) ; 4 cartes sont présentes des deux côtés à des numéros différents (Royce `002`/`003`, Rogue `005`/`006`…) ; 5 sont propres à chaque tirage. Ce sont bien deux releases distinctes, sans correspondance numéro à numéro.
-3. **Numéro mal formé** : *Over the Edge* porte le numéro `10` au lieu de `010` dans `embracingpowerretailstarterdeck` (et `β010` en Beta). C'est la seule exception au format `β?\d{3}[ab]?`.
+3. **Numéro mal formé** : *Over the Edge* porte le numéro `10` au lieu de `010` dans `embracingpowerretailstarterdeck` (et `β010` en Beta). C'est la seule exception au format `β?\d{3}[ab]?`. → Depuis le 04/11/2026, le pipeline le complète en `010` (§3, « Faits observés sur la numérotation »).
 4. **Textes FR divergents sur une même carte (7 cartes)** : les impressions Iconic omettent le texte de rappel (« (Payez le coût de cette Légende…) », « (Équipez à…) »). La divergence est réelle (texte imprimé) et non une erreur. Avec la règle actuelle (« la première impression de la langue »), le texte FR de la carte dépendrait de l'ordre de la source.
 5. **Textes EN probablement inversés** sur *Overwatch — Panam's Gift*. Dans la Retail EN, le texte de rappel d'équipement est absent de `093` (Epic) mais présent sur l'Iconic `165`, ce qui est l'inverse de la Beta (`β093` avec, `β165` sans) et du FR (`093` avec, `165` sans). Ailleurs, aucun texte imprimé EN ne diffère du texte officiel : il n'y a pas d'errata dans les données.
 6. **Nom FR divergent** : *Towerfall* s'appelle « Destruction de Tour » en `138` mais « Towerfall » en `167` (FR). C'est probablement une erreur de la source.
@@ -412,6 +413,6 @@ Nouveau crawl complet : **152 cartes, 862 impressions** (contre 151 et 751). Auc
   - Edgerunner Open S1 `031` (Johnny) et `052` (Sasha) : il ne manque plus que `028`.
   - **Nouvelle carte** *Lucyna Kushinada — Fresh Beginnings* (Légende bleue), en PRM01 `004a` et `004b` (deux illustrations, comme *V — Streetkid*). PRM01 commence donc à `004`.
 - Les 10 cartes exclusives aux starters ont désormais un nom et un texte FR.
-- *Over the Edge* : `10` en EN (anomalie déjà connue, point 3) mais `010` en FR dans Embracing Power. Les deux impressions ne sont **pas** rattachées (2 `missing-translation`) : le numéro source est conservé tel quel.
+- *Over the Edge* : `10` en EN (anomalie déjà connue, point 3) mais `010` en FR dans Embracing Power. Le pipeline complète désormais `10` en `010` (décision du 04/11/2026) : VO, VF et `β010` sont rattachées.
 - Textes FR divergents : 14 cartes au lieu de 7, même cause qu'au point 4 (texte de rappel omis sur certaines impressions, ici aussi sur des promos et starters FR).
 - Noms FR : *Afterparty at Lizzie's* s'appelle « After au Lizzie's » en Retail FR mais garde son nom anglais dans le starter FR ; *Adam Smasher — Metal Over Meat* et *Sandevistan* n'ont pas de `localized_name` dans les promos FR (Brawl, Showdown). Le nom FR de la carte n'en est pas affecté.

@@ -97,8 +97,7 @@ describe("Sets, level 2: releases of a set", () => {
     expect(content).toMatch(/Sets Welcome to Night City 17 tirages/);
     expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 172 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
     expect(content).toMatch(/Starters Starter Welcome to Night City The Heist — Retail 0 \/ 20/);
-    // 21 and not 20: Over the Edge is numbered "10" in EN and "010" in FR, so the two are not matched (catalog report).
-    expect(content).toContain("Embracing Power — Retail 1 / 21 VO VF 4 %");
+    expect(content).toContain("Embracing Power — Retail 1 / 20 VO VF 5 %");
     expect(content).toMatch(/Decks démo .*Merc 0 \/ 15 .*Arasaka 0 \/ 14/);
     expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 VO 0 %/);
   });

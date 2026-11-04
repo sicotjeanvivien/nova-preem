@@ -13,6 +13,7 @@ export type AnomalyCode =
   | "unknown-legality"
   | "card-without-printings"
   | "malformed-collector-number"
+  | "padded-collector-number"
   | "duplicate-printing-key"
   | "variant-card-conflict"
   | "missing-translation"
