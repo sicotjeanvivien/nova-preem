@@ -93,6 +93,45 @@ describe("legal pages (docs/legal-spec.md)", () => {
     const learnMore = link("En savoir plus sur les données");
     expect(learnMore.getAttribute("href")).toBe("/confidentialite#google-drive");
   });
+
+  describe("support card (spec §7)", () => {
+    const KOFI = "https://ko-fi.com/example";
+    const card = () => container.querySelector<HTMLElement>("#settings-support")?.closest("section") ?? null;
+    const sectionTitles = () => [...container.querySelectorAll(".settings h2")].map((h) => h.textContent);
+
+    it("is not shown without a Ko-fi address", async () => {
+      await render({ path: "/reglages" });
+      expect(card()).toBeNull();
+      expect(container.textContent).not.toContain("Ko-fi");
+    });
+
+    for (const [width, layout] of [
+      [390, "mobile"],
+      [1280, "desktop"],
+    ] as const) {
+      it(`comes just before About on ${layout}, with a plain link to Ko-fi in a new tab`, async () => {
+        setViewportWidth(width);
+        await render({ path: "/reglages", services: { supportUrl: KOFI } });
+        const titles = sectionTitles();
+        expect(titles.indexOf("Nous soutenir")).toBe(titles.indexOf("À propos") - 1);
+        const section = card()!;
+        expect(section.textContent).toContain("Nova Preem est et restera un outil gratuit, sans publicité. Vous pouvez soutenir le projet via le lien ci-dessous.");
+        expect(section.textContent).toContain("Paiement par carte ou PayPal sur Ko-fi (en anglais). Aucune fonction n'est réservée aux donateurs.");
+        const links = [...section.querySelectorAll("a")];
+        expect(links.map((a) => [a.textContent, a.getAttribute("href"), a.getAttribute("target"), a.getAttribute("rel")])).toEqual([
+          ["Soutenir sur Ko-fi", KOFI, "_blank", "noopener noreferrer"],
+        ]);
+        expect(section.querySelector("button")).toBeNull();
+      });
+    }
+
+    it("is translated", async () => {
+      await render({ path: "/reglages", language: "en", services: { supportUrl: KOFI } });
+      const section = card()!;
+      expect(section.querySelector("h2")?.textContent).toBe("Support us");
+      expect(section.querySelector("a")?.textContent).toBe("Support on Ko-fi");
+    });
+  });
 });
 
 describe("legal pages at first launch (spec §2)", () => {
@@ -121,6 +160,7 @@ describe("legal pages at first launch (spec §2)", () => {
       imageBaseUrl: "http://localhost/catalog/images/",
       appVersion: "0.1.0",
       sync: null,
+      supportUrl: null,
     };
     await act(async () => root.render(<App services={services} />));
     expect(container.textContent).toContain("Téléchargement du catalogue");

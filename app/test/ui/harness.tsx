@@ -107,6 +107,7 @@ export function TestApp({
       imageBaseUrl: "http://localhost/catalog/images/",
       appVersion: "0.1.0",
       sync: null,
+      supportUrl: null,
       ...extraServices,
     } as Services,
     catalog,

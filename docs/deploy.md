@@ -79,12 +79,13 @@ Acheté le 03/11/2026 par AWSD (Cloudflare Registrar, compte de la société). *
 
 ## Pages légales
 
-Les textes de `docs/legal/` sont convertis en HTML au build (`app/build/legal.ts`, voir `docs/legal-spec.md`). Deux variables, avec leur valeur par défaut dans `app/.env` :
+Les textes de `docs/legal/` sont convertis en HTML au build (`app/build/legal.ts`, voir `docs/legal-spec.md`). Trois variables, avec leur valeur par défaut dans `app/.env` :
 
 - `VITE_SITE_DOMAIN` : le domaine public, sans `https://` (`nova-preem.app` depuis le 03/11/2026) ;
-- `VITE_CONTACT_EMAIL` : l'adresse de contact (`awsd.contact@gmail.com`).
+- `VITE_CONTACT_EMAIL` : l'adresse de contact (`awsd.contact@gmail.com`) ;
+- `VITE_KOFI_URL` : l'adresse de la page Ko-fi de la carte « Nous soutenir » de Réglages (`docs/legal-spec.md` §7), ouverte dans un nouvel onglet (`https://ko-fi.com/awsd`, page créée le 04/11/2026). Facultative : vide, la carte n'est pas affichée.
 
-Pour les changer en production, modifier `app/.env` (ou les définir comme variables d'environnement du build). Le build échoue si l'une est vide ou si un texte contient un autre marqueur `{{…}}`. Le build écrit aussi `dist/a-propos.html`, `confidentialite.html`, `mentions-legales.html` et `cgu.html`, lisibles sans JavaScript : `curl https://nova-preem.app/confidentialite` doit renvoyer le texte complet.
+Pour les changer en production, modifier `app/.env` (ou les définir comme variables d'environnement du build). Le build échoue si `VITE_SITE_DOMAIN` ou `VITE_CONTACT_EMAIL` est vide ou si un texte contient un autre marqueur `{{…}}`. Le build écrit aussi `dist/a-propos.html`, `confidentialite.html`, `mentions-legales.html` et `cgu.html`, lisibles sans JavaScript : `curl https://nova-preem.app/confidentialite` doit renvoyer le texte complet.
 
 ## Points d'attention
 

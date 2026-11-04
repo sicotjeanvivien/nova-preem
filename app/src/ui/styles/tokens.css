@@ -68,6 +68,13 @@
 
   --color-toast: #262b38;
   --color-toast-floating: #1f2330;
+
+  /* "Nous soutenir" card (Settings / WebSettings): icon, link text and border, icon tile. */
+  --color-support: #ffb067;
+  --color-support-text: #ffd3a3;
+  --color-support-border: #6b4a26;
+  --color-support-icon-bg: #1f2330;
+
   --color-remove-bg: #3a1c25;
   --color-remove-text: #ff8fab;
   --color-remove-border: #ff5c8a;

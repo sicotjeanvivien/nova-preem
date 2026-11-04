@@ -12,6 +12,7 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCatalogUpdate } from "../CatalogUpdate.tsx";
 import { useDataActions } from "../dataActions.ts";
+import { SupportCard } from "../SupportCard.tsx";
 import { SyncCard } from "../SyncCard.tsx";
 import { useSync } from "../SyncContext.tsx";
 import { useImportFlow } from "../useImportFlow.tsx";
@@ -28,7 +29,8 @@ const INTERFACE_NAMES: Record<string, string> = { fr: "Français", en: "English"
 
 /**
  * Settings (Settings / WebSettings, docs/app-spec.md §7): entry, completion,
- * display, and data (catalog, export, import, CSV). Changes apply at once.
+ * display, data (catalog, export, import, CSV), support (when configured) and
+ * about. Changes apply at once.
  */
 export function SettingsScreen() {
   const { index, catalog, settings, updateSettings, services } = useApp();
@@ -283,6 +285,7 @@ export function SettingsScreen() {
           )}
         </Section>
 
+        <SupportCard />
         <Section id="about" title={t("settings.about")}>
           {LEGAL_PAGES.map((page) => (
             <Link key={page.id} className="settings-row settings-row--link" to={page.path} state={legalLinkState("nav.settings")}>
