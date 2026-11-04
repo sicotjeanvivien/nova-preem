@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { createMemoryRouter, RouterProvider, type RouteObject } from "react-router";
 import { manifestSchema } from "../../src/domain/catalog.ts";
-import { indexCatalog } from "../../src/domain/catalogIndex.ts";
+import { indexCatalog, type CatalogIndex } from "../../src/domain/catalogIndex.ts";
 import type { CollectionEntry } from "../../src/domain/collection.ts";
 import { DEFAULT_SETTINGS, type Settings } from "../../src/domain/settings.ts";
 import type { CollectionStore } from "../../src/domain/stores.ts";
@@ -74,7 +74,7 @@ const routes: RouteObject[] = [
   },
 ];
 
-/** The app at `path`, with the real catalog and a given collection. */
+/** The app at `path`, with the real catalog (or `catalogIndex`) and a given collection. */
 export function TestApp({
   path,
   language,
@@ -85,6 +85,7 @@ export function TestApp({
   catalogSource = fakeSource(),
   catalogStore = new MemoryCatalogStore(),
   checkAtLaunch = false,
+  catalogIndex: initialIndex = index,
 }: {
   path: string;
   language?: "fr" | "en";
@@ -95,10 +96,11 @@ export function TestApp({
   catalogSource?: CatalogSource;
   catalogStore?: MemoryCatalogStore;
   checkAtLaunch?: boolean;
+  catalogIndex?: CatalogIndex;
 }): ReactNode {
   const [settings, setSettings] = useState(initialSettings);
-  const [catalog, setCatalog] = useState<StoredCatalog>(() => ({ manifest: manifestSchema.parse(realManifest), catalog: index.catalog }));
-  const [catalogIndex, setCatalogIndex] = useState(index);
+  const [catalog, setCatalog] = useState<StoredCatalog>(() => ({ manifest: manifestSchema.parse(realManifest), catalog: initialIndex.catalog }));
+  const [catalogIndex, setCatalogIndex] = useState(initialIndex);
   const [router] = useState(() => createMemoryRouter(routes, { initialEntries: [path] }));
   const context = {
     services: {

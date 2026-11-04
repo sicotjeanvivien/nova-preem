@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T10:05:05.951Z",
+  "generatedAt": "2026-11-04T13:40:04.638Z",
   "summary": [
     {
       "code": "counterpart-mismatch",
       "severity": "warning",
-      "count": 12
+      "count": 16
     },
     {
       "code": "divergent-localized-name",
       "severity": "warning",
-      "count": 1
+      "count": 4
     },
     {
       "code": "divergent-rules-text",
       "severity": "warning",
-      "count": 1
+      "count": 14
     },
     {
       "code": "malformed-collector-number",
@@ -30,12 +30,17 @@
     {
       "code": "missing-retail-counterpart",
       "severity": "info",
-      "count": 5
+      "count": 1
     },
     {
       "code": "missing-rules-text",
       "severity": "info",
       "count": 1
+    },
+    {
+      "code": "missing-translation",
+      "severity": "warning",
+      "count": 2
     },
     {
       "code": "numbering-gap",
@@ -122,6 +127,32 @@
     {
       "code": "counterpart-mismatch",
       "severity": "warning",
+      "message": "Johnny Silverhand — Rocking Renegade β168 : artist « Divebound Studio » en Beta, « Divebound » en Retail",
+      "context": {
+        "cardId": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
+        "field": "artist",
+        "printingIds": [
+          "4f8fbab4-7aad-4271-8dd6-8cdf68654c5e",
+          "cb12d8c4-64b1-4e53-898e-8fd46aeac6bf"
+        ]
+      }
+    },
+    {
+      "code": "counterpart-mismatch",
+      "severity": "warning",
+      "message": "Judy Álvarez — Nothing to Doubt β171 : artist « Divebound Studio » en Beta, « Divebound » en Retail",
+      "context": {
+        "cardId": "cb7f8d05-87cc-4606-ad71-a9283f2f4b20",
+        "field": "artist",
+        "printingIds": [
+          "2c0d6f48-0804-4d5f-83c2-f28367ce26d5",
+          "fe26a4ff-1076-4371-8ab5-3f31d0319a3f"
+        ]
+      }
+    },
+    {
+      "code": "counterpart-mismatch",
+      "severity": "warning",
       "message": "Overwatch — Panam's Gift β165 : artist « Michal Ivan » en Beta, « Dardo Studios » en Retail",
       "context": {
         "cardId": "78ea68b3-1260-416b-9f88-d6be4586232b",
@@ -129,6 +160,19 @@
         "printingIds": [
           "775e7d6b-b9d9-48cf-a34d-00ba2b1c0a43",
           "768ac843-133b-4c01-b4d9-c1bc9c28470d"
+        ]
+      }
+    },
+    {
+      "code": "counterpart-mismatch",
+      "severity": "warning",
+      "message": "Panam Palmer — Strength Through Family β170 : artist « Divebound Studio » en Beta, « Divebound » en Retail",
+      "context": {
+        "cardId": "34774f04-4f16-40eb-8ee4-999144e572ab",
+        "field": "artist",
+        "printingIds": [
+          "7d71aedf-dbb6-435f-bece-e522834db122",
+          "5632d773-b6c8-402d-a162-364767d3d21e"
         ]
       }
     },
@@ -155,6 +199,19 @@
         "printingIds": [
           "b1db8654-6197-4e80-9555-8917dcba6dc7",
           "6ceb8ace-8b73-4b12-ba75-ee867b936e5c"
+        ]
+      }
+    },
+    {
+      "code": "counterpart-mismatch",
+      "severity": "warning",
+      "message": "Sasha Yakovleva — Won't Let You Down β169 : artist « Divebound Studio » en Beta, « Divebound » en Retail",
+      "context": {
+        "cardId": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
+        "field": "artist",
+        "printingIds": [
+          "146d6391-3b35-4e74-b270-cef69d8f2a91",
+          "307de3c6-6bbd-4e44-8dde-07f4fac45db0"
         ]
       }
     },
@@ -213,10 +270,150 @@
     {
       "code": "divergent-localized-name",
       "severity": "warning",
+      "message": "Adam Smasher — Metal Over Meat : noms différents en « fr » : 041 « Adam Smasher — Chair de Métal », 160 « Adam Smasher — Chair de Métal », 002 « null », 004 « null »",
+      "context": {
+        "cardId": "a2ad9c2f-bfb7-473b-9408-91af142d269d",
+        "language": "fr"
+      }
+    },
+    {
+      "code": "divergent-localized-name",
+      "severity": "warning",
+      "message": "Afterparty at Lizzie's : noms différents en « fr » : 065 « After au Lizzie's », 010 « Afterparty at Lizzie's »",
+      "context": {
+        "cardId": "d039e4b3-9b83-40da-8d8f-b1dfb1f172f1",
+        "language": "fr"
+      }
+    },
+    {
+      "code": "divergent-localized-name",
+      "severity": "warning",
+      "message": "Sandevistan : noms différents en « fr » : 095 « Sandevistan », 019 « Sandevistan », 001 « null », 003 « null », 005 « null »",
+      "context": {
+        "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
+        "language": "fr"
+      }
+    },
+    {
+      "code": "divergent-localized-name",
+      "severity": "warning",
       "message": "Towerfall : noms différents en « fr » : 138 « Destruction de Tour », 167 « Towerfall »",
       "context": {
         "cardId": "9a0fd5a3-a00b-425c-a251-755eeab12bfe",
         "language": "fr"
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Bootleg Black Sapphire Show : textes imprimés différents en « fr » (impressions non-Iconic 066, 007, 025)",
+      "context": {
+        "cardId": "84561b4c-67f0-4b2e-80ac-6b9c0a2396e3",
+        "language": "fr",
+        "printingIds": [
+          "eab0800b-0513-4264-930f-a6adf5e1eede",
+          "bf92e29e-162b-47b5-a416-f2ba389fc912",
+          "e8882cc2-86a2-49d1-aaf9-a7c315842510"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Corpo Security : textes imprimés différents en « fr » (impressions non-Iconic 076, 014, 009, 027)",
+      "context": {
+        "cardId": "71652e73-984a-4630-be47-af947f87d5c1",
+        "language": "fr",
+        "printingIds": [
+          "185e629f-b159-4015-a7eb-b9ffc1835e56",
+          "67c0d4ad-a044-4240-8941-4a90c8d5eeef",
+          "5f456afc-0bf1-4675-bee5-1d4bfb72034b",
+          "2ba670a8-030e-494c-aeaf-0503926e6eac"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Dying Night — V's Pistol : textes imprimés différents en « fr » (impressions non-Iconic 128, 017, 016, 034)",
+      "context": {
+        "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
+        "language": "fr",
+        "printingIds": [
+          "69a2e4bb-12e4-4a06-b9a2-cc9ceff1e22b",
+          "a287a673-d258-4d60-bc7a-9093678fe5dd",
+          "a96d4bb7-b498-4371-9558-e423be933064",
+          "d378d160-5c3b-4e45-b9c0-2f5715f01ba0"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Gorilla Arms : textes imprimés différents en « fr » (impressions non-Iconic 060, 011)",
+      "context": {
+        "cardId": "6dd172b1-2341-473f-8837-a9efe6a75701",
+        "language": "fr",
+        "printingIds": [
+          "f6a5ea4d-32d6-438d-b14b-83a743d90244",
+          "68e56b4e-9c21-4d09-a270-9b3cc355fa30"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Goro Takemura — Hands Unclean : textes imprimés différents en « fr » (impressions non-Iconic 012, 003)",
+      "context": {
+        "cardId": "72358c7d-9f29-4ef6-a682-f5bfc72c7714",
+        "language": "fr",
+        "printingIds": [
+          "6f154367-d0cb-4650-9d31-d87193f32bfc",
+          "e97ed28b-c4c7-4d21-a11e-057ae5cb43c1"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Jackie Welles — Ride or Die Choom : textes imprimés différents en « fr » (impressions non-Iconic 048, 004, 022)",
+      "context": {
+        "cardId": "b665e103-456b-4c51-9551-95b0bc87212a",
+        "language": "fr",
+        "printingIds": [
+          "cde99261-b242-4a30-acd3-74081653154a",
+          "9fd08b9f-ba4c-44b4-9005-f8007ff7b107",
+          "ca3dbf6e-ead5-4948-b704-e325a6297fd7"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Mandibular Upgrade : textes imprimés différents en « fr » (impressions non-Iconic 062, 008, 006, 024)",
+      "context": {
+        "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
+        "language": "fr",
+        "printingIds": [
+          "d9187cbc-ec7e-4727-9447-e8c7e46e72c0",
+          "2f9b1516-302b-4a3f-b23a-aea7d5196066",
+          "aa8dd968-405c-4e82-a6f5-722e1f00c490",
+          "4706864a-1946-4f13-a433-65add75ad6ca"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "NetWatch Netdriver : textes imprimés différents en « fr » (impressions non-Iconic 129, 017, 035)",
+      "context": {
+        "cardId": "40c98fdc-45d0-458d-be2c-2697dc337ca5",
+        "language": "fr",
+        "printingIds": [
+          "5ab4befe-a812-43ce-b2ff-0f4fea00be96",
+          "fc2e2d9b-f9ad-4017-b570-9775285dcaed",
+          "5dea5d8a-4fc5-4598-8e3c-b21d0ef9d85d"
+        ]
       }
     },
     {
@@ -229,6 +426,76 @@
         "printingIds": [
           "336131d1-3bc8-4b39-b893-5fce9be8ce7f",
           "0f825d0d-be91-4f42-9e97-5d87488ee2fc"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Psycho Squad : textes imprimés différents en « fr » (impressions non-Iconic 124, 016)",
+      "context": {
+        "cardId": "14d87f2a-8bd7-424f-b65b-3659156cef81",
+        "language": "fr",
+        "printingIds": [
+          "c7fa437c-1b52-45fd-ad94-8c99c206dca0",
+          "bc347fa2-8428-44a7-b6e4-2b166b66447c"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Satori — Sword of Saburo : textes imprimés différents en « fr » (impressions non-Iconic 026, 008, 003, 021)",
+      "context": {
+        "cardId": "4670d02b-b97a-4771-bb7e-65bdc012530e",
+        "language": "fr",
+        "printingIds": [
+          "27a443ba-ff83-4814-adb2-6607e741c150",
+          "7329d165-bd9e-41fd-aaac-38f81a629ec3",
+          "86665027-3400-4183-a246-a4df93b83c83",
+          "b142d928-a4fe-4f0a-84f7-860baf5a787f"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "Secondhand Bombus : textes imprimés différents en « fr » (impressions non-Iconic 053, 005, 005, 023)",
+      "context": {
+        "cardId": "b05cb065-309e-45a3-bbe0-20f4b6ea71aa",
+        "language": "fr",
+        "printingIds": [
+          "efa44196-731f-467d-8cbe-fce7a2c06d58",
+          "cb03d048-2691-421d-9654-e20ffed0592b",
+          "648a99cd-d25d-4e9e-a45d-14b47ed7f854",
+          "eb96776d-e7ab-4312-85a8-fe2957f22094"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "V — Corporate Exile : textes imprimés différents en « fr » (impressions non-Iconic 012, 006)",
+      "context": {
+        "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
+        "language": "fr",
+        "printingIds": [
+          "98a296a5-1dac-4475-b401-ae3e0e18234a",
+          "fb1b4f07-a39f-461b-a7e3-92fe886f87be"
+        ]
+      }
+    },
+    {
+      "code": "divergent-rules-text",
+      "severity": "warning",
+      "message": "We Gotta Live Together : textes imprimés différents en « fr » (impressions non-Iconic 104, 013, 031)",
+      "context": {
+        "cardId": "404748b4-f30e-4bf1-8991-5ad449da755a",
+        "language": "fr",
+        "printingIds": [
+          "1c963f25-948c-4e35-83e2-736b5ab1c899",
+          "1b15e610-8f48-46f0-8708-5104134e966b",
+          "c95ba50a-07d9-4c10-a3e5-4dc5f25a30ef"
         ]
       }
     },
@@ -259,60 +526,12 @@
     {
       "code": "missing-retail-counterpart",
       "severity": "info",
-      "message": "Johnny Silverhand — Rocking Renegade [welcometonightcitybeta β168 en] : pas d'équivalent dans wnc-retail",
-      "context": {
-        "cardId": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
-        "printingId": "4f8fbab4-7aad-4271-8dd6-8cdf68654c5e",
-        "sourceCode": "welcometonightcitybeta",
-        "collectorNumber": "β168",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
-      "message": "Judy Álvarez — Nothing to Doubt [welcometonightcitybeta β171 en] : pas d'équivalent dans wnc-retail",
-      "context": {
-        "cardId": "cb7f8d05-87cc-4606-ad71-a9283f2f4b20",
-        "printingId": "2c0d6f48-0804-4d5f-83c2-f28367ce26d5",
-        "sourceCode": "welcometonightcitybeta",
-        "collectorNumber": "β171",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
       "message": "Over the Edge [embracingpowerbetastarterdeck β010 en] : pas d'équivalent dans embracing-power-starter-retail",
       "context": {
         "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
         "printingId": "de9b7361-6d1c-4a27-bcfb-50ec7a78e518",
         "sourceCode": "embracingpowerbetastarterdeck",
         "collectorNumber": "β010",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
-      "message": "Panam Palmer — Strength Through Family [welcometonightcitybeta β170 en] : pas d'équivalent dans wnc-retail",
-      "context": {
-        "cardId": "34774f04-4f16-40eb-8ee4-999144e572ab",
-        "printingId": "7d71aedf-dbb6-435f-bece-e522834db122",
-        "sourceCode": "welcometonightcitybeta",
-        "collectorNumber": "β170",
-        "language": "en"
-      }
-    },
-    {
-      "code": "missing-retail-counterpart",
-      "severity": "info",
-      "message": "Sasha Yakovleva — Won't Let You Down [welcometonightcitybeta β169 en] : pas d'équivalent dans wnc-retail",
-      "context": {
-        "cardId": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
-        "printingId": "146d6391-3b35-4e74-b270-cef69d8f2a91",
-        "sourceCode": "welcometonightcitybeta",
-        "collectorNumber": "β169",
         "language": "en"
       }
     },
@@ -326,29 +545,52 @@
       }
     },
     {
-      "code": "numbering-gap",
-      "severity": "info",
-      "message": "edgerunner-open-s1 : numéros absents entre 001 et 054 : 028, 031, 052",
+      "code": "missing-translation",
+      "severity": "warning",
+      "message": "Over the Edge embracing-power-starter-retail#010 : pas d'impression en « en »",
       "context": {
-        "releaseId": "edgerunner-open-s1",
-        "missing": [
-          "028",
-          "031",
-          "052"
+        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
+        "variantKey": "embracing-power-starter-retail#010",
+        "language": "en",
+        "printingIds": [
+          "2c41626a-3fd6-4510-b75b-c42c6edd8f42"
+        ]
+      }
+    },
+    {
+      "code": "missing-translation",
+      "severity": "warning",
+      "message": "Over the Edge embracing-power-starter-retail#10 : pas d'impression en « fr »",
+      "context": {
+        "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
+        "variantKey": "embracing-power-starter-retail#10",
+        "language": "fr",
+        "printingIds": [
+          "9e5a152e-6105-44a4-8db0-9cbf6cda2252"
         ]
       }
     },
     {
       "code": "numbering-gap",
       "severity": "info",
-      "message": "set1-promos : numéros absents entre 001 et 008 : 001, 002, 003, 004",
+      "message": "edgerunner-open-s1 : numéros absents entre 001 et 054 : 028",
+      "context": {
+        "releaseId": "edgerunner-open-s1",
+        "missing": [
+          "028"
+        ]
+      }
+    },
+    {
+      "code": "numbering-gap",
+      "severity": "info",
+      "message": "set1-promos : numéros absents entre 001 et 008 : 001, 002, 003",
       "context": {
         "releaseId": "set1-promos",
         "missing": [
           "001",
           "002",
-          "003",
-          "004"
+          "003"
         ]
       }
     },

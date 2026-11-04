@@ -15,7 +15,7 @@ describe("Search, mobile layout (server rendering)", () => {
 
   it("lists every card with the filters of the spec", () => {
     const content = render("/recherche");
-    expect(content).toContain("151 cartes · tous sets, VF et VO");
+    expect(content).toContain("152 cartes · tous sets, VF et VO");
     expect(content).toMatch(/Tous types Unité Légende Programme Équipement|Tous types (Légende|Unité|Programme|Équipement)/);
     expect(content).toContain("Chercher aussi dans le texte de règles");
     expect(content).toMatch(/Possession Couleur Rareté Set Coût RAM/);
@@ -78,9 +78,9 @@ describe("Search, interactions", () => {
   it("shows a grid of cards on desktop, with the type filter", async () => {
     setViewportWidth(1280);
     await act(async () => root.render(<TestApp path="/recherche" entries={owned} />));
-    expect(container.querySelectorAll(".result-card")).toHaveLength(151);
+    expect(container.querySelectorAll(".result-card")).toHaveLength(152);
     const legend = [...container.querySelectorAll("button")].find((b) => b.textContent === "Légende")!;
     await act(async () => legend.click());
-    expect(container.querySelectorAll(".result-card")).toHaveLength(27);
+    expect(container.querySelectorAll(".result-card")).toHaveLength(28);
   });
 });

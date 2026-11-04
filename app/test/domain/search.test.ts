@@ -17,7 +17,7 @@ describe("normalizeText", () => {
 
 describe("searchCards (spec §5.6)", () => {
   it("returns every card of the catalog without query", () => {
-    expect(search({})).toHaveLength(151);
+    expect(search({})).toHaveLength(152);
   });
 
   it("finds a card by its name in any language, without accents", () => {
@@ -56,12 +56,12 @@ describe("searchCards (spec §5.6)", () => {
   });
 
   it("filters by type, color, cost range, RAM, rarity and set", () => {
-    expect(search({ types: ["legend"] })).toHaveLength(27);
-    expect(search({ colors: ["blue"] })).toHaveLength(38);
+    expect(search({ types: ["legend"] })).toHaveLength(28);
+    expect(search({ colors: ["blue"] })).toHaveLength(39);
     expect(search({ costs: ["7+"] })).toHaveLength(12);
     expect(search({ rams: ["5", "6"] })).toHaveLength(2);
     expect(search({ rarities: ["iconic"] }).every((r) => r.printings.some((p) => p.rarityId.startsWith("iconic")))).toBe(true);
-    expect(search({ sets: ["wnc"] })).toHaveLength(151);
+    expect(search({ sets: ["wnc"] })).toHaveLength(152);
   });
 
   it("filters by possession and counts the copies", () => {
@@ -72,8 +72,8 @@ describe("searchCards (spec §5.6)", () => {
     const mine = search({ possession: ["owned"] }, owned);
     expect(names(mine)).toEqual(["Croc Chromé"]);
     expect(mine[0]!.copies).toBe(4);
-    expect(search({ possession: ["missing"] }, owned)).toHaveLength(150);
-    expect(search({ possession: ["owned", "missing"] }, owned)).toHaveLength(151);
+    expect(search({ possession: ["missing"] }, owned)).toHaveLength(151);
+    expect(search({ possession: ["owned", "missing"] }, owned)).toHaveLength(152);
   });
 
   it("sorts by the displayed name", () => {

@@ -55,19 +55,26 @@ export const EDITIONS: EditionMapping[] = [
   { code: "welcometonightcityretail-fr", releaseId: "wnc-retail", language: "fr" },
   { code: "theheistbetastarterdeck", releaseId: "heist-starter-beta", language: "en" },
   { code: "theheistretailstarterdeck", releaseId: "heist-starter-retail", language: "en" },
+  { code: "theheistretailstarterdeck-fr", releaseId: "heist-starter-retail", language: "fr" },
   { code: "embracingpowerbetastarterdeck", releaseId: "embracing-power-starter-beta", language: "en" },
   { code: "embracingpowerretailstarterdeck", releaseId: "embracing-power-starter-retail", language: "en" },
+  // Truncated by the source (sic): "…starterde-fr", not "…starterdeck-fr".
+  { code: "embracingpowerretailstarterde-fr", releaseId: "embracing-power-starter-retail", language: "fr" },
   { code: "mercdemodeck", releaseId: "merc-demo", language: "en" },
   { code: "arasakademodeck", releaseId: "arasaka-demo", language: "en" },
   { code: "boxtoppersbeta", releaseId: "box-toppers-beta", language: "en" },
   { code: "boxtoppersretail", releaseId: "box-toppers-retail", language: "en" },
+  { code: "boxtoppersretail-fr", releaseId: "box-toppers-retail", language: "fr" },
   { code: "prereleasebeta", releaseId: "prerelease-beta", language: "en" },
   { code: "prereleaseretail", releaseId: "prerelease-retail", language: "en" },
+  { code: "prereleaseretail-FR", releaseId: "prerelease-retail", language: "fr" },
   { code: "PRM01", releaseId: "set1-promos", language: "en" },
   { code: "judgepromos", releaseId: "judge-promos", language: "en" },
   { code: "edgerunneropens1", releaseId: "edgerunner-open-s1", language: "en" },
   { code: "nightcitybrawls1", releaseId: "night-city-brawl-s1", language: "en" },
+  { code: "nightcitybrawls1-FR", releaseId: "night-city-brawl-s1", language: "fr" },
   { code: "nightcityshowdowns1", releaseId: "night-city-showdown-s1", language: "en" },
+  { code: "nightcityshowdowns1-FR", releaseId: "night-city-showdown-s1", language: "fr" },
 ];
 
 const editionsByCode = new Map(EDITIONS.map((edition) => [edition.code, edition]));

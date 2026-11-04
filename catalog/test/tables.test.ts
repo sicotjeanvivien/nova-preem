@@ -3,9 +3,9 @@ import { EDITIONS, RELEASES, SETS } from "../src/editions.ts";
 import { RARITIES, findRarity, unknownRarity } from "../src/rarities.ts";
 
 describe("edition table", () => {
-  it("maps the 18 known Netdeck codes, each once", () => {
-    expect(EDITIONS).toHaveLength(18);
-    expect(new Set(EDITIONS.map((edition) => edition.code)).size).toBe(18);
+  it("maps the 24 known Netdeck codes, each once", () => {
+    expect(EDITIONS).toHaveLength(24);
+    expect(new Set(EDITIONS.map((edition) => edition.code)).size).toBe(24);
   });
 
   it("only references existing releases and sets, and uses every release", () => {
@@ -26,6 +26,22 @@ describe("edition table", () => {
       ["welcometonightcityretail", "en"],
       ["welcometonightcityretail-fr", "fr"],
     ]);
+  });
+
+  it("puts each French edition in the same release as its English counterpart", () => {
+    const french = EDITIONS.filter((edition) => edition.language === "fr");
+    expect(french.map(({ code, releaseId }) => [code, releaseId])).toEqual([
+      ["welcometonightcityretail-fr", "wnc-retail"],
+      ["theheistretailstarterdeck-fr", "heist-starter-retail"],
+      ["embracingpowerretailstarterde-fr", "embracing-power-starter-retail"],
+      ["boxtoppersretail-fr", "box-toppers-retail"],
+      ["prereleaseretail-FR", "prerelease-retail"],
+      ["nightcitybrawls1-FR", "night-city-brawl-s1"],
+      ["nightcityshowdowns1-FR", "night-city-showdown-s1"],
+    ]);
+    for (const { releaseId } of french) {
+      expect(EDITIONS.some((edition) => edition.releaseId === releaseId && edition.language === "en")).toBe(true);
+    }
   });
 });
 

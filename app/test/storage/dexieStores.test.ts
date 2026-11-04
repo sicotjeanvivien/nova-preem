@@ -29,7 +29,7 @@ describe("DexieCatalogStore", () => {
     await store.save(stored);
     const loaded = await new DexieCatalogStore(db).load();
     expect(loaded?.manifest).toEqual(stored.manifest);
-    expect(loaded?.catalog.cards).toHaveLength(151);
+    expect(loaded?.catalog.cards).toHaveLength(152);
   });
 });
 

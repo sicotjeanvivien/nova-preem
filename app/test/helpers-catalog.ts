@@ -15,3 +15,12 @@ export function printingOf(englishName: string, releaseId: string, language: str
   if (!printing) throw new Error(`no printing ${englishName} ${releaseId} ${language}`);
   return printing;
 }
+
+/**
+ * The real catalog without the Retail Iconic Secrets 168–171, as it was until 2026-11-04:
+ * their Beta printings β168–β171 are then exclusive to the Beta (§5.3), a case the real data no longer has.
+ */
+export const indexWithBetaExclusives = indexCatalog({
+  ...index.catalog,
+  printings: index.catalog.printings.filter((p) => !(p.releaseId === "wnc-retail" && ["168", "169", "170", "171"].includes(p.collectorNumber))),
+});

@@ -9,7 +9,7 @@ describe("summarizeSets", () => {
   it("summarizes the real catalog: one set, its releases, cards and languages", () => {
     const [summary, ...others] = summarizeSets(catalog);
     expect(others).toEqual([]);
-    expect(summary).toMatchObject({ set: { id: "wnc" }, releaseCount: 17, cardCount: 151, languages: ["en", "fr"] });
+    expect(summary).toMatchObject({ set: { id: "wnc" }, releaseCount: 17, cardCount: 152, languages: ["en", "fr"] });
   });
 
   it("hides a set without any printing (announced but not in the catalog yet)", () => {

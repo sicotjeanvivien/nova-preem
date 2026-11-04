@@ -19,9 +19,9 @@ describe("Stats, mobile layout (server rendering)", () => {
   it("opens on the release measure, with its rarity breakdown and the counted groups", () => {
     const content = render("/stats");
     expect(content).toMatch(/Set jouable Master set Par tirage/);
-    expect(content).toMatch(/Tirage Retail, toutes langues 0 % 1 \/ 168/);
+    expect(content).toMatch(/Tirage Retail, toutes langues 0 % 1 \/ 172/);
     expect(content).toMatch(/Toutes VF VO/);
-    expect(content).toMatch(/Par rareté Commune 0\/60 .*Secrète 1\/4 Iconic 0\/27/);
+    expect(content).toMatch(/Par rareté Commune 0\/60 .*Secrète 1\/4 Iconic 0\/31/);
     expect(content).toMatch(/Groupes comptés Principal \+ Starters Modifier/);
   });
 
@@ -34,13 +34,13 @@ describe("Stats, mobile layout (server rendering)", () => {
 
   it("shows the master set by release and language, greying the groups not counted", () => {
     const html = renderToString(<TestApp path="/stats?mode=master" entries={owned} />);
-    expect(text(html)).toMatch(/Master set 0 % 2 \/ 588/);
-    expect(text(html)).toMatch(/Retail VF 1\/168 Retail VO 0\/168 Beta VO 1\/172 Starters 0\/80 Démos 0\/29 Promos 0\/134/);
+    expect(text(html)).toMatch(/Master set 0 % 2 \/ 636/);
+    expect(text(html)).toMatch(/Retail VF 1\/172 Retail VO 0\/172 Beta VO 1\/172 Starters 0\/120 Démos 0\/29 Promos 0\/197/);
     expect(html.split("breakdown-row--muted").length - 1).toBe(2);
   });
 
   it("counts a release in one language, and offers no VF for Beta", () => {
-    expect(render("/stats?langue=fr")).toMatch(/Tirage Retail en VF 0 % 1 \/ 168/);
+    expect(render("/stats?langue=fr")).toMatch(/Tirage Retail en VF 0 % 1 \/ 172/);
     const beta = render("/stats?tirage=wnc-beta");
     expect(beta).toMatch(/Tirage Beta, toutes langues 0 % 1 \/ 172/);
     expect(beta).not.toMatch(/Toutes VF VO/);

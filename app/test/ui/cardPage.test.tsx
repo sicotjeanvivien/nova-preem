@@ -3,7 +3,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { printingOf } from "../helpers-catalog.ts";
+import { indexWithBetaExclusives, printingOf } from "../helpers-catalog.ts";
 import { entry, MemoryCollectionStore, TestApp, text } from "./harness.tsx";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
@@ -24,9 +24,13 @@ describe("card page content (§5.9)", () => {
   it("lists every printing with its quantity, rarity, artist and exclusivity", () => {
     expect(content).toContain("2 exemplaires");
     expect(content).toMatch(/Retail #003 Illustration : Daniel Valaisis Secrète VF Français − 2 \+ VO Anglais − 0 \+/);
-    expect(content).toContain("Beta #β168 exclusive Beta");
-    expect(content).toContain("Exclusive au tirage Beta : pas d'équivalent en Retail");
+    expect(content).toContain("Retail #168 Illustration : Divebound");
     expect(content).toContain("Illustration : Divebound Studio");
+    // Since 2026-11-04, the Retail has the Iconic 168 too: the Beta one is no longer exclusive.
+    expect(content).not.toContain("exclusive Beta");
+    const withExclusives = text(renderToString(<TestApp path={JOHNNY} catalogIndex={indexWithBetaExclusives} />));
+    expect(withExclusives).toContain("Beta #β168 exclusive Beta");
+    expect(withExclusives).toContain("Exclusive au tirage Beta : pas d'équivalent en Retail");
     expect(html).toContain('aria-label="Ajouter Retail 003 VF"');
     expect(html).toContain('aria-label="Afficher Beta β168 VO"');
   });
@@ -87,7 +91,7 @@ describe("browsing from the cards of a release (step 3 criterion)", () => {
     expect(container.querySelector("h1")?.textContent).toBe("Retail");
     expect(container.querySelector('.filter-pill[aria-pressed="true"]')?.textContent).toBe("Manquantes");
     // Desktop width (1024 px) by default in the simulated DOM.
-    expect(container.textContent).toContain("Copier les 167 manques");
+    expect(container.textContent).toContain("Copier les 171 manques");
     await act(async () => {});
     expect(store.entries.get(printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr").id)?.quantity).toBe(1);
   });
