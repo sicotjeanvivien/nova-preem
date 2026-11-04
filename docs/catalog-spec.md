@@ -116,21 +116,27 @@ Champs utiles (les autres sont ignorés) :
 | `welcometonightcityretail-fr` | `wnc` | `wnc-retail` | **fr** | `main` |
 | `theheistbetastarterdeck` | `wnc` | `heist-starter-beta` | en | `starter` |
 | `theheistretailstarterdeck` | `wnc` | `heist-starter-retail` | en | `starter` |
+| `theheistretailstarterdeck-fr` | `wnc` | `heist-starter-retail` | **fr** | `starter` |
 | `embracingpowerbetastarterdeck` | `wnc` | `embracing-power-starter-beta` | en | `starter` |
 | `embracingpowerretailstarterdeck` | `wnc` | `embracing-power-starter-retail` | en | `starter` |
+| `embracingpowerretailstarterde-fr` (sic, tronqué par la source) | `wnc` | `embracing-power-starter-retail` | **fr** | `starter` |
 | `mercdemodeck` | `wnc` | `merc-demo` | en | `demo` |
 | `arasakademodeck` | `wnc` | `arasaka-demo` | en | `demo` |
 | `boxtoppersbeta` | `wnc` | `box-toppers-beta` | en | `promo` |
 | `boxtoppersretail` | `wnc` | `box-toppers-retail` | en | `promo` |
+| `boxtoppersretail-fr` | `wnc` | `box-toppers-retail` | **fr** | `promo` |
 | `prereleasebeta` | `wnc` | `prerelease-beta` | en | `promo` |
 | `prereleaseretail` | `wnc` | `prerelease-retail` | en | `promo` |
+| `prereleaseretail-FR` | `wnc` | `prerelease-retail` | **fr** | `promo` |
 | `PRM01` | `wnc` | `set1-promos` | en | `promo` |
 | `judgepromos` | `wnc` | `judge-promos` | en | `promo` |
 | `edgerunneropens1` | `wnc` | `edgerunner-open-s1` | en | `promo` |
 | `nightcitybrawls1` | `wnc` | `night-city-brawl-s1` | en | `promo` |
+| `nightcitybrawls1-FR` | `wnc` | `night-city-brawl-s1` | **fr** | `promo` |
 | `nightcityshowdowns1` | `wnc` | `night-city-showdown-s1` | en | `promo` |
+| `nightcityshowdowns1-FR` | `wnc` | `night-city-showdown-s1` | **fr** | `promo` |
 
-Ces 18 codes sont ceux exposés par les filtres du site au 26/10/2026.
+Les 18 premiers codes (17 EN et `welcometonightcityretail-fr`) sont ceux exposés par les filtres du site au 26/10/2026 ; les 6 autres codes FR sont apparus dans la source entre le 26/10 et le 04/11/2026 (§9, « Mise à jour du 04/11/2026 »). Leur casse n'est pas uniforme (`-fr` ou `-FR`) : la table reprend les codes exacts.
 
 Règles :
 - La correspondance est une **table explicite** dans le code (`catalog/src/editions.ts`), pas une heuristique. Un `set.code` inconnu **ne fait pas planter** le pipeline : l'impression est ajoutée dans une release `unknown-<code>` et signalée dans le rapport, pour qu'on complète la table.
@@ -369,7 +375,7 @@ Commandes attendues :
 | Rattachement des promos au set `wnc` | Oui : toutes les cartes des 9 releases promo (EO, Brawl, Showdown, Judge, PRM01, Box Toppers, Prerelease) existent dans le set principal, un starter ou un demo deck de WNC. Seule exception : *Rebecca — Having a Moment* (voir plus bas). Les cartes portent aussi la mention `MS01 - WNC`. |
 | Suffixes `a`/`b` | **Deux illustrations** de la même carte : *V — Streetkid*, V masculin (`005a`) et V féminin (`005b`). Même texte, même rareté, même artiste. Présents en Beta, Retail EN et Retail FR. Le suffixe est imprimé sur la carte. |
 | Unicité de `(card.id, set.code, collector_number, language)` | Confirmée. Aucun doublon d'identifiant de carte ou d'impression, ni de slug ou de `canonical_name`. |
-| Codes d'édition | Exactement les **18 codes** de la table §3. Aucune contradiction entre `language` et le suffixe `-fr`. |
+| Codes d'édition | Exactement les **18 codes** de la table §3 au 26/10 (24 au 04/11). Aucune contradiction entre `language` et le suffixe `-fr`. |
 
 ### Confirmations
 
@@ -395,3 +401,17 @@ Commandes attendues :
 10. **Espaces** : des doubles espaces dans quelques textes de la source (ex. `2 €$,  {Spend}`, sur 10 textes).
 11. L'ordre de la liste API n'est **pas alphabétique** : le tri du catalogue doit être fait par le pipeline (c'était déjà prévu).
 12. Champs présents mais non décrits dans la spec : `external_id` (ex. `cb-v-streetkid`), `legalities` (`{ "standard": "legal" }`), `flavor_text` (toujours `null`), `rulings` (toujours vide).
+
+### Mise à jour du 04/11/2026
+
+Nouveau crawl complet : **152 cartes, 862 impressions** (contre 151 et 751). Aucune impression ni carte supprimée, aucune image modifiée.
+
+- **111 impressions ajoutées** :
+  - **99 impressions FR** de releases qui n'existaient qu'en EN : starters Retail The Heist (20) et Embracing Power (20), Prerelease Retail (11), Box Toppers Retail (6), Night City Brawl S1 (37), Night City Showdown S1 (5). Six nouveaux codes d'édition, ajoutés à la table §3. Vérifié sur les données : chaque édition FR contient **exactement les mêmes cartes aux mêmes numéros** que son équivalent EN. Il n'y a toujours ni Beta FR, ni demo decks FR, ni EO / PRM01 / Judge FR.
+  - **Iconic Secret `168`–`171`** (Johnny, Sasha, Panam, Judy) en Retail EN et FR : elles n'existaient qu'en Beta (§9 « Confirmations » n'est plus vrai sur ce point). Leur artiste est « Divebound » en Retail contre « Divebound Studio » en Beta (4 `counterpart-mismatch`).
+  - Edgerunner Open S1 `031` (Johnny) et `052` (Sasha) : il ne manque plus que `028`.
+  - **Nouvelle carte** *Lucyna Kushinada — Fresh Beginnings* (Légende bleue), en PRM01 `004a` et `004b` (deux illustrations, comme *V — Streetkid*). PRM01 commence donc à `004`.
+- Les 10 cartes exclusives aux starters ont désormais un nom et un texte FR.
+- *Over the Edge* : `10` en EN (anomalie déjà connue, point 3) mais `010` en FR dans Embracing Power. Les deux impressions ne sont **pas** rattachées (2 `missing-translation`) : le numéro source est conservé tel quel.
+- Textes FR divergents : 14 cartes au lieu de 7, même cause qu'au point 4 (texte de rappel omis sur certaines impressions, ici aussi sur des promos et starters FR).
+- Noms FR : *Afterparty at Lizzie's* s'appelle « After au Lizzie's » en Retail FR mais garde son nom anglais dans le starter FR ; *Adam Smasher — Metal Over Meat* et *Sandevistan* n'ont pas de `localized_name` dans les promos FR (Brawl, Showdown). Le nom FR de la carte n'en est pas affecté.

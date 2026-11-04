@@ -74,7 +74,7 @@ describe("Sets, level 1: set list", () => {
     const setsHtml = render({ path: "/sets", entries });
     const releasesHtml = render({ path: "/sets/wnc", entries });
     expect(count(releasesHtml, "release-tile__percent release-tile__percent--complete")).toBe(3);
-    expect(text(releasesHtml)).toContain("Retail 167 / 168 VO VF 99 %");
+    expect(text(releasesHtml)).toContain("Retail 171 / 172 VO VF 99 %");
     expect(text(setsHtml)).toContain("Welcome to Night City 3 / 17 tirages complétés");
     expect(count(releasesHtml, "release-tile\"")).toBe(17);
     // The bar has the same ratio: 3 / 17 = 17 % (rounded down).
@@ -95,9 +95,10 @@ describe("Sets, level 2: releases of a set", () => {
     const owned = printingOf("Chrome Fang", "embracing-power-starter-retail", "en");
     const content = text(render({ path: "/sets/wnc", entries: [entry(owned.id, 1)] }));
     expect(content).toMatch(/Sets Welcome to Night City 17 tirages/);
-    expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 168 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
+    expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 172 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
     expect(content).toMatch(/Starters Starter Welcome to Night City The Heist — Retail 0 \/ 20/);
-    expect(content).toContain("Embracing Power — Retail 1 / 20 VO 5 %");
+    // 21 and not 20: Over the Edge is numbered "10" in EN and "010" in FR, so the two are not matched (catalog report).
+    expect(content).toContain("Embracing Power — Retail 1 / 21 VO VF 4 %");
     expect(content).toMatch(/Decks démo .*Merc 0 \/ 15 .*Arasaka 0 \/ 14/);
     expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 VO 0 %/);
   });
@@ -112,15 +113,15 @@ describe("Sets, level 2: releases of a set", () => {
 describe("Sets, level 3: cards of a release", () => {
   it("shows Retail with the VF/VO selector, one tile per variant with − quantity +", () => {
     const html = render({ path: "/sets/wnc/wnc-retail" });
-    expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 168 variantes possédées/);
+    expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 172 variantes possédées/);
     expect(text(html)).toMatch(/Quantités en VF VO Toutes Manquantes Possédées Doublons/);
-    expect(count(html, "tile ")).toBe(168);
+    expect(count(html, "tile ")).toBe(172);
     expect(html).toContain('aria-label="Ouvrir la carte Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003"');
     expect(html).toContain('aria-label="Ajouter un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle"');
     expect(html).toMatch(/aria-label="Retirer un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle" disabled=""/);
   });
 
-  it("shows Beta without language selector (VO only), with its exclusive Iconics", () => {
+  it("shows Beta without language selector (VO only), with its Iconics β168–β171", () => {
     const html = render({ path: "/sets/wnc/wnc-beta" });
     expect(text(html)).not.toContain("Quantités en");
     expect(count(html, "tile ")).toBe(172);
@@ -132,8 +133,8 @@ describe("Sets, level 3: cards of a release", () => {
     const johnny = printingOf("Johnny Silverhand — Rocking Renegade", "wnc-retail", "fr");
     const chrome = printingOf("Chrome Fang", "wnc-retail", "en");
     const html = render({ path: "/sets/wnc/wnc-retail?filtre=manquantes", entries: [entry(johnny.id, 1), entry(chrome.id, 1)] });
-    expect(count(html, "tile ")).toBe(167);
-    expect(text(html)).toContain("167 variantes manquantes Copier la liste");
+    expect(count(html, "tile ")).toBe(171);
+    expect(text(html)).toContain("171 variantes manquantes Copier la liste");
     // Owned in VO only: missing in VF, with the VO badge on the image.
     expect(text(html)).toMatch(/008 C VO 1 Croc Chromé − 0 \+/);
   });

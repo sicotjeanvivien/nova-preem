@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { copiesOwned, defaultPrinting, exclusiveCounterpart, printingsOfVariants, splitCardName, variantsOfCard } from "../../src/domain/cardView.ts";
-import { index, printingOf } from "../helpers-catalog.ts";
+import { index, indexWithBetaExclusives, printingOf } from "../helpers-catalog.ts";
 
 const cardNamed = (name: string) => index.catalog.cards.find((card) => card.name.en === name)!;
 const johnny = cardNamed("Johnny Silverhand — Rocking Renegade");
@@ -8,20 +8,35 @@ const johnnyVariants = variantsOfCard(index, johnny);
 
 describe("variants of a card", () => {
   it("lists every printing of the card, by release then number, one line per language", () => {
-    expect(johnnyVariants.map((v) => `${v.release.id} ${v.collectorNumber}`)).toEqual(["wnc-retail 003", "wnc-beta β003", "wnc-beta β168"]);
+    expect(johnnyVariants.map((v) => `${v.release.id} ${v.collectorNumber}`)).toEqual([
+      "wnc-retail 003",
+      "wnc-retail 168",
+      "wnc-beta β003",
+      "wnc-beta β168",
+      "edgerunner-open-s1 031",
+    ]);
     expect(printingsOfVariants(johnnyVariants, ["en", "fr"]).map((p) => `${p.collectorNumber} ${p.language}`)).toEqual([
       "003 en",
       "003 fr",
+      "168 en",
+      "168 fr",
       "β003 en",
       "β168 en",
+      "031 en",
     ]);
   });
 
   it("marks a printing exclusive to its release (Beta-only Iconic)", () => {
-    const [retail, beta, iconic] = johnnyVariants;
-    expect(exclusiveCounterpart(index, iconic!)?.id).toBe("wnc-retail");
-    expect(exclusiveCounterpart(index, beta!)).toBeNull();
-    expect(exclusiveCounterpart(index, retail!)).toBeNull();
+    const [retail, beta, iconic] = variantsOfCard(indexWithBetaExclusives, johnny);
+    expect(iconic!.collectorNumber).toBe("β168");
+    expect(exclusiveCounterpart(indexWithBetaExclusives, iconic!)?.id).toBe("wnc-retail");
+    expect(exclusiveCounterpart(indexWithBetaExclusives, beta!)).toBeNull();
+    expect(exclusiveCounterpart(indexWithBetaExclusives, retail!)).toBeNull();
+  });
+
+  it("no longer marks the Beta Iconic once the Retail has it too (catalog of 2026-11-04)", () => {
+    const betaIconic = johnnyVariants.find((v) => v.collectorNumber === "β168")!;
+    expect(exclusiveCounterpart(index, betaIconic)).toBeNull();
   });
 
   it("is not fooled by the malformed number 10 of Over the Edge (β010 in Beta)", () => {
@@ -49,8 +64,8 @@ describe("default printing (§5.9)", () => {
   });
 
   it("falls back to any printing for a card that does not exist in that language", () => {
-    const yorinobu = variantsOfCard(index, cardNamed("Yorinobu Arasaka — Embracing Destruction"));
-    expect(defaultPrinting(yorinobu, { variantKey: null, language: null }, "fr")?.language).toBe("en");
+    const lucyna = variantsOfCard(index, cardNamed("Lucyna Kushinada — Fresh Beginnings"));
+    expect(defaultPrinting(lucyna, { variantKey: null, language: null }, "fr")?.language).toBe("en");
   });
 });
 

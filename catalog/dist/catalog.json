@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26T10:05:05.951Z",
+  "generatedAt": "2026-11-04T13:40:04.638Z",
   "source": {
     "name": "netdeck",
-    "fetchedAt": "2026-10-26T10:05:05.951Z"
+    "fetchedAt": "2026-11-04T13:40:04.638Z"
   },
   "languages": [
     "en",
@@ -65,10 +65,12 @@
       },
       "group": "starter",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "theheistretailstarterdeck"
+        "theheistretailstarterdeck",
+        "theheistretailstarterdeck-fr"
       ],
       "order": 3,
       "counterpartReleaseId": "heist-starter-beta"
@@ -99,10 +101,12 @@
       },
       "group": "starter",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "embracingpowerretailstarterdeck"
+        "embracingpowerretailstarterdeck",
+        "embracingpowerretailstarterde-fr"
       ],
       "order": 5,
       "counterpartReleaseId": "embracing-power-starter-beta"
@@ -165,10 +169,12 @@
       },
       "group": "promo",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "prereleaseretail"
+        "prereleaseretail",
+        "prereleaseretail-FR"
       ],
       "order": 9
     },
@@ -197,10 +203,12 @@
       },
       "group": "promo",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "boxtoppersretail"
+        "boxtoppersretail",
+        "boxtoppersretail-fr"
       ],
       "order": 11,
       "counterpartReleaseId": "box-toppers-beta"
@@ -247,10 +255,12 @@
       },
       "group": "promo",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "nightcitybrawls1"
+        "nightcitybrawls1",
+        "nightcitybrawls1-FR"
       ],
       "order": 14
     },
@@ -263,10 +273,12 @@
       },
       "group": "promo",
       "languages": [
-        "en"
+        "en",
+        "fr"
       ],
       "sourceCodes": [
-        "nightcityshowdowns1"
+        "nightcityshowdowns1",
+        "nightcityshowdowns1-FR"
       ],
       "order": 15
     },
@@ -1146,13 +1158,16 @@
       "eddiable": false,
       "legal": true,
       "name": {
-        "en": "Dexter DeShawn — One Last Chance"
+        "en": "Dexter DeShawn — One Last Chance",
+        "fr": "Dexter DeShawn — Une Dernière Chance"
       },
       "baseName": {
-        "en": "Dexter DeShawn"
+        "en": "Dexter DeShawn",
+        "fr": "Dexter DeShawn"
       },
       "rulesText": {
-        "en": "{Play} {Attack} Adjust a Gig by up to 1.\n{Defeated} If your ☆ (Street Cred) differs from a Rival's by 10+, draw 2."
+        "en": "{Play} {Attack} Adjust a Gig by up to 1.\n{Defeated} If your ☆ (Street Cred) differs from a Rival's by 10+, draw 2.",
+        "fr": "{Play} {Attack} Ajustez un Gig jusqu'à +1 ou -1.\n{Defeated} Si votre ☆ (Street Cred) diffère de celle d'un Rival de 10+, piochez 2."
       }
     },
     {
@@ -1477,13 +1492,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "Goro Takemura — Hands Unclean"
+        "en": "Goro Takemura — Hands Unclean",
+        "fr": "Goro Takemura — Les Mains Souillées"
       },
       "baseName": {
-        "en": "Goro Takemura"
+        "en": "Goro Takemura",
+        "fr": "Goro Takemura"
       },
       "rulesText": {
-        "en": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)"
+        "en": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. If it leaves the field, remove it from the game.)\n{Blocker} (You may spend this Unit to redirect a rival Unit's attack to it instead.)",
+        "fr": "{Go Solo} (Payez le coût de cette Légende pour la jouer comme une Unité préparée. Elle peut attaquer ce tour-ci. Si elle quitte le terrain, retirez-la de la partie.)\n{Blocker} (Vous pouvez épuiser cette Unité afin de rediriger vers elle l'attaque d'une Unité rivale.)"
       }
     },
     {
@@ -1502,13 +1520,16 @@
       "eddiable": false,
       "legal": true,
       "name": {
-        "en": "Goro Takemura — Losing His Way"
+        "en": "Goro Takemura — Losing His Way",
+        "fr": "Goro Takemura — En Perte de Repères"
       },
       "baseName": {
-        "en": "Goro Takemura"
+        "en": "Goro Takemura",
+        "fr": "Goro Takemura"
       },
       "rulesText": {
-        "en": "{Attack} If all friendly Legends are face-up, this Unit has +5 power this turn."
+        "en": "{Attack} If all friendly Legends are face-up, this Unit has +5 power this turn.",
+        "fr": "{Attack} Si toutes les Légendes alliées sont face visible, cette Unité a +5 Power ce tour-ci."
       }
     },
     {
@@ -1778,13 +1799,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "Jackie Welles — Pour One Out For Me"
+        "en": "Jackie Welles — Pour One Out For Me",
+        "fr": "Jackie Welles — Sers-m'en Un"
       },
       "baseName": {
-        "en": "Jackie Welles"
+        "en": "Jackie Welles",
+        "fr": "Jackie Welles"
       },
       "rulesText": {
-        "en": "The first time you play a Blue Unit or Blue Gear each turn, you may decrease a friendly Gig by up to 2. If it becomes a min Gig, draw 1."
+        "en": "The first time you play a Blue Unit or Blue Gear each turn, you may decrease a friendly Gig by up to 2. If it becomes a min Gig, draw 1.",
+        "fr": "La première fois que vous jouez une Unité Bleue ou un Gear Bleu chaque tour, vous pouvez diminuer un Gig allié jusqu'à -2. S'il atteint son minimum, piochez 1."
       }
     },
     {
@@ -2151,6 +2175,32 @@
       }
     },
     {
+      "id": "36d7419a-7bf3-4201-a6da-3eb14b1f2268",
+      "slug": "lucyna-kushinada-fresh-beginnings",
+      "type": "legend",
+      "color": "blue",
+      "classifications": [
+        "Maine's Crew",
+        "Merc",
+        "Netrunner"
+      ],
+      "keywords": [],
+      "cost": null,
+      "power": null,
+      "ram": 2,
+      "eddiable": true,
+      "legal": true,
+      "name": {
+        "en": "Lucyna Kushinada — Fresh Beginnings"
+      },
+      "baseName": {
+        "en": "Lucyna Kushinada"
+      },
+      "rulesText": {
+        "en": "{Call}: Draw 1. If you control 2 or more min Gigs, draw 2 instead."
+      }
+    },
+    {
       "id": "f57094f7-0720-4ba5-9a71-aafbc714d65a",
       "slug": "maelstrom-goons",
       "type": "unit",
@@ -2470,13 +2520,16 @@
       "eddiable": false,
       "legal": true,
       "name": {
-        "en": "Minotaur"
+        "en": "Minotaur",
+        "fr": "Minotaure"
       },
       "baseName": {
-        "en": "Minotaur"
+        "en": "Minotaur",
+        "fr": "Minotaure"
       },
       "rulesText": {
-        "en": "{Play} If you have more ☆ (Street Cred) than a Rival, defeat a rival Unit with power 5 or less."
+        "en": "{Play} If you have more ☆ (Street Cred) than a Rival, defeat a rival Unit with power 5 or less.",
+        "fr": "{Play} Si vous avez plus de ☆ (Street Cred) qu'un Rival, éliminez une Unité rivale de Power 5 ou moins."
       }
     },
     {
@@ -2605,13 +2658,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "MT0D12 Flathead"
+        "en": "MT0D12 Flathead",
+        "fr": "Flathead MT0D12"
       },
       "baseName": {
-        "en": "MT0D12 Flathead"
+        "en": "MT0D12 Flathead",
+        "fr": "Flathead MT0D12"
       },
       "rulesText": {
-        "en": "If you have less ☆ (Street Cred) than a Rival, this Unit can't be blocked."
+        "en": "If you have less ☆ (Street Cred) than a Rival, this Unit can't be blocked.",
+        "fr": "Si vous avez moins de ☆ (Street Cred) qu'un Rival, cette Unité ne peut pas être bloquée."
       }
     },
     {
@@ -3426,13 +3482,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "Saburo Arasaka — Stubborn Patriarch"
+        "en": "Saburo Arasaka — Stubborn Patriarch",
+        "fr": "Saburo Arasaka — Patriarche Entêté"
       },
       "baseName": {
-        "en": "Saburo Arasaka"
+        "en": "Saburo Arasaka",
+        "fr": "Saburo Arasaka"
       },
       "rulesText": {
-        "en": "Friendly ARASAKA Units have +1 power while attacking.\n(Units steal an extra Gig for every 10 power.)"
+        "en": "Friendly ARASAKA Units have +1 power while attacking.\n(Units steal an extra Gig for every 10 power.)",
+        "fr": "Les Unités ARASAKA alliées ont +1 Power tant qu'elles attaquent.\n(Les Unités volent un Gig supplémentaire pour chaque dizaine de Power.)"
       }
     },
     {
@@ -4087,13 +4146,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "V — Corporate Exile"
+        "en": "V — Corporate Exile",
+        "fr": "V — Exilé.e Corpo"
       },
       "baseName": {
-        "en": "V"
+        "en": "V",
+        "fr": "V"
       },
       "rulesText": {
-        "en": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. When it leaves the field, remove it from the game.)"
+        "en": "{Go Solo} (Pay this Legend's cost to play it as a ready Unit. It can attack this turn. When it leaves the field, remove it from the game.)",
+        "fr": "{Go Solo} (Payez le coût de cette Légende pour la jouer comme une Unité préparée. Elle peut attaquer ce tour-ci. Si elle quitte le terrain, retirez-la de la partie.)"
       }
     },
     {
@@ -4249,13 +4311,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "Viktor Vektor — Sit Down and Relax"
+        "en": "Viktor Vektor — Sit Down and Relax",
+        "fr": "Viktor Vektor — Mets-toi à ton Aise"
       },
       "baseName": {
-        "en": "Viktor Vektor"
+        "en": "Viktor Vektor",
+        "fr": "Viktor Vektor"
       },
       "rulesText": {
-        "en": "{Call} Search the top 5 cards of your deck. Reveal up to 2 Gears with cost 2 or less and add them to your hand. Bottom-deck the rest in a random order."
+        "en": "{Call} Search the top 5 cards of your deck. Reveal up to 2 Gears with cost 2 or less and add them to your hand. Bottom-deck the rest in a random order.",
+        "fr": "{Call} Regardez les 5 cartes du dessus de votre deck. Révélez jusqu'à 2 Gears de coût 2 ou moins et ajoutez-les à votre main. Archivez le reste aléatoirement."
       }
     },
     {
@@ -4440,13 +4505,16 @@
       "eddiable": true,
       "legal": true,
       "name": {
-        "en": "Yorinobu Arasaka — Embracing Destruction"
+        "en": "Yorinobu Arasaka — Embracing Destruction",
+        "fr": "Yorinobu Arasaka — Adepte de la Destruction"
       },
       "baseName": {
-        "en": "Yorinobu Arasaka"
+        "en": "Yorinobu Arasaka",
+        "fr": "Yorinobu Arasaka"
       },
       "rulesText": {
-        "en": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1."
+        "en": "The first time a friendly ARASAKA Unit attacks each turn, draw 1. Then, if you have less than 20 ☆ (Street Cred), discard 1.",
+        "fr": "La première fois qu'une Unité ARASAKA alliée attaque chaque tour, piochez 1. Puis, si vous avez moins de 20 ☆ (Street Cred), défaussez 1."
       }
     },
     {
@@ -10928,6 +10996,158 @@
       "sourceCode": "welcometonightcityretail-fr"
     },
     {
+      "id": "cb12d8c4-64b1-4e53-898e-8fd46aeac6bf",
+      "cardId": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#168",
+      "language": "en",
+      "collectorNumber": "168",
+      "sortKey": "0168",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "cb12d8c4-64b1-4e53-898e-8fd46aeac6bf.webp",
+        "thumbPath": "thumbs/cb12d8c4-64b1-4e53-898e-8fd46aeac6bf.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail"
+    },
+    {
+      "id": "7d1960a6-2d90-4278-937c-1e6905a3a396",
+      "cardId": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#168",
+      "language": "fr",
+      "collectorNumber": "168",
+      "sortKey": "0168",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "7d1960a6-2d90-4278-937c-1e6905a3a396.webp",
+        "thumbPath": "thumbs/7d1960a6-2d90-4278-937c-1e6905a3a396.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail-fr"
+    },
+    {
+      "id": "307de3c6-6bbd-4e44-8dde-07f4fac45db0",
+      "cardId": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#169",
+      "language": "en",
+      "collectorNumber": "169",
+      "sortKey": "0169",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "307de3c6-6bbd-4e44-8dde-07f4fac45db0.webp",
+        "thumbPath": "thumbs/307de3c6-6bbd-4e44-8dde-07f4fac45db0.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail"
+    },
+    {
+      "id": "e13a5895-c065-40ad-9f33-901e457e3766",
+      "cardId": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#169",
+      "language": "fr",
+      "collectorNumber": "169",
+      "sortKey": "0169",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "e13a5895-c065-40ad-9f33-901e457e3766.webp",
+        "thumbPath": "thumbs/e13a5895-c065-40ad-9f33-901e457e3766.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail-fr"
+    },
+    {
+      "id": "5632d773-b6c8-402d-a162-364767d3d21e",
+      "cardId": "34774f04-4f16-40eb-8ee4-999144e572ab",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#170",
+      "language": "en",
+      "collectorNumber": "170",
+      "sortKey": "0170",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "5632d773-b6c8-402d-a162-364767d3d21e.webp",
+        "thumbPath": "thumbs/5632d773-b6c8-402d-a162-364767d3d21e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail"
+    },
+    {
+      "id": "b073652b-8428-4aeb-9877-22b50a0110bc",
+      "cardId": "34774f04-4f16-40eb-8ee4-999144e572ab",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#170",
+      "language": "fr",
+      "collectorNumber": "170",
+      "sortKey": "0170",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "b073652b-8428-4aeb-9877-22b50a0110bc.webp",
+        "thumbPath": "thumbs/b073652b-8428-4aeb-9877-22b50a0110bc.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail-fr"
+    },
+    {
+      "id": "fe26a4ff-1076-4371-8ab5-3f31d0319a3f",
+      "cardId": "cb7f8d05-87cc-4606-ad71-a9283f2f4b20",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#171",
+      "language": "en",
+      "collectorNumber": "171",
+      "sortKey": "0171",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "fe26a4ff-1076-4371-8ab5-3f31d0319a3f.webp",
+        "thumbPath": "thumbs/fe26a4ff-1076-4371-8ab5-3f31d0319a3f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail"
+    },
+    {
+      "id": "9aceebe8-9977-4b7b-ad1d-7b75af879f1a",
+      "cardId": "cb7f8d05-87cc-4606-ad71-a9283f2f4b20",
+      "releaseId": "wnc-retail",
+      "variantKey": "wnc-retail#171",
+      "language": "fr",
+      "collectorNumber": "171",
+      "sortKey": "0171",
+      "rarityId": "iconic-secret",
+      "artist": "Divebound",
+      "finish": null,
+      "image": {
+        "path": "9aceebe8-9977-4b7b-ad1d-7b75af879f1a.webp",
+        "thumbPath": "thumbs/9aceebe8-9977-4b7b-ad1d-7b75af879f1a.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "welcometonightcityretail-fr"
+    },
+    {
       "id": "4d75c13e-bde2-409b-8bcc-516e054f28f5",
       "cardId": "eff41c12-b872-4101-9779-00e691532893",
       "releaseId": "wnc-beta",
@@ -14216,6 +14436,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "b243251d-b8a9-4af3-8d42-ce800c2b27b4",
+      "cardId": "f090dc44-d7f0-4aec-a19e-9213155a6611",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "epic",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "b243251d-b8a9-4af3-8d42-ce800c2b27b4.webp",
+        "thumbPath": "thumbs/b243251d-b8a9-4af3-8d42-ce800c2b27b4.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "e2f38541-ecc9-41dc-ae15-164171391bff",
       "cardId": "f61b944a-32e3-4085-894b-7bd498325156",
       "releaseId": "heist-starter-retail",
@@ -14233,6 +14472,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "e3b8a9e8-5bed-4449-9738-c824db504be7",
+      "cardId": "f61b944a-32e3-4085-894b-7bd498325156",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "uncommon",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "e3b8a9e8-5bed-4449-9738-c824db504be7.webp",
+        "thumbPath": "thumbs/e3b8a9e8-5bed-4449-9738-c824db504be7.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "364ef4ac-8b0c-48b1-8cf2-454477abc452",
@@ -14254,6 +14512,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "6af18183-f8ab-40c4-8724-8287619c6c5c",
+      "cardId": "2a9deb43-bf9a-41db-9a05-bb0d357bb08e",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "uncommon",
+      "artist": "Łukasz Poller",
+      "finish": null,
+      "image": {
+        "path": "6af18183-f8ab-40c4-8724-8287619c6c5c.webp",
+        "thumbPath": "thumbs/6af18183-f8ab-40c4-8724-8287619c6c5c.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "1043d9b7-5dae-4fc5-852d-ec31daaaa88d",
       "cardId": "3ce6b982-7bba-46f1-8832-8867ec3588d4",
       "releaseId": "heist-starter-retail",
@@ -14271,6 +14548,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "064e6916-f284-4886-a4d5-380c8c4c81c3",
+      "cardId": "3ce6b982-7bba-46f1-8832-8867ec3588d4",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "common",
+      "artist": "Bernard Kowalczuk",
+      "finish": null,
+      "image": {
+        "path": "064e6916-f284-4886-a4d5-380c8c4c81c3.webp",
+        "thumbPath": "thumbs/064e6916-f284-4886-a4d5-380c8c4c81c3.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "b7d9313c-f2a4-40c0-85ed-81adb7653125",
@@ -14292,6 +14588,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "cb03d048-2691-421d-9654-e20ffed0592b",
+      "cardId": "b05cb065-309e-45a3-bbe0-20f4b6ea71aa",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "common",
+      "artist": "Luca Claretti",
+      "finish": null,
+      "image": {
+        "path": "cb03d048-2691-421d-9654-e20ffed0592b.webp",
+        "thumbPath": "thumbs/cb03d048-2691-421d-9654-e20ffed0592b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "46ddb436-ea2f-4c7f-b9b4-7987835c9cce",
       "cardId": "5a5a177c-6ed8-4bd9-8b11-13c2b64414e2",
       "releaseId": "heist-starter-retail",
@@ -14309,6 +14624,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "46d374ee-5bf1-4244-b93a-411869e26dd9",
+      "cardId": "5a5a177c-6ed8-4bd9-8b11-13c2b64414e2",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#006",
+      "language": "fr",
+      "collectorNumber": "006",
+      "sortKey": "0006",
+      "rarityId": "uncommon",
+      "artist": "Łukasz Poller",
+      "finish": null,
+      "image": {
+        "path": "46d374ee-5bf1-4244-b93a-411869e26dd9.webp",
+        "thumbPath": "thumbs/46d374ee-5bf1-4244-b93a-411869e26dd9.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "aa9b8a2e-ffd6-4435-8bed-c4e64e1c32ac",
@@ -14330,6 +14664,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "ef40fd67-27e4-45b1-b492-7c40aa29aa23",
+      "cardId": "654f2289-5d75-4f8b-bd35-702031fbb214",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#007",
+      "language": "fr",
+      "collectorNumber": "007",
+      "sortKey": "0007",
+      "rarityId": "common",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "ef40fd67-27e4-45b1-b492-7c40aa29aa23.webp",
+        "thumbPath": "thumbs/ef40fd67-27e4-45b1-b492-7c40aa29aa23.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "d13b8b15-8e31-448c-b28b-322bb498d0a7",
       "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
       "releaseId": "heist-starter-retail",
@@ -14347,6 +14700,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "2f9b1516-302b-4a3f-b23a-aea7d5196066",
+      "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#008",
+      "language": "fr",
+      "collectorNumber": "008",
+      "sortKey": "0008",
+      "rarityId": "common",
+      "artist": "Lea Leonowicz",
+      "finish": null,
+      "image": {
+        "path": "2f9b1516-302b-4a3f-b23a-aea7d5196066.webp",
+        "thumbPath": "thumbs/2f9b1516-302b-4a3f-b23a-aea7d5196066.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "26b755e4-b754-48fc-b89b-ba8ce670d43b",
@@ -14368,6 +14740,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "fb1687ac-3b22-4a0e-9f0d-44ef1e001c30",
+      "cardId": "b88d436f-1ec7-4f62-9dbc-c5f5e0d0a0df",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#009",
+      "language": "fr",
+      "collectorNumber": "009",
+      "sortKey": "0009",
+      "rarityId": "uncommon",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "fb1687ac-3b22-4a0e-9f0d-44ef1e001c30.webp",
+        "thumbPath": "thumbs/fb1687ac-3b22-4a0e-9f0d-44ef1e001c30.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "17db8555-a470-4c5b-9a24-4fac4bf04c4c",
       "cardId": "d039e4b3-9b83-40da-8d8f-b1dfb1f172f1",
       "releaseId": "heist-starter-retail",
@@ -14385,6 +14776,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "c61f50b6-fc6d-4a85-9d06-4d8825593469",
+      "cardId": "d039e4b3-9b83-40da-8d8f-b1dfb1f172f1",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#010",
+      "language": "fr",
+      "collectorNumber": "010",
+      "sortKey": "0010",
+      "rarityId": "common",
+      "artist": "Alicja Użarowska",
+      "finish": null,
+      "image": {
+        "path": "c61f50b6-fc6d-4a85-9d06-4d8825593469.webp",
+        "thumbPath": "thumbs/c61f50b6-fc6d-4a85-9d06-4d8825593469.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "a33d3324-fe48-4a9f-80a8-8545a0a4727f",
@@ -14406,6 +14816,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "1d5a2d7d-a372-409c-9e29-22124525f29a",
+      "cardId": "40502c1f-78a2-426a-a706-c60ebd4b31e3",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#011",
+      "language": "fr",
+      "collectorNumber": "011",
+      "sortKey": "0011",
+      "rarityId": "epic",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "1d5a2d7d-a372-409c-9e29-22124525f29a.webp",
+        "thumbPath": "thumbs/1d5a2d7d-a372-409c-9e29-22124525f29a.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "4a5591f9-743e-4186-8deb-560971bb3f82",
       "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
       "releaseId": "heist-starter-retail",
@@ -14423,6 +14852,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "98a296a5-1dac-4475-b401-ae3e0e18234a",
+      "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#012",
+      "language": "fr",
+      "collectorNumber": "012",
+      "sortKey": "0012",
+      "rarityId": "epic",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "98a296a5-1dac-4475-b401-ae3e0e18234a.webp",
+        "thumbPath": "thumbs/98a296a5-1dac-4475-b401-ae3e0e18234a.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "8092ff00-bff0-4a33-98e1-1fa33adabb8d",
@@ -14444,6 +14892,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "66eb5361-11f4-4880-b347-ca849aa28cb8",
+      "cardId": "a1e60653-5e28-49ee-9798-d16520b553c3",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#013",
+      "language": "fr",
+      "collectorNumber": "013",
+      "sortKey": "0013",
+      "rarityId": "common",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "66eb5361-11f4-4880-b347-ca849aa28cb8.webp",
+        "thumbPath": "thumbs/66eb5361-11f4-4880-b347-ca849aa28cb8.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "4b037f20-0cb8-4dfa-bd34-3a3b8381632b",
       "cardId": "a3cc3d15-8e6a-4684-b2ca-c843b4a854e2",
       "releaseId": "heist-starter-retail",
@@ -14461,6 +14928,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "431eaa98-5000-485a-8ac5-3e0c78213588",
+      "cardId": "a3cc3d15-8e6a-4684-b2ca-c843b4a854e2",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#014",
+      "language": "fr",
+      "collectorNumber": "014",
+      "sortKey": "0014",
+      "rarityId": "uncommon",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "431eaa98-5000-485a-8ac5-3e0c78213588.webp",
+        "thumbPath": "thumbs/431eaa98-5000-485a-8ac5-3e0c78213588.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "5f0d9dac-2547-4ecb-896e-0c603968422a",
@@ -14482,6 +14968,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "695a0906-3118-4ca5-a241-4eea0ed6f7cf",
+      "cardId": "619429c9-132f-496e-8aa0-414e850c87ec",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#015",
+      "language": "fr",
+      "collectorNumber": "015",
+      "sortKey": "0015",
+      "rarityId": "uncommon",
+      "artist": "Federico Sabbatini",
+      "finish": null,
+      "image": {
+        "path": "695a0906-3118-4ca5-a241-4eea0ed6f7cf.webp",
+        "thumbPath": "thumbs/695a0906-3118-4ca5-a241-4eea0ed6f7cf.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "b6295362-bd30-4b91-8755-738938cf839b",
       "cardId": "14d87f2a-8bd7-424f-b65b-3659156cef81",
       "releaseId": "heist-starter-retail",
@@ -14499,6 +15004,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "bc347fa2-8428-44a7-b6e4-2b166b66447c",
+      "cardId": "14d87f2a-8bd7-424f-b65b-3659156cef81",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#016",
+      "language": "fr",
+      "collectorNumber": "016",
+      "sortKey": "0016",
+      "rarityId": "common",
+      "artist": "Kieran McKeown \n& Giada Marchisio",
+      "finish": null,
+      "image": {
+        "path": "bc347fa2-8428-44a7-b6e4-2b166b66447c.webp",
+        "thumbPath": "thumbs/bc347fa2-8428-44a7-b6e4-2b166b66447c.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "4bb35017-9842-4178-99a6-34353a3de2d4",
@@ -14520,6 +15044,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "a287a673-d258-4d60-bc7a-9093678fe5dd",
+      "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#017",
+      "language": "fr",
+      "collectorNumber": "017",
+      "sortKey": "0017",
+      "rarityId": "rare",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "a287a673-d258-4d60-bc7a-9093678fe5dd.webp",
+        "thumbPath": "thumbs/a287a673-d258-4d60-bc7a-9093678fe5dd.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "39747fc8-20a0-4fbb-80d7-2a869b735ac9",
       "cardId": "39665784-d2f1-43e8-a958-894bac716d71",
       "releaseId": "heist-starter-retail",
@@ -14537,6 +15080,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "0e3c8bcd-da77-408e-b8c6-7f384d569ac3",
+      "cardId": "39665784-d2f1-43e8-a958-894bac716d71",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#018",
+      "language": "fr",
+      "collectorNumber": "018",
+      "sortKey": "0018",
+      "rarityId": "common",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "0e3c8bcd-da77-408e-b8c6-7f384d569ac3.webp",
+        "thumbPath": "thumbs/0e3c8bcd-da77-408e-b8c6-7f384d569ac3.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "60255f42-3ddd-4865-9e4a-335963694be1",
@@ -14558,6 +15120,25 @@
       "sourceCode": "theheistretailstarterdeck"
     },
     {
+      "id": "8efe08a5-0691-483d-817c-3aad5b73d28f",
+      "cardId": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#019",
+      "language": "fr",
+      "collectorNumber": "019",
+      "sortKey": "0019",
+      "rarityId": "common",
+      "artist": "DOFRESH",
+      "finish": null,
+      "image": {
+        "path": "8efe08a5-0691-483d-817c-3aad5b73d28f.webp",
+        "thumbPath": "thumbs/8efe08a5-0691-483d-817c-3aad5b73d28f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
+    },
+    {
       "id": "270c2b70-35fb-4d47-b1c0-3df11141f880",
       "cardId": "ad13a7bc-c49d-4166-8a9c-965e7bfa9b8f",
       "releaseId": "heist-starter-retail",
@@ -14575,6 +15156,25 @@
         "height": 1024
       },
       "sourceCode": "theheistretailstarterdeck"
+    },
+    {
+      "id": "3558e145-19d6-4273-b4fd-9b0f160a3d8c",
+      "cardId": "ad13a7bc-c49d-4166-8a9c-965e7bfa9b8f",
+      "releaseId": "heist-starter-retail",
+      "variantKey": "heist-starter-retail#020",
+      "language": "fr",
+      "collectorNumber": "020",
+      "sortKey": "0020",
+      "rarityId": "common",
+      "artist": "Miguel Valderrama",
+      "finish": null,
+      "image": {
+        "path": "3558e145-19d6-4273-b4fd-9b0f160a3d8c.webp",
+        "thumbPath": "thumbs/3558e145-19d6-4273-b4fd-9b0f160a3d8c.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "theheistretailstarterdeck-fr"
     },
     {
       "id": "56a13bb3-7e1d-4846-ac79-9163f33c0143",
@@ -14976,6 +15576,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "926a067d-4148-4f04-8468-13f5d435040e",
+      "cardId": "31fa5825-946a-4ca2-afa8-8f07b9898d6a",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "epic",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "926a067d-4148-4f04-8468-13f5d435040e.webp",
+        "thumbPath": "thumbs/926a067d-4148-4f04-8468-13f5d435040e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "0aab2858-fa5e-42f6-997e-39797fefb669",
       "cardId": "3c4cf61f-c469-4ad6-a209-67e715f9d45b",
       "releaseId": "embracing-power-starter-retail",
@@ -14993,6 +15612,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "8af3ebb8-0007-4d24-acd2-0edc9b0e9a34",
+      "cardId": "3c4cf61f-c469-4ad6-a209-67e715f9d45b",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "common",
+      "artist": "Bernard Kowalczuk",
+      "finish": null,
+      "image": {
+        "path": "8af3ebb8-0007-4d24-acd2-0edc9b0e9a34.webp",
+        "thumbPath": "thumbs/8af3ebb8-0007-4d24-acd2-0edc9b0e9a34.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "19587d4f-6d47-44fe-b4da-99743e2742f7",
@@ -15014,6 +15652,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "35c71811-34bb-4bdf-ad1e-eeff6a8030a6",
+      "cardId": "066641c5-acc2-45f4-ba67-16a8d20cce73",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "uncommon",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "35c71811-34bb-4bdf-ad1e-eeff6a8030a6.webp",
+        "thumbPath": "thumbs/35c71811-34bb-4bdf-ad1e-eeff6a8030a6.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "c4806b05-6476-4c67-95a5-fc9c4ce2aaa2",
       "cardId": "fee335a7-2546-48a5-9bb8-b0886014ce66",
       "releaseId": "embracing-power-starter-retail",
@@ -15031,6 +15688,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "dadab555-f412-425e-b700-e33fdfaf74e4",
+      "cardId": "fee335a7-2546-48a5-9bb8-b0886014ce66",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "common",
+      "artist": "Jeffrey Alan Love",
+      "finish": null,
+      "image": {
+        "path": "dadab555-f412-425e-b700-e33fdfaf74e4.webp",
+        "thumbPath": "thumbs/dadab555-f412-425e-b700-e33fdfaf74e4.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "9ecace66-9724-4582-8a45-ae614ffc640f",
@@ -15052,6 +15728,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "6a6cf4b7-ebca-4ffd-8d9f-14983ab94fe4",
+      "cardId": "3c4e7fcb-933d-4712-9ce7-6052a14f8e94",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "common",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "6a6cf4b7-ebca-4ffd-8d9f-14983ab94fe4.webp",
+        "thumbPath": "thumbs/6a6cf4b7-ebca-4ffd-8d9f-14983ab94fe4.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "49c919ef-61d7-47d3-b855-1d4d7c0f783f",
       "cardId": "5233bacc-f39f-4383-8e25-57ef634735ca",
       "releaseId": "embracing-power-starter-retail",
@@ -15069,6 +15764,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "d54b768a-bee0-4dd0-be7d-01aa1588183f",
+      "cardId": "5233bacc-f39f-4383-8e25-57ef634735ca",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#006",
+      "language": "fr",
+      "collectorNumber": "006",
+      "sortKey": "0006",
+      "rarityId": "common",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "d54b768a-bee0-4dd0-be7d-01aa1588183f.webp",
+        "thumbPath": "thumbs/d54b768a-bee0-4dd0-be7d-01aa1588183f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "087c30c2-1a7d-423e-b2f3-a7e1e8cfca12",
@@ -15090,6 +15804,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "eb57cfca-7635-451c-8d4e-30d0067acbfe",
+      "cardId": "28198e04-60e2-4f81-9786-903a9a947d7a",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#007",
+      "language": "fr",
+      "collectorNumber": "007",
+      "sortKey": "0007",
+      "rarityId": "common",
+      "artist": "Ricardo Padierne Silvera",
+      "finish": null,
+      "image": {
+        "path": "eb57cfca-7635-451c-8d4e-30d0067acbfe.webp",
+        "thumbPath": "thumbs/eb57cfca-7635-451c-8d4e-30d0067acbfe.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "0e0e7e20-eaf3-4dea-a177-cb54e01ffec6",
       "cardId": "4670d02b-b97a-4771-bb7e-65bdc012530e",
       "releaseId": "embracing-power-starter-retail",
@@ -15107,6 +15840,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "7329d165-bd9e-41fd-aaac-38f81a629ec3",
+      "cardId": "4670d02b-b97a-4771-bb7e-65bdc012530e",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#008",
+      "language": "fr",
+      "collectorNumber": "008",
+      "sortKey": "0008",
+      "rarityId": "uncommon",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "7329d165-bd9e-41fd-aaac-38f81a629ec3.webp",
+        "thumbPath": "thumbs/7329d165-bd9e-41fd-aaac-38f81a629ec3.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "301b47dd-eab3-4648-aece-bc071b87dcd1",
@@ -15128,6 +15880,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "5eacc91e-1b36-473a-a8d9-b1dfbd3eec59",
+      "cardId": "a708461f-1f91-4789-bb0d-96e3de5fcf44",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#009",
+      "language": "fr",
+      "collectorNumber": "009",
+      "sortKey": "0009",
+      "rarityId": "uncommon",
+      "artist": "Alexander Duder",
+      "finish": null,
+      "image": {
+        "path": "5eacc91e-1b36-473a-a8d9-b1dfbd3eec59.webp",
+        "thumbPath": "thumbs/5eacc91e-1b36-473a-a8d9-b1dfbd3eec59.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "9e5a152e-6105-44a4-8db0-9cbf6cda2252",
       "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
       "releaseId": "embracing-power-starter-retail",
@@ -15145,6 +15916,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "2c41626a-3fd6-4510-b75b-c42c6edd8f42",
+      "cardId": "144c3559-3518-4c01-b9e6-af42b7166661",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#010",
+      "language": "fr",
+      "collectorNumber": "010",
+      "sortKey": "0010",
+      "rarityId": "common",
+      "artist": "Roberto Ricci",
+      "finish": null,
+      "image": {
+        "path": "2c41626a-3fd6-4510-b75b-c42c6edd8f42.webp",
+        "thumbPath": "thumbs/2c41626a-3fd6-4510-b75b-c42c6edd8f42.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "b03a2e07-73a4-49c4-b4a3-761748a7b09e",
@@ -15166,6 +15956,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "a393570d-e0a3-4c87-88bb-e3d93d1c041f",
+      "cardId": "050d0502-94b0-4bee-a7e6-a9b00f31b4ae",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#011",
+      "language": "fr",
+      "collectorNumber": "011",
+      "sortKey": "0011",
+      "rarityId": "rare",
+      "artist": "Max Fiumara",
+      "finish": null,
+      "image": {
+        "path": "a393570d-e0a3-4c87-88bb-e3d93d1c041f.webp",
+        "thumbPath": "thumbs/a393570d-e0a3-4c87-88bb-e3d93d1c041f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "2ba68619-7050-44c5-b0ce-b32d48b8f40f",
       "cardId": "72358c7d-9f29-4ef6-a682-f5bfc72c7714",
       "releaseId": "embracing-power-starter-retail",
@@ -15183,6 +15992,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "6f154367-d0cb-4650-9d31-d87193f32bfc",
+      "cardId": "72358c7d-9f29-4ef6-a682-f5bfc72c7714",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#012",
+      "language": "fr",
+      "collectorNumber": "012",
+      "sortKey": "0012",
+      "rarityId": "epic",
+      "artist": "Bad Moon Studio",
+      "finish": null,
+      "image": {
+        "path": "6f154367-d0cb-4650-9d31-d87193f32bfc.webp",
+        "thumbPath": "thumbs/6f154367-d0cb-4650-9d31-d87193f32bfc.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "6ac7adce-01af-4b5b-956b-698eda0bed14",
@@ -15204,6 +16032,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "c5376289-9470-4a11-9f67-def96fb5f6f5",
+      "cardId": "cf50fa24-bf94-4c35-bcc1-c6d56a6f68d8",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#013",
+      "language": "fr",
+      "collectorNumber": "013",
+      "sortKey": "0013",
+      "rarityId": "epic",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "c5376289-9470-4a11-9f67-def96fb5f6f5.webp",
+        "thumbPath": "thumbs/c5376289-9470-4a11-9f67-def96fb5f6f5.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "0ce87466-8869-484f-bd4c-5094fdfc6dbc",
       "cardId": "71652e73-984a-4630-be47-af947f87d5c1",
       "releaseId": "embracing-power-starter-retail",
@@ -15221,6 +16068,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "67c0d4ad-a044-4240-8941-4a90c8d5eeef",
+      "cardId": "71652e73-984a-4630-be47-af947f87d5c1",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#014",
+      "language": "fr",
+      "collectorNumber": "014",
+      "sortKey": "0014",
+      "rarityId": "common",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "67c0d4ad-a044-4240-8941-4a90c8d5eeef.webp",
+        "thumbPath": "thumbs/67c0d4ad-a044-4240-8941-4a90c8d5eeef.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "b00202eb-35e5-4ae7-8079-34b70a143040",
@@ -15242,6 +16108,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "72903660-69b5-4198-9bfb-cb58e0964a27",
+      "cardId": "917e6515-ed23-4a1d-baaa-474d879bdabc",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#015",
+      "language": "fr",
+      "collectorNumber": "015",
+      "sortKey": "0015",
+      "rarityId": "common",
+      "artist": "Robert Sammelin",
+      "finish": null,
+      "image": {
+        "path": "72903660-69b5-4198-9bfb-cb58e0964a27.webp",
+        "thumbPath": "thumbs/72903660-69b5-4198-9bfb-cb58e0964a27.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "377a3054-68e1-4843-8109-70e230592519",
       "cardId": "4a8dfe3f-980d-4370-ac10-6bd989042cdf",
       "releaseId": "embracing-power-starter-retail",
@@ -15259,6 +16144,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "e1064ff5-fa7b-4f06-977a-c288a5480c4b",
+      "cardId": "4a8dfe3f-980d-4370-ac10-6bd989042cdf",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#016",
+      "language": "fr",
+      "collectorNumber": "016",
+      "sortKey": "0016",
+      "rarityId": "common",
+      "artist": "Michal Ivan",
+      "finish": null,
+      "image": {
+        "path": "e1064ff5-fa7b-4f06-977a-c288a5480c4b.webp",
+        "thumbPath": "thumbs/e1064ff5-fa7b-4f06-977a-c288a5480c4b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "42e03e7a-923d-4f2b-8d79-191e69873947",
@@ -15280,6 +16184,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "7f136179-5ad1-4990-872c-be989b77d61b",
+      "cardId": "08e6a687-56b7-4ac1-982f-8a8d6d0c0bc5",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#017",
+      "language": "fr",
+      "collectorNumber": "017",
+      "sortKey": "0017",
+      "rarityId": "uncommon",
+      "artist": "Ilya Kuvshinov",
+      "finish": null,
+      "image": {
+        "path": "7f136179-5ad1-4990-872c-be989b77d61b.webp",
+        "thumbPath": "thumbs/7f136179-5ad1-4990-872c-be989b77d61b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "3b69e0c7-418c-4000-b6f4-f9584bc541e3",
       "cardId": "d6f16c44-6d56-48ff-8130-154eea5540ca",
       "releaseId": "embracing-power-starter-retail",
@@ -15297,6 +16220,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "1684accd-b2bc-4a30-92cb-cc2d6d53429f",
+      "cardId": "d6f16c44-6d56-48ff-8130-154eea5540ca",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#018",
+      "language": "fr",
+      "collectorNumber": "018",
+      "sortKey": "0018",
+      "rarityId": "common",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "1684accd-b2bc-4a30-92cb-cc2d6d53429f.webp",
+        "thumbPath": "thumbs/1684accd-b2bc-4a30-92cb-cc2d6d53429f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "a4684963-6c44-4e6e-9466-56d987f86112",
@@ -15318,6 +16260,25 @@
       "sourceCode": "embracingpowerretailstarterdeck"
     },
     {
+      "id": "70d8df05-c5fc-4eaf-8e5b-c81ca96d02e3",
+      "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#019",
+      "language": "fr",
+      "collectorNumber": "019",
+      "sortKey": "0019",
+      "rarityId": "uncommon",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "70d8df05-c5fc-4eaf-8e5b-c81ca96d02e3.webp",
+        "thumbPath": "thumbs/70d8df05-c5fc-4eaf-8e5b-c81ca96d02e3.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
+    },
+    {
       "id": "8a13760d-050c-4a9c-bc44-f6b5796bb9f2",
       "cardId": "71fb410b-b56e-42b2-a793-4c49e935b9f1",
       "releaseId": "embracing-power-starter-retail",
@@ -15335,6 +16296,25 @@
         "height": 1024
       },
       "sourceCode": "embracingpowerretailstarterdeck"
+    },
+    {
+      "id": "cc86f2ba-b196-4316-9476-7dd6ef2194d6",
+      "cardId": "71fb410b-b56e-42b2-a793-4c49e935b9f1",
+      "releaseId": "embracing-power-starter-retail",
+      "variantKey": "embracing-power-starter-retail#020",
+      "language": "fr",
+      "collectorNumber": "020",
+      "sortKey": "0020",
+      "rarityId": "uncommon",
+      "artist": "John Liew",
+      "finish": null,
+      "image": {
+        "path": "cc86f2ba-b196-4316-9476-7dd6ef2194d6.webp",
+        "thumbPath": "thumbs/cc86f2ba-b196-4316-9476-7dd6ef2194d6.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "embracingpowerretailstarterde-fr"
     },
     {
       "id": "362bef23-c935-4729-a13b-dc3bc646d9b3",
@@ -16287,6 +17267,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "595437cd-5180-4aef-b110-61950f738d8e",
+      "cardId": "eff41c12-b872-4101-9779-00e691532893",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "epic",
+      "artist": "Michał Dziekan",
+      "finish": null,
+      "image": {
+        "path": "595437cd-5180-4aef-b110-61950f738d8e.webp",
+        "thumbPath": "thumbs/595437cd-5180-4aef-b110-61950f738d8e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "352acc48-3842-4e10-b9b8-157f8a5f7286",
       "cardId": "91df478a-91d5-4d42-a624-4c20ec61121c",
       "releaseId": "prerelease-retail",
@@ -16304,6 +17303,25 @@
         "height": 1024
       },
       "sourceCode": "prereleaseretail"
+    },
+    {
+      "id": "00280859-865f-43ec-a87f-5a2c0f447d4e",
+      "cardId": "91df478a-91d5-4d42-a624-4c20ec61121c",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "00280859-865f-43ec-a87f-5a2c0f447d4e.webp",
+        "thumbPath": "thumbs/00280859-865f-43ec-a87f-5a2c0f447d4e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
     },
     {
       "id": "c89f2af6-dab2-40fe-a29e-6e98c0322f5d",
@@ -16325,6 +17343,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "5f758458-2eb7-4286-8649-15195a3b92a3",
+      "cardId": "9e681d3e-cbfd-4c7b-a69a-72a83dc8b847",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "rare",
+      "artist": "Michal Ivan",
+      "finish": null,
+      "image": {
+        "path": "5f758458-2eb7-4286-8649-15195a3b92a3.webp",
+        "thumbPath": "thumbs/5f758458-2eb7-4286-8649-15195a3b92a3.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "3282ec42-006b-4214-a6c9-7c09f1278b26",
       "cardId": "3b3f941d-aa58-4337-99dc-4af3fd3ccd47",
       "releaseId": "prerelease-retail",
@@ -16342,6 +17379,25 @@
         "height": 1024
       },
       "sourceCode": "prereleaseretail"
+    },
+    {
+      "id": "de9ec3eb-8d07-4379-a481-f6a1aaa51347",
+      "cardId": "3b3f941d-aa58-4337-99dc-4af3fd3ccd47",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "rare",
+      "artist": "Łukasz Poller",
+      "finish": null,
+      "image": {
+        "path": "de9ec3eb-8d07-4379-a481-f6a1aaa51347.webp",
+        "thumbPath": "thumbs/de9ec3eb-8d07-4379-a481-f6a1aaa51347.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
     },
     {
       "id": "80efc8c5-c352-4d3a-b713-bfcf593a7f2a",
@@ -16363,6 +17419,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "76c9d33b-bb78-40f6-803b-007f45e5de9b",
+      "cardId": "fc516d53-5fd8-43dd-8349-9e60f0606efa",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "rare",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "76c9d33b-bb78-40f6-803b-007f45e5de9b.webp",
+        "thumbPath": "thumbs/76c9d33b-bb78-40f6-803b-007f45e5de9b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "ce3dacce-fb10-488c-9001-95fe7f3329a4",
       "cardId": "012b0300-6af1-417e-86a2-dc208a60ac15",
       "releaseId": "prerelease-retail",
@@ -16380,6 +17455,25 @@
         "height": 1024
       },
       "sourceCode": "prereleaseretail"
+    },
+    {
+      "id": "4054ccb4-9fc8-4588-8277-fb7c3dccc279",
+      "cardId": "012b0300-6af1-417e-86a2-dc208a60ac15",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#006",
+      "language": "fr",
+      "collectorNumber": "006",
+      "sortKey": "0006",
+      "rarityId": "rare",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "4054ccb4-9fc8-4588-8277-fb7c3dccc279.webp",
+        "thumbPath": "thumbs/4054ccb4-9fc8-4588-8277-fb7c3dccc279.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
     },
     {
       "id": "34436540-0422-4a92-8757-c15dded67ea9",
@@ -16401,6 +17495,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "7f38f6ab-10b1-4aaf-b295-53e703921874",
+      "cardId": "424c9c0f-cc01-40ec-8404-75957985c7f8",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#007",
+      "language": "fr",
+      "collectorNumber": "007",
+      "sortKey": "0007",
+      "rarityId": "rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "7f38f6ab-10b1-4aaf-b295-53e703921874.webp",
+        "thumbPath": "thumbs/7f38f6ab-10b1-4aaf-b295-53e703921874.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "c12c4516-264b-4f7a-9d99-de7bc3ebb0fb",
       "cardId": "501a3796-9983-400f-86e4-97ffac5d5451",
       "releaseId": "prerelease-retail",
@@ -16418,6 +17531,25 @@
         "height": 1024
       },
       "sourceCode": "prereleaseretail"
+    },
+    {
+      "id": "71a05ddb-312c-4976-bdfd-06d9f6feffed",
+      "cardId": "501a3796-9983-400f-86e4-97ffac5d5451",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#008",
+      "language": "fr",
+      "collectorNumber": "008",
+      "sortKey": "0008",
+      "rarityId": "rare",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "71a05ddb-312c-4976-bdfd-06d9f6feffed.webp",
+        "thumbPath": "thumbs/71a05ddb-312c-4976-bdfd-06d9f6feffed.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
     },
     {
       "id": "e2b7ca4a-ebb6-48d4-b0b7-59865c6c85f0",
@@ -16439,6 +17571,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "99db9a1f-e9ec-4998-9125-b7bcb79c5054",
+      "cardId": "12475e77-0e16-420e-a935-65eb74290de8",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#009",
+      "language": "fr",
+      "collectorNumber": "009",
+      "sortKey": "0009",
+      "rarityId": "rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "99db9a1f-e9ec-4998-9125-b7bcb79c5054.webp",
+        "thumbPath": "thumbs/99db9a1f-e9ec-4998-9125-b7bcb79c5054.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "ecfd2d86-f9dc-47c4-a4ec-4a1155217dc7",
       "cardId": "99f5e311-8dfd-42a9-abd0-2e50ac68679e",
       "releaseId": "prerelease-retail",
@@ -16458,6 +17609,25 @@
       "sourceCode": "prereleaseretail"
     },
     {
+      "id": "bbbd9bd0-71d3-4a39-8e2d-3d3f10aee23a",
+      "cardId": "99f5e311-8dfd-42a9-abd0-2e50ac68679e",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#010",
+      "language": "fr",
+      "collectorNumber": "010",
+      "sortKey": "0010",
+      "rarityId": "rare",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "bbbd9bd0-71d3-4a39-8e2d-3d3f10aee23a.webp",
+        "thumbPath": "thumbs/bbbd9bd0-71d3-4a39-8e2d-3d3f10aee23a.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR"
+    },
+    {
       "id": "e6663f3c-5668-4bab-ba3c-6e2b78636f2c",
       "cardId": "6dd172b1-2341-473f-8837-a9efe6a75701",
       "releaseId": "prerelease-retail",
@@ -16475,6 +17645,26 @@
         "height": 1024
       },
       "sourceCode": "prereleaseretail"
+    },
+    {
+      "id": "68e56b4e-9c21-4d09-a270-9b3cc355fa30",
+      "cardId": "6dd172b1-2341-473f-8837-a9efe6a75701",
+      "releaseId": "prerelease-retail",
+      "variantKey": "prerelease-retail#011",
+      "language": "fr",
+      "collectorNumber": "011",
+      "sortKey": "0011",
+      "rarityId": "nova-rare",
+      "artist": "TOPDOG Entertainment",
+      "finish": null,
+      "image": {
+        "path": "68e56b4e-9c21-4d09-a270-9b3cc355fa30.webp",
+        "thumbPath": "thumbs/68e56b4e-9c21-4d09-a270-9b3cc355fa30.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "prereleaseretail-FR",
+      "printedRulesText": "La première fois que cette Unité vole au moins un Gig chaque tour, volez un Gig rival ayant une valeur différente des Gigs alliés."
     },
     {
       "id": "10ca370b-deb7-4c58-a9f9-faf4f9708f6d",
@@ -16705,6 +17895,25 @@
       "sourceCode": "boxtoppersretail"
     },
     {
+      "id": "be95c7f4-4a0f-4a96-80d8-03db7c809f74",
+      "cardId": "31fa5825-946a-4ca2-afa8-8f07b9898d6a",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "nova-rare",
+      "artist": "Vincenzo Riccardi",
+      "finish": null,
+      "image": {
+        "path": "be95c7f4-4a0f-4a96-80d8-03db7c809f74.webp",
+        "thumbPath": "thumbs/be95c7f4-4a0f-4a96-80d8-03db7c809f74.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr"
+    },
+    {
       "id": "c9ceb0e7-c803-45d1-8da1-8c85c3b2e7e8",
       "cardId": "f090dc44-d7f0-4aec-a19e-9213155a6611",
       "releaseId": "box-toppers-retail",
@@ -16722,6 +17931,25 @@
         "height": 1024
       },
       "sourceCode": "boxtoppersretail"
+    },
+    {
+      "id": "14eb3f3d-c53c-47ca-a222-40e3680edeea",
+      "cardId": "f090dc44-d7f0-4aec-a19e-9213155a6611",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "nova-rare",
+      "artist": "Ito (Kirby's Comic Art)",
+      "finish": null,
+      "image": {
+        "path": "14eb3f3d-c53c-47ca-a222-40e3680edeea.webp",
+        "thumbPath": "thumbs/14eb3f3d-c53c-47ca-a222-40e3680edeea.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr"
     },
     {
       "id": "1b6e44dd-d6e7-46eb-a5e5-24c38eed888b",
@@ -16743,6 +17971,26 @@
       "sourceCode": "boxtoppersretail"
     },
     {
+      "id": "e97ed28b-c4c7-4d21-a11e-057ae5cb43c1",
+      "cardId": "72358c7d-9f29-4ef6-a682-f5bfc72c7714",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "nova-rare",
+      "artist": "Vincenzo Riccardi",
+      "finish": null,
+      "image": {
+        "path": "e97ed28b-c4c7-4d21-a11e-057ae5cb43c1.webp",
+        "thumbPath": "thumbs/e97ed28b-c4c7-4d21-a11e-057ae5cb43c1.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr",
+      "printedRulesText": "{Go Solo}\n{Blocker}"
+    },
+    {
       "id": "77e482f2-6090-47e9-9d03-be28417cb1cb",
       "cardId": "cf50fa24-bf94-4c35-bcc1-c6d56a6f68d8",
       "releaseId": "box-toppers-retail",
@@ -16760,6 +18008,25 @@
         "height": 1024
       },
       "sourceCode": "boxtoppersretail"
+    },
+    {
+      "id": "497dca45-581d-4507-a780-4d3f97531df1",
+      "cardId": "cf50fa24-bf94-4c35-bcc1-c6d56a6f68d8",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "nova-rare",
+      "artist": "Vincenzo Riccardi",
+      "finish": null,
+      "image": {
+        "path": "497dca45-581d-4507-a780-4d3f97531df1.webp",
+        "thumbPath": "thumbs/497dca45-581d-4507-a780-4d3f97531df1.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr"
     },
     {
       "id": "e4e17d32-3ec4-4c74-927c-fd0911b86e72",
@@ -16781,6 +18048,25 @@
       "sourceCode": "boxtoppersretail"
     },
     {
+      "id": "483be286-3715-4e5b-a9cb-6299a39ef2b5",
+      "cardId": "40502c1f-78a2-426a-a706-c60ebd4b31e3",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "nova-rare",
+      "artist": "Ito (Kirby's Comic Art)",
+      "finish": null,
+      "image": {
+        "path": "483be286-3715-4e5b-a9cb-6299a39ef2b5.webp",
+        "thumbPath": "thumbs/483be286-3715-4e5b-a9cb-6299a39ef2b5.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr"
+    },
+    {
       "id": "f509ebd8-c8b7-4a22-8922-2d71c6df0b6f",
       "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
       "releaseId": "box-toppers-retail",
@@ -16798,6 +18084,26 @@
         "height": 1024
       },
       "sourceCode": "boxtoppersretail"
+    },
+    {
+      "id": "fb1b4f07-a39f-461b-a7e3-92fe886f87be",
+      "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
+      "releaseId": "box-toppers-retail",
+      "variantKey": "box-toppers-retail#006",
+      "language": "fr",
+      "collectorNumber": "006",
+      "sortKey": "0006",
+      "rarityId": "nova-rare",
+      "artist": "Ito (Kirby's Comic Art)",
+      "finish": null,
+      "image": {
+        "path": "fb1b4f07-a39f-461b-a7e3-92fe886f87be.webp",
+        "thumbPath": "thumbs/fb1b4f07-a39f-461b-a7e3-92fe886f87be.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "boxtoppersretail-fr",
+      "printedRulesText": "{Go Solo}"
     },
     {
       "id": "12337d92-713c-4c7c-8a16-595a7b4717f1",
@@ -17465,6 +18771,25 @@
       "sourceCode": "edgerunneropens1"
     },
     {
+      "id": "b6f81fe8-d0ed-4dcb-b025-058559d0cf98",
+      "cardId": "56947a14-0b1e-4c3d-89e0-17839bcf4280",
+      "releaseId": "edgerunner-open-s1",
+      "variantKey": "edgerunner-open-s1#031",
+      "language": "en",
+      "collectorNumber": "031",
+      "sortKey": "0031",
+      "rarityId": "nova-rare",
+      "artist": "Divebound Studio",
+      "finish": null,
+      "image": {
+        "path": "b6f81fe8-d0ed-4dcb-b025-058559d0cf98.webp",
+        "thumbPath": "thumbs/b6f81fe8-d0ed-4dcb-b025-058559d0cf98.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "edgerunneropens1"
+    },
+    {
       "id": "e59f737b-83e1-45f2-a469-8bde0146b967",
       "cardId": "9e681d3e-cbfd-4c7b-a69a-72a83dc8b847",
       "releaseId": "edgerunner-open-s1",
@@ -17845,6 +19170,25 @@
       "sourceCode": "edgerunneropens1"
     },
     {
+      "id": "e6de94ff-ecf1-4a9f-9992-96ed71100b95",
+      "cardId": "e2dc863c-5bc9-4ad7-9138-2d5b966ed901",
+      "releaseId": "edgerunner-open-s1",
+      "variantKey": "edgerunner-open-s1#052",
+      "language": "en",
+      "collectorNumber": "052",
+      "sortKey": "0052",
+      "rarityId": "nova-rare",
+      "artist": "Divebound Studio",
+      "finish": null,
+      "image": {
+        "path": "e6de94ff-ecf1-4a9f-9992-96ed71100b95.webp",
+        "thumbPath": "thumbs/e6de94ff-ecf1-4a9f-9992-96ed71100b95.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "edgerunneropens1"
+    },
+    {
       "id": "848e3de6-3a3e-462e-8186-0a214ff03b79",
       "cardId": "627186b3-cffb-4228-aed4-b3ee35235fb6",
       "releaseId": "edgerunner-open-s1",
@@ -17902,6 +19246,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "e1be086c-78ca-472a-927f-1c145e87646b",
+      "cardId": "5c4d4058-9185-4305-9e8f-7eca41cf6674",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "nova-rare",
+      "artist": "Bogna Gawrońska",
+      "finish": null,
+      "image": {
+        "path": "e1be086c-78ca-472a-927f-1c145e87646b.webp",
+        "thumbPath": "thumbs/e1be086c-78ca-472a-927f-1c145e87646b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "a4271ab1-4688-4f98-b000-a186aadd7fee",
       "cardId": "066641c5-acc2-45f4-ba67-16a8d20cce73",
       "releaseId": "night-city-brawl-s1",
@@ -17919,6 +19282,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "71cad350-657b-4a55-bd07-aada806def8e",
+      "cardId": "066641c5-acc2-45f4-ba67-16a8d20cce73",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "nova-rare",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "71cad350-657b-4a55-bd07-aada806def8e.webp",
+        "thumbPath": "thumbs/71cad350-657b-4a55-bd07-aada806def8e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "c0a913fe-d3fc-4558-a35f-cfa34d4023c3",
@@ -17940,6 +19322,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "86665027-3400-4183-a246-a4df93b83c83",
+      "cardId": "4670d02b-b97a-4771-bb7e-65bdc012530e",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "nova-rare",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "86665027-3400-4183-a246-a4df93b83c83.webp",
+        "thumbPath": "thumbs/86665027-3400-4183-a246-a4df93b83c83.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \nLorsque cette Unité gagne un combat contre une Unité rivale, piochez 1."
+    },
+    {
       "id": "5b855c9c-bdf3-4743-9653-d6eb6ce3f6f5",
       "cardId": "b665e103-456b-4c51-9551-95b0bc87212a",
       "releaseId": "night-city-brawl-s1",
@@ -17957,6 +19359,26 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "9fd08b9f-ba4c-44b4-9005-f8007ff7b107",
+      "cardId": "b665e103-456b-4c51-9551-95b0bc87212a",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "nova-rare",
+      "artist": "Ilya Kuvshinov",
+      "finish": null,
+      "image": {
+        "path": "9fd08b9f-ba4c-44b4-9005-f8007ff7b107.webp",
+        "thumbPath": "thumbs/9fd08b9f-ba4c-44b4-9005-f8007ff7b107.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "{Attack} Donnez à cette Unité +2 Power ce tour-ci pour chaque Gig allié de valeur paire. \n{Defeated} Piochez 1 pour chaque Gig allié de valeur impaire."
     },
     {
       "id": "a78c25bb-94ce-4833-bcc4-be6dce72ecb1",
@@ -17978,6 +19400,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "648a99cd-d25d-4e9e-a45d-14b47ed7f854",
+      "cardId": "b05cb065-309e-45a3-bbe0-20f4b6ea71aa",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "nova-rare",
+      "artist": "Luca Claretti",
+      "finish": null,
+      "image": {
+        "path": "648a99cd-d25d-4e9e-a45d-14b47ed7f854.webp",
+        "thumbPath": "thumbs/648a99cd-d25d-4e9e-a45d-14b47ed7f854.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.) \n(Les Unités de Power 0 ne volent pas de Gig.)"
+    },
+    {
       "id": "d16f9b63-cc98-4b88-981e-258d1940aa04",
       "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
       "releaseId": "night-city-brawl-s1",
@@ -17995,6 +19437,26 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "aa8dd968-405c-4e82-a6f5-722e1f00c490",
+      "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#006",
+      "language": "fr",
+      "collectorNumber": "006",
+      "sortKey": "0006",
+      "rarityId": "nova-rare",
+      "artist": "Lea Leonowicz",
+      "finish": null,
+      "image": {
+        "path": "aa8dd968-405c-4e82-a6f5-722e1f00c490.webp",
+        "thumbPath": "thumbs/aa8dd968-405c-4e82-a6f5-722e1f00c490.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.)\t\n{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.)"
     },
     {
       "id": "f997c534-5208-4c37-8aff-4f6587e606c2",
@@ -18016,6 +19478,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "bf92e29e-162b-47b5-a416-f2ba389fc912",
+      "cardId": "84561b4c-67f0-4b2e-80ac-6b9c0a2396e3",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#007",
+      "language": "fr",
+      "collectorNumber": "007",
+      "sortKey": "0007",
+      "rarityId": "nova-rare",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "bf92e29e-162b-47b5-a416-f2ba389fc912.webp",
+        "thumbPath": "thumbs/bf92e29e-162b-47b5-a416-f2ba389fc912.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Vendez la carte du dessus de votre deck. \nSi vous contrôlez un Gig avec une valeur paire et un Gig avec une valeur impaire, piochez 2."
+    },
+    {
       "id": "88002e9c-429e-4434-8564-e1b22625ce4e",
       "cardId": "87e001dd-8604-4523-af6e-d768118ccf98",
       "releaseId": "night-city-brawl-s1",
@@ -18033,6 +19515,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "3f8a1c0a-ebb1-46a7-a6d6-4331f0cee098",
+      "cardId": "87e001dd-8604-4523-af6e-d768118ccf98",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#008",
+      "language": "fr",
+      "collectorNumber": "008",
+      "sortKey": "0008",
+      "rarityId": "nova-rare",
+      "artist": "Michal Ivan",
+      "finish": null,
+      "image": {
+        "path": "3f8a1c0a-ebb1-46a7-a6d6-4331f0cee098.webp",
+        "thumbPath": "thumbs/3f8a1c0a-ebb1-46a7-a6d6-4331f0cee098.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "6b574386-2893-4236-86a4-68c48222ae9e",
@@ -18054,6 +19555,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "5f456afc-0bf1-4675-bee5-1d4bfb72034b",
+      "cardId": "71652e73-984a-4630-be47-af947f87d5c1",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#009",
+      "language": "fr",
+      "collectorNumber": "009",
+      "sortKey": "0009",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "5f456afc-0bf1-4675-bee5-1d4bfb72034b.webp",
+        "thumbPath": "thumbs/5f456afc-0bf1-4675-bee5-1d4bfb72034b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Cette Unité ne peut pas attaquer. \n{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.)"
+    },
+    {
       "id": "f77b20fd-8792-41bb-a634-06030fd2eb6d",
       "cardId": "2a8802d3-598c-4ce3-9051-59ecf965ffbf",
       "releaseId": "night-city-brawl-s1",
@@ -18071,6 +19592,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "c740f0b7-858c-4792-862d-7dd54372cfff",
+      "cardId": "2a8802d3-598c-4ce3-9051-59ecf965ffbf",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#010",
+      "language": "fr",
+      "collectorNumber": "010",
+      "sortKey": "0010",
+      "rarityId": "nova-rare",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "c740f0b7-858c-4792-862d-7dd54372cfff.webp",
+        "thumbPath": "thumbs/c740f0b7-858c-4792-862d-7dd54372cfff.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "7757b045-4ccf-432b-b412-c82a44ee3adc",
@@ -18092,6 +19632,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "221a8a1f-77bc-42f4-b044-a3fb09965805",
+      "cardId": "67b47cff-2237-4765-86fb-9b2b3abecbb1",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#011",
+      "language": "fr",
+      "collectorNumber": "011",
+      "sortKey": "0011",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "221a8a1f-77bc-42f4-b044-a3fb09965805.webp",
+        "thumbPath": "thumbs/221a8a1f-77bc-42f4-b044-a3fb09965805.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "bd897ed7-a74b-4993-9da5-16f820c3502d",
       "cardId": "17a80b46-c583-4867-97ac-7855494363a9",
       "releaseId": "night-city-brawl-s1",
@@ -18109,6 +19668,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "bb84e7b0-0a5d-41c5-b60c-56d670777fc6",
+      "cardId": "17a80b46-c583-4867-97ac-7855494363a9",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#012",
+      "language": "fr",
+      "collectorNumber": "012",
+      "sortKey": "0012",
+      "rarityId": "nova-rare",
+      "artist": "Alex Eckman-Lawn",
+      "finish": null,
+      "image": {
+        "path": "bb84e7b0-0a5d-41c5-b60c-56d670777fc6.webp",
+        "thumbPath": "thumbs/bb84e7b0-0a5d-41c5-b60c-56d670777fc6.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "3a3900be-bbee-4218-8b58-0e5fa445ee46",
@@ -18130,6 +19708,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "1b15e610-8f48-46f0-8708-5104134e966b",
+      "cardId": "404748b4-f30e-4bf1-8991-5ad449da755a",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#013",
+      "language": "fr",
+      "collectorNumber": "013",
+      "sortKey": "0013",
+      "rarityId": "nova-rare",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "1b15e610-8f48-46f0-8708-5104134e966b.webp",
+        "thumbPath": "thumbs/1b15e610-8f48-46f0-8708-5104134e966b.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Si un Rival contrôle au moins 2 Gigs de plus que vous, jouez ce Programme pour 3 €$. \nJouez gratuitement jusqu'à 2 Unités de coût 3 ou moins de votre défausse."
+    },
+    {
       "id": "e03952c1-9f8c-4ecb-8258-ab753ef9c9a7",
       "cardId": "a1e60653-5e28-49ee-9798-d16520b553c3",
       "releaseId": "night-city-brawl-s1",
@@ -18147,6 +19745,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "6728f922-a514-4f15-991b-27ba0e17951f",
+      "cardId": "a1e60653-5e28-49ee-9798-d16520b553c3",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#014",
+      "language": "fr",
+      "collectorNumber": "014",
+      "sortKey": "0014",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "6728f922-a514-4f15-991b-27ba0e17951f.webp",
+        "thumbPath": "thumbs/6728f922-a514-4f15-991b-27ba0e17951f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "a1c75317-6fa9-48f8-b296-cfe6a336f12a",
@@ -18168,6 +19785,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "c0a8e28f-7f0c-4631-ad73-2219ab851160",
+      "cardId": "5380dea3-4d21-445b-af02-487b45d40395",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#015",
+      "language": "fr",
+      "collectorNumber": "015",
+      "sortKey": "0015",
+      "rarityId": "nova-rare",
+      "artist": "TOPDOG Entertainment",
+      "finish": null,
+      "image": {
+        "path": "c0a8e28f-7f0c-4631-ad73-2219ab851160.webp",
+        "thumbPath": "thumbs/c0a8e28f-7f0c-4631-ad73-2219ab851160.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "70ef0b79-d569-4a62-bdbc-e02c616f8b98",
       "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
       "releaseId": "night-city-brawl-s1",
@@ -18185,6 +19821,26 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "a96d4bb7-b498-4371-9558-e423be933064",
+      "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#016",
+      "language": "fr",
+      "collectorNumber": "016",
+      "sortKey": "0016",
+      "rarityId": "nova-rare",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "a96d4bb7-b498-4371-9558-e423be933064.webp",
+        "thumbPath": "thumbs/a96d4bb7-b498-4371-9558-e423be933064.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \n{Attack} Diminuez un Gig jusqu'à -2. À la fin de votre tour, si cette Unité est nommée « V », préparez 2 Eddies."
     },
     {
       "id": "f8098004-7b14-4d5a-8398-85c5660e1d8f",
@@ -18206,6 +19862,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "fc2e2d9b-f9ad-4017-b570-9775285dcaed",
+      "cardId": "40c98fdc-45d0-458d-be2c-2697dc337ca5",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#017",
+      "language": "fr",
+      "collectorNumber": "017",
+      "sortKey": "0017",
+      "rarityId": "nova-rare",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "fc2e2d9b-f9ad-4017-b570-9775285dcaed.webp",
+        "thumbPath": "thumbs/fc2e2d9b-f9ad-4017-b570-9775285dcaed.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \nQuand cette Unité ou Légende est épuisée, piochez 1."
+    },
+    {
       "id": "2267884a-40c8-49ff-952b-90ec1b977179",
       "cardId": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
       "releaseId": "night-city-brawl-s1",
@@ -18223,6 +19899,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "d8b393db-c317-4cb0-bec4-2d5327ce3e37",
+      "cardId": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#018",
+      "language": "fr",
+      "collectorNumber": "018",
+      "sortKey": "0018",
+      "rarityId": "nova-rare",
+      "artist": "DOFRESH",
+      "finish": null,
+      "image": {
+        "path": "d8b393db-c317-4cb0-bec4-2d5327ce3e37.webp",
+        "thumbPath": "thumbs/d8b393db-c317-4cb0-bec4-2d5327ce3e37.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "c51e7c71-6305-4330-a107-a197af5eeeb2",
@@ -18244,6 +19939,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "77189cf1-2e1e-44a6-8190-9175789c8c8d",
+      "cardId": "5c4d4058-9185-4305-9e8f-7eca41cf6674",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#019",
+      "language": "fr",
+      "collectorNumber": "019",
+      "sortKey": "0019",
+      "rarityId": "nova-rare",
+      "artist": "Bogna Gawrońska",
+      "finish": null,
+      "image": {
+        "path": "77189cf1-2e1e-44a6-8190-9175789c8c8d.webp",
+        "thumbPath": "thumbs/77189cf1-2e1e-44a6-8190-9175789c8c8d.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "bd6fe2cf-bfcd-4de2-bc78-ffc215d39603",
       "cardId": "066641c5-acc2-45f4-ba67-16a8d20cce73",
       "releaseId": "night-city-brawl-s1",
@@ -18261,6 +19975,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "e5207a33-75fe-460c-8476-872cd746c6a6",
+      "cardId": "066641c5-acc2-45f4-ba67-16a8d20cce73",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#020",
+      "language": "fr",
+      "collectorNumber": "020",
+      "sortKey": "0020",
+      "rarityId": "nova-rare",
+      "artist": "CD Projekt Red",
+      "finish": null,
+      "image": {
+        "path": "e5207a33-75fe-460c-8476-872cd746c6a6.webp",
+        "thumbPath": "thumbs/e5207a33-75fe-460c-8476-872cd746c6a6.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "922e0824-cef0-4062-bb6f-5e30f4814f40",
@@ -18282,6 +20015,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "b142d928-a4fe-4f0a-84f7-860baf5a787f",
+      "cardId": "4670d02b-b97a-4771-bb7e-65bdc012530e",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#021",
+      "language": "fr",
+      "collectorNumber": "021",
+      "sortKey": "0021",
+      "rarityId": "nova-rare",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "b142d928-a4fe-4f0a-84f7-860baf5a787f.webp",
+        "thumbPath": "thumbs/b142d928-a4fe-4f0a-84f7-860baf5a787f.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \nLorsque cette Unité gagne un combat contre une Unité rivale, piochez 1."
+    },
+    {
       "id": "adf78727-f462-424c-8689-0b759794ee3c",
       "cardId": "b665e103-456b-4c51-9551-95b0bc87212a",
       "releaseId": "night-city-brawl-s1",
@@ -18299,6 +20052,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "ca3dbf6e-ead5-4948-b704-e325a6297fd7",
+      "cardId": "b665e103-456b-4c51-9551-95b0bc87212a",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#022",
+      "language": "fr",
+      "collectorNumber": "022",
+      "sortKey": "0022",
+      "rarityId": "nova-rare",
+      "artist": "Ilya Kuvshinov",
+      "finish": null,
+      "image": {
+        "path": "ca3dbf6e-ead5-4948-b704-e325a6297fd7.webp",
+        "thumbPath": "thumbs/ca3dbf6e-ead5-4948-b704-e325a6297fd7.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "9f7b3df5-721c-410f-8dec-5ce3bc4377c0",
@@ -18320,6 +20092,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "eb96776d-e7ab-4312-85a8-fe2957f22094",
+      "cardId": "b05cb065-309e-45a3-bbe0-20f4b6ea71aa",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#023",
+      "language": "fr",
+      "collectorNumber": "023",
+      "sortKey": "0023",
+      "rarityId": "nova-rare",
+      "artist": "Luca Claretti",
+      "finish": null,
+      "image": {
+        "path": "eb96776d-e7ab-4312-85a8-fe2957f22094.webp",
+        "thumbPath": "thumbs/eb96776d-e7ab-4312-85a8-fe2957f22094.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.) \n(Les Unités de Power 0 ne volent pas de Gig.)"
+    },
+    {
       "id": "34dd1e1b-5022-4858-91bc-1243ea7f4615",
       "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
       "releaseId": "night-city-brawl-s1",
@@ -18337,6 +20129,26 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "4706864a-1946-4f13-a433-65add75ad6ca",
+      "cardId": "6720e7fd-d1e8-4c8a-9ff2-f51f62241902",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#024",
+      "language": "fr",
+      "collectorNumber": "024",
+      "sortKey": "0024",
+      "rarityId": "nova-rare",
+      "artist": "Lea Leonowicz",
+      "finish": null,
+      "image": {
+        "path": "4706864a-1946-4f13-a433-65add75ad6ca.webp",
+        "thumbPath": "thumbs/4706864a-1946-4f13-a433-65add75ad6ca.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.)\t\n{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.)"
     },
     {
       "id": "86bc6f96-41d3-4639-b75b-25ae58202b3d",
@@ -18358,6 +20170,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "e8882cc2-86a2-49d1-aaf9-a7c315842510",
+      "cardId": "84561b4c-67f0-4b2e-80ac-6b9c0a2396e3",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#025",
+      "language": "fr",
+      "collectorNumber": "025",
+      "sortKey": "0025",
+      "rarityId": "nova-rare",
+      "artist": "ADIA",
+      "finish": null,
+      "image": {
+        "path": "e8882cc2-86a2-49d1-aaf9-a7c315842510.webp",
+        "thumbPath": "thumbs/e8882cc2-86a2-49d1-aaf9-a7c315842510.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Vendez la carte du dessus de votre deck. \nSi vous contrôlez un Gig avec une valeur paire et un Gig avec une valeur impaire, piochez 2."
+    },
+    {
       "id": "968eff55-5775-44c1-b5e0-7b1b9293763e",
       "cardId": "87e001dd-8604-4523-af6e-d768118ccf98",
       "releaseId": "night-city-brawl-s1",
@@ -18375,6 +20207,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "c9fbad01-853c-4f3f-a550-45951847a04c",
+      "cardId": "87e001dd-8604-4523-af6e-d768118ccf98",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#026",
+      "language": "fr",
+      "collectorNumber": "026",
+      "sortKey": "0026",
+      "rarityId": "nova-rare",
+      "artist": "Michal Ivan",
+      "finish": null,
+      "image": {
+        "path": "c9fbad01-853c-4f3f-a550-45951847a04c.webp",
+        "thumbPath": "thumbs/c9fbad01-853c-4f3f-a550-45951847a04c.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "8c0cd775-71b6-43f9-af49-1d41386eb1ee",
@@ -18396,6 +20247,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "2ba670a8-030e-494c-aeaf-0503926e6eac",
+      "cardId": "71652e73-984a-4630-be47-af947f87d5c1",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#027",
+      "language": "fr",
+      "collectorNumber": "027",
+      "sortKey": "0027",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "2ba670a8-030e-494c-aeaf-0503926e6eac.webp",
+        "thumbPath": "thumbs/2ba670a8-030e-494c-aeaf-0503926e6eac.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Cette Unité ne peut pas attaquer. \n{Blocker} (Vous pouvez épuiser cette Unité pour rediriger vers elle l'attaque d'une Unité rivale.)"
+    },
+    {
       "id": "c89b85cb-aa23-4fa6-b093-aad81bde74a4",
       "cardId": "2a8802d3-598c-4ce3-9051-59ecf965ffbf",
       "releaseId": "night-city-brawl-s1",
@@ -18413,6 +20284,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "627659e9-5298-466f-8cc2-97caaed5ab48",
+      "cardId": "2a8802d3-598c-4ce3-9051-59ecf965ffbf",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#028",
+      "language": "fr",
+      "collectorNumber": "028",
+      "sortKey": "0028",
+      "rarityId": "nova-rare",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "627659e9-5298-466f-8cc2-97caaed5ab48.webp",
+        "thumbPath": "thumbs/627659e9-5298-466f-8cc2-97caaed5ab48.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "36d849b2-3d3a-4113-bc69-214a8a91e6d6",
@@ -18434,6 +20324,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "20d5d227-d18b-4039-9834-6ad5bc324557",
+      "cardId": "67b47cff-2237-4765-86fb-9b2b3abecbb1",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#029",
+      "language": "fr",
+      "collectorNumber": "029",
+      "sortKey": "0029",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "20d5d227-d18b-4039-9834-6ad5bc324557.webp",
+        "thumbPath": "thumbs/20d5d227-d18b-4039-9834-6ad5bc324557.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "6121b4c1-b899-4c69-a7d6-674bb6889e29",
       "cardId": "17a80b46-c583-4867-97ac-7855494363a9",
       "releaseId": "night-city-brawl-s1",
@@ -18451,6 +20360,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "2c63f11a-7ff6-4460-ad2f-a002405dc555",
+      "cardId": "17a80b46-c583-4867-97ac-7855494363a9",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#030",
+      "language": "fr",
+      "collectorNumber": "030",
+      "sortKey": "0030",
+      "rarityId": "nova-rare",
+      "artist": "Alex Eckman-Lawn",
+      "finish": null,
+      "image": {
+        "path": "2c63f11a-7ff6-4460-ad2f-a002405dc555.webp",
+        "thumbPath": "thumbs/2c63f11a-7ff6-4460-ad2f-a002405dc555.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "aea6c98e-6bc5-4912-b7d8-a6558fde5eaf",
@@ -18472,6 +20400,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "c95ba50a-07d9-4c10-a3e5-4dc5f25a30ef",
+      "cardId": "404748b4-f30e-4bf1-8991-5ad449da755a",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#031",
+      "language": "fr",
+      "collectorNumber": "031",
+      "sortKey": "0031",
+      "rarityId": "nova-rare",
+      "artist": "Olgierd Ciszak",
+      "finish": null,
+      "image": {
+        "path": "c95ba50a-07d9-4c10-a3e5-4dc5f25a30ef.webp",
+        "thumbPath": "thumbs/c95ba50a-07d9-4c10-a3e5-4dc5f25a30ef.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "Si un Rival contrôle au moins 2 Gigs de plus que vous, jouez ce Programme pour 3 €$. \nJouez gratuitement jusqu'à 2 Unités de coût 3 ou moins de votre défausse."
+    },
+    {
       "id": "1f3e50a4-54ea-4e77-9ef3-0ceeb38d0278",
       "cardId": "a1e60653-5e28-49ee-9798-d16520b553c3",
       "releaseId": "night-city-brawl-s1",
@@ -18489,6 +20437,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "65e81385-8e38-4d8c-b0a7-09226fb72823",
+      "cardId": "a1e60653-5e28-49ee-9798-d16520b553c3",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#032",
+      "language": "fr",
+      "collectorNumber": "032",
+      "sortKey": "0032",
+      "rarityId": "nova-rare",
+      "artist": "Daniel Valaisis",
+      "finish": null,
+      "image": {
+        "path": "65e81385-8e38-4d8c-b0a7-09226fb72823.webp",
+        "thumbPath": "thumbs/65e81385-8e38-4d8c-b0a7-09226fb72823.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "317331e6-55bd-4c4d-9f50-700601f53db2",
@@ -18510,6 +20477,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "5d923604-b3a1-4632-b5df-14dadb95caa5",
+      "cardId": "5380dea3-4d21-445b-af02-487b45d40395",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#033",
+      "language": "fr",
+      "collectorNumber": "033",
+      "sortKey": "0033",
+      "rarityId": "nova-rare",
+      "artist": "TOPDOG Entertainment",
+      "finish": null,
+      "image": {
+        "path": "5d923604-b3a1-4632-b5df-14dadb95caa5.webp",
+        "thumbPath": "thumbs/5d923604-b3a1-4632-b5df-14dadb95caa5.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "779c63a5-cec1-47b0-a96e-51369a0ba186",
       "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
       "releaseId": "night-city-brawl-s1",
@@ -18527,6 +20513,26 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "d378d160-5c3b-4e45-b9c0-2f5715f01ba0",
+      "cardId": "df06b6e2-1675-48a3-bfe2-d0bc4c5f35eb",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#034",
+      "language": "fr",
+      "collectorNumber": "034",
+      "sortKey": "0034",
+      "rarityId": "nova-rare",
+      "artist": "Ivan Shavrin",
+      "finish": null,
+      "image": {
+        "path": "d378d160-5c3b-4e45-b9c0-2f5715f01ba0.webp",
+        "thumbPath": "thumbs/d378d160-5c3b-4e45-b9c0-2f5715f01ba0.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \n{Attack} Diminuez un Gig jusqu'à -2. À la fin de votre tour, si cette Unité est nommée « V », préparez 2 Eddies."
     },
     {
       "id": "fbe9274d-e4c4-415f-9914-0fbd5985c0b3",
@@ -18548,6 +20554,26 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "5dea5d8a-4fc5-4598-8e3c-b21d0ef9d85d",
+      "cardId": "40c98fdc-45d0-458d-be2c-2697dc337ca5",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#035",
+      "language": "fr",
+      "collectorNumber": "035",
+      "sortKey": "0035",
+      "rarityId": "nova-rare",
+      "artist": "Mooncolony",
+      "finish": null,
+      "image": {
+        "path": "5dea5d8a-4fc5-4598-8e3c-b21d0ef9d85d.webp",
+        "thumbPath": "thumbs/5dea5d8a-4fc5-4598-8e3c-b21d0ef9d85d.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR",
+      "printedRulesText": "(Équipez à une Unité alliée ou une Légende alliée face visible.) \nQuand cette Unité ou Légende est épuisée, piochez 1."
+    },
+    {
       "id": "575138c0-4eae-4d61-abf7-028557a884c8",
       "cardId": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
       "releaseId": "night-city-brawl-s1",
@@ -18565,6 +20591,25 @@
         "height": 1024
       },
       "sourceCode": "nightcitybrawls1"
+    },
+    {
+      "id": "d7682383-70b5-4caa-9822-5a6cd46d02af",
+      "cardId": "0cd37c43-e722-48eb-91ef-4c1bd1645215",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#036",
+      "language": "fr",
+      "collectorNumber": "036",
+      "sortKey": "0036",
+      "rarityId": "nova-rare",
+      "artist": "DOFRESH",
+      "finish": null,
+      "image": {
+        "path": "d7682383-70b5-4caa-9822-5a6cd46d02af.webp",
+        "thumbPath": "thumbs/d7682383-70b5-4caa-9822-5a6cd46d02af.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
     },
     {
       "id": "5cc2112c-10b6-4491-963d-8b517244aaee",
@@ -18586,6 +20631,25 @@
       "sourceCode": "nightcitybrawls1"
     },
     {
+      "id": "0bb3e3d1-accf-4e8f-9e93-2d4c5c86168e",
+      "cardId": "5380dea3-4d21-445b-af02-487b45d40395",
+      "releaseId": "night-city-brawl-s1",
+      "variantKey": "night-city-brawl-s1#037",
+      "language": "fr",
+      "collectorNumber": "037",
+      "sortKey": "0037",
+      "rarityId": "nova-rare",
+      "artist": "TOPDOG Entertainment",
+      "finish": null,
+      "image": {
+        "path": "0bb3e3d1-accf-4e8f-9e93-2d4c5c86168e.webp",
+        "thumbPath": "thumbs/0bb3e3d1-accf-4e8f-9e93-2d4c5c86168e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcitybrawls1-FR"
+    },
+    {
       "id": "a9eb38f2-fe64-47c5-9938-9b6ecb01c913",
       "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
       "releaseId": "night-city-showdown-s1",
@@ -18603,6 +20667,25 @@
         "height": 1024
       },
       "sourceCode": "nightcityshowdowns1"
+    },
+    {
+      "id": "4917aef2-61e8-4208-9ff3-f51903c09494",
+      "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
+      "releaseId": "night-city-showdown-s1",
+      "variantKey": "night-city-showdown-s1#001",
+      "language": "fr",
+      "collectorNumber": "001",
+      "sortKey": "0001",
+      "rarityId": "nova-rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "4917aef2-61e8-4208-9ff3-f51903c09494.webp",
+        "thumbPath": "thumbs/4917aef2-61e8-4208-9ff3-f51903c09494.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcityshowdowns1-FR"
     },
     {
       "id": "2a0fa3c6-f259-49ad-88a2-843713712ccd",
@@ -18624,6 +20707,25 @@
       "sourceCode": "nightcityshowdowns1"
     },
     {
+      "id": "926893b9-9214-4db7-bf21-f6bfd7b59bdb",
+      "cardId": "a2ad9c2f-bfb7-473b-9408-91af142d269d",
+      "releaseId": "night-city-showdown-s1",
+      "variantKey": "night-city-showdown-s1#002",
+      "language": "fr",
+      "collectorNumber": "002",
+      "sortKey": "0002",
+      "rarityId": "nova-rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "926893b9-9214-4db7-bf21-f6bfd7b59bdb.webp",
+        "thumbPath": "thumbs/926893b9-9214-4db7-bf21-f6bfd7b59bdb.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcityshowdowns1-FR"
+    },
+    {
       "id": "6f8d1015-dd5d-49c4-9620-6b3b0c7ee82a",
       "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
       "releaseId": "night-city-showdown-s1",
@@ -18641,6 +20743,25 @@
         "height": 1024
       },
       "sourceCode": "nightcityshowdowns1"
+    },
+    {
+      "id": "57e0fbcf-59b2-405a-b35f-30b101e8e9a0",
+      "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
+      "releaseId": "night-city-showdown-s1",
+      "variantKey": "night-city-showdown-s1#003",
+      "language": "fr",
+      "collectorNumber": "003",
+      "sortKey": "0003",
+      "rarityId": "nova-rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "57e0fbcf-59b2-405a-b35f-30b101e8e9a0.webp",
+        "thumbPath": "thumbs/57e0fbcf-59b2-405a-b35f-30b101e8e9a0.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcityshowdowns1-FR"
     },
     {
       "id": "b2d8aa5e-0d41-4c9e-b736-9d61e8153651",
@@ -18662,6 +20783,25 @@
       "sourceCode": "nightcityshowdowns1"
     },
     {
+      "id": "b0d19195-416d-456e-9d6e-e9816aaad0b1",
+      "cardId": "a2ad9c2f-bfb7-473b-9408-91af142d269d",
+      "releaseId": "night-city-showdown-s1",
+      "variantKey": "night-city-showdown-s1#004",
+      "language": "fr",
+      "collectorNumber": "004",
+      "sortKey": "0004",
+      "rarityId": "nova-rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "b0d19195-416d-456e-9d6e-e9816aaad0b1.webp",
+        "thumbPath": "thumbs/b0d19195-416d-456e-9d6e-e9816aaad0b1.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcityshowdowns1-FR"
+    },
+    {
       "id": "36d42759-0199-47f0-835b-ee6616842e49",
       "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
       "releaseId": "night-city-showdown-s1",
@@ -18679,6 +20819,63 @@
         "height": 1024
       },
       "sourceCode": "nightcityshowdowns1"
+    },
+    {
+      "id": "4e8061a5-646b-46e5-be0d-f74af37259f1",
+      "cardId": "55153b49-c3a7-4208-a47b-0a91fa7e3b5c",
+      "releaseId": "night-city-showdown-s1",
+      "variantKey": "night-city-showdown-s1#005",
+      "language": "fr",
+      "collectorNumber": "005",
+      "sortKey": "0005",
+      "rarityId": "nova-rare",
+      "artist": "Envar",
+      "finish": null,
+      "image": {
+        "path": "4e8061a5-646b-46e5-be0d-f74af37259f1.webp",
+        "thumbPath": "thumbs/4e8061a5-646b-46e5-be0d-f74af37259f1.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "nightcityshowdowns1-FR"
+    },
+    {
+      "id": "9b4231da-b5e9-44ee-9de9-75ba6a6e6de6",
+      "cardId": "36d7419a-7bf3-4201-a6da-3eb14b1f2268",
+      "releaseId": "set1-promos",
+      "variantKey": "set1-promos#004a",
+      "language": "en",
+      "collectorNumber": "004a",
+      "sortKey": "0004a",
+      "rarityId": "nova-rare",
+      "artist": "Pandart Studio",
+      "finish": null,
+      "image": {
+        "path": "9b4231da-b5e9-44ee-9de9-75ba6a6e6de6.webp",
+        "thumbPath": "thumbs/9b4231da-b5e9-44ee-9de9-75ba6a6e6de6.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "PRM01"
+    },
+    {
+      "id": "0cf807a8-4131-426a-a67d-4d03e372b05e",
+      "cardId": "36d7419a-7bf3-4201-a6da-3eb14b1f2268",
+      "releaseId": "set1-promos",
+      "variantKey": "set1-promos#004b",
+      "language": "en",
+      "collectorNumber": "004b",
+      "sortKey": "0004b",
+      "rarityId": "nova-rare",
+      "artist": "Pandart Studio",
+      "finish": null,
+      "image": {
+        "path": "0cf807a8-4131-426a-a67d-4d03e372b05e.webp",
+        "thumbPath": "thumbs/0cf807a8-4131-426a-a67d-4d03e372b05e.webp",
+        "width": 733,
+        "height": 1024
+      },
+      "sourceCode": "PRM01"
     },
     {
       "id": "71a35836-e604-4d98-ab56-58bfb4581033",

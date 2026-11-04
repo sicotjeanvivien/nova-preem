@@ -125,7 +125,7 @@ Une ligne par entrée, séparateur `;` (Excel FR), UTF-8 avec BOM : `set;tirage;
 
 - La saisie se fait sur la page des **cartes d'un tirage** : le tirage est celui de la page.
 - Chaque vignette affiche **− quantité +**. **+** ajoute 1 exemplaire de l'impression (tirage, numéro, langue choisie), **−** en retire 1 (jamais en dessous de 0 ; le bouton − est grisé à 0). La page ne change pas.
-- La **langue** des quantités se choisit avec le sélecteur VF/VO de la page ; défaut : la langue de saisie des Réglages (VF). Le sélecteur n'apparaît que si le tirage existe dans plusieurs langues (aujourd'hui, seul le Retail a une VF). Quand une autre langue est aussi possédée, un petit badge sur l'image l'indique (ex. « VO 1 »).
+- La **langue** des quantités se choisit avec le sélecteur VF/VO de la page ; défaut : la langue de saisie des Réglages (VF). Le sélecteur n'apparaît que si le tirage existe dans plusieurs langues (depuis le catalogue du 04/11/2026 : Retail, starters Retail, Prerelease Retail, Box Toppers Retail, Night City Brawl S1 et Showdown S1). Quand une autre langue est aussi possédée, un petit badge sur l'image l'indique (ex. « VO 1 »).
 - **Un clic sur l'image ou le nom** de la carte ouvre la **page carte** (§5.9). Il n'y a plus de « tap pour ajouter » ni de mode retrait.
 - Après chaque + ou −, un bandeau « +1 [nom] · VF » avec **Annuler** (annule exactement la dernière action). Le bandeau reste jusqu'à l'action suivante ou 5 s.
 - Sur la page carte, chaque impression (tous tirages, toutes langues) a aussi ses boutons − et +.
@@ -151,7 +151,7 @@ Chaque niveau de Sets résume celui d'en dessous : la liste des sets compte des 
 | **Tirages complétés** (tuile d'un set, liste des sets) | tirages du set ayant au moins une impression (tous groupes : ce sont les tuiles du niveau 2) | tirages dont la mesure « par tirage, toutes langues » est à 100 % |
 
 Conséquences :
-- Une impression **exclusive à un tirage** (ex. Iconic `β168`, Beta uniquement) n'entre que dans le dénominateur de ce tirage : elle n'est jamais « manquante » ailleurs.
+- Une impression **exclusive à un tirage** (ex. Iconic `β168` dans le catalogue du 26/10/2026, Beta uniquement ; le Retail l'a depuis le 04/11/2026, et les tests simulent l'ancien catalogue) n'entre que dans le dénominateur de ce tirage : elle n'est jamais « manquante » ailleurs.
 - Si une langue n'existe pas pour un tirage (ex. Beta en VF), le calcul « en VF » de ce tirage n'est pas proposé.
 - Les pourcentages sont arrondis à l'entier **inférieur**, pour que 100 % signifie toujours « tout possédé » (99,6 % s'affiche 99 %).
 - Ventilations affichées dans Stats : par type de carte (set jouable), par tirage et langue (master set), par rareté (par tirage).

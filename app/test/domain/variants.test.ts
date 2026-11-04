@@ -7,7 +7,7 @@ const beta = variantsOf(index, [index.releases.get("wnc-beta")!]);
 
 describe("variants", () => {
   it("groups the languages of a printing: one Retail variant per number, in EN and FR", () => {
-    expect(retail).toHaveLength(168);
+    expect(retail).toHaveLength(172);
     expect(retail.every((variant) => variant.printings.size === 2)).toBe(true);
     expect(retail.slice(0, 7).map((v) => v.collectorNumber)).toEqual(["001", "002", "003", "004", "005a", "005b", "006"]);
     expect(languagesOf(retail, ["en", "fr"])).toEqual(["en", "fr"]);
@@ -45,7 +45,7 @@ describe("filters (spec §5.4, §5.5)", () => {
 
   it("shows a variant missing in VF but owned in VO as missing, with the mention", () => {
     const missing = filterVariants(retail, "missing", quantities, "fr", 1);
-    expect(missing).toHaveLength(167);
+    expect(missing).toHaveLength(171);
     expect(missing).toContain(chrome);
     expect(ownedInOtherLanguages(chrome, quantities, "fr")).toEqual(["en"]);
     expect(ownedInOtherLanguages(johnny, quantities, "fr")).toEqual([]);
@@ -55,6 +55,6 @@ describe("filters (spec §5.4, §5.5)", () => {
     expect(filterVariants(retail, "owned", quantities, "fr", 1)).toEqual([johnny]);
     expect(filterVariants(retail, "duplicates", quantities, "fr", 1)).toEqual([johnny]);
     expect(filterVariants(retail, "duplicates", quantities, "fr", 3)).toEqual([]);
-    expect(filterVariants(retail, "all", quantities, "fr", 1)).toHaveLength(168);
+    expect(filterVariants(retail, "all", quantities, "fr", 1)).toHaveLength(172);
   });
 });
