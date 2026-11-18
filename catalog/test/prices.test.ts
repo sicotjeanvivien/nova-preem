@@ -5,6 +5,7 @@ import { parseMarketFiles, retainedPrice, type MarketSnapshot } from "../src/pri
 import { parseMapping, type PriceMapping } from "../src/prices/mapping.ts";
 import { matchPrices, nameKey } from "../src/prices/match.ts";
 import { pricesFile, validatePricesFile } from "../src/prices/output.ts";
+import { coverageProblem, PRICES_HEADERS } from "../src/prices/publish.ts";
 
 const json = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"));
 
@@ -177,5 +178,23 @@ describe("prices.json", () => {
   it("refuses a broken file", () => {
     expect(() => validatePricesFile({ ...pricesFile(setup(), info), prices: { "wnc-retail#001": -1 } })).toThrow(/prices.json invalide/);
     expect(() => validatePricesFile({ ...pricesFile(setup(), info), catalogVersion: "" })).toThrow(/catalogVersion/);
+  });
+});
+
+describe("publication guard", () => {
+  it("publishes when there is no previous publication", () => {
+    expect(coverageProblem({ matched: 534 }, null)).toBeNull();
+  });
+
+  it("refuses a coverage under 80 % of the previous publication", () => {
+    expect(coverageProblem({ matched: 534 }, { matched: 534 })).toBeNull();
+    expect(coverageProblem({ matched: 428 }, { matched: 534 })).toBeNull(); // 427.2 → 428
+    expect(coverageProblem({ matched: 427 }, { matched: 534 })).toMatch(/427 variantes rattachées, contre 534.*minimum 428/);
+    expect(coverageProblem({ matched: 0 }, { matched: 534 })).not.toBeNull();
+  });
+
+  it("serves the file with open CORS and one hour of cache", () => {
+    expect(PRICES_HEADERS).toContain("Access-Control-Allow-Origin: *");
+    expect(PRICES_HEADERS).toContain("Cache-Control: public, max-age=3600");
   });
 });

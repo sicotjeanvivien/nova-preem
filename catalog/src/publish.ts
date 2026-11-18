@@ -46,8 +46,9 @@ async function stage(files: readonly string[]): Promise<void> {
   await writeFile(join(STAGING_DIR, "_headers"), HEADERS);
 }
 
-function deploy(project: string): Promise<void> {
-  const args = ["dlx", WRANGLER, "pages", "deploy", STAGING_DIR, `--project-name=${project}`, "--branch=main", "--commit-dirty=true"];
+/** Deploys `dir` to the Cloudflare Pages project, replacing the whole site. */
+export function deploy(project: string, dir = STAGING_DIR): Promise<void> {
+  const args = ["dlx", WRANGLER, "pages", "deploy", dir, `--project-name=${project}`, "--branch=main", "--commit-dirty=true"];
   return new Promise((resolve, reject) => {
     const child = spawn("pnpm", args, { stdio: "inherit" });
     child.on("error", reject);

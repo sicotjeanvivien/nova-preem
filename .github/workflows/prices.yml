@@ -1,0 +1,96 @@
+# Builds the indicative Cardmarket prices every night and publishes prices.json to
+# the Cloudflare Pages project nova-preem-prices (docs/prices-spec.md §4).
+# Never publishes an invalid file or a coverage drop (under 80 % of the variants
+# matched by the previous publication): the run fails and the file online stays.
+name: Prices
+
+on:
+  schedule:
+    # 03:30 UTC: 04:30 in Paris in winter, 05:30 in summer; Cardmarket regenerates its file around 02:45.
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+    inputs:
+      test_guard:
+        description: "Test the guard: break the file on purpose; the run must fail and nothing is published"
+        type: choice
+        options: [none, broken-file, low-coverage]
+        default: none
+
+concurrency:
+  group: prices
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  # To download the report of the previous publication.
+  actions: read
+
+jobs:
+  prices:
+    # Until PRICES_BASE_URL is set (docs/deploy.md, "Prix indicatifs"), the nightly run does nothing.
+    if: github.event_name == 'workflow_dispatch' || vars.PRICES_BASE_URL != ''
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: catalog
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PRICES_BASE_URL: ${{ vars.PRICES_BASE_URL }}
+      PRICES_PROJECT: ${{ vars.PRICES_PROJECT || 'nova-preem-prices' }}
+      TEST_GUARD: ${{ inputs.test_guard || 'none' }}
+    steps:
+      - name: Check configuration
+        # Runs before the checkout: catalog/ does not exist yet.
+        working-directory: .
+        run: |
+          for name in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID PRICES_BASE_URL; do
+            if [ -z "${!name}" ]; then echo "::error::$name is not set (repository secrets / variables)"; exit 1; fi
+          done
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: catalog/package.json
+          cache: true
+          cache_dependency_path: catalog/pnpm-lock.yaml
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build prices.json
+        # Downloads the two Cardmarket files (two requests), matches them to catalog/dist/catalog.json.
+        run: |
+          set -o pipefail
+          pnpm --silent prices | tee prices.log
+          { echo '```'; cat prices.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report
+        if: always() && env.TEST_GUARD == 'none'
+        uses: actions/upload-artifact@v7
+        with:
+          name: prices-report
+          path: catalog/prices/dist/prices-report.json
+          if-no-files-found: ignore
+
+      - name: Previous publication
+        # The report of the last successful run, i.e. of the file online.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_id=$(gh run list --workflow prices.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+          if [ -z "$run_id" ]; then echo "::notice::No previous publication: coverage check skipped"; exit 0; fi
+          gh run download "$run_id" --name prices-report --dir .cache/previous \
+            || echo "::warning::Report of run $run_id unavailable: coverage check skipped"
+
+      - name: Break the file on purpose (guard test)
+        if: env.TEST_GUARD != 'none'
+        run: |
+          case "$TEST_GUARD" in
+            broken-file) echo '{"schemaVersion":1,"prices":{"wnc-retail#001":-1}}' > prices/dist/prices.json ;;
+            low-coverage) mkdir -p .cache/previous && echo '{"summary":{"matched":100000}}' > .cache/previous/prices-report.json ;;
+          esac
+          echo "::notice::Guard test ($TEST_GUARD): this run must fail at Publish, and nothing is published"
+
+      - name: Publish
+        run: pnpm publish-prices --previous .cache/previous/prices-report.json ${{ env.TEST_GUARD != 'none' && '--dry-run' || '' }}

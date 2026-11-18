@@ -1,13 +1,13 @@
 # Mise en ligne et CI
 
-Deux sites statiques sur **Cloudflare Pages**, sur deux origines :
+Trois sites statiques sur **Cloudflare Pages**, sur trois origines :
 
-| | App (PWA) | Catalogue |
-|---|---|---|
-| Projet Pages | `nova-preem` | `nova-preem-catalog` |
-| Contenu | `app/dist/` | `catalog.json`, `manifest.json`, `images/` (miniatures comprises) |
-| Déployé par | la CI, à chaque push sur `main` dont les vérifications passent | à la main, `pnpm publish-catalog` dans `catalog/` |
-| En-têtes | `app/public/_headers` | écrits par `catalog/src/publish.ts` (CORS ouvert : l'app est sur une autre origine) |
+| | App (PWA) | Catalogue | Prix indicatifs |
+|---|---|---|---|
+| Projet Pages | `nova-preem` | `nova-preem-catalog` | `nova-preem-prices` |
+| Contenu | `app/dist/` | `catalog.json`, `manifest.json`, `images/` (miniatures comprises) | `prices.json` |
+| Déployé par | la CI, à chaque push sur `main` dont les vérifications passent | à la main, `pnpm publish-catalog` dans `catalog/` | le workflow `prices.yml`, chaque nuit |
+| En-têtes | `app/public/_headers` | écrits par `catalog/src/publish.ts` (CORS ouvert : l'app est sur une autre origine) | écrits par `catalog/src/prices/publish.ts` (CORS ouvert, `max-age=3600`) |
 
 Le catalogue n'est pas publié par la CI : ses images n'existent que là où le crawl a tourné (`catalog/dist/images/` est ignoré par git), et la source ne doit pas être crawlée à chaque push.
 
@@ -18,6 +18,15 @@ L'app trouve le catalogue grâce à `VITE_CATALOG_BASE_URL`, fixée au build par
 - **catalog** : typecheck et tests du pipeline.
 - **app** : tests, puis `pnpm build` (qui vérifie aussi les types de l'app, du domaine et des tests).
 - **deploy** (push sur `main` seulement, après les deux autres) : build avec l'URL du catalogue, puis `wrangler pages deploy`.
+
+## Prix (`.github/workflows/prices.yml`)
+
+Chaque nuit à 03 h 30 UTC (04 h 30 à Paris en hiver, 05 h 30 en été : les tâches planifiées de GitHub sont en UTC), et à la demande :
+
+1. `pnpm prices` : télécharge les deux fichiers Cardmarket et construit `prices.json` à partir de `catalog/dist/catalog.json` et de `catalog/prices/cardmarket.json`. Le résumé s'affiche sur la page du run ; le rapport complet (`prices-report.json`) est joint au run (*Artifacts*).
+2. `pnpm publish-prices` : valide `prices.json`, compare la couverture au rapport de la dernière publication (le dernier run réussi), puis `wrangler pages deploy`. Fichier invalide ou moins de 80 % des variantes rattachées la fois précédente : rien n'est publié, le run échoue et le dernier fichier reste en ligne.
+
+Tant que la variable `PRICES_BASE_URL` n'existe pas, le run de la nuit ne fait rien.
 
 ## Mise en place (une seule fois)
 
@@ -79,13 +88,15 @@ Acheté le 03/11/2026 par AWSD (Cloudflare Registrar, compte de la société). *
 1. `pnpm dlx wrangler@4.155.0 pages project create nova-preem-prices --production-branch=main` (dans `catalog/`).
 2. Projet Pages `nova-preem-prices` → *Custom domains* → `prices.nova-preem.app` (même procédure que le catalogue).
 3. GitHub, variable `PRICES_BASE_URL` = `https://prices.nova-preem.app/` (barre finale). Sans elle, l'app est construite sans prix.
-4. Lancer une fois le workflow `prices.yml` à la main (*Actions → Prices → Run workflow*), puis redéployer l'app.
+4. Lancer une fois le workflow `prices.yml` à la main (*Actions → Prices → Run workflow*), puis redéployer l'app. Vérifier : `curl -I https://prices.nova-preem.app/prices.json` renvoie `access-control-allow-origin: *` et `cache-control: public, max-age=3600`.
+5. Tester le garde-fou : *Run workflow* avec `test_guard` = `broken-file`, puis `low-coverage`. Chaque run doit **échouer** à l'étape *Publish*, sans rien publier (le fichier en ligne garde sa date `sourceDate`).
 
 Ensuite, rien à faire : le workflow publie les prix chaque nuit. S'il échoue (format Cardmarket changé, couverture en chute), GitHub l'indique par e-mail et le dernier fichier reste en ligne. Une nouvelle extension Cardmarket (nouveau set, nouvelle promo) s'ajoute à la main dans `catalog/prices/cardmarket.json` ; le rapport du workflow la signale comme produit orphelin.
 
 ## Au quotidien
 
 - **App** : merger sur `main` suffit.
+- **Prix** : rien, le workflow tourne chaque nuit. En local : `pnpm prices` dans `catalog/` (puis `pnpm publish-prices --dry-run` pour vérifier sans publier).
 - **Catalogue** : `pnpm crawl && pnpm build && pnpm publish-catalog` dans `catalog/`. L'app détecte la nouvelle version par `manifest.json` et propose la mise à jour. `CATALOG_PROJECT=<nom>` change le projet visé.
 
 ## Pages légales
