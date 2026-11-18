@@ -449,13 +449,6 @@ h2 {
 
 /* Rows of chips (Collection, Search, Settings) */
 
-.chip-row {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
 .chip-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -1410,47 +1403,6 @@ h2 {
   color: var(--color-text-muted);
 }
 
-.menu-button {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 32px;
-  padding: 0 8px 0 12px;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-small);
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  font: inherit;
-  font-size: 13px;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.menu-button--active {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-}
-
-.menu-button[aria-expanded="true"] svg {
-  transform: rotate(180deg);
-}
-
-.menu-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 12px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-medium);
-}
-
-.menu-panel__clear {
-  align-self: flex-start;
-  margin-top: 6px;
-}
-
 .checkbox {
   display: flex;
   align-items: center;
@@ -1597,53 +1549,6 @@ h2 {
 .collection-body {
   display: flex;
   flex-wrap: wrap;
-}
-
-.filter-panel {
-  flex: 1 1 220px;
-  max-width: 280px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 16px 20px;
-  border-right: 1px solid var(--color-border);
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.filter-group legend {
-  margin-bottom: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.filter-option {
-  min-height: 36px;
-  padding: 0 12px;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-small);
-  background: transparent;
-  color: var(--color-text-secondary);
-  font: inherit;
-  font-size: 13px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.filter-option[aria-pressed="true"] {
-  background: var(--color-selected-pill);
-  border-color: var(--color-selected-pill);
-  color: var(--color-on-accent);
 }
 
 .switch {
@@ -2022,6 +1927,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -2079,6 +1985,12 @@ h2 {
 .active-filters--toolbar {
   overflow-x: auto;
   scrollbar-width: none;
+}
+
+.active-filters--gallery,
+.active-filters--results {
+  flex-wrap: wrap;
+  margin-bottom: 14px;
 }
 
 .active-filters--page {
@@ -3391,7 +3303,6 @@ h2 {
     margin: 0;
     line-height: 1.45;
   }
-
 
   .topbar {
     height: auto;

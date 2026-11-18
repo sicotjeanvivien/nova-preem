@@ -42,6 +42,11 @@ describe("Collection gallery, mobile (server rendering)", () => {
     expect(vf).not.toContain("VO ×1");
     expect(vf).toContain("Filtres · 1");
 
+    // One active filter per value, shown as removable chips under the controls (§8.1).
+    const rarities = text(render("/collection?rarete=common,epic&doublons=1"));
+    expect(rarities).toContain("Filtres · 3");
+    expect(rarities).toMatch(/Filtres · 3 Doublons Commune Épique Tout effacer/);
+
     const duplicates = text(render("/collection?doublons=1"));
     expect(duplicates).toMatch(/C \+1 VF ×2 VO ×1 Lames Mantis/);
     expect(duplicates).toMatch(/C \+2 VF ×3 Croc Chromé/);
@@ -107,7 +112,24 @@ describe("Collection gallery, interactions", () => {
   it("desktop: sort, card size (remembered as a setting), and back from the card page to the same gallery", async () => {
     setViewportWidth(1280);
     await mount("/collection");
-    expect(container.querySelector("aside")?.textContent).toMatch(/Langue.*Toutes langues.*VF seulement.*VO seulement.*Doublons/);
+    expect(container.querySelector("aside")).toBeNull();
+    await click(button("Filtres"));
+    const panel = container.querySelector('section[aria-label="Filtres"]')!;
+    expect([...panel.querySelectorAll(".filters-panel__title")].map((t) => t.textContent)).toEqual([
+      "Langue",
+      "Doublons",
+      "Set",
+      "Tirage",
+      "Rareté",
+      "Type",
+      "Couleur",
+    ]);
+    await click(button("VF", panel));
+    await click(button("Starters", panel));
+    expect(container.querySelector(".active-filters")?.textContent).toBe("VF seulementStartersTout effacer");
+    await click(button("Tout effacer"));
+    await click(button("Voir 3 cartes", panel));
+    expect(container.querySelector('section[aria-label="Filtres"]')).toBeNull();
     expect(container.querySelector(".gallery")?.getAttribute("style")).toContain("minmax(180px, 1fr)");
 
     await change(container.querySelector<HTMLSelectElement>("#collection-sort")!, "name");

@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { CollectionEntry } from "../../src/domain/collection.ts";
 import {
-  activeFilterCount,
   collectionParams,
   collectionRows,
   NO_FILTERS,
@@ -79,14 +78,6 @@ describe("name filter (spec §5.7)", () => {
     expect(names("LAMES")).toEqual(["Mantis Blades"]);
     expect(names("streetkid")).toEqual(["V — Streetkid"]);
     expect(names("nothing like this")).toEqual([]);
-  });
-});
-
-describe("active filters (mobile Filtres button)", () => {
-  it("counts each active filter, not the name", () => {
-    expect(activeFilterCount(NO_FILTERS)).toBe(0);
-    expect(activeFilterCount({ ...NO_FILTERS, query: "johnny" })).toBe(0);
-    expect(activeFilterCount({ ...NO_FILTERS, language: "fr", duplicates: true, rarities: ["rare", "epic"], colors: ["red"] })).toBe(4);
   });
 });
 

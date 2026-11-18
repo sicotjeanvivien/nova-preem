@@ -21,6 +21,8 @@ export interface FilterOption {
   count?: number;
   /** Color dot before the label (rarity, card color). */
   dot?: string;
+  /** Label of its active chip, when it differs (e.g. "VF seulement" for "VF"). */
+  activeLabel?: string;
 }
 
 export type FilterCriterion =
@@ -38,6 +40,8 @@ export type FilterCriterion =
   | {
       kind: "switch" | "checkbox";
       id: string;
+      /** Title above it, as for the other criteria. */
+      title?: string;
       label: string;
       /** Label of its chip when it is on. */
       activeLabel: string;
@@ -71,7 +75,8 @@ export function useActiveFilters(model: FilterModel): ActiveFilter[] {
     switch (criterion.kind) {
       case "chips":
         return criterion.selected.map((value) => {
-          const label = criterion.options.find((option) => option.value === value)?.label ?? value;
+          const option = criterion.options.find((o) => o.value === value);
+          const label = option?.activeLabel ?? option?.label ?? value;
           return {
             key: `${criterion.id}:${value}`,
             label,
@@ -224,21 +229,32 @@ function Criterion({ criterion }: { criterion: FilterCriterion }) {
         </label>
       );
     case "switch":
-      return (
-        <button type="button" role="switch" aria-checked={criterion.checked} className="switch switch--large" onClick={() => criterion.onChange(!criterion.checked)}>
-          <span className="switch__track">
-            <span className="switch__thumb" />
+    case "checkbox": {
+      const control =
+        criterion.kind === "switch" ? (
+          <button type="button" role="switch" aria-checked={criterion.checked} className="switch switch--large" onClick={() => criterion.onChange(!criterion.checked)}>
+            <span className="switch__track">
+              <span className="switch__thumb" />
+            </span>
+            {criterion.label}
+          </button>
+        ) : (
+          <label className="checkbox">
+            <input type="checkbox" checked={criterion.checked} onChange={(event) => criterion.onChange(event.target.checked)} />
+            {criterion.label}
+          </label>
+        );
+      return criterion.title ? (
+        <div className="filters-panel__criterion">
+          <span className="filters-panel__title" aria-hidden="true">
+            {criterion.title}
           </span>
-          {criterion.label}
-        </button>
+          {control}
+        </div>
+      ) : (
+        control
       );
-    case "checkbox":
-      return (
-        <label className="checkbox">
-          <input type="checkbox" checked={criterion.checked} onChange={(event) => criterion.onChange(event.target.checked)} />
-          {criterion.label}
-        </label>
-      );
+    }
   }
 }
 
