@@ -25,23 +25,20 @@ input::placeholder{color:#8B92A3}
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3AAB9" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
 <input id="q" type="search" value="{{query}}" onInput="{{onQuery}}" placeholder="Nom VF ou VO, texte, numéro…" style="flex: 1; min-width: 0; height: 100%; border: 0; outline: none; background: transparent; color: #ECEEF3; font-size: 15px; font-family: inherit">
 </div>
+<button onClick="{{openSheet}}" aria-haspopup="dialog" style="flex-shrink: 0; height: 48px; padding: 0 10px; border-radius: 8px; border: 1px solid {{filterBorder}}; background: {{filterBg}}; color: #ECEEF3; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 7px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Filtres<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}"><span style="min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; box-sizing: border-box; background: {{accent}}; color: #0D0F14; font-size: 11px; font-weight: 600; display: grid; place-items: center">{{facetCount}}</span></sc-if></button>
 <div style="display: flex; align-items: center; margin-right: -6px">
 <a href="Settings.dc.html" aria-label="Google Drive : synchronisé" style="width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: #8AF0DD; cursor: pointer"><span style="width: 34px; height: 34px; box-sizing: border-box; border-radius: 50%; border: 1px solid #2B6B60; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.5-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 9.5z"></path></svg></span></a>
 </div>
 </div>
-<div style="display: flex; gap: 6px; overflow-x: auto">
-<sc-for list="{{types}}" as="t" hint-placeholder-count="5">
-<button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
+<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; overflow-x: auto; align-items: center; gap: 6px">
+<sc-for list="{{active}}" as="a" hint-placeholder-count="2">
+<button onClick="{{a.remove}}" aria-label="{{a.aria}}" style="height: 30px; padding: 0 8px 0 11px; border-radius: 999px; cursor: pointer; font-size: 12px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #2B6B60; background: #12302B; color: #8AF0DD">{{a.label}}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </sc-for>
+<button onClick="{{clearFacets}}" style="height: 30px; padding: 0 6px; border: 0; background: transparent; color: {{accent}}; font-size: 12px; cursor: pointer">Tout effacer</button>
 </div>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 32px; font-size: 13px; color: #D5D9E2; cursor: pointer">
-<input type="checkbox" style="width: 18px; height: 18px; accent-color: #46E3C8">Chercher aussi dans le texte de règles</label>
-<div style="display: flex; gap: 6px; overflow-x: auto">
-<sc-for list="{{menus}}" as="m" hint-placeholder-count="5">
-<button aria-haspopup="listbox" style="height: 32px; padding: 0 8px 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid #2B3040; background: #161922; color: #D5D9E2; display: flex; align-items: center; gap: 4px">{{m.label}}
-<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
-</sc-for>
-</div>
+</sc-if>
 </header>
 
 <main style="flex: 1; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px">
@@ -74,9 +71,35 @@ input::placeholder{color:#8B92A3}
 <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; color: #A3AAB9">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>Réglages</a>
 </nav>
+
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; background: rgba(5, 6, 9, 0.72); display: flex; flex-direction: column; justify-content: flex-end">
+<button onClick="{{closeSheet}}" aria-label="Fermer les filtres" style="flex: 1; min-height: 60px; border: 0; background: transparent; cursor: pointer"></button>
+<section role="dialog" aria-label="Filtres" style="max-height: 700px; overflow-y: auto; background: #161922; border-top: 1px solid #2B3040; border-radius: 16px 16px 0 0; padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 16px">
+<div style="width: 40px; height: 4px; border-radius: 2px; background: #3A4152; align-self: center"></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Type</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{types}}" as="t" hint-placeholder-count="5"><button onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="height: 34px; padding: 0 11px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button></sc-for></div></div>
+<sc-for list="{{fgroups}}" as="g" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">{{g.title}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{g.options}}" as="o" hint-placeholder-count="3">
+<button onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="height: 34px; padding: 0 11px; border-radius: 999px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid {{o.border}}; background: {{o.bg}}; color: {{o.fg}}">{{o.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Texte</span>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 34px; font-size: 14px; color: #D5D9E2; cursor: pointer"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #46E3C8">Chercher aussi dans le texte de règles</label></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; position: sticky; bottom: 0; background: #161922; padding-top: 8px">
+<button onClick="{{clearFacets}}" style="height: 44px; border-radius: 10px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 14px; cursor: pointer">Réinitialiser</button>
+<button onClick="{{closeSheet}}" style="height: 44px; border-radius: 10px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 14px; cursor: pointer">Voir {{count}} cartes</button>
+</div>
+</section>
+</div>
+</sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"panneau":{"editor":"enum","default":"fermé","options":["fermé","ouvert"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
 const CARDS = [
   { fr: 'Croc Chromé', en: 'Chrome Fang', t: 'Unit', col: 'R', prints: 'Retail #008 · Beta · Starter Embracing Power #002', n: 4, owned: 4 },
   { fr: "Johnny Silverhand — Rock'n'Rebelle", en: 'Johnny Silverhand — Rocking Renegade', t: 'Legend', col: 'R', prints: 'Retail #003 · Beta #β003 · Beta Iconic #β168', n: 4, owned: 1 },
@@ -94,9 +117,34 @@ const CARDS = [
 const STRIPE = { R: '#E5484D', Y: '#E8C547' };
 const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
+const GROUPS = [
+  { title: 'Possession', options: ['Possédées', 'Manquantes'] },
+  { title: 'Couleur', options: ['Rouge', 'Jaune', 'Bleu', 'Vert'] },
+  { title: 'Rareté', options: ['Commune', 'Peu commune', 'Rare', 'Épique', 'Secrète', 'Iconic', 'Nova Rare'] },
+  { title: 'Set', options: ['Welcome to Night City'] },
+  { title: 'Coût', options: ['0–2', '3–4', '5–6', '7 et plus'] },
+  { title: 'RAM', options: ['1', '2', '3', '4'] }
+];
+const PRESEL = {"Rareté|Rare": true, "Possession|Manquantes": true};
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { query: 'chrom', type: 'all' }; }
+
+  facetVM(groups, extraActive) {
+    const s = this.state; const sel = s.sel || {};
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const toggle = (k) => { const n = Object.assign({}, this.state.sel || {}); if (n[k]) delete n[k]; else n[k] = true; this.setState({ sel: n }); };
+    const fgroups = groups.map((g) => ({ title: g.title, options: (g.vm || g.options.map((o) => Object.assign({ label: o, pick: () => toggle(g.title + '|' + o) }, chip(!!sel[g.title + '|' + o])))) }));
+    const active = (extraActive || []).concat(Object.keys(sel).map((k) => { const label = k.split('|')[1]; return { label, aria: 'Retirer le filtre ' + label, remove: () => toggle(k) }; }));
+    return {
+      fgroups, active, hasActive: active.length > 0, facetCount: active.length,
+      sheetOpen: !!s.sheet, sheetExpanded: s.sheet ? 'true' : 'false', chevron: s.sheet ? 180 : 0,
+      toggleSheet: () => this.setState({ sheet: !this.state.sheet }), openSheet: () => this.setState({ sheet: true }), closeSheet: () => this.setState({ sheet: false }),
+      filterBorder: active.length || s.sheet ? (this.props.accent ?? '#46E3C8') : '#2B3040', filterBg: s.sheet ? '#12302B' : 'transparent'
+    };
+  }
   renderVals() {
+    const tw = this.props.panneau || '';
+    if (tw !== this.state.tw) { this.state = Object.assign({}, this.state, { tw, sheet: tw === 'ouvert', sel: tw === 'ouvert' ? PRESEL : (this.state.sel || {}) }); }
     const accent = this.props.accent ?? '#46E3C8';
     const s = this.state; const q = norm(s.query.trim());
     const list = CARDS.filter((c) => (s.type === 'all' || c.t === s.type) && (!q || norm(c.fr).includes(q) || norm(c.en).includes(q)));
@@ -115,7 +163,8 @@ class Component extends DCLogic {
       accent, query: s.query, results, types, empty: results.length === 0,
       onQuery: (e) => this.setState({ query: e.target.value }),
       resultLabel: results.length + ' carte' + (results.length > 1 ? 's' : '') + ' · tous sets, VF et VO',
-      menus: [{ label: 'Couleur' }, { label: 'Rareté' }, { label: 'Set' }, { label: 'Coût' }, { label: 'RAM' }, { label: 'Possession' }]
+      ...this.facetVM(GROUPS, s.type !== 'all' ? [{ label: s.type, aria: 'Retirer le filtre de type', remove: () => this.setState({ type: 'all' }) }] : []),
+      clearFacets: () => this.setState({ sel: {}, type: 'all' }), count: results.length
     };
   }
 }

@@ -55,35 +55,48 @@ input::placeholder{color:#8B92A3}
 <option value="rarity">Rareté</option>
 <option value="qty">Quantité</option>
 </select>
+<button onClick="{{toggleSheet}}" aria-expanded="{{sheetExpanded}}" aria-controls="filtres" style="flex-shrink: 0; height: 38px; padding: 0 12px; border-radius: 8px; border: 1px solid {{filterBorder}}; background: {{filterBg}}; color: #ECEEF3; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 7px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Filtres<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}"><span style="min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; box-sizing: border-box; background: {{accent}}; color: #0D0F14; font-size: 11px; font-weight: 600; display: grid; place-items: center">{{facetCount}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{chevron}}deg)"><path d="M6 9l6 6 6-6"></path></svg></button>
 <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #A3AAB9">{{summary}}</span>
 </header>
-
-<div style="display: flex; flex-wrap: wrap; flex: 1">
-<aside aria-label="Filtres" style="flex: 1 1 220px; max-width: 260px; box-sizing: border-box; padding: 16px 20px; border-right: 1px solid #232838; display: flex; flex-direction: column; gap: 18px">
-<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px">
-<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">Langue</legend>
-<sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
-<button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; padding: 0 12px; border-radius: 8px; cursor: pointer; font-size: 13px; text-align: left; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button>
-</sc-for>
-</fieldset>
-<fieldset style="border: 0; margin: 0; padding: 0">
-<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">Doublons</legend>
-<button role="switch" aria-checked="{{dupsChecked}}" onClick="{{toggleDups}}" style="display: flex; align-items: center; gap: 10px; border: 0; background: transparent; color: #ECEEF3; cursor: pointer; padding: 0; font-size: 14px">
-<span style="width: 44px; height: 26px; border-radius: 999px; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{dupsJustify}}; background: {{dupsTrack}}"><span style="width: 20px; height: 20px; border-radius: 50%; background: #ECEEF3"></span></span>
-Au-delà de 1 ex.</button>
-</fieldset>
-<sc-for list="{{groups}}" as="g" hint-placeholder-count="5">
-<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px">
-<legend style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px">{{g.title}}</legend>
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
+<section id="filtres" aria-label="Filtres" style="padding: 16px 24px 18px; border-bottom: 1px solid #232838; background: #161922; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px 28px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Langue</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{langs}}" as="l" hint-placeholder-count="3"><button onClick="{{l.pick}}" aria-pressed="{{l.pressed}}" style="height: 34px; padding: 0 11px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</button></sc-for></div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Doublons</span>
+<button role="switch" aria-checked="{{dupsChecked}}" onClick="{{toggleDups}}" style="display: flex; align-items: center; gap: 10px; border: 0; background: transparent; color: #ECEEF3; cursor: pointer; padding: 0; font-size: 14px; min-height: 34px">
+<span style="width: 44px; height: 26px; border-radius: 999px; padding: 3px; box-sizing: border-box; display: flex; justify-content: {{dupsJustify}}; background: {{dupsTrack}}"><span style="width: 20px; height: 20px; border-radius: 50%; background: #ECEEF3"></span></span>Au-delà de 1 ex.</button></div>
+<sc-for list="{{fgroups}}" as="g" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">{{g.title}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
 <sc-for list="{{g.options}}" as="o" hint-placeholder-count="3">
-<label style="display: flex; align-items: center; gap: 10px; min-height: 28px; font-size: 14px; color: #D5D9E2; cursor: pointer">
-<input type="checkbox" style="width: 18px; height: 18px; accent-color: #46E3C8">{{o}}</label>
+<button onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="height: 34px; padding: 0 11px; border-radius: 999px; cursor: pointer; font-size: 13px; white-space: nowrap; border: 1px solid {{o.border}}; background: {{o.bg}}; color: {{o.fg}}">{{o.label}}</button>
 </sc-for>
-</fieldset>
+</div>
+</div>
 </sc-for>
-</aside>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<span style="font-size: 12px; color: #8B92A3; flex: 1 1 300px">Les filtres et le tri restent dans l'adresse de la page.</span>
+<button onClick="{{clearFacets}}" style="height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Réinitialiser</button>
+<button onClick="{{closeSheet}}" style="height: 36px; padding: 0 14px; border-radius: 8px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 13px; cursor: pointer">Voir {{count}} cartes</button>
+</div>
+</section>
+</sc-if>
 
-<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 18px 22px 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; flex: 1">
+
+<main style="flex: 1; min-width: 0; box-sizing: border-box; padding: 18px 22px 24px; display: flex; flex-direction: column; gap: 14px">
+<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<sc-for list="{{active}}" as="a" hint-placeholder-count="2">
+<button onClick="{{a.remove}}" aria-label="{{a.aria}}" style="height: 30px; padding: 0 8px 0 11px; border-radius: 999px; cursor: pointer; font-size: 12px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #2B6B60; background: #12302B; color: #8AF0DD">{{a.label}}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</sc-for>
+<button onClick="{{clearFacets}}" style="height: 30px; padding: 0 6px; border: 0; background: transparent; color: {{accent}}; font-size: 12px; cursor: pointer">Tout effacer</button>
+</div>
+</sc-if>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax({{tileMin}}px, 1fr)); gap: 16px">
 <sc-for list="{{cards}}" as="c" hint-placeholder-count="10">
 <a href="WebCard.dc.html" aria-label="{{c.aria}}" style="display: flex; flex-direction: column; gap: 6px; color: #ECEEF3">
@@ -124,7 +137,7 @@ Au-delà de 1 ex.</button>
 </div>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+<script type="text/x-dc" data-dc-script data-props='{"panneau":{"editor":"enum","default":"fermé","options":["fermé","ouvert"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
 const RAR = { C: ['C', '#A3AAB9', 0], U: ['PC', '#6FCF97', 1], R: ['R', '#5B9CFF', 2], E: ['É', '#B98CFF', 3], S: ['S', '#FF5C8A', 4], IL: ['IC', '#F2C94C', 5] };
 const STRIPE = { R: '#E5484D', Y: '#E8C547' };
 const OWNED = [
@@ -147,9 +160,26 @@ const OWNED = [
 ];
 const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
+const PRESEL = {"Rareté|Rare": true, "Couleur|Rouge": true};
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { lang: 'all', dups: false, sort: 'recent', query: '', size: 180 }; }
+
+  facetVM(groups, extraActive) {
+    const s = this.state; const sel = s.sel || {};
+    const chip = (on) => ({ bg: on ? '#ECEEF3' : 'transparent', fg: on ? '#0D0F14' : '#D5D9E2', border: on ? '#ECEEF3' : '#2B3040', pressed: on ? 'true' : 'false' });
+    const toggle = (k) => { const n = Object.assign({}, this.state.sel || {}); if (n[k]) delete n[k]; else n[k] = true; this.setState({ sel: n }); };
+    const fgroups = groups.map((g) => ({ title: g.title, options: (g.vm || g.options.map((o) => Object.assign({ label: o, pick: () => toggle(g.title + '|' + o) }, chip(!!sel[g.title + '|' + o])))) }));
+    const active = (extraActive || []).concat(Object.keys(sel).map((k) => { const label = k.split('|')[1]; return { label, aria: 'Retirer le filtre ' + label, remove: () => toggle(k) }; }));
+    return {
+      fgroups, active, hasActive: active.length > 0, facetCount: active.length,
+      sheetOpen: !!s.sheet, sheetExpanded: s.sheet ? 'true' : 'false', chevron: s.sheet ? 180 : 0,
+      toggleSheet: () => this.setState({ sheet: !this.state.sheet }), openSheet: () => this.setState({ sheet: true }), closeSheet: () => this.setState({ sheet: false }),
+      filterBorder: active.length || s.sheet ? (this.props.accent ?? '#46E3C8') : '#2B3040', filterBg: s.sheet ? '#12302B' : 'transparent'
+    };
+  }
   renderVals() {
+    const tw = this.props.panneau || '';
+    if (tw !== this.state.tw) { this.state = Object.assign({}, this.state, { tw, sheet: tw === 'ouvert', sel: tw === 'ouvert' ? PRESEL : (this.state.sel || {}) }); }
     const accent = this.props.accent ?? '#46E3C8';
     const s = this.state; const q = norm(s.query.trim());
     const qtyOf = (o) => (s.lang === 'fr' ? o.vf : (s.lang === 'en' ? o.vo : o.vf + o.vo));
@@ -183,6 +213,8 @@ class Component extends DCLogic {
       { title: 'Couleur', options: ['Rouge', 'Jaune', 'Bleu', 'Vert'] }
     ];
     return {
+      ...this.facetVM(groups, [].concat(s.lang !== 'all' ? [{ label: s.lang === 'fr' ? 'VF seulement' : 'VO seulement', aria: 'Retirer le filtre de langue', remove: () => this.setState({ lang: 'all' }) }] : [], s.dups ? [{ label: 'Doublons', aria: 'Retirer le filtre Doublons', remove: () => this.setState({ dups: false }) }] : [])),
+      clearFacets: () => this.setState({ sel: {}, lang: 'all', dups: false }), count: cards.length,
       accent, cards, langs, groups, query: s.query, tileMin: s.size, empty: cards.length === 0,
       summary: copies + ' exemplaires · ' + list.length + ' impressions',
       onQuery: (e) => this.setState({ query: e.target.value }),

@@ -193,7 +193,7 @@ Manques — Welcome to Night City · Retail · VF (12)
 - Porte sur **toutes les cartes du catalogue**, possédées ou non, tous sets et tous tirages.
 - Le texte cherché est comparé, **sans casse ni accents** (normalisation NFD), à : les noms de la carte dans toutes les langues, ses numéros de collection, et ses classifications. Option dans les filtres : inclure le texte de règles.
 - Un résultat par **carte** (pas par impression) : nom dans la langue d'affichage, nom dans l'autre langue en dessous (préfixé « VO : » quand c'est lui qui correspond), type, liste résumée des impressions, badge « Possédée ×N » ou « Manquante ».
-- Filtres : type, couleur, rareté, set, coût, RAM, possession (toutes / possédées / manquantes), et une case « Chercher aussi dans le texte de règles ». Les valeurs proposées viennent du catalogue. Mêmes filtres sur mobile et sur bureau.
+- Filtres : type, couleur, rareté, set, coût, RAM, possession (toutes / possédées / manquantes), et une case « Chercher aussi dans le texte de règles ». Les valeurs proposées viennent du catalogue. Mêmes filtres sur mobile et sur bureau, dans le **panneau de filtres commun** (§8.1) ; le champ de recherche reste toujours visible, avec le bouton « Filtres » à sa droite.
 - La recherche s'exécute à chaque frappe, sans réseau.
 
 ### 5.7 Collection (onglet)
@@ -202,7 +202,7 @@ But : **admirer sa collection**. C'est une **galerie**, pas une liste ni un tabl
 
 - Une **image de carte en grand format** (proportions de la carte) par **impression possédée**. Sur l'image : badge de rareté, badges de quantité par langue (« VF ×2 », « VO ×1 »), et le surplus avec le filtre Doublons (« +2 en trop »). Sous l'image : nom, tirage et numéro.
 - **Un clic sur une carte ouvre sa page carte** (§5.9) ; le retour ramène à la galerie dans le même état. Pas de + ni de − dans la galerie : la saisie se fait dans Sets ou sur la page carte.
-- Filtres : langue (toutes / VF / VO), doublons, set, tirage, rareté, type, couleur. Sur bureau, ils sont dans une **colonne à gauche**, toujours visible ; sur mobile, dans un **panneau** ouvert par le bouton « Filtres » (qui affiche le nombre de filtres actifs), avec « Réinitialiser » et « Voir N cartes ».
+- Filtres : langue (toutes / VF / VO), doublons, set, tirage, rareté, type, couleur, dans le **panneau de filtres commun** (§8.1).
 - Champ de filtre par nom (VF et VO, sans accents).
 - Tri : **Ajouts récents** (`lastAddedAt` décroissant, défaut), numéro, nom (ordre alphabétique français), rareté (de la plus rare à la plus commune), quantité.
 - **Taille des cartes** réglable sur bureau (curseur en bas de la galerie) ; mobile : deux colonnes. Le réglage est mémorisé.
@@ -277,8 +277,8 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
   - **liste des sets** et **tirages du set** : tuiles en grille (colonnes automatiques), fil d'Ariane en haut ;
   - **cartes d'un tirage** : grille de vignettes plus large (colonnes automatiques d'environ 150 px minimum), barre de filtres et sélecteur de langue sous l'en-tête, − quantité + sous chaque vignette comme sur mobile ;
   - **page carte** : en pleine page, image et vignettes des impressions à gauche, informations et tableau des impressions à droite ; précédente / suivante dans la barre du haut ;
-  - **Collection** : galerie de cartes en grand format (colonnes automatiques, taille réglable), filtres en colonne à gauche, tri et filtre par nom en haut ;
-  - **Recherche** : grand champ, filtres en colonne à gauche, résultats en grille de cartes ;
+  - **Collection** : galerie de cartes en grand format (colonnes automatiques, taille réglable), bouton « Filtres » (§8.1), tri et filtre par nom en haut ;
+  - **Recherche** : grand champ avec le bouton « Filtres » à droite (§8.1), résultats en grille de cartes ;
   - **Stats** : tableau de bord (indicateurs en haut, blocs de ventilation dessous) ;
   - **Réglages** : sections en cartes côte à côte.
 - Les filtres de couleur proposent les **quatre couleurs** du jeu (rouge, jaune, bleu, vert) ; les maquettes n'en montrent que deux, faute de données lors de leur création.
@@ -288,6 +288,18 @@ Mention en bas de Réglages et dans « À propos » : outil de fan, non officiel
 - Toutes les chaînes d'interface passent par un module de traduction (FR et EN dès le MVP).
 
 ---
+
+### 8.1 Panneau de filtres commun (18/11/2026)
+
+Un seul modèle de filtres pour toute l'app : cartes d'un tirage, Collection, Recherche. **Pas de colonne de filtres latérale.**
+
+- Un bouton **« Filtres »** dans la barre d'outils de l'écran, avec le nombre de filtres actifs en pastille.
+- **Bureau** : le bouton déplie un panneau sous la barre (la grille descend, rien n'est recouvert) ; les critères y sont rangés en colonnes automatiques. Pied du panneau : « Réinitialiser » et « Voir N cartes » (qui referme le panneau).
+- **Mobile** : le bouton ouvre un panneau par le bas, mêmes critères, mêmes boutons.
+- Valeurs en **puces** (une ou plusieurs par critère), avec le nombre de cartes quand c'est utile (§5.1.1).
+- Panneau fermé, les filtres actifs restent visibles en **pastilles retirables** au-dessus des résultats, suivies de « Tout effacer ».
+- Ce qui sert à chaque usage reste hors du panneau : sélecteur VF/VO et puces de possession (cartes d'un tirage), champ de nom et tri (Collection), champ de recherche (Recherche).
+- Un seul composant React pour les deux dispositions ; l'état des filtres est dans l'URL.
 
 ## 9. Stack
 
@@ -326,7 +338,7 @@ Chaque étape se termine par une app qui fonctionne. Ne pas commencer la suivant
    *Critère* : saisir 12 cartes d'un booster en moins de 30 secondes ; les quantités survivent à un redémarrage.
 3. **Page carte** : la page commune du §5.9 (impressions, quantités par langue, texte de règles, retour contextuel, précédente / suivante), ouverte depuis les cartes d'un tirage.
    *Critère* : depuis les cartes du Retail filtrées sur « Manquantes », ouvrir une carte, passer à la suivante, revenir : on retrouve le filtre, la langue et la position.
-4. **Collection** : galerie de cartes, filtres (colonne sur bureau, panneau sur mobile), tri, taille des cartes, doublons avec surplus ; chaque carte ouvre la page carte.
+4. **Collection** : galerie de cartes, filtres (panneau de filtres commun, §8.1), tri, taille des cartes, doublons avec surplus ; chaque carte ouvre la page carte.
 5. **Recherche** : recherche multilingue sans accents, filtres, résultats par carte ; chaque résultat ouvre la page carte.
 6. **Stats** : les quatre mesures du §5.3 et leurs ventilations.
    *Critère* : tests unitaires couvrant chaque règle, dont l'impression exclusive à un tirage et la langue absente d'un tirage.
