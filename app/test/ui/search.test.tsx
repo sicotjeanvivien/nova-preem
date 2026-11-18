@@ -13,12 +13,19 @@ const owned = [entry(printingOf("Chrome Fang", "wnc-retail", "fr").id, 3), entry
 describe("Search, mobile layout (server rendering)", () => {
   const render = (path: string) => text(renderToString(<TestApp path={path} entries={owned} />));
 
-  it("lists every card with the filters of the spec", () => {
+  it("lists every card, the filters behind the Filtres button at the right of the field (§8.1)", () => {
     const content = render("/recherche");
     expect(content).toContain("152 cartes · tous sets, VF et VO");
-    expect(content).toMatch(/Tous types Unité Légende Programme Équipement|Tous types (Légende|Unité|Programme|Équipement)/);
-    expect(content).toContain("Chercher aussi dans le texte de règles");
-    expect(content).toMatch(/Possession Couleur Rareté Set Coût RAM/);
+    expect(content).toMatch(/Rechercher une carte Filtres/);
+    // No row of menus nor type chips any more: they are in the panel.
+    expect(content).not.toContain("Tous types");
+    expect(content).not.toContain("Tout effacer");
+  });
+
+  it("shows the active filters from the URL as removable chips", () => {
+    const content = render("/recherche?cout=7%2B&type=unit&ram=2&texte=1");
+    expect(content).toMatch(/Filtres · 4/);
+    expect(content).toMatch(/Unité Coût 7 et plus RAM 2 Texte de règles Tout effacer/);
   });
 
   it("finds a card by its English name, shown with the VO prefix, and its ownership", () => {
@@ -75,12 +82,40 @@ describe("Search, interactions", () => {
     expect(count()).toBe("1 carte · tous sets, VF et VO");
   });
 
-  it("shows a grid of cards on desktop, with the type filter", async () => {
+  const button = (name: string, scope: ParentNode = container) => [...scope.querySelectorAll("button")].find((b) => b.textContent?.trim() === name);
+  const titles = (scope: Element) => [...scope.querySelectorAll(".filters-panel__title")].map((t) => t.textContent);
+  const ORDER = ["Type", "Possession", "Couleur", "Rareté", "Set", "Coût", "RAM", "Texte"];
+
+  it("shows a grid of cards on desktop, the filters in a panel unfolded under the field", async () => {
     setViewportWidth(1280);
     await act(async () => root.render(<TestApp path="/recherche" entries={owned} />));
     expect(container.querySelectorAll(".result-card")).toHaveLength(152);
-    const legend = [...container.querySelectorAll("button")].find((b) => b.textContent === "Légende")!;
-    await act(async () => legend.click());
+    expect(container.querySelector("aside")).toBeNull();
+    await act(async () => button("Filtres")!.click());
+    const panel = container.querySelector('section[aria-label="Filtres"]')!;
+    expect(titles(panel)).toEqual(ORDER);
+    expect(panel.textContent).toContain("Chercher aussi dans le texte de règles");
+    await act(async () => button("Légende", panel)!.click());
     expect(container.querySelectorAll(".result-card")).toHaveLength(28);
+    // One type at a time, "Tous types" to clear it, as in the mockups.
+    await act(async () => button("Unité", panel)!.click());
+    expect(button("Légende", panel)!.getAttribute("aria-pressed")).toBe("false");
+    await act(async () => button("Tous types", panel)!.click());
+    await act(async () => button("Voir 152 cartes", panel)!.click());
+    expect(container.querySelector('section[aria-label="Filtres"]')).toBeNull();
+  });
+
+  it("mobile: the same filters in a sheet, with chips once closed", async () => {
+    setViewportWidth(390);
+    await act(async () => root.render(<TestApp path="/recherche" entries={owned} />));
+    await act(async () => button("Filtres")!.click());
+    const sheet = container.querySelector('[role="dialog"]')!;
+    expect(titles(sheet)).toEqual(ORDER);
+    await act(async () => button("Possédées", sheet)!.click());
+    await act(async () => button("Voir 1 carte", sheet)!.click());
+    expect(count()).toBe("1 carte · tous sets, VF et VO");
+    expect(container.querySelector(".active-filters")?.textContent).toBe("PossédéesTout effacer");
+    await act(async () => container.querySelector<HTMLElement>('[aria-label="Retirer le filtre Possession : Possédées"]')!.click());
+    expect(count()).toBe("152 cartes · tous sets, VF et VO");
   });
 });

@@ -32,15 +32,6 @@ export type CollectionSort = "recent" | "number" | "name" | "rarity" | "quantity
 export const COLLECTION_SORTS: CollectionSort[] = ["recent", "number", "name", "rarity", "quantity"];
 export const DEFAULT_SORT: CollectionSort = "recent";
 
-/** Number of active filters, shown on the mobile "Filtres" button (the name filter has its own field). */
-export function activeFilterCount(filters: CollectionFilters): number {
-  return (
-    (filters.language ? 1 : 0) +
-    (filters.duplicates ? 1 : 0) +
-    [filters.sets, filters.releases, filters.rarities, filters.types, filters.colors].filter((list) => list.length > 0).length
-  );
-}
-
 /**
  * Release filter (same groups as the set page tabs): a main release on its own
  * ("Retail", "Beta"), the other releases by group ("Starters", "Démos", "Promos").

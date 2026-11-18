@@ -317,7 +317,10 @@ function useCardFilterModel(
       chips("rarities", "collection.filter.rarity", (id) => rarityOption(index, id, language)),
       chips("types", "collection.filter.type", (type) => ({ label: cardTypeLabel(t, type) })),
       chips("colors", "collection.filter.color", (color) => ({ label: cardColorLabel(t, color), dot: cardColor(color) })),
-      chips("costs", "search.filter.cost", (range) => ({ label: t(`search.cost.${range}` as MessageKey) })),
+      chips("costs", "search.filter.cost", (range) => {
+        const label = t(`search.cost.${range}` as MessageKey);
+        return { label, activeLabel: t("search.costChip", { range: label }) };
+      }),
     ],
   };
 }

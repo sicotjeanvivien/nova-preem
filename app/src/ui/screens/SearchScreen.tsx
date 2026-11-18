@@ -1,9 +1,8 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Link, useLocation, useSearchParams } from "react-router";
 import { localize, type Printing } from "../../domain/catalog.ts";
 import { groupBy } from "../../domain/catalogIndex.ts";
-import { rarityFilterKey } from "../../domain/collectionView.ts";
-import { COST_RANGES, costRange, parseSearchParams, searchCards, searchParams, type SearchFilters, type SearchResult } from "../../domain/search.ts";
+import { COST_RANGES, costRange, NO_SEARCH, parseSearchParams, searchCards, searchParams, type SearchFilters, type SearchResult } from "../../domain/search.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import type { MessageKey } from "../../i18n/messages.ts";
@@ -11,13 +10,16 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState } from "../cardLink.ts";
 import { useCollection } from "../CollectionContext.tsx";
-import { FilterFieldsets, FilterMenus, type FilterGroup } from "../FilterControls.tsx";
+import { ActiveFilters, type FilterCriterion, FilterPanel, FiltersButton, type FilterModel, type FilterOption } from "../FilterPanel.tsx";
+import { colorOptions, rarityOptions, typeOptions } from "../filterOptions.ts";
 import { SearchIcon } from "../icons.tsx";
-import { cardColor, cardColorLabel, cardTypeLabel, languageLabel } from "../labels.ts";
+import { cardColor, cardTypeLabel, languageLabel } from "../labels.ts";
 import { HeaderIndicators } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 
 type ListField = "possession" | "colors" | "rarities" | "sets" | "costs" | "rams";
+
+const PANEL_ID = "search-filters";
 
 /**
  * Search (Search / WebSearch, docs/app-spec.md §5.6): every card of the
@@ -31,6 +33,8 @@ export function SearchScreen() {
   const isDesktop = useIsDesktop();
   const location = useLocation();
   const [params, setParams] = useSearchParams();
+  const [panelOpen, setPanelOpen] = useState(false);
+  const closePanel = useCallback(() => setPanelOpen(false), []);
   useDocumentTitle(t("search.title"));
 
   const filters = parseSearchParams(Object.fromEntries(params));
@@ -42,8 +46,7 @@ export function SearchScreen() {
   );
   const update = (changes: Partial<SearchFilters>) => setParams(searchParams({ ...filters, ...changes }), { replace: true });
 
-  const groups = useSearchFilterGroups();
-  const types = [...new Set(index.catalog.cards.map((card) => card.type))];
+  const listOptions = useSearchListOptions();
   // "VF et VO": the entry language first, as in the mockups.
   const languageList = [...index.catalog.languages]
     .sort((a, b) => (a === settings.entryLanguage ? -1 : b === settings.entryLanguage ? 1 : 0))
@@ -98,19 +101,43 @@ export function SearchScreen() {
       />
     </div>
   );
-  const rulesCheckbox = (
-    <label className="checkbox">
-      <input type="checkbox" checked={filters.includeRules} onChange={(event) => update({ includeRules: event.target.checked })} />
-      {t("search.includeRules")}
-    </label>
-  );
-  const typeOptions = [
-    { value: null, label: t("search.allTypes") },
-    ...types.map((type) => ({ value: type, label: cardTypeLabel(t, type) })),
-  ];
-  const typeSelected = (value: string | null) => (value === null ? filters.types.length === 0 : filters.types.length === 1 && filters.types[0] === value);
-  const selected = (field: ListField) => filters[field];
-  const onChange = (field: ListField, values: string[]) => update({ [field]: values });
+  const filterModel: FilterModel = {
+    label: t("search.filters"),
+    resultCount: results.length,
+    onReset: () => update({ ...NO_SEARCH, query: filters.query }),
+    criteria: [
+      {
+        kind: "chips",
+        id: "types",
+        title: t("search.filter.type"),
+        single: { allLabel: t("search.allTypes") },
+        options: typeOptions(index, t),
+        selected: filters.types,
+        onChange: (types) => update({ types }),
+      },
+      ...listOptions.map(
+        ({ field, title, options }): FilterCriterion => ({
+          kind: "chips",
+          id: field,
+          title: t(title),
+          options,
+          selected: filters[field],
+          onChange: (values) => update({ [field]: values }),
+        }),
+      ),
+      {
+        kind: "checkbox",
+        id: "rules",
+        title: t("search.filter.text"),
+        label: t("search.includeRules"),
+        activeLabel: t("search.rulesChip"),
+        checked: filters.includeRules,
+        onChange: (includeRules) => update({ includeRules }),
+      },
+    ],
+  };
+  const filtersButton = <FiltersButton model={filterModel} open={panelOpen} onToggle={() => setPanelOpen((open) => !open)} panelId={PANEL_ID} />;
+  const filterPanel = <FilterPanel model={filterModel} open={panelOpen} onClose={closePanel} panelId={PANEL_ID} />;
   const resultsLabel = <p className="search-results__count">{t("search.results", { count: results.length, languages: languagesText })}</p>;
   const empty = results.length === 0 && <p className="collection__empty">{t("search.empty")}</p>;
 
@@ -119,28 +146,15 @@ export function SearchScreen() {
       <div className="search search--desktop">
         <header className="search-header">
           <h1>{t("search.title")}</h1>
-          {searchField}
+          <div className="search-header__row">
+            {searchField}
+            {filtersButton}
+          </div>
         </header>
+        {filterPanel}
         <div className="collection-body">
-          <aside aria-label={t("search.filters")} className="filter-panel">
-            <fieldset className="filter-group">
-              <legend>{t("search.filter.type")}</legend>
-              {typeOptions.map((option) => (
-                <button
-                  key={option.value ?? "all"}
-                  type="button"
-                  aria-pressed={typeSelected(option.value)}
-                  className="filter-option"
-                  onClick={() => update({ types: option.value ? [option.value] : [] })}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </fieldset>
-            <FilterFieldsets groups={groups} selected={selected} onChange={onChange} />
-            {rulesCheckbox}
-          </aside>
           <div className="search-results">
+            <ActiveFilters model={filterModel} className="active-filters--results" />
             {resultsLabel}
             <div className="result-grid">
               {results.map((result) => {
@@ -174,23 +188,10 @@ export function SearchScreen() {
       <header className="collection-header">
         <div className="search-header__row">
           {searchField}
+          {filtersButton}
           <HeaderIndicators />
         </div>
-        <div className="chip-row">
-          {typeOptions.map((option) => (
-            <button
-              key={option.value ?? "all"}
-              type="button"
-              aria-pressed={typeSelected(option.value)}
-              className="filter-pill"
-              onClick={() => update({ types: option.value ? [option.value] : [] })}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-        {rulesCheckbox}
-        <FilterMenus groups={groups} selected={selected} onChange={onChange} panelId="search-filter-options" />
+        <ActiveFilters model={filterModel} className="active-filters--toolbar" />
       </header>
       <div className="collection-list">
         {resultsLabel}
@@ -213,49 +214,48 @@ export function SearchScreen() {
         })}
         {empty}
       </div>
+      {filterPanel}
     </div>
   );
 }
 
-/** Options of the search filters, from the catalog (spec §5.6). */
-function useSearchFilterGroups(): FilterGroup<ListField>[] {
+/** Options of the search filters after the type, from the catalog (spec §5.6), in the order of the panel. */
+function useSearchListOptions(): { field: ListField; title: MessageKey; options: FilterOption[] }[] {
   const { index } = useApp();
   const { t, language } = useI18n();
   return useMemo(() => {
     const present = <T,>(values: (T | null)[]) => [...new Set(values.filter((v): v is T => v !== null))];
-    const rarities = new Map<string, string>();
-    for (const rarity of [...index.catalog.rarities].sort((a, b) => a.order - b.order)) {
-      const key = rarityFilterKey(rarity);
-      if (!rarities.has(key)) rarities.set(key, rarity.iconic ? t("collection.iconic") : localize(rarity.name, language));
-    }
     const costs = new Set(present(index.catalog.cards.map((card) => card.cost)).map(costRange));
     const rams = present(index.catalog.cards.map((card) => card.ram)).sort((a, b) => a - b);
     return [
       {
-        field: "possession",
-        title: "search.filter.possession",
+        field: "possession" as const,
+        title: "search.filter.possession" as const,
         options: [
           { value: "owned", label: t("search.possession.owned") },
           { value: "missing", label: t("search.possession.missing") },
         ],
       },
+      { field: "colors" as const, title: "collection.filter.color" as const, options: colorOptions(index, t) },
+      { field: "rarities" as const, title: "collection.filter.rarity" as const, options: rarityOptions(index, t, language) },
       {
-        field: "colors",
-        title: "collection.filter.color",
-        options: present(index.catalog.cards.map((card) => card.color)).map((value) => ({ value, label: cardColorLabel(t, value) })),
-      },
-      { field: "rarities", title: "collection.filter.rarity", options: [...rarities].map(([value, label]) => ({ value, label })) },
-      {
-        field: "sets",
-        title: "collection.filter.set",
+        field: "sets" as const,
+        title: "collection.filter.set" as const,
         options: [...index.catalog.sets].sort((a, b) => a.order - b.order).map((set) => ({ value: set.id, label: localize(set.name, language) })),
       },
       {
-        field: "costs",
-        title: "search.filter.cost",
-        options: COST_RANGES.filter((range) => costs.has(range)).map((value) => ({ value, label: t(`search.cost.${value}` as MessageKey) })),
+        field: "costs" as const,
+        title: "search.filter.cost" as const,
+        options: COST_RANGES.filter((range) => costs.has(range)).map((value) => {
+          const label = t(`search.cost.${value}` as MessageKey);
+          return { value, label, activeLabel: t("search.costChip", { range: label }) };
+        }),
       },
-      { field: "rams", title: "search.filter.ram", options: rams.map((value) => ({ value: String(value), label: String(value) })) },
-    ] satisfies FilterGroup<ListField>[];
+      {
+        field: "rams" as const,
+        title: "search.filter.ram" as const,
+        options: rams.map((value) => ({ value: String(value), label: String(value), activeLabel: t("search.ramChip", { ram: value }) })),
+      },
+    ];
   }, [index, t, language]);
 }
