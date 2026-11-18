@@ -64,7 +64,7 @@ export function CardScreen() {
         index,
         decodeURIComponent(fromRelease[1]!),
         decodeURIComponent(fromRelease[2]!),
-        { filtre: originParams.get("filtre"), langue: originParams.get("langue") },
+        Object.fromEntries(originParams),
         settings,
         quantities,
       )

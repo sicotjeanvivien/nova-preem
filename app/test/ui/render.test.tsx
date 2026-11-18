@@ -113,7 +113,7 @@ describe("Sets, level 3: cards of a release", () => {
   it("shows Retail with the VF/VO selector, one tile per variant with − quantity +", () => {
     const html = render({ path: "/sets/wnc/wnc-retail" });
     expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 172 variantes possédées/);
-    expect(text(html)).toMatch(/Saisie en VF VO Toutes Manquantes Possédées Doublons/);
+    expect(text(html)).toMatch(/Saisie en VF VO Filtres Toutes Manquantes Possédées Doublons/);
     expect(html).toContain('aria-label="Langue de saisie"');
     expect(count(html, "tile ")).toBe(172);
     expect(html).toContain('aria-label="Ouvrir la carte Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003"');

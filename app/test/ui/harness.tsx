@@ -86,6 +86,7 @@ export function TestApp({
   catalogStore = new MemoryCatalogStore(),
   checkAtLaunch = false,
   catalogIndex: initialIndex = index,
+  onRouter,
 }: {
   path: string;
   language?: "fr" | "en";
@@ -97,11 +98,17 @@ export function TestApp({
   catalogStore?: MemoryCatalogStore;
   checkAtLaunch?: boolean;
   catalogIndex?: CatalogIndex;
+  /** Receives the router, e.g. to read the current URL. */
+  onRouter?: (router: ReturnType<typeof createMemoryRouter>) => void;
 }): ReactNode {
   const [settings, setSettings] = useState(initialSettings);
   const [catalog, setCatalog] = useState<StoredCatalog>(() => ({ manifest: manifestSchema.parse(realManifest), catalog: initialIndex.catalog }));
   const [catalogIndex, setCatalogIndex] = useState(initialIndex);
-  const [router] = useState(() => createMemoryRouter(routes, { initialEntries: [path] }));
+  const [router] = useState(() => {
+    const created = createMemoryRouter(routes, { initialEntries: [path] });
+    onRouter?.(created);
+    return created;
+  });
   const context = {
     services: {
       collection: store,

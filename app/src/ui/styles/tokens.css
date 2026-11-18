@@ -84,6 +84,10 @@
   --color-remove-text: #ff8fab;
   --color-remove-border: #ff5c8a;
   --color-selected-pill: #eceef3;
+  /* Active filter chips (spec §8.1) */
+  --color-active-filter-bg: #12302b;
+  --color-active-filter-border: #2b6b60;
+  --color-active-filter-text: #8af0dd;
 
   --font-display: "Chakra Petch", sans-serif;
   --font-logo: "Oxanium", "Chakra Petch", sans-serif;
