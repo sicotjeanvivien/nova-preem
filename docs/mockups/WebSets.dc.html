@@ -64,18 +64,16 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
 <button onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="height: 32px; padding: 0 12px; border-radius: 999px; cursor: pointer; font-size: 13px; border: 1px solid {{f.border}}; background: {{f.bg}}; color: {{f.fg}}">{{f.label}}</button>
 </sc-for>
+<span style="width: 1px; height: 24px; background: #2B3040"></span>
+<button onClick="{{toggleSheet}}" aria-expanded="{{sheetExpanded}}" aria-controls="filtres-cartes" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid {{filterBorder}}; background: {{filterBg}}; color: #ECEEF3; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 7px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Filtres<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}"><span style="min-width: 18px; height: 18px; border-radius: 9px; padding: 0 5px; box-sizing: border-box; background: {{accent}}; color: #0D0F14; font-size: 11px; font-weight: 600; display: grid; place-items: center">{{facetCount}}</span></sc-if><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: rotate({{chevron}}deg)"><path d="M6 9l6 6 6-6"></path></svg></button>
 <sc-if value="{{isMissingFilter}}" hint-placeholder-val="{{ false }}">
 <button onClick="{{copyMissing}}" style="margin-left: auto; height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Copier les {{missingCount}} manques{{missingScope}}</button>
 </sc-if>
 </div>
-
-<div style="display: flex; flex-wrap: wrap; align-items: flex-start">
-<aside aria-label="Filtres" style="flex: 0 0 248px; box-sizing: border-box; padding: 18px 16px 40px 24px; display: flex; flex-direction: column; gap: 18px; position: sticky; top: 0">
-<div style="display: flex; align-items: baseline; gap: 8px">
-<h2 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px">Filtres</h2>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9">{{shown}} / {{total}}</span>
-<sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}"><button onClick="{{clearFacets}}" style="margin-left: auto; height: 28px; padding: 0; border: 0; background: transparent; color: {{accent}}; font-size: 13px; cursor: pointer">Réinitialiser</button></sc-if>
-</div>
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ false }}">
+<section id="filtres-cartes" aria-label="Filtres de cartes" style="padding: 16px 24px 18px; border-bottom: 1px solid #232838; background: #161922; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px 28px; align-items: start">
 <label style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 12px; font-weight: 600; color: #A3AAB9; letter-spacing: 0.06em; text-transform: uppercase">Nom ou numéro</span>
 <input type="search" value="{{query}}" onInput="{{onQuery}}" placeholder="ex. Johnny, 036" style="height: 42px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: #0D0F14; color: #ECEEF3; font-size: 14px; font-family: inherit"></label>
 <sc-for list="{{facetGroups}}" as="g" hint-placeholder-count="4">
@@ -88,14 +86,23 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </div>
 </div>
 </sc-for>
-<p style="margin: 0; font-size: 12px; line-height: 1.45; color: #8B92A3">Les nombres tiennent compte des autres filtres. La progression en haut reste celle du tirage entier.</p>
-</aside>
-<main style="flex: 1 1 480px; min-width: 0; padding: 18px 24px 40px 8px">
+</div>
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+<span style="font-size: 12px; color: #8B92A3; flex: 1 1 300px">Les nombres tiennent compte des autres filtres. La progression en haut reste celle du tirage entier.</span>
+<button onClick="{{clearFacets}}" style="height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Réinitialiser</button>
+<button onClick="{{closeSheet}}" style="height: 36px; padding: 0 14px; border-radius: 8px; border: 0; background: {{accent}}; color: #0D0F14; font-weight: 600; font-size: 13px; cursor: pointer">Voir {{shown}} cartes</button>
+</div>
+</section>
+</sc-if>
+
+<main style="padding: 18px 24px 40px">
 <sc-if value="{{hasActive}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A3AAB9; margin-right: 4px">{{shown}} / {{total}}</span>
 <sc-for list="{{active}}" as="a" hint-placeholder-count="2">
 <button onClick="{{a.remove}}" aria-label="{{a.aria}}" style="height: 30px; padding: 0 8px 0 11px; border-radius: 999px; cursor: pointer; font-size: 12px; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #2B6B60; background: #12302B; color: #8AF0DD">{{a.label}}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
 </sc-for>
+<button onClick="{{clearFacets}}" style="height: 30px; padding: 0 6px; border: 0; background: transparent; color: {{accent}}; font-size: 12px; cursor: pointer">Tout effacer</button>
 </div>
 </sc-if>
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px">
@@ -127,7 +134,6 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </sc-if>
 </main>
 </div>
-</div>
 
 <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
 <div role="status" style="position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 16px; background: #262B38; border: 1px solid #3A4152; border-radius: 10px; font-size: 14px; max-width: calc(100% - 32px)">
@@ -139,7 +145,7 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"filtres":{"editor":"enum","default":"aucun","options":["aucun","rare-et-plus","unites-rouges"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
+<script type="text/x-dc" data-dc-script data-props='{"filtres":{"editor":"enum","default":"aucun","options":["aucun","rare-et-plus","unites-rouges"]},"panneau":{"editor":"enum","default":"fermé","options":["fermé","ouvert"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":1440,"height":1000}}'>
 const CARDS = [{"n":"001","en":"Adam Smasher — Ender of Legends","fr":"Adam Smasher — Acheveur De Légendes","r":"E","col":"R"},{"n":"002","en":"Dexter DeShawn — Off the Grid","fr":"Dexter DeShawn — Indétectable","r":"R","col":"R"},{"n":"003","en":"Johnny Silverhand — Rocking Renegade","fr":"Johnny Silverhand — Rock'n'Rebelle","r":"S","col":"R"},{"n":"004","en":"Royce — Psycho on the Edge","fr":"Royce — Psychoverdose","r":"R","col":"R"},{"n":"005a","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"R","col":"R"},{"n":"005b","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"R","col":"R"},{"n":"006","en":"6th Street Recruits","fr":"Recrues Des 6th Street","r":"C","col":"R"},{"n":"007","en":"Animals Wrecker","fr":"Destructeur Des Animals","r":"C","col":"R"},{"n":"008","en":"Chrome Fang","fr":"Croc Chromé","r":"C","col":"R"},{"n":"009","en":"El Sombrerón — La Venganza Lenta","fr":"El Sombrerón — La Venganza Lenta","r":"R","col":"R"},{"n":"010","en":"Japantown Jonin","fr":"Jônin De Japantown","r":"C","col":"R"},{"n":"011","en":"Johnny Silverhand — Never Stop Fighting","fr":"Johnny Silverhand — N'abandonne Jamais Le Combat","r":"E","col":"R"},{"n":"012","en":"Kerry Eurodyne — The Last Rockerboy","fr":"Kerry Eurodyne — Le Dernier Rockerboy","r":"U","col":"R"},{"n":"013","en":"La Llorona — Ghost of the Past","fr":"La Llorona — Fantôme Du Passé","r":"U","col":"R"},{"n":"014","en":"Meredith Stout — Stone Cold Corpo","fr":"Meredith Stout — Corpo Sans Pitié","r":"R","col":"R"},{"n":"015","en":"Octant","fr":"Octant","r":"C","col":"R"},{"n":"016","en":"Royce — Don't Call Me Simon","fr":"Royce — J'suis Pas Simon","r":"U","col":"R"},{"n":"017","en":"Ruthless Lowlife","fr":"Racaille Impitoyable","r":"C","col":"R"},{"n":"018","en":"Screw — Lovelorn Fool","fr":"Screw — Seul En Amour","r":"C","col":"R"},{"n":"019","en":"Swordwise Huscle","fr":"Gros Bras Sabreur","r":"C","col":"R"},{"n":"020","en":"V — Roamer of the Badlands","fr":"V — Errance À Travers Les Badlands","r":"E","col":"R"},{"n":"021","en":"Valentino Guerrera","fr":"Guerrera Des Valentinos","r":"C","col":"R"},{"n":"022","en":"Yorinobu Arasaka — Steel Dragon","fr":"Yorinobu Arasaka — Dragon D'acier","r":"R","col":"R"},{"n":"023","en":"Arasaka Emergency Radioport","fr":"Radioport d'urgence d'Arasaka","r":"C","col":"R"},{"n":"024","en":"Deadman Transmitter","fr":"Émetteur Deadman","r":"U","col":"R"},{"n":"025","en":"Mantis Blades","fr":"Lames Mantis","r":"C","col":"R"},{"n":"026","en":"Satori — Sword of Saburo","fr":"Satori — Lame De Saburo","r":"U","col":"R"},{"n":"027","en":"All is Lost","fr":"Tout Est Perdu","r":"C","col":"R"},{"n":"028","en":"Appetite for Destruction","fr":"Soif de Destruction","r":"U","col":"R"},{"n":"029","en":"Bonnie and Clyde","fr":"Bonnie et Clyde","r":"U","col":"R"},{"n":"030","en":"Carnage at the Colosseum","fr":"Massacre au Colisée","r":"C","col":"R"},{"n":"031","en":"Detonate","fr":"Détonation","r":"C","col":"R"},{"n":"032","en":"Gunpoint Diplomacy","fr":"Diplomatie du Pistolet","r":"U","col":"R"},{"n":"033","en":"Industrial Assembly","fr":"Assemblage Industriel","r":"U","col":"R"},{"n":"034","en":"Over the Edge","fr":"Au Bord du Gouffre","r":"C","col":"R"},{"n":"035","en":"Shattered Memories","fr":"Souvenirs en Lambeaux","r":"R","col":"R"},{"n":"036","en":"Dum Dum — Maelstrom Triggerman","fr":"Dum Dum — As de la Gâchette du Maelstrom","r":"R","col":"Y"},{"n":"037","en":"Kerry Eurodyne — Axe, Attitude, Audience","fr":"Kerry Eurodyne — Une Gratte, du Style et un Public","r":"R","col":"Y"},{"n":"038","en":"Muamar Reyes — El Capitán","fr":"Muamar Reyes — El Capitán","r":"R","col":"Y"},{"n":"039","en":"River Ward — Detective on the Hunt","fr":"River Ward — Détective en Action","r":"R","col":"Y"},{"n":"040","en":"Rogue Amendiares — Preem Solo","fr":"Rogue Amendiares — Solo Premios","r":"R","col":"Y"},{"n":"043","en":"Augmented Negotiators","fr":"Négociateurs Augmentés","r":"C","col":"Y"},{"n":"044","en":"Caliber — Totentanz's Top Dog","fr":"Caliber — La Meilleure du Totentanz","r":"R","col":"Y"},{"n":"045","en":"Gilded Matón","fr":"Matón Doré","r":"C","col":"Y"},{"n":"046","en":"Hanako Arasaka — In a Gilded Cage","fr":"Hanako Arasaka — Mise en Cage Dorée","r":"R","col":"Y"},{"n":"047","en":"Heywood Ripperdoc","fr":"Charcudoc d'Heywood","r":"U","col":"Y"},{"n":"048","en":"Jackie Welles — Ride or Die Choom","fr":"Jackie Welles — Marche ou Crève","r":"E","col":"Y"},{"n":"049","en":"Maelstrom Goons","fr":"Sbires du Maelstrom","r":"C","col":"Y"},{"n":"050","en":"MaxTac Suppression Team","fr":"Escouade de Répression de la MaxTac","r":"C","col":"Y"},{"n":"051","en":"Offduty Malfini","fr":"Malfini Après le Boulot","r":"C","col":"Y"},{"n":"052","en":"Rockn' Rockerboy","fr":"Rockn' Rockerboy","r":"C","col":"Y"},{"n":"053","en":"Secondhand Bombus","fr":"Bombus d'Occasion","r":"C","col":"Y"},{"n":"054","en":"Sketchy Ripper","fr":"Charcu Louche","r":"C","col":"Y"},{"n":"055","en":"T-Bug — Amateur Philosopher","fr":"T-Bug — Philosophe Amatrice","r":"U","col":"Y"},{"n":"057","en":"Viktor Vektor — Drop Your Illusions","fr":"Viktor Vektor — Oublie tes Illusions","r":"E","col":"Y"},{"n":"058","en":"Viktor Vektor — You Might Feel a Little Pinch","fr":"Viktor Vektor — Ça va Picoter un Peu","r":"U","col":"Y"},{"n":"141","en":"Adam Smasher — Ender of Legends","fr":"Adam Smasher — Acheveur De Légendes","r":"IL","col":"R"},{"n":"142","en":"Dexter DeShawn — Off the Grid","fr":"Dexter DeShawn — Indétectable","r":"IL","col":"R"},{"n":"143","en":"Royce — Psycho on the Edge","fr":"Royce — Psychoverdose","r":"IL","col":"R"},{"n":"144","en":"V — Streetkid","fr":"V — Gosse Des Rues","r":"IL","col":"R"},{"n":"145","en":"Dum Dum — Maelstrom Triggerman","fr":"Dum Dum — As de la Gâchette du Maelstrom","r":"IL","col":"Y"},{"n":"146","en":"Kerry Eurodyne — Axe, Attitude, Audience","fr":"Kerry Eurodyne — Une Gratte, du Style et un Public","r":"IL","col":"Y"},{"n":"147","en":"Muamar Reyes — El Capitán","fr":"Muamar Reyes — El Capitán","r":"IL","col":"Y"},{"n":"148","en":"River Ward — Detective on the Hunt","fr":"River Ward — Détective en Action","r":"IL","col":"Y"},{"n":"149","en":"Rogue Amendiares — Preem Solo","fr":"Rogue Amendiares — Solo Premios","r":"IL","col":"Y"},{"n":"159","en":"Johnny Silverhand — Never Stop Fighting","fr":"Johnny Silverhand — N'abandonne Jamais Le Combat","r":"IO","col":"R"},{"n":"162","en":"Hanako Arasaka — In a Gilded Cage","fr":"Hanako Arasaka — Mise en Cage Dorée","r":"IO","col":"Y"}];
 const RARITY = {
   C: { short: 'C', color: '#A3AAB9' }, U: { short: 'PC', color: '#6FCF97' }, R: { short: 'R', color: '#5B9CFF' },
@@ -233,6 +239,8 @@ class Component extends DCLogic {
     return {
       accent, total, ownedCount, pct: Math.floor((ownedCount / total) * 100), cards, langBtns, filters,
       isMissingFilter: s.filter === 'missing', missingCount: missingVisible, missingScope: facetCount ? ' parmi les filtres' : '',
+      sheetOpen: s.sheet, sheetExpanded: s.sheet ? 'true' : 'false', chevron: s.sheet ? 180 : 0, toggleSheet: () => this.setState({ sheet: !s.sheet }), closeSheet: () => this.setState({ sheet: false }),
+      filterBorder: facetCount || s.sheet ? accent : '#2B3040', filterBg: s.sheet ? '#12302B' : 'transparent',
       facetGroups, active, hasActive: facetCount > 0, facetCount, clearFacets, query: s.query, onQuery: (e) => this.setState({ query: e.target.value }),
       shown: cards.length, empty: cards.length === 0,
       copyMissing: () => this.setState({ last: { n: null, text: 'Liste des manques copiée, prête à coller sur Discord.' } }),
