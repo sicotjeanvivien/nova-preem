@@ -88,7 +88,10 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <span style="font-weight: 600; font-size: 14px">{{v.release}} <span style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: #A3AAB9">#{{v.num}}</span></span>
 <span style="font-size: 12px; color: #A3AAB9">{{v.artist}}</span>
 </div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0">
 <span style="font-size: 11px; font-weight: 600; color: #0D0F14; background: {{v.rColor}}; border-radius: 4px; padding: 2px 6px; white-space: nowrap">{{v.rarity}}</span>
+<span aria-label="{{v.priceAria}}" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; white-space: nowrap">{{v.price}}</span>
+</div>
 </div>
 <sc-for list="{{v.rows}}" as="row" hint-placeholder-count="1">
 <div style="display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 14px">
@@ -104,6 +107,7 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </sc-if>
 </div>
 </sc-for>
+<p style="margin: 0; font-size: 12px; color: #8B92A3; display: flex; align-items: center; gap: 6px">Prix indicatifs Cardmarket, toutes langues confondues · {{priceDate}}</p>
 </section>
 <p style="margin: 0 0 8px; font-size: 12px; color: #8B92A3; line-height: 1.45">Page commune : la même depuis un set, la Collection ou la Recherche. Le retour ramène à l'écran d'origine ; précédente / suivante n'apparaissent qu'en venant d'un set.</p>
 </main>
@@ -116,9 +120,9 @@ const TEXT = {
   en: { title: 'Johnny Silverhand', subtitle: 'Rocking Renegade', rules: "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value." }
 };
 const VARIANTS = [
-  { key: 'retail-003', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['fr', 'en'], note: '' },
-  { key: 'beta-003', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['en'], note: '' },
-  { key: 'beta-168', release: 'Beta', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', artist: 'Divebound Studio', langs: ['en'], note: "Exclusive au tirage Beta : pas d'équivalent en Retail, elle n'est jamais comptée comme manquante en Retail." }
+  { key: 'retail-003', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['fr', 'en'], note: '', price: '≈ 14 €' },
+  { key: 'beta-003', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['en'], note: '', price: '≈ 27 €' },
+  { key: 'beta-168', release: 'Beta', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', artist: 'Divebound Studio', langs: ['en'], price: '≈ 1 510 €', note: "Exclusive au tirage Beta : pas d'équivalent en Retail, elle n'est jamais comptée comme manquante en Retail." }
 ];
 
 class Component extends DCLogic {
@@ -137,7 +141,7 @@ class Component extends DCLogic {
     Object.keys(s.qty).forEach((k) => { ownedTotal += s.qty[k]; });
     const variants = VARIANTS.map((v) => ({
       release: v.release, num: v.num, rarity: v.rarity, rColor: v.rColor, artist: 'Illustration : ' + v.artist,
-      hasNote: !!v.note, note: v.note,
+      hasNote: !!v.note, note: v.note, price: v.price, priceAria: 'Prix indicatif ' + v.price.replace('≈', 'environ'),
       rows: v.langs.map((l) => {
         const k = v.key + ':' + l;
         return {
@@ -162,7 +166,7 @@ class Component extends DCLogic {
       });
     }));
     const selLabel = (thumbs.find((x) => x.key === s.sel) || thumbs[0]).text;
-    return { title: t.title, subtitle: t.subtitle, rules: t.rules, langCode: LANG[s.lang].code, variants, ownedTotal, langBtns, thumbs, selLabel };
+    return { priceDate: '17/11', title: t.title, subtitle: t.subtitle, rules: t.rules, langCode: LANG[s.lang].code, variants, ownedTotal, langBtns, thumbs, selLabel };
   }
 }
 </script>

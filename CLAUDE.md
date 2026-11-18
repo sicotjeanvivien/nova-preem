@@ -40,6 +40,7 @@ Documents de référence :
 - `docs/deploy.md` : mise en ligne (Cloudflare Pages) et CI.
 - `docs/sync-spec.md` : synchronisation Google Drive (après le MVP) : fusion à trois points, connexion sans backend, étapes. **Lire avant d'y toucher**, et suivre ses étapes dans l'ordre.
 - `docs/legal-spec.md` : pages À propos, Confidentialité, Mentions légales, CGU (textes FR/EN dans `docs/legal/`). **Toute évolution qui change les données traitées doit mettre à jour la politique de confidentialité avant d'être livrée.**
+- `docs/prices-spec.md` : valeur estimée de la collection (prix indicatifs Cardmarket, après le MVP) : source, rattachement, publication nocturne, arrondis, écrans. **Lire avant d'y toucher**, et suivre ses étapes dans l'ordre.
 - `docs/app-spec.md` : l'app MVP (écrans, fichier de collection, règles de complétion, doublons, recherche, étapes). **Lire avant toute modification de `app/`**, et suivre ses étapes dans l'ordre.
 
 Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src/domain/` n'importe ni React, ni Dexie, ni API du navigateur ; tout stockage passe par une interface (`CollectionStore`…) dont Dexie n'est qu'une implémentation. Distribution : PWA, puis TWA pour le Play Store, Capacitor seulement si besoin natif.
@@ -76,7 +77,7 @@ Règles importantes :
 
 ## Hors périmètre (ne pas implémenter sans demande)
 
-Deck builder, prix et valeur de collection, scan de carte, comptes utilisateurs, backend, marketplace, multi-TCG.
+Deck builder, achat / vente et suivi de prix payés (la valeur **estimée** est couverte par `docs/prices-spec.md`), scan de carte, comptes utilisateurs, backend, marketplace, multi-TCG.
 
 ## Propriété intellectuelle
 

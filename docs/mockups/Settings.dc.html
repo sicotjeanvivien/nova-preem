@@ -92,6 +92,12 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </sc-for>
 </div>
 <span style="font-size: 12px; color: #8B92A3">Langue de l'interface : Français</span>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px solid #232838">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Prix indicatifs</span><span style="font-size: 12px; color: #A3AAB9">Valeur estimée (Cardmarket, toutes langues), mise à jour chaque nuit · {{pricesInfo}}</span></span>
+<button role="switch" aria-checked="{{pricesChecked}}" aria-label="Prix indicatifs" onClick="{{togglePrices}}" style="width: 52px; height: 32px; flex-shrink: 0; border-radius: 999px; border: 0; cursor: pointer; padding: 3px; display: flex; justify-content: {{pricesJustify}}; background: {{pricesTrack}}">
+<span style="width: 26px; height: 26px; border-radius: 50%; background: #ECEEF3"></span>
+</button>
+</div>
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 10px; border-top: 1px solid #232838">
 <span style="display: flex; flex-direction: column"><span style="font-size: 14px">Télécharger toutes les images</span><span style="font-size: 12px; color: #A3AAB9">Pour tout voir hors-ligne · Wi-Fi conseillé</span></span>
 <button style="height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #2B3040; background: transparent; color: #ECEEF3; font-size: 13px; cursor: pointer">Télécharger</button>
@@ -311,6 +317,8 @@ class Component extends DCLogic {
     };
     sync.pillIcon = !off && etat === 'ok'; sync.pillText = !off && etat !== 'ok';
     return Object.assign(sync, {
+      pricesChecked: s.prices === false ? 'false' : 'true', pricesJustify: s.prices === false ? 'flex-start' : 'flex-end', pricesTrack: s.prices === false ? '#3A4152' : accent,
+      pricesInfo: s.prices === false ? 'désactivés' : 'prix du 17/11', togglePrices: () => this.setState({ prices: s.prices === false }),
       accent, releases, langs, groups, names, keep: s.keep,
       defaultLabel: relLabel + ' · ' + LANG[s.lang].code,
       keepDec: () => this.setState({ keep: Math.max(1, s.keep - 1) }), keepInc: () => this.setState({ keep: Math.min(9, s.keep + 1) })

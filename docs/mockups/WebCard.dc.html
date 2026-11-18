@@ -104,13 +104,14 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3AAB9">{{ownedTotal}} exemplaires</span>
 </div>
 <div style="border: 1px solid #232838; border-radius: 12px; overflow-x: auto">
-<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px">
+<table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 660px">
 <thead>
 <tr style="background: #161922; color: #A3AAB9; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em">
 <th scope="col" style="text-align: left; padding: 10px 14px; font-weight: 600">Tirage</th>
 <th scope="col" style="text-align: left; padding: 10px 14px; font-weight: 600">N°</th>
 <th scope="col" style="text-align: left; padding: 10px 14px; font-weight: 600">Rareté</th>
 <th scope="col" style="text-align: left; padding: 10px 14px; font-weight: 600">Langue</th>
+<th scope="col" style="text-align: right; padding: 10px 14px; font-weight: 600">Prix indicatif</th>
 <th scope="col" style="text-align: right; padding: 10px 14px; font-weight: 600">Quantité</th>
 </tr>
 </thead>
@@ -121,6 +122,7 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 <td style="padding: 8px 14px; font-family: 'IBM Plex Mono', monospace">{{row.num}}</td>
 <td style="padding: 8px 14px"><span style="font-size: 11px; font-weight: 600; color: #0D0F14; background: {{row.rColor}}; border-radius: 4px; padding: 2px 6px">{{row.rarity}}</span></td>
 <td style="padding: 8px 14px"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: {{row.color}}; border: 1px solid {{row.color}}; border-radius: 4px; padding: 0 5px">{{row.code}}</span></td>
+<td style="padding: 8px 14px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #D5D9E2; white-space: nowrap">{{row.price}}</td>
 <td style="padding: 6px 10px">
 <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px">
 <button onClick="{{row.dec}}" aria-label="{{row.decAria}}" style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #2B3040; background: #1F2330; color: #ECEEF3; font-size: 18px; cursor: pointer">−</button>
@@ -133,6 +135,7 @@ a{color:#46E3C8;text-decoration:none}a:hover{color:#8AF0DD}
 </tbody>
 </table>
 </div>
+<p style="margin: 0; font-size: 12px; color: #8B92A3; display: flex; align-items: center; gap: 6px">Prix indicatifs Cardmarket, toutes langues confondues · {{priceDate}}</p>
 <p style="margin: 0; font-size: 12px; color: #8B92A3">Illustrations : Daniel Valaisis (Retail, Beta #β003), Divebound Studio (Iconic #β168).</p>
 </section>
 </div>
@@ -147,10 +150,10 @@ const TEXT = {
   en: { title: 'Johnny Silverhand', subtitle: 'Rocking Renegade', other: "VF : Johnny Silverhand — Rock'n'Rebelle", rules: "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value." }
 };
 const PRINTS = [
-  { key: 'retail-003:fr', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'fr', exclusive: false },
-  { key: 'retail-003:en', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'en', exclusive: false },
-  { key: 'beta-003:en', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'en', exclusive: false },
-  { key: 'beta-168:en', release: 'Beta · Iconic', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', lang: 'en', exclusive: true }
+  { key: 'retail-003:fr', price: '≈ 14 €', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'fr', exclusive: false },
+  { key: 'retail-003:en', price: '≈ 14 €', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'en', exclusive: false },
+  { key: 'beta-003:en', price: '≈ 27 €', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', lang: 'en', exclusive: false },
+  { key: 'beta-168:en', price: '≈ 1 510 €', release: 'Beta · Iconic', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', lang: 'en', exclusive: true }
 ];
 
 class Component extends DCLogic {
@@ -164,6 +167,7 @@ class Component extends DCLogic {
     const s = this.state; const t = TEXT[s.lang];
     let ownedTotal = 0; Object.keys(s.qty).forEach((k) => { ownedTotal += s.qty[k]; });
     const rows = PRINTS.map((p) => ({
+      price: p.price,
       release: p.release, num: p.num, rarity: p.rarity, rColor: p.rColor, exclusive: p.exclusive,
       code: LANG[p.lang].code, color: LANG[p.lang].color, qty: s.qty[p.key],
       decAria: 'Retirer ' + p.release + ' ' + p.num + ' ' + LANG[p.lang].code, incAria: 'Ajouter ' + p.release + ' ' + p.num + ' ' + LANG[p.lang].code,
@@ -180,6 +184,7 @@ class Component extends DCLogic {
       pick: () => this.setState({ lang: l })
     }));
     return {
+      priceDate: '17/11',
       accent, title: t.title, subtitle: t.subtitle, otherName: t.other, rules: t.rules, langCode: LANG[s.lang].code,
       rows, thumbs, langBtns, ownedTotal, selLabel: sp.release + ' ' + sp.num + ' ' + LANG[sp.lang].code
     };

@@ -72,6 +72,17 @@ Acheté le 03/11/2026 par AWSD (Cloudflare Registrar, compte de la société). *
 5. **Ancienne adresse** : `nova-preem.pages.dev` reste en ligne. Tant que personne d'autre n'a installé l'app, rien à migrer ; pour soi, exporter la collection depuis l'ancienne adresse et l'importer sur la nouvelle.
 6. Facultatif : e-mail `contact@nova-preem.app` avec Cloudflare Email Routing (transfert vers l'adresse de contact), puis `VITE_CONTACT_EMAIL`.
 
+## Prix indicatifs (une seule fois, voir `docs/prices-spec.md`)
+
+À faire à l'étape 2 de `prices-spec.md`, pas avant :
+
+1. `pnpm dlx wrangler@4.155.0 pages project create nova-preem-prices --production-branch=main` (dans `catalog/`).
+2. Projet Pages `nova-preem-prices` → *Custom domains* → `prices.nova-preem.app` (même procédure que le catalogue).
+3. GitHub, variable `PRICES_BASE_URL` = `https://prices.nova-preem.app/` (barre finale). Sans elle, l'app est construite sans prix.
+4. Lancer une fois le workflow `prices.yml` à la main (*Actions → Prices → Run workflow*), puis redéployer l'app.
+
+Ensuite, rien à faire : le workflow publie les prix chaque nuit. S'il échoue (format Cardmarket changé, couverture en chute), GitHub l'indique par e-mail et le dernier fichier reste en ligne. Une nouvelle extension Cardmarket (nouveau set, nouvelle promo) s'ajoute à la main dans `catalog/prices/cardmarket.json` ; le rapport du workflow la signale comme produit orphelin.
+
 ## Au quotidien
 
 - **App** : merger sur `main` suffit.
