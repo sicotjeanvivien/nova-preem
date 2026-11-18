@@ -44,7 +44,8 @@ Tant que la variable `PRICES_BASE_URL` n'existe pas, le run de la nuit ne fait r
    - secrets : `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` ;
    - variable : `CATALOG_BASE_URL` = adresse du site du catalogue, **avec la barre finale** (`https://catalog.nova-preem.app/` ; avant le domaine propre : `https://nova-preem-catalog.pages.dev/`, toujours en ligne) ;
    - variable facultative : `APP_PROJECT`, si le projet de l'app ne s'appelle pas `nova-preem`.
-   - variable `GOOGLE_CLIENT_ID` : identifiant client OAuth de la synchronisation Google Drive (ci-dessous). Sans elle, la synchronisation reste désactivée (ligne « Bientôt » dans Réglages).
+   - variable `PRICES_BASE_URL` : adresse du site des prix indicatifs, avec la barre finale (section « Prix indicatifs » ci-dessous). Sans elle, l'app est construite sans prix.
+  - variable `GOOGLE_CLIENT_ID` : identifiant client OAuth de la synchronisation Google Drive (ci-dessous). Sans elle, la synchronisation reste désactivée (ligne « Bientôt » dans Réglages).
 5. Relancer le dernier workflow de `main` (ou pousser sur `main`) : l'app est déployée.
 
 ## Synchronisation Google Drive (une seule fois)

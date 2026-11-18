@@ -6,8 +6,9 @@ import type { CollectionEntry } from "../../src/domain/collection.ts";
 import { DEFAULT_SETTINGS } from "../../src/domain/settings.ts";
 import { connectedState } from "../../src/domain/sync.ts";
 import { NovaPreemDatabase } from "../../src/storage/db.ts";
-import { DexieCatalogStore, DexieCollectionStore, DexieSettingsStore, DexieSyncStore } from "../../src/storage/dexieStores.ts";
+import { DexieCatalogStore, DexieCollectionStore, DexiePriceStore, DexieSettingsStore, DexieSyncStore } from "../../src/storage/dexieStores.ts";
 import { realCatalogText, realManifest } from "../helpers.ts";
+import { PRICES_FILE } from "../helpers-prices.ts";
 
 let db: NovaPreemDatabase;
 beforeEach(() => {
@@ -30,6 +31,24 @@ describe("DexieCatalogStore", () => {
     const loaded = await new DexieCatalogStore(db).load();
     expect(loaded?.manifest).toEqual(stored.manifest);
     expect(loaded?.catalog.cards).toHaveLength(152);
+  });
+});
+
+describe("DexiePriceStore", () => {
+  it("keeps the last prices in the catalog table, next to the catalog", async () => {
+    const store = new DexiePriceStore(db);
+    expect(await store.load()).toBeUndefined();
+    const stored = { file: PRICES_FILE, downloadedAt: "2026-11-18T12:00:00.000Z" };
+    await store.save(stored);
+    expect(await new DexiePriceStore(db).load()).toEqual(stored);
+    expect((await db.catalog.toCollection().primaryKeys()).sort()).toEqual(["prices"]);
+    // The catalog store ignores the row.
+    expect(await new DexieCatalogStore(db).load()).toBeUndefined();
+  });
+
+  it("ignores an invalid stored value", async () => {
+    await db.catalog.put({ key: "prices", value: { file: { ...PRICES_FILE, schemaVersion: 9 }, downloadedAt: "2026-11-18T12:00:00.000Z" } });
+    expect(await new DexiePriceStore(db).load()).toBeUndefined();
   });
 });
 

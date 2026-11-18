@@ -25,6 +25,7 @@ import { ReleaseCardsScreen } from "../../src/ui/screens/ReleaseCardsScreen.tsx"
 import { SetReleasesScreen } from "../../src/ui/screens/SetReleasesScreen.tsx";
 import { SetsScreen } from "../../src/ui/screens/SetsScreen.tsx";
 import { SyncProvider } from "../../src/ui/SyncContext.tsx";
+import { PricesProvider } from "../../src/ui/PricesContext.tsx";
 import { index } from "../helpers-catalog.ts";
 import { fakeSource, MemoryCatalogStore, nodeHasher, realManifest } from "../helpers.ts";
 
@@ -116,6 +117,7 @@ export function TestApp({
       imageBaseUrl: "http://localhost/catalog/images/",
       appVersion: "0.1.0",
       sync: null,
+      prices: null,
       supportUrl: null,
       ...extraServices,
     } as Services,
@@ -136,7 +138,9 @@ export function TestApp({
         >
           <CollectionProvider store={store} initial={entries}>
             <SyncProvider>
-              <RouterProvider router={router} />
+              <PricesProvider>
+                <RouterProvider router={router} />
+              </PricesProvider>
             </SyncProvider>
           </CollectionProvider>
         </CatalogUpdateProvider>

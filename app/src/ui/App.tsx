@@ -13,6 +13,7 @@ import { CatalogUpdateProvider } from "./CatalogUpdate.tsx";
 import { CollectionProvider } from "./CollectionContext.tsx";
 import { FirstLaunch, FirstLaunchContext, type FirstLaunchProps } from "./FirstLaunch.tsx";
 import { LEGAL_PAGES } from "./legalPages.ts";
+import { PricesProvider } from "./PricesContext.tsx";
 import { LegalScreen } from "./screens/LegalScreen.tsx";
 import { CollectionScreen } from "./screens/CollectionScreen.tsx";
 import { SettingsScreen } from "./screens/SettingsScreen.tsx";
@@ -137,7 +138,9 @@ export function App({ services }: { services: Services }) {
           <CatalogUpdateProvider onUpdated={(catalog) => setBoot({ status: "ready", catalog })} checkAtLaunch={navigator.onLine}>
             <CollectionProvider store={services.collection} initial={entries}>
               <SyncProvider>
-                <Router create={createAppRouter} />
+                <PricesProvider>
+                  <Router create={createAppRouter} />
+                </PricesProvider>
               </SyncProvider>
             </CollectionProvider>
           </CatalogUpdateProvider>

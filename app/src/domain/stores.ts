@@ -1,5 +1,6 @@
 import type { Catalog, CatalogManifest } from "./catalog.ts";
 import type { CollectionEntry } from "./collection.ts";
+import type { PricesFile } from "./prices.ts";
 import type { Settings } from "./settings.ts";
 import type { SyncState } from "./sync.ts";
 
@@ -42,4 +43,18 @@ export interface SyncStore {
   save(state: SyncState): Promise<void>;
   /** Forgets everything about the sync (disconnection, sync spec §4.2). */
   clear(): Promise<void>;
+}
+
+/** The indicative prices kept on the device (docs/prices-spec.md §5), and when they were downloaded. */
+export interface StoredPrices {
+  file: PricesFile;
+  /** ISO date of the download. */
+  downloadedAt: string;
+}
+
+export interface PriceStore {
+  /** The last prices downloaded, if any. */
+  load(): Promise<StoredPrices | undefined>;
+  /** Replaces them. */
+  save(stored: StoredPrices): Promise<void>;
 }

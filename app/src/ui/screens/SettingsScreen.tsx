@@ -12,6 +12,7 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCatalogUpdate } from "../CatalogUpdate.tsx";
 import { useDataActions } from "../dataActions.ts";
+import { formatPriceDate, usePrices } from "../PricesContext.tsx";
 import { SupportCard } from "../SupportCard.tsx";
 import { SyncCard } from "../SyncCard.tsx";
 import { useSync } from "../SyncContext.tsx";
@@ -40,6 +41,7 @@ export function SettingsScreen() {
   const images = useImageDownload();
   const catalogUpdate = useCatalogUpdate();
   const sync = useSync();
+  const prices = usePrices();
   const syncOn = sync.available && sync.status !== "disabled";
   const [check, setCheck] = useState<CatalogCheck | "checking" | null>(null);
   const [message, setMessage] = useState<{ id: number; text: string } | null>(null);
@@ -208,6 +210,38 @@ export function SettingsScreen() {
               ))}
             </div>
           </div>
+          {services.prices && (
+            <div className="settings-row">
+              <span className="settings-row__text">
+                <span>{t("settings.prices")}</span>
+                <span className="settings-row__hint">
+                  {t("settings.pricesHint")} ·{" "}
+                  {!settings.indicativePrices ? (
+                    t("settings.pricesOff")
+                  ) : prices ? (
+                    <span className={prices.old ? "prices-old" : undefined}>
+                      {t("settings.pricesDate", { date: formatPriceDate(prices.sourceDate, uiLanguage) })}
+                      {prices.old && ` · ${t("prices.old")}`}
+                    </span>
+                  ) : (
+                    t("settings.pricesNone")
+                  )}
+                </span>
+              </span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={settings.indicativePrices}
+                aria-label={t("settings.prices")}
+                className="switch switch--large"
+                onClick={() => updateSettings({ indicativePrices: !settings.indicativePrices })}
+              >
+                <span className="switch__track">
+                  <span className="switch__thumb" />
+                </span>
+              </button>
+            </div>
+          )}
           <div className="settings-row">
             <span className="settings-row__text">
               <span>{t("settings.images")}</span>
