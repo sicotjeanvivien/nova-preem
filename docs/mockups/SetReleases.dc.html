@@ -53,10 +53,11 @@ input::placeholder{color:#8B92A3}
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{r.pctColor}}">{{r.pct}} %</span>
 </div>
 <div style="height: 4px; background: #232838; border-radius: 2px; overflow: hidden"><div style="height: 100%; width: {{r.pct}}%; background: {{r.bar}}"></div></div>
-<div style="display: flex; gap: 4px">
+<div style="display: flex; align-items: center; gap: 4px">
 <sc-for list="{{r.langs}}" as="l" hint-placeholder-count="1">
 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: {{l.color}}; border: 1px solid {{l.color}}; border-radius: 3px; padding: 0 4px">{{l.code}}</span>
 </sc-for>
+<sc-if value="{{showPrices}}" hint-placeholder-val="{{ true }}"><span title="{{r.valueHelp}}" aria-label="{{r.valueAria}}" style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{r.valueColor}}; white-space: nowrap">{{r.value}}</span></sc-if>
 </div>
 </div>
 </a>
@@ -83,7 +84,7 @@ input::placeholder{color:#8B92A3}
 </nav>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"prix":{"editor":"enum","default":"affichés","options":["affichés","désactivés"]},"accent":{"editor":"color","default":"#46E3C8","options":["#46E3C8","#FF5C8A","#FFB067","#8FB4FF"]},"$preview":{"width":390,"height":844}}'>
 const RELEASES = [
   ['main', 'Retail', ['en', 'fr'], 112, 168], ['main', 'Beta', ['en'], 9, 172],
   ['starter', 'The Heist — Retail', ['en'], 0, 20], ['starter', 'The Heist — Beta', ['en'], 0, 20],
@@ -94,6 +95,15 @@ const RELEASES = [
   ['promo', 'Edgerunner Open S1', ['en'], 0, 51], ['promo', 'Night City Brawl S1', ['en'], 0, 37],
   ['promo', 'Night City Showdown S1', ['en'], 0, 5], ['promo', 'Set 1 Promos', ['en'], 2, 4], ['promo', 'Judge Promos', ['en'], 3, 3]
 ];
+const VALUE = {"Retail":[2108.92,0],"Beta":[7162.41,0],"The Heist — Retail":[57.18,0],"The Heist — Beta":[33.11,0],"Embracing Power — Retail":[32.46,2],"Embracing Power — Beta":[21.42,0],"Merc":[33.82,7],"Arasaka":[26.11,5],"Pre-Release — Retail":[32.45,0],"Pre-Release — Beta":[125.23,0],"Box Toppers — Retail":[49.03,0],"Box Toppers — Beta":[132.91,0],"Edgerunner Open S1":[0,53],"Night City Brawl S1":[815.81,3],"Night City Showdown S1":[473.48,0],"Set 1 Promos":[21.43,5],"Judge Promos":[0,3]};
+const fmtPrice = (p) => {
+  if (p === null || p === undefined) return '—';
+  if (p < 0.1) return '< 0,10 €';
+  const step = p < 1 ? 0.1 : p < 10 ? 0.5 : p < 100 ? 1 : 10;
+  const v = Math.round(p / step) * step;
+  return '≈ ' + (v < 10 && step < 1 ? v.toFixed(2).replace('.', ',') : String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')) + ' €';
+};
+const fmtTotal = (t) => { const step = t < 100 ? 1 : t < 1000 ? 10 : 50; return '≈ ' + String(Math.round(t / step) * step).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €'; };
 const GROUPS = [['main', 'Set principal', 'Principal', '#46E3C8'], ['starter', 'Starters', 'Starter', '#FFB067'], ['demo', 'Decks démo', 'Démo', '#A3AAB9'], ['promo', 'Promos', 'Promo', '#B98CFF']];
 const LANG = { fr: { code: 'VF', color: '#FFB067' }, en: { code: 'VO', color: '#8FB4FF' } };
 const norm = (x) => x.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -110,11 +120,14 @@ class Component extends DCLogic {
         return {
           name: r[1], tag, ribbon, count: r[3] + ' / ' + r[4], pct,
           pctColor: pct === 100 ? accent : '#A3AAB9', bar: pct === 100 ? accent : '#5B9CFF',
-          langs: r[2].map((l) => LANG[l])
+          langs: r[2].map((l) => LANG[l]),
+          value: VALUE[r[1]][0] ? fmtTotal(VALUE[r[1]][0]) : 'Pas de prix', valueColor: VALUE[r[1]][0] ? '#D5D9E2' : '#5E6577',
+          valueAria: VALUE[r[1]][0] ? 'Valeur du tirage complet ' + fmtTotal(VALUE[r[1]][0]).replace('≈', 'environ') : 'Pas de prix pour ce tirage',
+          valueHelp: 'Un exemplaire de chaque carte' + (VALUE[r[1]][1] ? ' · ' + VALUE[r[1]][1] + ' sans prix' : '')
         };
       })
     })).filter((g) => g.items.length > 0);
-    return { accent, groups, query: this.state.query, empty: groups.length === 0, onQuery: (e) => this.setState({ query: e.target.value }) };
+    return { showPrices: this.props.prix !== 'désactivés', accent, groups, query: this.state.query, empty: groups.length === 0, onQuery: (e) => this.setState({ query: e.target.value }) };
   }
 }
 </script>

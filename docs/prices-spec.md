@@ -129,14 +129,17 @@ Prix d'une carte :
 | 10 € à 100 € | arrondi à 1 € : « ≈ 65 € » |
 | ≥ 100 € | arrondi à 10 € : « ≈ 340 € » |
 
-Valeur d'un ensemble (somme des prix réels × quantités, puis arrondi) : < 100 € à 1 € près, < 1 000 € à 10 € près, au-delà à 50 € près. Format français (`≈ 1 250 €`) ou anglais (`≈ €1,250`) selon la langue de l'interface. Les cartes sans prix ne comptent pas ; leur nombre est affiché.
+Valeur d'un ensemble (somme des prix réels × quantités, ou d'un exemplaire par variante pour la valeur d'un tirage, puis arrondi) : < 100 € à 1 € près, < 1 000 € à 10 € près, au-delà à 50 € près. Format français (`≈ 1 250 €`) ou anglais (`≈ €1,250`) selon la langue de l'interface. Les cartes sans prix ne comptent pas ; leur nombre est affiché.
 
 ### Où apparaissent les prix
 
 - **Page carte** : à droite de chaque impression, son prix arrondi, en gris discret. Sous la liste : « Prix indicatifs Cardmarket, toutes langues confondues · 17/11 ».
 - **Stats** : une carte « Valeur estimée » en tête : total arrondi, nombre de cartes sans prix, date des prix ; puis la valeur par tirage (barres) et les 5 cartes possédées les plus chères (chacune ouvre la page carte).
 - **Collection** : tri **« Valeur »** (décroissante, sans prix à la fin) ; prix arrondi dans la ligne d'information de chaque carte (« Retail · #003 · ≈ 14 € ») ; valeur de la **sélection affichée** (filtres compris) à la fin du résumé en haut (« 18 ex. · 10 impressions · ≈ 90 € »). Filtres inchangés.
-- **Pas de prix** sur la grille de saisie des cartes d'un tirage, ni dans Recherche (écrans de saisie et de recherche, pas d'estimation).
+- **Tirages du set** (tuiles) : **valeur du tirage complet**, à droite des badges de langue (« ≈ 2 100 € ») : somme des prix d'**un exemplaire de chaque variante** du tirage (une langue), arrondie comme un total. Infobulle / étiquette d'accessibilité : « Un exemplaire de chaque carte · N sans prix ». Tirage sans aucun prix (ex. Edgerunner Open, absent de Cardmarket) : « Pas de prix », en gris.
+- **Cartes d'un tirage** (grille de saisie) : prix arrondi de chaque carte en **bas à droite de l'image** (fond sombre semi-opaque). Le badge de l'autre langue (« VO 1 ») passe en **bas à gauche**. Carte sans prix : « — ».
+- **Pas de prix** dans Recherche.
+- Réglage « Prix indicatifs » désactivé : aucun de ces éléments n'apparaît ; le badge de langue reste en bas à gauche.
 - Prix de plus de 7 jours (workflow en panne, appareil hors-ligne longtemps) : la date passe en ambre avec « Prix anciens ».
 
 ### Portabilité
@@ -165,4 +168,4 @@ Le calcul (rattachement prix ↔ impressions possédées, arrondis, totaux) est 
    *Critère* : le rapport retrouve les chiffres du §2 (534 variantes rattachées, Tetratonic rattachée par l'alias, 82 groupes de doublons rattachés, 513 variantes avec prix, aucun contrôle Iconic en échec) sur les fichiers du 17/11.
 2. **Publication** : projet Pages, domaine, workflow nocturne, garde-fou de couverture. *Critère* : deux nuits de suite publiées sans intervention ; un fichier volontairement cassé n'est pas publié.
 3. **App** : chargement, `PriceStore`, arrondis (tests de toutes les bornes du tableau), réglage « Prix indicatifs ».
-4. **Écrans** : page carte, Stats, tri Collection, mentions de source ; textes légaux. *Critère* : le total de Stats est égal à la somme des prix réels × quantités de la collection de démonstration, arrondie selon la règle.
+4. **Écrans** : page carte, Stats, tri Collection, valeur des tirages, prix sur la grille des cartes d'un tirage, mentions de source ; textes légaux. *Critère* : le total de Stats est égal à la somme des prix réels × quantités de la collection de démonstration, arrondie selon la règle.
