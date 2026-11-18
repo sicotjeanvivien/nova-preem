@@ -130,13 +130,15 @@ Une ligne par entrée, séparateur `;` (Excel FR), UTF-8 avec BOM : `set;tirage;
 - Après chaque + ou −, un bandeau « +1 [nom] · VF » avec **Annuler** (annule exactement la dernière action). Le bandeau reste jusqu'à l'action suivante ou 5 s.
 - Sur la page carte, chaque impression (tous tirages, toutes langues) a aussi ses boutons − et +.
 
+- Libellé du sélecteur de langue de la page des cartes d'un tirage : **« Saisie en »** VF / VO (EN : « Entering in » EN / FR), étiquette d'accessibilité « Langue de saisie » / « Entry language ». Il indique la langue dans laquelle − et + ajoutent ou retirent ; ce n'est pas un filtre et il reste hors du panneau de filtres (§8.1).
+
 #### 5.1.1 Filtres de cartes de la page d'un tirage (ajout du 18/11/2026)
 
 - Critères : **nom ou numéro** (VF et VO, sans casse ni accents, comme la recherche), **rareté**, **type**, **couleur**, **coût** (tranches 0–2, 3–4, 5–6, 7 et plus, comme Recherche ; une carte sans coût ne correspond à aucune tranche). Ils s'ajoutent aux filtres de possession (toutes, manquantes, possédées, doublons).
 - Les valeurs proposées viennent du catalogue et se limitent à celles présentes dans le tirage (ordre : `rarity.order`, puis légende, unité, équipement, programme ; rouge, jaune, bleu, vert).
 - Plusieurs valeurs d'un même critère : **OU** ; critères différents : **ET**. Chaque option affiche le nombre de cartes qu'elle donnerait compte tenu des autres filtres (0 → option grisée mais cliquable).
 - **Mobile** : bouton « Filtres » à droite du sélecteur VF/VO, avec le nombre de filtres actifs ; il ouvre un panneau (même composant que Collection) avec « Réinitialiser » et « Voir N cartes ». Les filtres actifs apparaissent en pastilles retirables sous les puces de possession, précédées de « N / total » et suivies de « Tout effacer ».
-- **Bureau** : bouton « Filtres » dans la barre de « Quantités en VF / VO » (avec le nombre de filtres actifs) ; il déplie un panneau sous cette barre, qui pousse la grille vers le bas (pas de colonne latérale), avec « Réinitialiser » et « Voir N cartes » (qui le referme). Les filtres actifs sont en pastilles retirables au-dessus de la grille, précédées de « N / total » et suivies de « Tout effacer ».
+- **Bureau** : bouton « Filtres » dans la barre « Saisie en VF / VO » (avec le nombre de filtres actifs) ; il déplie un panneau sous cette barre, qui pousse la grille vers le bas (pas de colonne latérale), avec « Réinitialiser » et « Voir N cartes » (qui le referme). Les filtres actifs sont en pastilles retirables au-dessus de la grille, précédées de « N / total » et suivies de « Tout effacer ».
 - Le compteur « variantes possédées » (mobile) et la barre de progression (bureau) restent ceux du **tirage entier**. « Copier la liste » copie les manques **visibles** (avec les filtres de cartes) ; le libellé le dit (« … parmi les filtres »).
 - Aucune carte : « Aucune carte pour ces filtres. » et un bouton « Effacer les filtres ».
 - Tout est dans l'URL (`?filtre=manquantes&langue=fr&rarete=rare,epic&type=unit&couleur=red&cout=3-4&nom=johnny`, identifiants du catalogue) ; précédente / suivante de la page carte suivent l'ordre **et tous les filtres** de la page.
