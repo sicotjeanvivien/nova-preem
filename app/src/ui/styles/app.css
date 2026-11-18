@@ -765,7 +765,7 @@ h2 {
 
 /*
  * Narrow tiles (small phones): smaller figures, then the value on its own line,
- * so that "172 / 172 · ≈ 7 150 € · 100 %" never overflows.
+ * so that "172 / 172 · 7 150 € · 100 %" never overflows.
  */
 .release-tile {
   container-type: inline-size;

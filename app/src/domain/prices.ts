@@ -79,7 +79,7 @@ export function roundTotal(total: number): number {
   return roundTo(total, 5000);
 }
 
-// Formatting: "≈ 1 250 €" in French, "≈ €1,250" in English. Non-breaking spaces keep it on one line.
+// Formatting: "1 250 €" in French, "€1,250" in English. Non-breaking spaces keep it on one line.
 
 const NBSP = " ";
 
@@ -91,7 +91,10 @@ function formatEuros(value: number, language: string, decimals: number): string 
   return french ? `${amount}${NBSP}€` : `€${amount}`;
 }
 
-/** "—" without a price, "< 0,10 €", or "≈ 2,50 €" (two decimals under 10 €, none beyond). */
+/**
+ * "—" without a price, "< 0,10 €", or "2,50 €" (two decimals under 10 €, none
+ * beyond). No "≈" in front (spec §5): the rounding says it is an order of magnitude.
+ */
 export function formatPrice(price: number | undefined, language: string): string {
   const rounded = roundPrice(price);
   switch (rounded.kind) {
@@ -100,15 +103,15 @@ export function formatPrice(price: number | undefined, language: string): string
     case "below":
       return `<${NBSP}${formatEuros(LOWEST_PRICE, language, 2)}`;
     case "approx":
-      return `≈${NBSP}${formatEuros(rounded.value, language, rounded.value < 10 ? 2 : 0)}`;
+      return formatEuros(rounded.value, language, rounded.value < 10 ? 2 : 0);
   }
 }
 
-/** "≈ 1 250 €"; a total above 0 that rounds to 0 shows as "< 1 €". */
+/** "1 250 €"; a total above 0 that rounds to 0 shows as "< 1 €". */
 export function formatTotal(total: number, language: string): string {
   const rounded = roundTotal(total);
   if (rounded === 0 && total > 0) return `<${NBSP}${formatEuros(1, language, 0)}`;
-  return `≈${NBSP}${formatEuros(rounded, language, 0)}`;
+  return formatEuros(rounded, language, 0);
 }
 
 // Values (sums of real prices; rounded only when shown).
