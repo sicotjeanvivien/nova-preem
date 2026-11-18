@@ -1,6 +1,6 @@
 # Maquettes (copie du canevas)
 
-Copie des fichiers du canevas Design « Nova Preem — MVP » (https://claude.ai/artifact/EeVh5fSkMmUbTXN9fnKwXC), mise à jour le 04/11/2026 (logo « carte tirée » : voir la note « Logo » du canevas et le kit `docs/nova-preem-logo-kit/`).
+Copie des fichiers du canevas Design « Nova Preem — MVP » (https://claude.ai/artifact/MYKA7d3jdPDHDwGQWKXZGJ), mise à jour le 04/11/2026 (logo « carte tirée » : voir la note « Logo » du canevas et le kit `docs/nova-preem-logo-kit/`).
 
 - **La référence reste le canevas** : cette copie peut prendre du retard. En cas de différence, le canevas fait foi.
 - `canvas.json` est l'index (titre de chaque planche, post-it) ; chaque `*.dc.html` est une planche.

@@ -49,7 +49,7 @@ Règles de portabilité de l'app (détail : `docs/app-spec.md` §9.1) : `app/src
 **Lire `docs/app-spec.md` avant toute modification de `app/`**, et réaliser ses étapes (§10) **dans l'ordre**, une à la fois : ne pas commencer une étape tant que le critère de la précédente n'est pas rempli.
 
 Règles importantes :
-- **Maquettes de référence** : le canevas Design « Nova Preem — MVP » (https://claude.ai/artifact/EeVh5fSkMmUbTXN9fnKwXC), copié dans `docs/mockups/` (le canevas fait foi en cas de différence). Les `.dc.html` sont des maquettes, pas du code à copier : reconstruire l'interface en React, avec des variables CSS.
+- **Maquettes de référence** : le canevas Design « Nova Preem — MVP » (https://claude.ai/artifact/MYKA7d3jdPDHDwGQWKXZGJ), copié dans `docs/mockups/` (le canevas fait foi en cas de différence). Les `.dc.html` sont des maquettes, pas du code à copier : reconstruire l'interface en React, avec des variables CSS.
 - En cas de conflit, `docs/app-spec.md` fait foi pour les règles et le comportement, le canevas pour l'apparence. **Signaler tout conflit** au lieu de trancher en silence.
 - Mobile et bureau : mêmes écrans, mêmes fonctions, mêmes filtres ; seule la disposition change. Une fonction absente d'une des deux maquettes est un oubli : l'appliquer aux deux.
 - Les données viennent du vrai catalogue (`catalog/dist/`), jamais des maquettes (échantillon de 60 cartes, quantités fictives).

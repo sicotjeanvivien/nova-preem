@@ -2,7 +2,7 @@
 
 Ce document décrit l'application (PWA) : écrans, données de la collection, règles de calcul et découpage en étapes. Il complète `docs/catalog-spec.md`, qui décrit le catalogue que l'app consomme.
 
-**Maquettes de référence :** canevas « Nova Preem — MVP » (https://claude.ai/artifact/EeVh5fSkMmUbTXN9fnKwXC, privé : le propriétaire du dépôt y a accès). Les maquettes donnent la disposition, les libellés et le comportement attendu ; en cas d'écart, **ce document fait foi** pour les règles, les maquettes pour l'apparence.
+**Maquettes de référence :** canevas « Nova Preem — MVP » (https://claude.ai/artifact/MYKA7d3jdPDHDwGQWKXZGJ, privé : le propriétaire du dépôt y a accès). Les maquettes donnent la disposition, les libellés et le comportement attendu ; en cas d'écart, **ce document fait foi** pour les règles, les maquettes pour l'apparence.
 
 ---
 
@@ -35,7 +35,7 @@ Cinq onglets, dans cet ordre : **Sets · Collection · Recherche · Stats · Ré
 
 1. **Liste des sets** (`/sets`) : une tuile par set (icône, nom, **tirages complétés / tirages** — ex. « 2 / 17 tirages complétés » —, barre de progression de la même proportion), avec un champ de filtre par nom. Un set annoncé mais absent du catalogue n'apparaît pas (la maquette montre *Edgerunners: Burn Bright* « à venir » à titre d'illustration).
 2. **Tirages du set** (`/sets/:setId`) : **une tuile par tirage** (Retail, Beta, chaque starter, chaque deck démo, chaque série de promos), regroupées sous les titres « Set principal », « Starters », « Decks démo », « Promos » (groupes `main`, `starter`, `demo`, `promo`), dans l'ordre `release.order`. Chaque tuile : bandeau avec le nom du tirage et un ruban vertical indiquant le groupe, variantes possédées / total, pourcentage, barre de progression, langues disponibles (VO, VF). Champ de filtre par nom. Un tirage sans impression n'est pas affiché.
-3. **Cartes d'un tirage** (`/sets/:setId/:releaseId`) : la grille des cartes du tirage, dans l'ordre des numéros. C'est l'écran de **saisie** (§5.1) : chaque vignette a ses boutons **− quantité +** ; un clic sur l'image ou le nom ouvre la page carte. Filtres : toutes, manquantes, possédées, doublons ; « Copier la liste » avec le filtre Manquantes.
+3. **Cartes d'un tirage** (`/sets/:setId/:releaseId`) : la grille des cartes du tirage, dans l'ordre des numéros. C'est l'écran de **saisie** (§5.1) : chaque vignette a ses boutons **− quantité +** ; un clic sur l'image ou le nom ouvre la page carte. Filtres de possession : toutes, manquantes, possédées, doublons ; « Copier la liste » avec le filtre Manquantes. Filtres de cartes (§5.1.1) : nom ou numéro, rareté, type, couleur, coût.
 4. **Page carte** (`/cartes/:slug`) : **une seule page**, ouverte depuis les cartes d'un tirage, la Collection ou la Recherche (§5.9). Son bouton « 3D » ouvre la **vue 3D** de la carte (`/cartes/:slug/3d`, §5.10).
 
 Le fil d'Ariane (bureau) et le bouton retour (mobile) remontent d'un niveau : page carte → cartes du tirage → tirages du set → liste des sets.
@@ -46,7 +46,7 @@ Le fil d'Ariane (bureau) et le bouton retour (mobile) remontent d'un niveau : pa
 
 Il n'y a **pas d'onglet « Manques »** : les manques sont le filtre « Manquantes » de la page des cartes d'un tirage, les doublons le filtre « Doublons » de Collection.
 
-Chaque écran a une URL (routage côté client) pour que le bouton retour d'Android et l'historique du navigateur fonctionnent. Le tirage est dans le chemin et les filtres de la page des cartes sont dans l'URL (`/sets/wnc/wnc-retail?filtre=manquantes&langue=fr`), pour que le retour depuis une page carte retrouve exactement le même état.
+Chaque écran a une URL (routage côté client) pour que le bouton retour d'Android et l'historique du navigateur fonctionnent. Le tirage est dans le chemin et les filtres de la page des cartes sont dans l'URL (`/sets/wnc/wnc-retail?filtre=manquantes&langue=fr&rarete=rare`), pour que le retour depuis une page carte retrouve exactement le même état.
 
 ---
 
@@ -129,6 +129,18 @@ Une ligne par entrée, séparateur `;` (Excel FR), UTF-8 avec BOM : `set;tirage;
 - **Un clic sur l'image ou le nom** de la carte ouvre la **page carte** (§5.9). Il n'y a plus de « tap pour ajouter » ni de mode retrait.
 - Après chaque + ou −, un bandeau « +1 [nom] · VF » avec **Annuler** (annule exactement la dernière action). Le bandeau reste jusqu'à l'action suivante ou 5 s.
 - Sur la page carte, chaque impression (tous tirages, toutes langues) a aussi ses boutons − et +.
+
+#### 5.1.1 Filtres de cartes de la page d'un tirage (ajout du 18/11/2026)
+
+- Critères : **nom ou numéro** (VF et VO, sans casse ni accents, comme la recherche), **rareté**, **type**, **couleur**, **coût** (tranches 0–2, 3–4, 5–6, 7 et plus, comme Recherche ; une carte sans coût ne correspond à aucune tranche). Ils s'ajoutent aux filtres de possession (toutes, manquantes, possédées, doublons).
+- Les valeurs proposées viennent du catalogue et se limitent à celles présentes dans le tirage (ordre : `rarity.order`, puis légende, unité, équipement, programme ; rouge, jaune, bleu, vert).
+- Plusieurs valeurs d'un même critère : **OU** ; critères différents : **ET**. Chaque option affiche le nombre de cartes qu'elle donnerait compte tenu des autres filtres (0 → option grisée mais cliquable).
+- **Mobile** : bouton « Filtres » à droite du sélecteur VF/VO, avec le nombre de filtres actifs ; il ouvre un panneau (même composant que Collection) avec « Réinitialiser » et « Voir N cartes ». Les filtres actifs apparaissent en pastilles retirables sous les puces de possession, précédées de « N / total » et suivies de « Tout effacer ».
+- **Bureau** : colonne de filtres à gauche de la grille, toujours visible, avec « N / total » et « Réinitialiser » ; pastilles retirables au-dessus de la grille.
+- Le compteur « variantes possédées » (mobile) et la barre de progression (bureau) restent ceux du **tirage entier**. « Copier la liste » copie les manques **visibles** (avec les filtres de cartes) ; le libellé le dit (« … parmi les filtres »).
+- Aucune carte : « Aucune carte pour ces filtres. » et un bouton « Effacer les filtres ».
+- Tout est dans l'URL (`?filtre=manquantes&langue=fr&rarete=rare,epic&type=unit&couleur=red&cout=3-4&nom=johnny`, identifiants du catalogue) ; précédente / suivante de la page carte suivent l'ordre **et tous les filtres** de la page.
+- Logique de filtrage dans `app/src/domain/` (pure, testée), partagée avec Collection et Recherche quand c'est possible.
 
 ### 5.2 Possession
 
@@ -321,6 +333,8 @@ Chaque étape se termine par une app qui fonctionne. Ne pas commencer la suivant
 7. **Réglages et données** : tous les réglages du §7, export, import (remplacer / fusionner, résumé, impressions inconnues), CSV.
    *Critère* : exporter, vider la base, importer, et retrouver une collection identique.
 8. **États et finitions** : hors-ligne, mise à jour du catalogue, collection vide, images (cache, téléchargement complet), interface en anglais.
+9. **Filtres de cartes d'un tirage** (ajout après mise en ligne) : §5.1.1, mobile et bureau.
+   *Critère* : sur le Retail, « Manquantes » + rareté Rare + type Unité donne le même résultat sur mobile et sur bureau, survit à l'aller-retour vers une page carte (précédente / suivante comprises) et au rechargement de la page ; tests unitaires du filtrage.
 
 ---
 
