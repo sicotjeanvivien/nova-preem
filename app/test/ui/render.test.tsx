@@ -74,7 +74,7 @@ describe("Sets, level 1: set list", () => {
     const setsHtml = render({ path: "/sets", entries });
     const releasesHtml = render({ path: "/sets/wnc", entries });
     expect(count(releasesHtml, "release-tile__percent release-tile__percent--complete")).toBe(3);
-    expect(text(releasesHtml)).toContain("Retail 171 / 172 VO VF 99 %");
+    expect(text(releasesHtml)).toContain("Principal VO VF Welcome to Night City Retail 171 / 172 99 %");
     expect(text(setsHtml)).toContain("Welcome to Night City 3 / 17 tirages complétés");
     expect(count(releasesHtml, "release-tile\"")).toBe(17);
     // The bar has the same ratio: 3 / 17 = 17 % (rounded down).
@@ -95,11 +95,12 @@ describe("Sets, level 2: releases of a set", () => {
     const owned = printingOf("Chrome Fang", "embracing-power-starter-retail", "en");
     const content = text(render({ path: "/sets/wnc", entries: [entry(owned.id, 1)] }));
     expect(content).toMatch(/Sets Welcome to Night City 17 tirages/);
-    expect(content).toMatch(/Set principal Principal Welcome to Night City Retail 0 \/ 172 VO VF 0 % Principal Welcome to Night City Beta 0 \/ 172 VO 0 %/);
-    expect(content).toMatch(/Starters Starter Welcome to Night City The Heist — Retail 0 \/ 20/);
-    expect(content).toContain("Embracing Power — Retail 1 / 20 VO VF 5 %");
+    // The languages are in the top right corner of the banner (prices spec §5).
+    expect(content).toMatch(/Set principal Principal VO VF Welcome to Night City Retail 0 \/ 172 0 % Principal VO Welcome to Night City Beta 0 \/ 172 0 %/);
+    expect(content).toMatch(/Starters Starter VO VF Welcome to Night City The Heist — Retail 0 \/ 20/);
+    expect(content).toContain("Embracing Power — Retail 1 / 20 5 %");
     expect(content).toMatch(/Decks démo .*Merc 0 \/ 15 .*Arasaka 0 \/ 14/);
-    expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 VO 0 %/);
+    expect(content).toMatch(/Promos .*Pre-Release — Retail .*Judge Promos 0 \/ 3 0 %/);
   });
 
   it("links each tile to the cards of its release", () => {

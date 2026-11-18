@@ -702,6 +702,8 @@ h2 {
 }
 
 .release-tile__set {
+  /* Room for the language chips in the top right corner. */
+  margin-right: 58px;
   overflow: hidden;
   font-family: var(--font-display);
   font-size: 10px;
@@ -719,26 +721,38 @@ h2 {
   line-height: 1.15;
 }
 
+/* Owned / total on the left, value of the complete release in the middle, percentage on the right. */
 .release-tile__stats {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "count percent"
-    "languages languages";
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 5px 6px;
-  padding: 7px 10px 4px;
+  gap: 4px;
+  padding: 7px 10px 6px;
+  white-space: nowrap;
 }
 
 .release-tile__count {
-  grid-area: count;
+  justify-self: start;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 12px;
 }
 
+.release-tile__value {
+  justify-self: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.release-tile__value--none {
+  color: var(--color-text-dim);
+}
+
 .release-tile__percent {
-  grid-area: percent;
+  grid-column: 3;
+  justify-self: end;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 12px;
@@ -749,10 +763,55 @@ h2 {
   color: var(--color-accent);
 }
 
+/*
+ * Narrow tiles (small phones): smaller figures, then the value on its own line,
+ * so that "172 / 172 · ≈ 7 150 € · 100 %" never overflows.
+ */
+.release-tile {
+  container-type: inline-size;
+}
+
+@container (max-width: 179px) {
+  .release-tile__stats {
+    padding-inline: 8px;
+  }
+
+  .release-tile__count,
+  .release-tile__value,
+  .release-tile__percent {
+    font-size: 11px;
+  }
+}
+
+@container (max-width: 165px) {
+  .release-tile__stats {
+    grid-template-columns: 1fr auto;
+    row-gap: 2px;
+  }
+
+  .release-tile__value {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .release-tile__percent {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
+/* Languages in the top right corner of the banner. */
 .release-tile__languages {
-  grid-area: languages;
+  position: absolute;
+  top: 6px;
+  right: 6px;
   display: flex;
   gap: 4px;
+}
+
+.release-tile__languages .language-chip {
+  background: var(--color-surface-raised);
 }
 
 .release-tile__bar {
@@ -829,13 +888,29 @@ h2 {
   opacity: 0.55;
 }
 
+/* Copies owned in the other language: bottom left; the price is bottom right (prices spec §5). */
 .tile__other {
   position: absolute;
-  right: 6px;
+  left: 6px;
   bottom: 6px;
   padding: 0 4px;
   border-radius: 3px;
   font-size: 10px;
+}
+
+.tile__price {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 0 4px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 3px;
+  background: var(--color-price-badge-bg);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  color: var(--color-text);
+  white-space: nowrap;
 }
 
 .tile__stepper {
@@ -1258,6 +1333,30 @@ h2 {
   gap: 8px;
   padding: 10px 14px;
   border-bottom: 1px solid var(--color-border);
+}
+
+/* Rarity, then the indicative price below it (prices spec §5). */
+.printing-card__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.printing-card__price,
+.printing-table__price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* "Prix indicatifs Cardmarket, toutes langues confondues · 17/11". */
+.price-source {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-faint);
 }
 
 .printing-card__titles {
@@ -2575,6 +2674,212 @@ h2 {
   color: var(--color-text);
 }
 
+/* Estimated value of the collection (prices spec §5). */
+.value-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.value-card__figures {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.value-card__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.value-card__total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.05;
+}
+
+.value-card__meta {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.value-card__date,
+.value-card__note,
+.value-detail__note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+.value-card__note {
+  margin-top: 6px;
+}
+
+.value-card__detail {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.value-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid var(--color-border);
+}
+
+.value-detail__part {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.value-detail__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.value-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 10px;
+}
+
+.value-row__label {
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.value-row__track {
+  height: 10px;
+  overflow: hidden;
+  background: var(--color-border);
+  border-radius: 5px;
+}
+
+.value-row__bar {
+  display: block;
+  height: 100%;
+}
+
+.value-row__value,
+.value-top__price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.value-top {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value-top li {
+  border-top: 1px solid var(--color-border);
+}
+
+.value-top__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 6px 0;
+  color: var(--color-text);
+}
+
+.value-top__link:hover {
+  color: var(--color-text);
+}
+
+.value-top__rank {
+  width: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+.value-top__names {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.value-top__name {
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.value-top__meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.value-top__price {
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+/* Desktop: one panel, the total, the value by release and the most expensive side by side. */
+.value-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+  gap: 18px 28px;
+  padding: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.value-panel .value-card {
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.value-panel .value-card__total {
+  font-size: 40px;
+}
+
+.value-panel .value-card__meta {
+  font-size: 13px;
+}
+
+.value-panel .value-detail__title {
+  font-size: 14px;
+}
+
+.value-panel .value-row {
+  grid-template-columns: 90px minmax(0, 1fr) 64px;
+}
+
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -3462,18 +3767,19 @@ h2 {
   }
 
   .release-tile__stats {
-    display: flex;
-    gap: 12px;
+    gap: 8px;
     padding: 9px 14px;
   }
 
   .release-tile__count,
+  .release-tile__value,
   .release-tile__percent {
     font-size: 13px;
   }
 
-  .release-tile__percent {
-    margin-left: auto;
+  .release-tile__languages {
+    top: 8px;
+    right: 8px;
   }
 
   .release-tile__bar {
@@ -3530,9 +3836,15 @@ h2 {
   }
 
   .tile__other {
-    right: 8px;
+    left: 8px;
     bottom: 8px;
     padding: 0 5px;
+    font-size: 11px;
+  }
+
+  .tile__price {
+    right: 8px;
+    bottom: 8px;
     font-size: 11px;
   }
 
@@ -3706,7 +4018,7 @@ h2 {
 
   .printing-table {
     width: 100%;
-    min-width: 560px;
+    min-width: 660px;
     border-collapse: collapse;
     font-size: 14px;
   }
@@ -3727,7 +4039,8 @@ h2 {
     border-top: 1px solid var(--color-border);
   }
 
-  .printing-table__quantity {
+  .printing-table__quantity,
+  .printing-table__price {
     text-align: right;
   }
 

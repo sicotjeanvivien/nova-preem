@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
+import { formatPrice } from "../domain/prices.ts";
 import { isVariantOwnedIn, quantityOf, type Quantities, type Variant } from "../domain/variants.ts";
 import { useI18n } from "../i18n/i18n.tsx";
 import { useApp } from "./AppContext.tsx";
 import { cardLinkState } from "./cardLink.ts";
 import { CardPlaceholderIcon } from "./icons.tsx";
 import { cardColor, languageLabel, rarityColor, rarityShort } from "./labels.ts";
+import { usePrices } from "./PricesContext.tsx";
 
 interface CardTileProps {
   variant: Variant;
@@ -19,11 +21,13 @@ interface CardTileProps {
 /**
  * A card of a release (SetGrid / WebSets, spec §5.1): the image and the name
  * open the card page; − quantity + below change the copies in the page's
- * language. A badge shows the copies owned in the other language.
+ * language. A badge shows the copies owned in the other language (bottom
+ * left), another the indicative price (bottom right, prices spec §5).
  */
 export function CardTile({ variant, language, name, quantities, onChange }: CardTileProps) {
   const { t } = useI18n();
   const { services } = useApp();
+  const prices = usePrices();
   const location = useLocation();
   const [imageFailed, setImageFailed] = useState(false);
 
@@ -65,6 +69,7 @@ export function CardTile({ variant, language, name, quantities, onChange }: Card
               {languageLabel(t, other.code)} {other.quantity}
             </span>
           ))}
+          {prices && <PriceBadge price={prices.prices[variant.key]} />}
         </span>
         <span className="tile__name">{name}</span>
       </Link>
@@ -82,5 +87,17 @@ export function CardTile({ variant, language, name, quantities, onChange }: Card
         </div>
       )}
     </div>
+  );
+}
+
+/** Rounded price over the image; "—" without a price. */
+function PriceBadge({ price }: { price: number | undefined }) {
+  const { t, language } = useI18n();
+  const text = formatPrice(price, language);
+  return (
+    <span className="tile__price" title={price === undefined ? t("prices.unknown") : t("prices.cardLabel")}>
+      <span className="visually-hidden">{t("prices.cardLabel")} </span>
+      {text}
+    </span>
   );
 }

@@ -1,6 +1,6 @@
 # Conditions générales d'utilisation
 
-Dernière mise à jour : 30 octobre 2026
+Dernière mise à jour : 18 novembre 2026
 
 ## En bref
 
@@ -40,7 +40,7 @@ Le service est fourni gratuitement et sans garantie de disponibilité. AWSD peut
 
 ## Responsabilité
 
-Le service est fourni « en l'état ». Dans les limites permises par la loi, AWSD ne peut être tenue responsable des dommages liés à son utilisation, notamment d'une erreur dans les données des cartes ou d'une perte de données.
+Le service est fourni « en l'état ». Dans les limites permises par la loi, AWSD ne peut être tenue responsable des dommages liés à son utilisation, notamment d'une erreur dans les données des cartes ou d'une perte de données. Les prix affichés sont des estimations indicatives, sans garantie ; ce ne sont ni des offres ni des conseils.
 
 ## Propriété intellectuelle
 

@@ -16,6 +16,7 @@ The idea comes from UrzaGatherer, the go-to app for Magic: The Gathering collect
 - Record what you own, printing by printing, with − and +.
 - Track completion for each release and each set, and spot missing cards and duplicates.
 - Search for a card across all sets and all languages.
+- Estimate what your collection is worth, as a rough order of magnitude.
 - Export and import your collection, and sync it between your devices with Google Drive if you want.
 
 ## Your data stays yours
@@ -27,6 +28,7 @@ The idea comes from UrzaGatherer, the go-to app for Magic: The Gathering collect
 ## Sources and credits
 
 - Card data (names, texts, artwork) comes from the official database at [cyberpunktcg.com](https://cyberpunktcg.com/cards), powered by Netdeck. It is updated regularly and may contain errors.
+- Indicative prices: Cardmarket (public price trend files), all languages combined, updated every night. Nova Preem is not affiliated with Cardmarket.
 - The source code is public, under the MIT license: [github.com/sicotjeanvivien/nova-preem](https://github.com/sicotjeanvivien/nova-preem).
 - Fonts: Chakra Petch, IBM Plex and Oxanium, under the SIL Open Font License.
 

@@ -1,6 +1,6 @@
 # Terms of use
 
-Last updated: October 30, 2026
+Last updated: November 18, 2026
 
 ## In short
 
@@ -40,7 +40,7 @@ The service is provided free of charge, with no availability guarantee. AWSD may
 
 ## Liability
 
-The service is provided "as is". To the extent permitted by law, AWSD is not liable for damage related to its use, in particular an error in card data or a loss of data.
+The service is provided "as is". To the extent permitted by law, AWSD is not liable for damage related to its use, in particular an error in card data or a loss of data. Prices shown are indicative estimates, without any guarantee; they are neither offers nor advice.
 
 ## Intellectual property
 

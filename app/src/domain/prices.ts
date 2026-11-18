@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Printing } from "./catalog.ts";
+import type { Printing, Release, ReleaseGroup } from "./catalog.ts";
 import type { PriceStore, StoredPrices } from "./stores.ts";
 import type { Quantities } from "./variants.ts";
 
@@ -153,4 +153,66 @@ export function releaseValue(variants: Iterable<{ key: string }>, prices: PriceM
     [...variants].map((variant) => ({ variantKey: variant.key, quantity: 1 })),
     prices,
   );
+}
+
+/** A line of "Valeur par tirage" (Stats): a main release on its own, the other releases by group. */
+export interface ReleaseValueRow {
+  /** The release id for a main release, else the group. */
+  key: string;
+  group: ReleaseGroup;
+  /** Set for a main release. */
+  releaseId: string | null;
+  total: number;
+}
+
+const GROUP_ORDER: readonly ReleaseGroup[] = ["main", "starter", "demo", "promo", "unknown"];
+
+/**
+ * Value of the collection by release (Completion / WebStats mockups): each main
+ * release (Retail, Beta), then the starters, demo decks and promos together.
+ * Only the lines worth something, in release order.
+ */
+export function collectionValueByRelease(
+  quantities: Quantities,
+  printings: ReadonlyMap<string, Printing>,
+  releases: ReadonlyMap<string, Release>,
+  prices: PriceMap,
+): ReleaseValueRow[] {
+  const rows = new Map<string, ReleaseValueRow & { order: number }>();
+  for (const [printingId, quantity] of quantities) {
+    const printing = printings.get(printingId);
+    const price = printing ? prices[printing.variantKey] : undefined;
+    const release = printing ? releases.get(printing.releaseId) : undefined;
+    if (!release || price === undefined || quantity <= 0) continue;
+    const main = release.group === "main";
+    const key = main ? release.id : release.group;
+    const order = GROUP_ORDER.indexOf(release.group) * 10_000 + (main ? release.order : 0);
+    const row = rows.get(key) ?? { key, group: release.group, releaseId: main ? release.id : null, total: 0, order };
+    row.total += price * quantity;
+    rows.set(key, row);
+  }
+  return [...rows.values()].sort((a, b) => a.order - b.order).map(({ order: _order, ...row }) => row);
+}
+
+export interface ValuableVariant {
+  variantKey: string;
+  price: number;
+  /** The printings of the variant owned, e.g. its VF and its VO. */
+  printings: Printing[];
+}
+
+/** The most expensive variants owned (Stats, "Les plus chères"): by price, then variant key. */
+export function mostValuable(quantities: Quantities, printings: ReadonlyMap<string, Printing>, prices: PriceMap, limit = 5): ValuableVariant[] {
+  const byVariant = new Map<string, ValuableVariant>();
+  for (const [printingId, quantity] of quantities) {
+    const printing = printings.get(printingId);
+    const price = printing ? prices[printing.variantKey] : undefined;
+    if (!printing || price === undefined || quantity <= 0) continue;
+    const entry = byVariant.get(printing.variantKey) ?? { variantKey: printing.variantKey, price, printings: [] };
+    entry.printings.push(printing);
+    byVariant.set(printing.variantKey, entry);
+  }
+  return [...byVariant.values()]
+    .sort((a, b) => b.price - a.price || a.variantKey.localeCompare(b.variantKey))
+    .slice(0, limit);
 }

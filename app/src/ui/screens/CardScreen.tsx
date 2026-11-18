@@ -2,6 +2,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { Link, Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 import { localize, type Printing } from "../../domain/catalog.ts";
 import { copiesOwned, defaultPrinting, exclusiveCounterpart, printingsOfVariants, splitCardName, variantsOfCard } from "../../domain/cardView.ts";
+import { formatPrice } from "../../domain/prices.ts";
 import { computeReleaseView, neighbors } from "../../domain/releaseView.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
 import { quantityOf, type Variant } from "../../domain/variants.ts";
@@ -9,6 +10,7 @@ import { useI18n } from "../../i18n/i18n.tsx";
 import { useApp } from "../AppContext.tsx";
 import { cardLinkState, readCardLinkState } from "../cardLink.ts";
 import { useCollection } from "../CollectionContext.tsx";
+import { PriceSource, usePrices } from "../PricesContext.tsx";
 import { CardPlaceholderIcon, ChevronLeftIcon, ChevronRightIcon, RotateCardIcon } from "../icons.tsx";
 import { cardColor, cardColorLabel, cardColorText, cardTypeLabel, languageLabel, languageName, rarityColor } from "../labels.ts";
 import { FROM_CARD_PAGE } from "./CardViewerScreen.tsx";
@@ -20,12 +22,14 @@ const RELEASE_CARDS = /^\/sets\/([^/]+)\/([^/]+)$/;
 /**
  * Card page (CardDetail / WebCard, docs/app-spec.md §5.9): one page per card,
  * whatever screen it is opened from. The back button returns to that screen
- * in the same state; previous / next browse the set page it came from.
+ * in the same state; previous / next browse the set page it came from. Each
+ * printing shows its indicative price, then the source (prices spec §5).
  */
 export function CardScreen() {
   const { slug = "" } = useParams();
   const { index, settings, services } = useApp();
   const { quantities, change } = useCollection();
+  const prices = usePrices();
   const { t, language: uiLanguage } = useI18n();
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +59,7 @@ export function CardScreen() {
   const releaseLabel = (variant: Pick<Variant, "release">) => releaseShortName(localize(variant.release.name, uiLanguage), setName(variant.release.setId));
   const variantOf = (printing: Printing) => variants.find((variant) => variant.key === printing.variantKey)!;
 
-  // Screen of origin: the cards of a release (with their filter and language), Collection, Search,
+  // Screen of origin: the cards of a release (with their filter and language), Collection, Search, Stats,
   // or none (direct link: back goes up one level, to the cards of the release of the printing shown).
   const fromRelease = linkState ? RELEASE_CARDS.exec(linkState.from.pathname) : null;
   const originParams = new URLSearchParams(linkState?.from.search ?? "");
@@ -76,7 +80,9 @@ export function CardScreen() {
       ? t("nav.collection")
       : linkState?.from.pathname === "/recherche"
         ? t("nav.search")
-        : `${setName(selectedRelease.setId)} · ${releaseLabel({ release: selectedRelease })}`;
+        : linkState?.from.pathname === "/stats"
+          ? t("nav.stats")
+          : `${setName(selectedRelease.setId)} · ${releaseLabel({ release: selectedRelease })}`;
   const goBack = () => (linkState ? navigate(-1) : navigate(`/sets/${selectedRelease.setId}/${selectedRelease.id}`));
 
   const around = releaseView && linkState?.variantKey ? neighbors(releaseView, linkState.variantKey) : { previous: null, next: null };
@@ -143,6 +149,16 @@ export function CardScreen() {
     );
   };
   const hasNeighbors = Boolean(around.previous || around.next);
+  // Every language of a printing shares its price (prices spec §1).
+  const priceText = (variant: Variant) => {
+    const price = prices?.prices[variant.key];
+    return (
+      <span title={price === undefined ? t("prices.unknown") : undefined}>
+        <span className="visually-hidden">{t("prices.cardLabel")} </span>
+        {formatPrice(price, uiLanguage)}
+      </span>
+    );
+  };
 
   const artists = new Map<string, string[]>();
   for (const variant of variants) {
@@ -279,7 +295,10 @@ export function CardScreen() {
                         </span>
                         <span className="printing-card__artist">{t("card.illustration", { artist: artistsOfVariant.join(" / ") })}</span>
                       </div>
-                      <RarityLabel variant={variant} />
+                      <span className="printing-card__side">
+                        <RarityLabel variant={variant} />
+                        {prices && <span className="printing-card__price">{priceText(variant)}</span>}
+                      </span>
                     </div>
                     {printingsOfVariants([variant], languageOrder).map((printing) => (
                       <div key={printing.id} className="printing-row">
@@ -306,6 +325,11 @@ export function CardScreen() {
                     <th scope="col">{t("card.column.number")}</th>
                     <th scope="col">{t("card.column.rarity")}</th>
                     <th scope="col">{t("card.column.language")}</th>
+                    {prices && (
+                      <th scope="col" className="printing-table__price">
+                        {t("prices.cardLabel")}
+                      </th>
+                    )}
                     <th scope="col" className="printing-table__quantity">
                       {t("card.column.quantity")}
                     </th>
@@ -327,6 +351,7 @@ export function CardScreen() {
                         <td>
                           <span className={`language-chip language-chip--${printing.language}`}>{languageLabel(t, printing.language)}</span>
                         </td>
+                        {prices && <td className="printing-table__price">{priceText(variant)}</td>}
                         <td>
                           <QuantityStepper printing={printing} labels={printingLabel(printing)} quantity={quantityOf(quantities, printing)} onChange={change} />
                         </td>
@@ -336,6 +361,7 @@ export function CardScreen() {
                 </tbody>
               </table>
             </div>
+            {prices && <PriceSource prices={prices} />}
             <p className="desktop-only printings__artists">
               {t("card.illustrations", { list: [...artists].map(([artist, where]) => `${artist} (${where.join(", ")})`).join(", ") })}
             </p>

@@ -1,6 +1,6 @@
 # Privacy policy
 
-Last updated: November 2, 2026
+Last updated: November 18, 2026
 
 ## In short
 
@@ -28,7 +28,7 @@ This data leaves your device only if you export a file or turn on sync. To erase
 
 The site is hosted by Cloudflare (Cloudflare Pages). To serve pages and protect the site, Cloudflare receives your requests, including your IP address and technical information about your browser. This data may be processed outside the European Union, in particular in the United States; Cloudflare participates in the EU–U.S. Data Privacy Framework. We have not turned on any analytics tool and we do not use these logs to identify visitors.
 
-The catalog, images and fonts are served by the site itself: using Nova Preem sends no request to any third-party service.
+The catalog, indicative prices, images and fonts are served by the site itself: using Nova Preem sends no request to any third-party service.
 
 ## Google Drive sync (optional) {#google-drive}
 
