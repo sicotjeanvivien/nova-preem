@@ -19,6 +19,8 @@ pnpm build            # builds dist/ from the cache, without network
 pnpm test             # Vitest, on fixtures taken from real API responses
 pnpm typecheck
 pnpm publish-catalog  # deploys dist/ to Cloudflare Pages (maintainer only)
+pnpm prices           # downloads the Cardmarket files and builds prices/dist/prices.json
+pnpm prices --offline # same, from the files downloaded last time
 ```
 
 A full update is `pnpm crawl && pnpm build`, then `pnpm publish-catalog` to put it online. The app sees the new version through `manifest.json` and offers the update.
@@ -67,12 +69,22 @@ src/crawl.ts            the crawl command
 src/build.ts            the build command: catalog.json, manifest.json, report.json
 src/publish.ts          the publish command (Cloudflare Pages, CORS headers)
 src/model.ts            types of the output catalog
+src/prices/             the price pipeline: Cardmarket adapter, mapping, matching, prices.json, the prices command
+prices/cardmarket.json  catalog ↔ Cardmarket correspondence, maintained by hand
 test/fixtures/          real API responses, truncated
 ```
 
 ## Publishing
 
 `pnpm publish-catalog` stages the JSON files and the referenced images, writes the `_headers` file (CORS open, since the app runs on another origin) and runs a pinned version of `wrangler pages deploy`. Set `CATALOG_PROJECT` to target a project other than `nova-preem-catalog`. Setup: [`docs/deploy.md`](../docs/deploy.md).
+
+## Indicative prices
+
+`pnpm prices` builds `prices/dist/prices.json`, the indicative Cardmarket price of each variant (`variantKey` → euros), and `prices/dist/prices-report.json`, which is not published. Neither is in git: prices change every night. The full specification is in [`docs/prices-spec.md`](../docs/prices-spec.md) (in French).
+
+- **Source**: two public files of Cardmarket for the game (products and price guide), downloaded once per run with the project's User-Agent and validated with Zod. The adapter is [`src/prices/cardmarket.ts`](src/prices/cardmarket.ts). Only the single cards are kept; the retained price is `trend`, otherwise `trend-foil`, otherwise none.
+- **Matching**: [`prices/cardmarket.json`](prices/cardmarket.json), maintained by hand, maps each release to a Cardmarket expansion and holds the name aliases (typos of the source) and the overrides (`variantKey` → product). Within a release, products are matched to the English printings by normalized name; several printings with the same name are matched in order (`idProduct` ↔ collector number) only if both counts are equal.
+- **Report**: releases without an expansion, names not matched (with both counts), orphan products, Iconic printings cheaper than their normal version, coverage. As for the catalog, the pipeline never guesses: a case it cannot settle is reported, and can be fixed with an override.
 
 ## Legal
 
