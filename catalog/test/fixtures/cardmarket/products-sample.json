@@ -1,0 +1,87 @@
+{
+ "version": 1,
+ "createdAt": "2026-11-16T13:57:03+0100",
+ "products": [
+  {
+   "idProduct": 904772,
+   "name": "Rebecca - Having a Moment",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6719,
+   "idMetacard": 467163,
+   "dateAdded": "2026-08-27 19:38:10"
+  },
+  {
+   "idProduct": 904914,
+   "name": "Lucyna Kushinada - Fresh Beginnings",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6722,
+   "idMetacard": 467168,
+   "dateAdded": "2026-08-28 14:11:57"
+  },
+  {
+   "idProduct": 904915,
+   "name": "Yorinobu Arasaka - Embracing Destruction",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6722,
+   "idMetacard": 467169,
+   "dateAdded": "2026-08-28 14:13:25"
+  },
+  {
+   "idProduct": 905002,
+   "name": "Swordwise Huscle",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6721,
+   "idMetacard": 467177,
+   "dateAdded": "2026-08-28 14:53:26"
+  },
+  {
+   "idProduct": 905261,
+   "name": "Adam Smasher - Ender of Legends",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6719,
+   "idMetacard": 467203,
+   "dateAdded": "2026-08-28 18:38:35"
+  },
+  {
+   "idProduct": 920398,
+   "name": "Adam Smasher - Ender of Legends",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6761,
+   "idMetacard": 467203,
+   "dateAdded": "2026-10-30 10:26:17"
+  },
+  {
+   "idProduct": 920416,
+   "name": "Tetratonic Rippler",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6762,
+   "idMetacard": 467220,
+   "dateAdded": "2026-10-30 10:58:20"
+  },
+  {
+   "idProduct": 920637,
+   "name": "Tetratronic Rippler",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6761,
+   "idMetacard": 467312,
+   "dateAdded": "2026-10-30 13:46:33"
+  },
+  {
+   "idProduct": 920648,
+   "name": "Adam Smasher - Ender of Legends",
+   "idCategory": 1661,
+   "categoryName": "Cyberpunk Single",
+   "idExpansion": 6761,
+   "idMetacard": 467203,
+   "dateAdded": "2026-10-30 13:52:20"
+  }
+ ]
+}

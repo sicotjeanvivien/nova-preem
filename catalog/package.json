@@ -13,6 +13,7 @@
     "build": "tsx src/build.ts",
     "test": "vitest run",
     "publish-catalog": "tsx src/publish.ts",
+    "prices": "tsx src/prices/build.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

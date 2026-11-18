@@ -1,0 +1,29 @@
+{
+  "game": 23,
+  "category": 1661,
+  "expansions": {
+    "wnc-beta": 6714,
+    "wnc-retail": 6761,
+    "heist-starter-beta": 6715,
+    "heist-starter-retail": 6762,
+    "embracing-power-starter-beta": 6716,
+    "embracing-power-starter-retail": 6763,
+    "merc-demo": 6720,
+    "arasaka-demo": 6721,
+    "prerelease-beta": 6718,
+    "prerelease-retail": 6765,
+    "box-toppers-beta": 6717,
+    "box-toppers-retail": 6764,
+    "night-city-brawl-s1": 6953,
+    "night-city-showdown-s1": 6954,
+    "set1-promos": 6719,
+    "judge-promos": 6952
+  },
+  "ignoredExpansions": {
+    "6722": "cartes Kickstarter absentes du catalogue"
+  },
+  "nameAliases": {
+    "Tetratonic Rippler": "Tetratronic Rippler"
+  },
+  "overrides": {}
+}
