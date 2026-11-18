@@ -4,8 +4,10 @@ import { localize } from "../../domain/catalog.ts";
 import { releasesOfSet } from "../../domain/catalogIndex.ts";
 import { percentFloor, releaseVariants } from "../../domain/completion.ts";
 import { normalizeText } from "../../domain/search.ts";
+import { formatTotal, releaseValue, type PricedValue } from "../../domain/prices.ts";
 import { RELEASE_GROUP_ORDER } from "../../domain/sets.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
+import { variantsOf } from "../../domain/variants.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import type { MessageKey } from "../../i18n/messages.ts";
 import { useIsDesktop } from "../../platform/media.ts";
@@ -13,6 +15,7 @@ import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
 import { ChevronLeftIcon } from "../icons.tsx";
 import { languageLabel } from "../labels.ts";
+import { usePrices } from "../PricesContext.tsx";
 import { ProgressBar } from "../ProgressBar.tsx";
 import { HeaderIndicators } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
@@ -28,13 +31,15 @@ const RIBBON_COLORS: Record<string, string> = {
 /**
  * Sets, level 2 (SetReleases / WebSetReleases, spec §2.1): one tile per
  * release, grouped by type (main set, starters, demo decks, promos), with its
- * progress and languages; filter by name.
+ * progress, languages and the value of the complete release (prices spec §5);
+ * filter by name.
  */
 export function SetReleasesScreen() {
   const { setId = "" } = useParams();
   const [params] = useSearchParams();
   const { index, settings } = useApp();
   const { quantities } = useCollection();
+  const prices = usePrices();
   const { t, language } = useI18n();
   const isDesktop = useIsDesktop();
   const [query, setQuery] = useState("");
@@ -111,11 +116,6 @@ export function SetReleasesScreen() {
                       <span className="release-tile__ribbon" style={{ background: RIBBON_COLORS[group] }}>
                         <span>{t(`releases.ribbon.${group}` as MessageKey)}</span>
                       </span>
-                      <span className="release-tile__set">{setName}</span>
-                      <span className="release-tile__name">{shortName(release.name)}</span>
-                    </span>
-                    <span className="release-tile__stats">
-                      <span className="release-tile__count">{t("sets.ratio", progress)}</span>
                       <span className="release-tile__languages">
                         {languages(release.languages).map((code) => (
                           <span key={code} className={`language-chip language-chip--small language-chip--${code}`}>
@@ -123,6 +123,12 @@ export function SetReleasesScreen() {
                           </span>
                         ))}
                       </span>
+                      <span className="release-tile__set">{setName}</span>
+                      <span className="release-tile__name">{shortName(release.name)}</span>
+                    </span>
+                    <span className="release-tile__stats">
+                      <span className="release-tile__count">{t("sets.ratio", progress)}</span>
+                      {prices && <ReleaseValue value={releaseValue(variantsOf(index, [release]), prices.prices)} />}
                       <span className={`release-tile__percent ${complete ? "release-tile__percent--complete" : ""}`}>{percent}&nbsp;%</span>
                     </span>
                     <ProgressBar
@@ -140,5 +146,26 @@ export function SetReleasesScreen() {
         {groups.length === 0 && <p className="set-page__empty">{t("releases.empty")}</p>}
       </div>
     </div>
+  );
+}
+
+/**
+ * Value of the complete release: one copy of each card (prices spec §5), or
+ * "Pas de prix" in grey when none of its cards has a price.
+ */
+function ReleaseValue({ value }: { value: PricedValue }) {
+  const { t, language } = useI18n();
+  if (value.priced === 0) {
+    return (
+      <span className="release-tile__value release-tile__value--none" title={t("prices.releaseNone")}>
+        {t("prices.none")}
+      </span>
+    );
+  }
+  return (
+    <span className="release-tile__value" title={t("prices.releaseHelp", { unpriced: value.unpriced })}>
+      <span className="visually-hidden">{t("prices.releaseValue")} </span>
+      {formatTotal(value.total, language)}
+    </span>
   );
 }

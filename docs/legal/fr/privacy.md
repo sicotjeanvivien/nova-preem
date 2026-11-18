@@ -1,6 +1,6 @@
 # Politique de confidentialité
 
-Dernière mise à jour : 2 novembre 2026
+Dernière mise à jour : 18 novembre 2026
 
 ## En bref
 
@@ -28,7 +28,7 @@ Ces données ne quittent votre appareil que si vous exportez un fichier ou activ
 
 Le site est hébergé par Cloudflare (Cloudflare Pages). Pour servir les pages et protéger le site, Cloudflare reçoit vos requêtes, avec votre adresse IP et des informations techniques sur votre navigateur. Ces données peuvent être traitées hors de l'Union européenne, notamment aux États-Unis ; Cloudflare adhère au cadre de protection des données UE–États-Unis (Data Privacy Framework). Nous n'avons activé aucun outil de statistiques et nous n'utilisons pas ces journaux pour identifier les visiteurs.
 
-Le catalogue, les images et les polices sont servis par le site lui-même : consulter Nova Preem n'envoie aucune requête à un service tiers.
+Le catalogue, les prix indicatifs, les images et les polices sont servis par le site lui-même : consulter Nova Preem n'envoie aucune requête à un service tiers.
 
 ## Synchronisation avec Google Drive (facultative) {#google-drive}
 

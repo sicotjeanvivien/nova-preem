@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useI18n } from "../i18n/i18n.tsx";
 import { arePricesOld, downloadPrices, isPriceRefreshDue, type PriceMap } from "../domain/prices.ts";
 import type { StoredPrices } from "../domain/stores.ts";
 import { useApp } from "./AppContext.tsx";
@@ -62,4 +63,26 @@ export function usePrices(): PricesInfo | null {
 /** "17/11" (French) or "11/17" (English): the date of the prices. */
 export function formatPriceDate(sourceDate: string, language: string): string {
   return new Intl.DateTimeFormat(language, { day: "2-digit", month: "2-digit" }).format(new Date(sourceDate));
+}
+
+/**
+ * "Prix du 17/11", or "Prix anciens · 09/11" in amber when the prices are more
+ * than 7 days old (spec §5). `lowercase`: "prix du 17/11", inside a sentence.
+ */
+export function PriceDate({ prices, lowercase = false }: { prices: PricesInfo; lowercase?: boolean }) {
+  const { t, language } = useI18n();
+  const date = formatPriceDate(prices.sourceDate, language);
+  if (prices.old) return <span className="prices-old">{t("prices.dateOld", { date })}</span>;
+  return <>{lowercase ? t("settings.pricesDate", { date }) : t("prices.date", { date })}</>;
+}
+
+/** "Prix indicatifs Cardmarket, toutes langues confondues · 17/11" (card page, spec §5); the date in amber when old. */
+export function PriceSource({ prices }: { prices: PricesInfo }) {
+  const { t, language } = useI18n();
+  const date = formatPriceDate(prices.sourceDate, language);
+  return (
+    <p className="price-source">
+      {t("prices.source")} · {prices.old ? <span className="prices-old">{t("prices.dateOld", { date })}</span> : date}
+    </p>
+  );
 }

@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
-import type { Printing } from "../../src/domain/catalog.ts";
+import type { Printing, Release } from "../../src/domain/catalog.ts";
 import {
   arePricesOld,
   collectionValue,
+  collectionValueByRelease,
+  mostValuable,
   downloadPrices,
   formatPrice,
   formatTotal,
@@ -199,5 +201,57 @@ describe("loading", () => {
 
   it("accepts the file published by the pipeline", () => {
     expect(pricesFileSchema.safeParse(PRICES_FILE).success).toBe(true);
+  });
+});
+
+describe("Stats detail", () => {
+  const printing = (id: string, variantKey: string, releaseId: string, language = "fr") =>
+    [id, { id, variantKey, releaseId, language } as Printing] as const;
+  const printings = new Map([
+    printing("r1", "wnc-retail#001", "wnc-retail"),
+    printing("r141", "wnc-retail#141", "wnc-retail"),
+    printing("r141en", "wnc-retail#141", "wnc-retail", "en"),
+    printing("b141", "wnc-beta#141", "wnc-beta", "en"),
+    printing("s2", "embracing-power-starter-retail#002", "embracing-power-starter-retail"),
+    printing("h18", "heist-starter-retail#018", "heist-starter-retail"),
+    printing("p1", "set1-promos#005", "set1-promos"),
+  ]);
+  const release = (id: string, group: string, order: number) => [id, { id, group, order } as Release] as const;
+  const releases = new Map([
+    release("wnc-retail", "main", 1),
+    release("wnc-beta", "main", 2),
+    release("embracing-power-starter-retail", "starter", 5),
+    release("heist-starter-retail", "starter", 3),
+    release("set1-promos", "promo", 20),
+  ]);
+  const prices = { "wnc-retail#001": 0.8, "wnc-retail#141": 64.85, "wnc-beta#141": 123.27, "embracing-power-starter-retail#002": 0.2, "heist-starter-retail#018": 0.3 };
+  const quantities = new Map([
+    ["r1", 2],
+    ["r141", 1],
+    ["r141en", 1],
+    ["b141", 1],
+    ["s2", 3],
+    ["h18", 1],
+    ["p1", 4],
+  ]);
+
+  it("gives each main release, then the other groups, with a value", () => {
+    const rows = collectionValueByRelease(quantities, printings, releases, prices);
+    expect(rows.map(({ key, group, releaseId }) => ({ key, group, releaseId }))).toEqual([
+      { key: "wnc-retail", group: "main", releaseId: "wnc-retail" },
+      { key: "wnc-beta", group: "main", releaseId: "wnc-beta" },
+      { key: "starter", group: "starter", releaseId: null },
+    ]);
+    expect(rows[0]!.total).toBeCloseTo(0.8 * 2 + 64.85 * 2);
+    expect(rows[2]!.total).toBeCloseTo(0.2 * 3 + 0.3);
+  });
+
+  it("lists the most expensive variants owned, once each with their languages", () => {
+    const top = mostValuable(quantities, printings, prices, 3);
+    expect(top.map((item) => [item.variantKey, item.price, item.printings.map((p) => p.language)])).toEqual([
+      ["wnc-beta#141", 123.27, ["en"]],
+      ["wnc-retail#141", 64.85, ["fr", "en"]],
+      ["wnc-retail#001", 0.8, ["fr"]],
+    ]);
   });
 });

@@ -37,3 +37,48 @@ export function fakePriceSource(file: unknown = PRICES_FILE): PriceSource & { do
   };
   return source;
 }
+
+/** Real prices of 17/11/2026 for the variants of the demonstration collection (subset of prices.json). */
+export const DEMO_PRICES: Record<string, number> = {
+  "wnc-retail#003": 14.04,
+  "wnc-retail#008": 0.04,
+  "wnc-retail#011": 11.57,
+  "wnc-retail#014": 0.2,
+  "wnc-retail#017": 0.04,
+  "wnc-retail#020": 1.22,
+  "wnc-retail#025": 0.07,
+  "wnc-retail#048": 3.63,
+  "wnc-retail#053": 0.08,
+  "wnc-retail#141": 64.85,
+  "wnc-retail#144": 70.07,
+  "wnc-beta#141": 123.27,
+  "embracing-power-starter-retail#002": 0.2,
+  "night-city-brawl-s1#001": 4.72,
+};
+
+export const DEMO_PRICES_FILE: PricesFile = { ...PRICES_FILE, prices: DEMO_PRICES };
+
+/**
+ * The demonstration collection: the cards of the Collection mockup, plus an
+ * Iconic, a Beta, a promo and two cards without a price.
+ * [variant key, language, quantity].
+ */
+export const DEMO_COLLECTION: [string, string, number][] = [
+  ["wnc-retail#144", "fr", 1],
+  ["wnc-retail#008", "fr", 3],
+  ["wnc-retail#025", "fr", 2],
+  ["wnc-retail#025", "en", 1],
+  ["wnc-retail#003", "fr", 1],
+  ["wnc-retail#020", "fr", 1],
+  ["wnc-retail#053", "fr", 3],
+  ["wnc-retail#048", "fr", 1],
+  ["wnc-retail#014", "fr", 1],
+  ["wnc-retail#014", "en", 1],
+  ["wnc-retail#017", "fr", 2],
+  ["wnc-retail#141", "fr", 1],
+  ["wnc-beta#141", "en", 1],
+  ["embracing-power-starter-retail#002", "en", 1],
+  ["night-city-brawl-s1#001", "en", 1],
+  ["edgerunner-open-s1#001", "en", 2],
+  ["set1-promos#005", "en", 1],
+];

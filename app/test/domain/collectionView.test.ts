@@ -6,6 +6,7 @@ import {
   NO_FILTERS,
   parseCollectionParams,
   quantityIn,
+  rowsValue,
   sortRows,
   summarizeRows,
 } from "../../src/domain/collectionView.ts";
@@ -98,18 +99,38 @@ describe("sorting (spec §5.7)", () => {
     expect(order("rarity")[0]).toBe("wnc-retail 144");
     expect(order("quantity").slice(0, 2)).toEqual(["wnc-retail 008", "wnc-retail 025"]);
   });
+
+  it("sorts by value: unit price, most expensive first, cards without a price last (prices spec §5)", () => {
+    const prices = { "wnc-retail#008": 0.04, "wnc-retail#144": 70.07, "wnc-retail#025": 0.07 };
+    const byValue = sortRows(rows, "value", name, collator.compare, prices).map((row) => `${row.variant.release.id} ${row.variant.collectorNumber}`);
+    expect(byValue).toEqual(["wnc-retail 144", "wnc-retail 025", "wnc-retail 008", "embracing-power-starter-retail 002"]);
+    // Without prices, the order is the number order.
+    expect(sortRows(rows, "value", name, collator.compare)).toEqual(sortRows(rows, "number", name, collator.compare));
+  });
+});
+
+describe("value of the selection (prices spec §5)", () => {
+  it("is the price × copies of the rows shown, filters included", () => {
+    const prices = { "wnc-retail#025": 0.07, "wnc-retail#008": 0.04 };
+    const all = rowsValue(collectionRows(index, owned, NO_FILTERS, 1), prices);
+    const french = rowsValue(collectionRows(index, owned, { ...NO_FILTERS, language: "fr" }, 1), prices);
+    expect(all.total).toBeGreaterThan(french.total);
+    expect(all.priced + all.unpriced).toBe(summarizeRows(collectionRows(index, owned, NO_FILTERS, 1)).copies);
+  });
 });
 
 describe("URL parameters", () => {
   it("round-trips the name, filters and sort, and omits the defaults", () => {
     const state = {
       filters: { ...NO_FILTERS, query: "croc", language: "fr", duplicates: true, releases: ["wnc-retail", "starter"], colors: ["red"] },
-      sort: "rarity" as const,
+      sort: "rarity" as "rarity" | "value",
     };
     const params = collectionParams(state.filters, state.sort);
     expect(params).toEqual({ q: "croc", langue: "fr", doublons: "1", tirage: "wnc-retail,starter", couleur: "red", tri: "rarete" });
     expect(parseCollectionParams(params)).toEqual(state);
     expect(collectionParams(NO_FILTERS, "recent")).toEqual({});
     expect(parseCollectionParams({})).toEqual({ filters: NO_FILTERS, sort: "recent" });
+    expect(parseCollectionParams(collectionParams(NO_FILTERS, "value"))).toEqual({ filters: NO_FILTERS, sort: "value" });
+    expect(collectionParams(NO_FILTERS, "value")).toEqual({ tri: "valeur" });
   });
 });

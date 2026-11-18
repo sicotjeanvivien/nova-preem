@@ -20,6 +20,8 @@ import type { MessageKey } from "../../i18n/messages.ts";
 import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCollection } from "../CollectionContext.tsx";
+import { COLLECTION_VALUE_SECTION, CollectionValueCard, CollectionValueDetail } from "../CollectionValue.tsx";
+import { usePrices } from "../PricesContext.tsx";
 import { cardTypeLabel, languageLabel, rarityColor } from "../labels.ts";
 import { ProgressBar } from "../ProgressBar.tsx";
 import { HeaderIndicators } from "../SyncIndicators.tsx";
@@ -46,10 +48,12 @@ interface BreakdownRow {
  * Stats (Completion / WebStats, docs/app-spec.md §5.3): the four completion
  * measures and their breakdowns. Mobile shows one measure at a time; desktop a
  * dashboard. The release of "par tirage" can be chosen (spec: "le tirage choisi").
+ * With prices, the estimated value of the collection comes first (prices spec §5).
  */
 export function StatsScreen() {
   const { index, settings } = useApp();
   const { quantities } = useCollection();
+  const prices = usePrices();
   const { t, language: uiLanguage } = useI18n();
   const isDesktop = useIsDesktop();
   const [params, setParams] = useSearchParams();
@@ -184,6 +188,12 @@ export function StatsScreen() {
             </section>
           ))}
         </div>
+        {prices && (
+          <div className="value-panel">
+            <CollectionValueCard prices={prices} detailLink={false} />
+            <CollectionValueDetail prices={prices} compact />
+          </div>
+        )}
         <div className="breakdown-grid">
           <Breakdown title={t("stats.byReleaseLanguage")} rows={masterRows} note={t("stats.notCountedNote")} />
           <Breakdown
@@ -227,6 +237,7 @@ export function StatsScreen() {
         <HeaderIndicators />
       </header>
       <div className="screen stats-body">
+        {prices && <CollectionValueCard prices={prices} detailLink />}
         {setSelect}
         <div role="group" aria-label={t("stats.modes")} className="mode-switch">
           {(Object.keys(MODE_PARAMS) as Mode[]).map((m) => (
@@ -247,6 +258,11 @@ export function StatsScreen() {
         </section>
         {mode === "release" && languageChips}
         <Breakdown title={breakdown.title} rows={breakdown.rows} plain {...("note" in breakdown && { note: breakdown.note })} />
+        {prices && (
+          <section id={COLLECTION_VALUE_SECTION} aria-label={t("stats.value.title")} className="value-detail">
+            <CollectionValueDetail prices={prices} compact={false} />
+          </section>
+        )}
         <Link to="/reglages" className="counted-card">
           <span className="counted-card__text">
             <span className="counted-card__label">{t("stats.countedGroups")}</span>

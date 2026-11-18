@@ -5,6 +5,7 @@ import { releasesOfSet } from "../../domain/catalogIndex.ts";
 import {
   COLLECTION_SORTS,
   collectionParams,
+  DEFAULT_SORT,
   collectionRows,
   type CollectionFilters,
   type CollectionRow,
@@ -12,9 +13,11 @@ import {
   NO_FILTERS,
   parseCollectionParams,
   quantityIn,
+  rowsValue,
   sortRows,
   summarizeRows,
 } from "../../domain/collectionView.ts";
+import { formatPrice, formatTotal } from "../../domain/prices.ts";
 import { buildSetTabs, releaseShortName } from "../../domain/setTabs.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
 import type { MessageKey } from "../../i18n/messages.ts";
@@ -27,6 +30,7 @@ import { ActiveFilters, type FilterCriterion, FilterPanel, FiltersButton, type F
 import { colorOptions, rarityOptions, typeOptions } from "../filterOptions.ts";
 import { ImageIcon } from "../icons.tsx";
 import { cardColor, languageLabel, rarityColor, rarityShort } from "../labels.ts";
+import { usePrices } from "../PricesContext.tsx";
 import { HeaderIndicators } from "../SyncIndicators.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
 import { useTabLabel } from "./useTabLabel.ts";
@@ -58,17 +62,23 @@ function CollectionGallery() {
   const closePanel = useCallback(() => setPanelOpen(false), []);
   useDocumentTitle(t("collection.title"));
 
-  const { filters, sort } = parseCollectionParams(Object.fromEntries(params));
+  const prices = usePrices();
+  const parsed = parseCollectionParams(Object.fromEntries(params));
+  const { filters } = parsed;
+  // The value sort only exists with prices (prices spec §5).
+  const sort = parsed.sort === "value" && !prices ? DEFAULT_SORT : parsed.sort;
   const displayLanguages = [...index.catalog.languages].sort((a, b) => (a === settings.entryLanguage ? -1 : b === settings.entryLanguage ? 1 : 0));
   const nameLanguage = settings.cardNameLanguage !== "entry" ? settings.cardNameLanguage : (filters.language ?? settings.entryLanguage);
 
   const rows = useMemo(() => {
     const collator = new Intl.Collator(uiLanguage);
     const all = collectionRows(index, entries, filters, settings.duplicateThreshold);
-    return sortRows(all, sort, (row) => localize(row.variant.card.name, nameLanguage), collator.compare);
+    return sortRows(all, sort, (row) => localize(row.variant.card.name, nameLanguage), collator.compare, prices?.prices);
     // `filters` and `sort` are rebuilt from the URL on every render: depend on the URL itself.
-  }, [index, entries, params, settings.duplicateThreshold, nameLanguage, uiLanguage]);
+  }, [index, entries, params, settings.duplicateThreshold, nameLanguage, uiLanguage, prices]);
   const summary = summarizeRows(rows);
+  // Value of the selection shown, filters included, at the end of the summary.
+  const valueSuffix = prices ? ` · ${formatTotal(rowsValue(rows, prices.prices).total, uiLanguage)}` : "";
 
   const update = (next: { filters?: CollectionFilters; sort?: CollectionSort }) =>
     setParams(collectionParams(next.filters ?? filters, next.sort ?? sort), { replace: true });
@@ -136,7 +146,7 @@ function CollectionGallery() {
   );
   const sortSelect = (
     <select id="collection-sort" className="sort-select" value={sort} onChange={(event) => update({ sort: event.target.value as CollectionSort })}>
-      {COLLECTION_SORTS.map((key) => (
+      {COLLECTION_SORTS.filter((key) => key !== "value" || prices).map((key) => (
         <option key={key} value={key}>
           {t(`collection.sort.${key}` as MessageKey)}
         </option>
@@ -174,7 +184,10 @@ function CollectionGallery() {
           </label>
           {sortSelect}
           {filtersButton}
-          <span className="collection-header__summary">{t("collection.summaryLong", summary)}</span>
+          <span className="collection-header__summary">
+            {t("collection.summaryLong", summary)}
+            {valueSuffix}
+          </span>
         </header>
         {filterPanel}
         <div className="collection-body">
@@ -205,7 +218,10 @@ function CollectionGallery() {
         <div className="collection-header__title">
           <h1>{t("collection.title")}</h1>
           <span className="collection-header__end">
-            <span className="collection-header__summary">{t("collection.summary", summary)}</span>
+            <span className="collection-header__summary">
+              {t("collection.summary", summary)}
+              {valueSuffix}
+            </span>
             <HeaderIndicators />
           </span>
         </div>
@@ -244,6 +260,7 @@ function GalleryCard({
   linkLanguage: string | null;
 }) {
   const { services, index } = useApp();
+  const prices = usePrices();
   const { t, language: uiLanguage } = useI18n();
   const location = useLocation();
   const [failed, setFailed] = useState(false);
@@ -302,7 +319,10 @@ function GalleryCard({
         </span>
       </span>
       <span className="gallery-card__name">{name}</span>
-      <span className="gallery-card__meta">{t("collection.meta", { release, number: variant.collectorNumber })}</span>
+      <span className="gallery-card__meta">
+        {t("collection.meta", { release, number: variant.collectorNumber })}
+        {prices && ` · ${formatPrice(prices.prices[variant.key], uiLanguage)}`}
+      </span>
     </Link>
   );
 }

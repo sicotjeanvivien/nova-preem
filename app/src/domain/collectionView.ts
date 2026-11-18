@@ -1,6 +1,7 @@
 import type { Printing, Rarity, Release } from "./catalog.ts";
 import type { CatalogIndex } from "./catalogIndex.ts";
 import type { CollectionEntry } from "./collection.ts";
+import { type PriceMap, type PricedValue, valueOf } from "./prices.ts";
 import { normalizeText } from "./search.ts";
 import type { Variant } from "./variants.ts";
 
@@ -26,10 +27,11 @@ export const NO_FILTERS: CollectionFilters = { query: "", language: null, duplic
 
 /**
  * Sorts of the gallery (spec §5.7): recent entries first (default), number,
- * name (French order), rarity (rarest first), quantity (largest first).
+ * name (French order), rarity (rarest first), quantity (largest first), and
+ * with prices, value (most expensive first, without a price last; prices spec §5).
  */
-export type CollectionSort = "recent" | "number" | "name" | "rarity" | "quantity";
-export const COLLECTION_SORTS: CollectionSort[] = ["recent", "number", "name", "rarity", "quantity"];
+export type CollectionSort = "recent" | "number" | "name" | "rarity" | "quantity" | "value";
+export const COLLECTION_SORTS: CollectionSort[] = ["recent", "number", "name", "rarity", "quantity", "value"];
 export const DEFAULT_SORT: CollectionSort = "recent";
 
 /**
@@ -125,6 +127,14 @@ export function summarizeRows(rows: readonly CollectionRow[]): { copies: number;
   };
 }
 
+/** Value of the rows shown, filters included (prices spec §5): every copy in scope. */
+export function rowsValue(rows: readonly CollectionRow[], prices: PriceMap): PricedValue {
+  return valueOf(
+    rows.map((row) => ({ variantKey: row.variant.key, quantity: row.copies })),
+    prices,
+  );
+}
+
 export function quantityIn(row: CollectionRow, language: string): number {
   return row.owned.find(({ printing }) => printing.language === language)?.quantity ?? 0;
 }
@@ -133,12 +143,14 @@ export function quantityIn(row: CollectionRow, language: string): number {
  * Sorts the rows (spec §5.7). `name` gives the displayed name of a row and
  * `compareNames` compares them (French alphabetical order in the interface).
  * Ties are broken by release and number, so that the order is stable.
+ * `prices` is needed by the value sort (unit price of the card).
  */
 export function sortRows(
   rows: readonly CollectionRow[],
   sort: CollectionSort,
   name: (row: CollectionRow) => string,
   compareNames: (a: string, b: string) => number,
+  prices: PriceMap = {},
 ): CollectionRow[] {
   const byNumber = (a: CollectionRow, b: CollectionRow) =>
     a.variant.release.order - b.variant.release.order || compare(a.variant.sortKey, b.variant.sortKey);
@@ -154,6 +166,12 @@ export function sortRows(
         return (b.variant.rarity?.order ?? -1) - (a.variant.rarity?.order ?? -1);
       case "quantity":
         return b.copies - a.copies;
+      case "value": {
+        const priceA = prices[a.variant.key];
+        const priceB = prices[b.variant.key];
+        if (priceA === undefined || priceB === undefined) return (priceA === undefined ? 1 : 0) - (priceB === undefined ? 1 : 0);
+        return priceB - priceA;
+      }
     }
   };
   return [...rows].sort((a, b) => primary(a, b) || byNumber(a, b));
@@ -168,6 +186,7 @@ const SORT_PARAMS: Record<string, CollectionSort> = {
   nom: "name",
   rarete: "rarity",
   quantite: "quantity",
+  valeur: "value",
 };
 
 /** URL parameters as plain key → value pairs (the domain does not depend on browser APIs). */

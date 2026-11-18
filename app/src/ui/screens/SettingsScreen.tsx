@@ -12,7 +12,7 @@ import { useIsDesktop } from "../../platform/media.ts";
 import { useApp } from "../AppContext.tsx";
 import { useCatalogUpdate } from "../CatalogUpdate.tsx";
 import { useDataActions } from "../dataActions.ts";
-import { formatPriceDate, usePrices } from "../PricesContext.tsx";
+import { PriceDate, usePrices } from "../PricesContext.tsx";
 import { SupportCard } from "../SupportCard.tsx";
 import { SyncCard } from "../SyncCard.tsx";
 import { useSync } from "../SyncContext.tsx";
@@ -219,10 +219,7 @@ export function SettingsScreen() {
                   {!settings.indicativePrices ? (
                     t("settings.pricesOff")
                   ) : prices ? (
-                    <span className={prices.old ? "prices-old" : undefined}>
-                      {t("settings.pricesDate", { date: formatPriceDate(prices.sourceDate, uiLanguage) })}
-                      {prices.old && ` · ${t("prices.old")}`}
-                    </span>
+                    <PriceDate prices={prices} lowercase />
                   ) : (
                     t("settings.pricesNone")
                   )}

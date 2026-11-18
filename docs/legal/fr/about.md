@@ -16,6 +16,7 @@ L'idée vient d'UrzaGatherer, l'application de référence des collectionneurs d
 - Noter ce que vous possédez, impression par impression, avec − et +.
 - Suivre la complétion de chaque tirage et de chaque set, et repérer manques et doublons.
 - Rechercher une carte dans tous les sets et toutes les langues.
+- Estimer la valeur de votre collection, en ordre de grandeur.
 - Exporter et importer votre collection, et la synchroniser entre vos appareils avec Google Drive si vous le souhaitez.
 
 ## Vos données restent à vous
@@ -27,6 +28,7 @@ L'idée vient d'UrzaGatherer, l'application de référence des collectionneurs d
 ## Sources et crédits
 
 - Les données des cartes (noms, textes, illustrations) viennent de la base officielle [cyberpunktcg.com](https://cyberpunktcg.com/cards), propulsée par Netdeck. Elles sont mises à jour régulièrement et peuvent contenir des erreurs.
+- Prix indicatifs : Cardmarket (fichiers publics de tendance des prix), toutes langues confondues, mis à jour chaque nuit. Nova Preem n'est pas lié à Cardmarket.
 - Le code source est public, sous licence MIT : [github.com/sicotjeanvivien/nova-preem](https://github.com/sicotjeanvivien/nova-preem).
 - Polices : Chakra Petch, IBM Plex et Oxanium, sous licence SIL Open Font License.
 

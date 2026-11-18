@@ -93,8 +93,8 @@ describe("Indicative prices: loading and setting", () => {
     setOnline(false);
     const store = new MemoryPriceStore(stored("2026-11-10T00:00:00.000Z", { ...PRICES_FILE, sourceDate: "2026-11-09T02:50:00+01:00" }));
     await show({ store, source: fakePriceSource() });
-    expect(row()).toContain("prix du 09/11 · Prix anciens");
-    expect(container.querySelector(".prices-old")?.textContent).toBe("prix du 09/11 · Prix anciens");
+    expect(row()).toContain("· Prix anciens · 09/11");
+    expect(container.querySelector(".prices-old")?.textContent).toBe("Prix anciens · 09/11");
   });
 
   it("is on by default; off, nothing is downloaded", async () => {

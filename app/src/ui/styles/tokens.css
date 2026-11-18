@@ -9,6 +9,8 @@
   --color-border: #232838;
   --color-border-strong: #2b3040;
   --color-border-dashed: #3a4152;
+  /* Price over a card image (prices spec §5): the background, 82 % opaque. */
+  --color-price-badge-bg: rgb(13 15 20 / 0.82);
   --color-text: #eceef3;
   --color-text-secondary: #d5d9e2;
   --color-text-muted: #a3aab9;
