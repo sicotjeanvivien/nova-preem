@@ -61,19 +61,19 @@ input::placeholder{color:#8B92A3}
 <sc-for list="{{g.items}}" as="r" hint-placeholder-count="2">
 <a href="WebSets.dc.html" style="display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: #161922; border: 1px solid #232838; color: #ECEEF3">
 <div style="height: 88px; position: relative; background: #1C2029; display: flex; flex-direction: column; justify-content: center; padding: 0 14px 0 38px">
+<div style="position: absolute; top: 8px; right: 8px; display: flex; gap: 4px">
+<sc-for list="{{r.langs}}" as="l" hint-placeholder-count="1">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: {{l.color}}; border: 1px solid {{l.color}}; border-radius: 3px; padding: 0 4px; background: #1C2029">{{l.code}}</span>
+</sc-for>
+</div>
 <span style="position: absolute; left: 0; top: 0; bottom: 0; width: 24px; background: {{r.ribbon}}; display: flex; align-items: center; justify-content: center"><span style="writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #0D0F14; text-transform: uppercase">{{r.tag}}</span></span>
 <span style="font-family: 'Chakra Petch', sans-serif; font-size: 11px; letter-spacing: 0.12em; color: #A3AAB9; text-transform: uppercase">Welcome to Night City</span>
 <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 19px; line-height: 1.15">{{r.name}}</span>
 </div>
-<div style="display: flex; align-items: center; gap: 12px; padding: 9px 14px">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px">{{r.count}}</span>
-<div style="display: flex; gap: 4px">
-<sc-for list="{{r.langs}}" as="l" hint-placeholder-count="1">
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: {{l.color}}; border: 1px solid {{l.color}}; border-radius: 3px; padding: 0 4px">{{l.code}}</span>
-</sc-for>
-<sc-if value="{{showPrices}}" hint-placeholder-val="{{ true }}"><span title="{{r.valueHelp}}" aria-label="{{r.valueAria}}" style="margin-left: auto; margin-right: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{r.valueColor}}; white-space: nowrap">{{r.value}}</span></sc-if>
-</div>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{r.pctColor}}">{{r.pct}} %</span>
+<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding: 9px 14px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; justify-self: start">{{r.count}}</span>
+<sc-if value="{{showPrices}}" hint-placeholder-val="{{ true }}"><span title="{{r.valueHelp}}" aria-label="{{r.valueAria}}" style="justify-self: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{r.valueColor}}; white-space: nowrap">{{r.value}}</span></sc-if>
+<span style="grid-column: 3; justify-self: end; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{r.pctColor}}">{{r.pct}} %</span>
 </div>
 <div style="height: 4px; background: #232838"><div style="height: 100%; width: {{r.pct}}%; background: {{r.bar}}"></div></div>
 </a>
