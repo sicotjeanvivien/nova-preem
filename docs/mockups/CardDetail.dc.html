@@ -120,9 +120,9 @@ const TEXT = {
   en: { title: 'Johnny Silverhand', subtitle: 'Rocking Renegade', rules: "2 €$, {Spend} A friendly Unit can attack spent rival Units the turn it's played. If it's a ROCKER Unit, also give it +2 power this turn. This effect costs -1 €$ for each friendly Gig with 8+ value." }
 };
 const VARIANTS = [
-  { key: 'retail-003', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['fr', 'en'], note: '', price: '≈ 14 €' },
-  { key: 'beta-003', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['en'], note: '', price: '≈ 27 €' },
-  { key: 'beta-168', release: 'Beta', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', artist: 'Divebound Studio', langs: ['en'], price: '≈ 1 510 €', note: "Exclusive au tirage Beta : pas d'équivalent en Retail, elle n'est jamais comptée comme manquante en Retail." }
+  { key: 'retail-003', release: 'Retail', num: '003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['fr', 'en'], note: '', price: '14 €' },
+  { key: 'beta-003', release: 'Beta', num: 'β003', rarity: 'Secrète', rColor: '#FF5C8A', artist: 'Daniel Valaisis', langs: ['en'], note: '', price: '27 €' },
+  { key: 'beta-168', release: 'Beta', num: 'β168', rarity: 'Iconic Secret', rColor: '#F2C94C', artist: 'Divebound Studio', langs: ['en'], price: '1 510 €', note: "Exclusive au tirage Beta : pas d'équivalent en Retail, elle n'est jamais comptée comme manquante en Retail." }
 ];
 
 class Component extends DCLogic {
@@ -141,7 +141,7 @@ class Component extends DCLogic {
     Object.keys(s.qty).forEach((k) => { ownedTotal += s.qty[k]; });
     const variants = VARIANTS.map((v) => ({
       release: v.release, num: v.num, rarity: v.rarity, rColor: v.rColor, artist: 'Illustration : ' + v.artist,
-      hasNote: !!v.note, note: v.note, price: v.price, priceAria: 'Prix indicatif ' + v.price.replace('≈', 'environ'),
+      hasNote: !!v.note, note: v.note, price: v.price, priceAria: 'Prix indicatif ' + v.price,
       rows: v.langs.map((l) => {
         const k = v.key + ':' + l;
         return {

@@ -161,9 +161,9 @@ const fmtPrice = (p) => {
   if (p < 0.1) return '< 0,10 €';
   const step = p < 1 ? 0.1 : p < 10 ? 0.5 : p < 100 ? 1 : 10;
   const v = Math.round(p / step) * step;
-  return '≈ ' + (v < 10 && step < 1 ? v.toFixed(2).replace('.', ',') : String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')) + ' €';
+  return (v < 10 && step < 1 ? v.toFixed(2).replace('.', ',') : String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')) + ' €';
 };
-const fmtTotal = (t) => { const step = t < 100 ? 1 : t < 1000 ? 10 : 50; return '≈ ' + String(Math.round(t / step) * step).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €'; };
+const fmtTotal = (t) => { const step = t < 100 ? 1 : t < 1000 ? 10 : 50; return String(Math.round(t / step) * step).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €'; };
 const META = {"001":["L",9],"002":["L",null],"003":["L",null],"004":["L",6],"005a":["L",5],"005b":["L",5],"006":["U",4],"007":["U",6],"008":["U",5],"009":["U",5],"010":["U",2],"011":["U",6],"012":["U",4],"013":["U",3],"014":["U",4],"015":["U",7],"016":["U",5],"017":["U",2],"018":["U",5],"019":["U",3],"020":["U",5],"021":["U",3],"022":["U",7],"023":["G",2],"024":["G",3],"025":["G",1],"026":["G",2],"027":["P",1],"028":["P",3],"029":["P",3],"030":["P",6],"031":["P",1],"032":["P",4],"033":["P",1],"034":["P",3],"035":["P",4],"036":["L",null],"037":["L",null],"038":["L",null],"039":["L",null],"040":["L",7],"043":["U",3],"044":["U",5],"045":["U",4],"046":["U",4],"047":["U",6],"048":["U",6],"049":["U",3],"050":["U",5],"051":["U",4],"052":["U",5],"053":["U",2],"054":["U",2],"055":["U",4],"057":["U",5],"058":["U",3],"141":["L",9],"142":["L",null],"143":["L",6],"144":["L",5],"145":["L",null],"146":["L",null],"147":["L",null],"148":["L",null],"149":["L",7],"159":["U",6],"162":["U",4]};
 CARDS.forEach((c) => { c.t = META[c.n][0]; c.cost = META[c.n][1]; });
 const FACETS = [
@@ -229,7 +229,7 @@ class Component extends DCLogic {
     const cards = visible.map((c) => {
       const q = s.qty[c.n]; const r = RARITY[c.r]; const name = s.lang === 'fr' ? c.fr : c.en; const mine = q[s.lang];
       return {
-        price: fmtPrice(PRICES[c.n]), priceAria: 'Prix indicatif ' + fmtPrice(PRICES[c.n]).replace('≈', 'environ'),
+        price: fmtPrice(PRICES[c.n]), priceAria: 'Prix indicatif ' + fmtPrice(PRICES[c.n]),
         n: c.n, name, rShort: r.short, rColor: r.color, stripe: STRIPE[c.col], qty: mine,
         qtyColor: mine > 0 ? '#ECEEF3' : '#8B92A3', decColor: mine > 0 ? '#ECEEF3' : '#3A4152',
         opacity: q.fr + q.en === 0 ? 0.55 : 1, borderStyle: q.fr + q.en === 0 ? 'dashed' : 'solid', borderColor: q.fr + q.en === 0 ? '#3A4152' : '#232838',

@@ -146,14 +146,14 @@ const RAR = [['Commune', '#A3AAB9', 23], ['Peu commune', '#6FCF97', 12], ['Rare'
 const OWNED = { all: [20, 9, 10, 3, 1, 3], fr: [18, 8, 9, 3, 1, 2], en: [6, 3, 2, 1, 0, 0] };
 
 const VALUE = {
-  total: '≈ 230 €', cards: 412, missing: 37,
+  total: '230 €', cards: 412, missing: 37,
   byRelease: [['Retail', 214, '#46E3C8'], ['Beta', 9, '#B98CFF'], ['Starters', 4, '#8FB4FF'], ['Promos', 2, '#FFB067']],
   top: [
-    ['Alt Cunningham — Soulkiller Architect', 'Retail #155 · VF', '≈ 85 €'],
-    ['Adam Smasher — Ender of Legends', 'Retail #141 · VF', '≈ 65 €'],
-    ['Johnny Silverhand — Rocking Renegade', 'Retail #003 · VF', '≈ 14 €'],
-    ['Johnny Silverhand — Never Stop Fighting', 'Retail #011 · VO', '≈ 12 €'],
-    ['Sasha Yakovleva — Won\'t Let You Down', 'Retail #109 · VF', '≈ 8 €']
+    ['Alt Cunningham — Soulkiller Architect', 'Retail #155 · VF', '85 €'],
+    ['Adam Smasher — Ender of Legends', 'Retail #141 · VF', '65 €'],
+    ['Johnny Silverhand — Rocking Renegade', 'Retail #003 · VF', '14 €'],
+    ['Johnny Silverhand — Never Stop Fighting', 'Retail #011 · VO', '12 €'],
+    ['Sasha Yakovleva — Won\'t Let You Down', 'Retail #109 · VF', '8 €']
   ]
 };
 function valueVals(props) {
@@ -162,7 +162,7 @@ function valueVals(props) {
   return {
     vTotal: VALUE.total, vMeta: VALUE.cards + ' cartes estimées · ' + VALUE.missing + ' sans prix',
     vDate: old ? 'Prix anciens · 02/11' : 'Prix du 17/11', vDateColor: old ? '#FFB067' : '#8B92A3',
-    vReleases: VALUE.byRelease.map((r) => ({ label: r[0], value: '≈ ' + r[1] + ' €', pct: Math.max(2, Math.round((r[1] / max) * 100)), color: r[2] })),
+    vReleases: VALUE.byRelease.map((r) => ({ label: r[0], value: r[1] + ' €', pct: Math.max(2, Math.round((r[1] / max) * 100)), color: r[2] })),
     vTop: VALUE.top.map((t, i) => ({ rank: i + 1, name: t[0], meta: t[1], price: t[2] }))
   };
 }

@@ -124,19 +124,21 @@ Prix d'une carte :
 |---|---|
 | inconnu | « — » (aide : « Pas encore de prix ») |
 | < 0,10 € | « < 0,10 € » |
-| 0,10 € à 1 € | arrondi à 0,10 € : « ≈ 0,30 € » |
-| 1 € à 10 € | arrondi à 0,50 € : « ≈ 2,50 € » |
-| 10 € à 100 € | arrondi à 1 € : « ≈ 65 € » |
-| ≥ 100 € | arrondi à 10 € : « ≈ 340 € » |
+| 0,10 € à 1 € | arrondi à 0,10 € : « 0,30 € » |
+| 1 € à 10 € | arrondi à 0,50 € : « 2,50 € » |
+| 10 € à 100 € | arrondi à 1 € : « 65 € » |
+| ≥ 100 € | arrondi à 10 € : « 340 € » |
 
-Valeur d'un ensemble (somme des prix réels × quantités, ou d'un exemplaire par variante pour la valeur d'un tirage, puis arrondi) : < 100 € à 1 € près, < 1 000 € à 10 € près, au-delà à 50 € près. Format français (`≈ 1 250 €`) ou anglais (`≈ €1,250`) selon la langue de l'interface. Les cartes sans prix ne comptent pas ; leur nombre est affiché.
+**Pas de symbole devant les prix** (« ≈ », « environ », « ~ ») : décision du 18/11/2026, ça nuit à la lisibilité. L'arrondi et la mention « Prix indicatifs Cardmarket » suffisent ; seule exception, « < 0,10 € » (et « < 1 € » pour un total), qui dit autre chose qu'une approximation. Les étiquettes d'accessibilité disent « Prix indicatif 14 € ».
+
+Valeur d'un ensemble (somme des prix réels × quantités, ou d'un exemplaire par variante pour la valeur d'un tirage, puis arrondi) : < 100 € à 1 € près, < 1 000 € à 10 € près, au-delà à 50 € près. Format français (`1 250 €`) ou anglais (`€1,250`) selon la langue de l'interface. Les cartes sans prix ne comptent pas ; leur nombre est affiché.
 
 ### Où apparaissent les prix
 
 - **Page carte** : à droite de chaque impression, son prix arrondi, en gris discret. Sous la liste : « Prix indicatifs Cardmarket, toutes langues confondues · 17/11 ».
 - **Stats** : une carte « Valeur estimée » en tête : total arrondi, nombre de cartes sans prix, date des prix ; puis la valeur par tirage (barres) et les 5 cartes possédées les plus chères (chacune ouvre la page carte).
-- **Collection** : tri **« Valeur »** (décroissante, sans prix à la fin) ; prix arrondi dans la ligne d'information de chaque carte (« Retail · #003 · ≈ 14 € ») ; valeur de la **sélection affichée** (filtres compris) à la fin du résumé en haut (« 18 ex. · 10 impressions · ≈ 90 € »). Filtres inchangés.
-- **Tirages du set** (tuiles) : les badges de langue (VO, VF) passent dans le **coin supérieur droit du bandeau** ; la ligne sous le bandeau devient « possédées / total » à gauche, **valeur du tirage complet** au centre (« ≈ 2 100 € »), pourcentage à droite. Valeur : somme des prix d'**un exemplaire de chaque variante** du tirage (une langue), arrondie comme un total. Infobulle / étiquette d'accessibilité : « Un exemplaire de chaque carte · N sans prix ». Tirage sans aucun prix (ex. Edgerunner Open, absent de Cardmarket) : « Pas de prix », en gris.
+- **Collection** : tri **« Valeur »** (décroissante, sans prix à la fin) ; prix arrondi dans la ligne d'information de chaque carte (« Retail · #003 · 14 € ») ; valeur de la **sélection affichée** (filtres compris) à la fin du résumé en haut (« 18 ex. · 10 impressions · 90 € »). Filtres inchangés.
+- **Tirages du set** (tuiles) : les badges de langue (VO, VF) passent dans le **coin supérieur droit du bandeau** ; la ligne sous le bandeau devient « possédées / total » à gauche, **valeur du tirage complet** au centre (« 2 100 € »), pourcentage à droite. Valeur : somme des prix d'**un exemplaire de chaque variante** du tirage (une langue), arrondie comme un total. Infobulle / étiquette d'accessibilité : « Un exemplaire de chaque carte · N sans prix ». Tirage sans aucun prix (ex. Edgerunner Open, absent de Cardmarket) : « Pas de prix », en gris.
 - **Cartes d'un tirage** (grille de saisie) : prix arrondi de chaque carte en **bas à droite de l'image** (fond sombre semi-opaque). Le badge de l'autre langue (« VO 1 ») passe en **bas à gauche**. Carte sans prix : « — ».
 - **Pas de prix** dans Recherche.
 - Réglage « Prix indicatifs » désactivé : aucun de ces éléments n'apparaît ; le badge de langue reste en bas à gauche.
