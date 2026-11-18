@@ -1,9 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, Navigate, useParams, useSearchParams } from "react-router";
 import { localize } from "../../domain/catalog.ts";
+import type { CatalogIndex } from "../../domain/catalogIndex.ts";
 import { percentFloor, releaseVariants } from "../../domain/completion.ts";
 import { formatMissingList } from "../../domain/missingList.ts";
-import { computeReleaseView, FILTER_PARAMS } from "../../domain/releaseView.ts";
+import {
+  activeCardFilterCount,
+  type CardFilterField,
+  cardFilterParams,
+  computeReleaseView,
+  FILTER_PARAMS,
+  NO_CARD_FILTERS,
+  type ReleaseCardFilters,
+  type ReleaseView,
+} from "../../domain/releaseView.ts";
 import { releaseShortName } from "../../domain/setTabs.ts";
 import { ownedInOtherLanguages, type GridFilter, type Variant } from "../../domain/variants.ts";
 import { useI18n } from "../../i18n/i18n.tsx";
@@ -13,7 +23,8 @@ import { useApp } from "../AppContext.tsx";
 import { CardTile } from "../CardTile.tsx";
 import { useCollection, type QuantityChange } from "../CollectionContext.tsx";
 import { ChevronLeftIcon } from "../icons.tsx";
-import { languageLabel, rarityShort } from "../labels.ts";
+import { ActiveFilters, FilterPanel, FiltersButton, type FilterModel, type FilterOption } from "../FilterPanel.tsx";
+import { cardColor, cardColorLabel, cardTypeLabel, languageLabel, rarityColor, rarityShort } from "../labels.ts";
 import { ProgressBar } from "../ProgressBar.tsx";
 import { Toast } from "../Toast.tsx";
 import { useDocumentTitle } from "./useDocumentTitle.ts";
@@ -26,13 +37,15 @@ const FILTERS: { id: GridFilter; label: MessageKey }[] = [
 ];
 
 const TOAST_DURATION_MS = 5000;
+const PANEL_ID = "release-card-filters";
 
 type ToastState = { id: number; text: string; change: QuantityChange | null };
 
 /**
  * Sets, level 3 (SetGrid / WebSets, spec §2.1, §5.1, §5.4): the cards of a
  * release, the entry screen. Each tile has − quantity +; the image and the
- * name open the card page. Filter and language live in the URL.
+ * name open the card page. Possession filter, entry language and card filters
+ * (§5.1.1) live in the URL.
  */
 export function ReleaseCardsScreen() {
   const { setId = "", releaseId = "" } = useParams();
@@ -43,13 +56,15 @@ export function ReleaseCardsScreen() {
   const [params, setParams] = useSearchParams();
 
   const view = useMemo(
-    () => computeReleaseView(index, setId, releaseId, { filtre: params.get("filtre"), langue: params.get("langue") }, settings, quantities),
+    () => computeReleaseView(index, setId, releaseId, Object.fromEntries(params), settings, quantities),
     [index, setId, releaseId, params, settings, quantities],
   );
   const setName = view ? localize(view.set.name, uiLanguage) : "";
   const releaseName = view ? releaseShortName(localize(view.release.name, uiLanguage), setName) : "";
   useDocumentTitle(view ? `${releaseName} · ${setName}` : "");
 
+  const [panelOpen, setPanelOpen] = useState(false);
+  const closePanel = useCallback(() => setPanelOpen(false), []);
   const [toast, setToast] = useState<ToastState | null>(null);
   const toastId = useRef(0);
   useEffect(() => {
@@ -74,8 +89,11 @@ export function ReleaseCardsScreen() {
     [setParams],
   );
 
+  const filterModel = useCardFilterModel(view?.cardFilters ?? NO_CARD_FILTERS, view, (filters) => updateParams(cardFilterParams(filters)));
+
   if (!view) return <Navigate to={index.sets.has(setId) ? `/sets/${setId}` : "/sets"} replace />;
   const { release, languages, language, filter, visible } = view;
+  const filtered = activeCardFilterCount(view.cardFilters) > 0;
   const nameLanguage = settings.cardNameLanguage === "entry" ? language : settings.cardNameLanguage;
   const cardName = (variant: Variant) => localize(variant.card.name, nameLanguage);
   const progress = releaseVariants(index, [release.id], quantities);
@@ -130,6 +148,14 @@ export function ReleaseCardsScreen() {
       </div>
     </>
   );
+  const filtersButton = <FiltersButton model={filterModel} open={panelOpen} onToggle={() => setPanelOpen((open) => !open)} panelId={PANEL_ID} />;
+  const activeFilters = (
+    <ActiveFilters
+      model={filterModel}
+      summary={t("filters.ratio", { shown: visible.length, total: view.variants.length })}
+      className={isDesktop ? "active-filters--page" : "active-filters--toolbar"}
+    />
+  );
   const filterButtons = (
     <div role="group" aria-label={t("setPage.filters")} className="toolbar__filters">
       {FILTERS.map((f) => (
@@ -180,19 +206,25 @@ export function ReleaseCardsScreen() {
               {languageSelector}
               {languageSelector && <span className="toolbar__separator" aria-hidden="true" />}
               {filterButtons}
+              <span className="toolbar__separator" aria-hidden="true" />
+              {filtersButton}
               {filter === "missing" && (
                 <button type="button" className="secondary-button toolbar__copy" onClick={() => void copyMissing()} disabled={visible.length === 0}>
-                  {t("setPage.copyMissing", { count: visible.length })}
+                  {t(filtered ? "setPage.copyMissingFiltered" : "setPage.copyMissing", { count: visible.length })}
                 </button>
               )}
             </>
           ) : (
             <>
-              {languageSelector && <div className="toolbar__entry">{languageSelector}</div>}
+              <div className="toolbar__entry">
+                {languageSelector}
+                {filtersButton}
+              </div>
               {filterButtons}
+              {activeFilters}
               {filter === "missing" && (
                 <div className="toolbar__missing">
-                  <span className="toolbar__missing-count">{t("cards.missingCount", { count: visible.length })}</span>
+                  <span className="toolbar__missing-count">{t(filtered ? "cards.missingCountFiltered" : "cards.missingCount", { count: visible.length })}</span>
                   <button type="button" className="secondary-button" onClick={() => void copyMissing()} disabled={visible.length === 0}>
                     {t("setPage.copyList")}
                   </button>
@@ -201,8 +233,10 @@ export function ReleaseCardsScreen() {
             </>
           )}
         </div>
+        {isDesktop && <FilterPanel model={filterModel} open={panelOpen} onClose={closePanel} panelId={PANEL_ID} />}
       </div>
 
+      {isDesktop && activeFilters}
       <div className="tile-grid">
         {visible.map((variant) => (
           <CardTile
@@ -215,7 +249,17 @@ export function ReleaseCardsScreen() {
           />
         ))}
       </div>
-      {visible.length === 0 && <p className="set-page__empty">{t("setPage.empty")}</p>}
+      {visible.length === 0 && (
+        <div className="set-page__empty">
+          <p>{t("setPage.empty")}</p>
+          {filtered && (
+            <button type="button" className="secondary-button" onClick={filterModel.onReset}>
+              {t("cards.clearFilters")}
+            </button>
+          )}
+        </div>
+      )}
+      {!isDesktop && <FilterPanel model={filterModel} open={panelOpen} onClose={closePanel} panelId={PANEL_ID} />}
 
       {toast && (
         <Toast
@@ -231,4 +275,54 @@ export function ReleaseCardsScreen() {
       )}
     </div>
   );
+}
+
+/**
+ * Card filters of the page (spec §5.1.1) for the common filter panel (§8.1):
+ * name or number, rarity, type, color and cost, with the number of cards each
+ * option would give.
+ */
+function useCardFilterModel(
+  filters: ReleaseCardFilters,
+  view: Pick<ReleaseView, "cardOptions" | "counts" | "visible"> | null,
+  onChange: (filters: ReleaseCardFilters) => void,
+): FilterModel {
+  const { index } = useApp();
+  const { t, language } = useI18n();
+  const isDesktop = useIsDesktop();
+  const options = (field: CardFilterField, describe: (value: string) => Omit<FilterOption, "value" | "count">): FilterOption[] =>
+    (view?.cardOptions[field] ?? []).map((value) => ({ value, count: view?.counts[field]?.get(value) ?? 0, ...describe(value) }));
+  const chips = (field: CardFilterField, title: MessageKey, describe: (value: string) => Omit<FilterOption, "value" | "count">) => ({
+    kind: "chips" as const,
+    id: field,
+    title: t(title),
+    options: options(field, describe),
+    selected: filters[field],
+    onChange: (values: string[]) => onChange({ ...filters, [field]: values }),
+  });
+  return {
+    label: t("cards.filters"),
+    resultCount: view?.visible.length ?? 0,
+    onReset: () => onChange(NO_CARD_FILTERS),
+    note: t(isDesktop ? "cards.filtersNoteDesktop" : "cards.filtersNote"),
+    criteria: [
+      {
+        kind: "text",
+        id: "query",
+        title: t("cards.filter.query"),
+        value: filters.query,
+        placeholder: t("cards.filter.queryPlaceholder"),
+        onChange: (query) => onChange({ ...filters, query }),
+      },
+      chips("rarities", "collection.filter.rarity", (id) => rarityOption(index, id, language)),
+      chips("types", "collection.filter.type", (type) => ({ label: cardTypeLabel(t, type) })),
+      chips("colors", "collection.filter.color", (color) => ({ label: cardColorLabel(t, color), dot: cardColor(color) })),
+      chips("costs", "search.filter.cost", (range) => ({ label: t(`search.cost.${range}` as MessageKey) })),
+    ],
+  };
+}
+
+function rarityOption(index: CatalogIndex, id: string, language: string): Omit<FilterOption, "value" | "count"> {
+  const rarity = index.rarities.get(id);
+  return { label: rarity ? localize(rarity.name, language) : id, dot: rarityColor(rarity) };
 }
