@@ -14,6 +14,7 @@
     "test": "vitest run",
     "publish-catalog": "tsx src/publish.ts",
     "prices": "tsx src/prices/build.ts",
+    "publish-prices": "tsx src/prices/publish.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

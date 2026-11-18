@@ -21,6 +21,7 @@ pnpm typecheck
 pnpm publish-catalog  # deploys dist/ to Cloudflare Pages (maintainer only)
 pnpm prices           # downloads the Cardmarket files and builds prices/dist/prices.json
 pnpm prices --offline # same, from the files downloaded last time
+pnpm publish-prices   # checks prices/dist/ and deploys prices.json (CI only, see below)
 ```
 
 A full update is `pnpm crawl && pnpm build`, then `pnpm publish-catalog` to put it online. The app sees the new version through `manifest.json` and offers the update.
@@ -84,6 +85,7 @@ test/fixtures/          real API responses, truncated
 
 - **Source**: two public files of Cardmarket for the game (products and price guide), downloaded once per run with the project's User-Agent and validated with Zod. The adapter is [`src/prices/cardmarket.ts`](src/prices/cardmarket.ts). Only the single cards are kept; the retained price is `trend`, otherwise `trend-foil`, otherwise none.
 - **Matching**: [`prices/cardmarket.json`](prices/cardmarket.json), maintained by hand, maps each release to a Cardmarket expansion and holds the name aliases (typos of the source) and the overrides (`variantKey` → product). Within a release, products are matched to the English printings by normalized name; several printings with the same name are matched in order (`idProduct` ↔ collector number) only if both counts are equal.
+- **Publishing**: the `prices.yml` workflow runs `pnpm prices` then `pnpm publish-prices` every night. The latter validates `prices.json` and refuses to publish (and fails) when fewer than 80 % of the variants matched by the previous publication are matched (`--previous <prices-report.json>`); `--dry-run` checks without publishing. It deploys to the Cloudflare Pages project `nova-preem-prices` (`PRICES_PROJECT` to change it), with open CORS and one hour of cache. Setup: [`docs/deploy.md`](../docs/deploy.md).
 - **Report**: releases without an expansion, names not matched (with both counts), orphan products, Iconic printings cheaper than their normal version, coverage. As for the catalog, the pipeline never guesses: a case it cannot settle is reported, and can be fixed with an override.
 
 ## Legal
