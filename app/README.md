@@ -37,6 +37,7 @@ Environment variables, read at build time. Defaults are in [`.env`](.env); put l
 | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID for the Drive sync. Public value, no secret. Empty: sync is off. | empty |
 | `VITE_SITE_DOMAIN` | Public domain, without `https://`: replaces `{{domain}}` in the legal pages | `nova-preem.app` |
 | `VITE_CONTACT_EMAIL` | Contact address: replaces `{{contactEmail}}` in the legal pages | `awsd.contact@gmail.com` |
+| `VITE_PRICES_BASE_URL` | Base URL of `prices.json`, the indicative Cardmarket prices ([`docs/prices-spec.md`](../docs/prices-spec.md)), with a trailing slash. In development, `/prices/` is served from `../catalog/prices/dist/` (run `pnpm prices` in `catalog/`). Empty: the feature is absent. | `/prices/` |
 | `VITE_KOFI_URL` | Ko-fi page of the "Nous soutenir" card in Settings, opened in a new tab. Empty: no card. | `https://ko-fi.com/awsd` |
 
 Setting up the Google project: [`docs/deploy.md`](../docs/deploy.md).
@@ -49,7 +50,7 @@ About, privacy policy, legal notice and terms (`/a-propos`, `/confidentialite`, 
 
 ```
 src/domain/     rules, types and Zod schemas; pure: no React, no Dexie, no browser API
-src/storage/    Dexie implementations of the CatalogStore, CollectionStore and SettingsStore interfaces
+src/storage/    Dexie implementations of the CatalogStore, CollectionStore, SettingsStore, SyncStore and PriceStore interfaces
 src/platform/   browser services: HTTP, hashing, connectivity, service worker, Google sign-in and Drive
 src/i18n/       interface strings, French and English
 src/ui/         React: layout, screens, styles (CSS variables in ui/styles/tokens.css)

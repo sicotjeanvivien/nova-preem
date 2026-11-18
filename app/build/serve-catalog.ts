@@ -13,8 +13,9 @@ const CONTENT_TYPES: Record<string, string> = {
  * Serves the catalog produced by the pipeline (catalog/dist/) under `base`,
  * in development and in `vite preview`. In production the catalog lives on its
  * own host (VITE_CATALOG_BASE_URL), so it is never copied into the app build.
+ * Also serves the indicative prices (catalog/prices/dist/, VITE_PRICES_BASE_URL).
  */
-export function serveCatalog(options: { dir: string; base: string }): Plugin {
+export function serveCatalog(options: { dir: string; base: string; name?: string }): Plugin {
   const root = resolve(options.dir);
   const middleware: Connect.NextHandleFunction = (req, res, next) => {
     void handle(req, res, next);
@@ -38,7 +39,7 @@ export function serveCatalog(options: { dir: string; base: string }): Plugin {
   }
 
   return {
-    name: "nova-preem:serve-catalog",
+    name: `nova-preem:serve-${options.name ?? "catalog"}`,
     configureServer(server) {
       server.middlewares.use(middleware);
     },

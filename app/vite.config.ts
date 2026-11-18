@@ -9,12 +9,14 @@ const THEME_COLOR = "#0D0F14";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const catalogBase = env.VITE_CATALOG_BASE_URL ?? "/catalog/";
+  const pricesBase = env.VITE_PRICES_BASE_URL ?? "";
   return {
     plugins: [
       react(),
       legalPages({ dir: "../docs/legal", config: legalConfig(env) }),
       // Only a same-origin, relative base can be served locally.
       ...(catalogBase.startsWith("/") ? [serveCatalog({ dir: "../catalog/dist", base: catalogBase })] : []),
+      ...(pricesBase.startsWith("/") ? [serveCatalog({ dir: "../catalog/prices/dist", base: pricesBase, name: "prices" })] : []),
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: false,

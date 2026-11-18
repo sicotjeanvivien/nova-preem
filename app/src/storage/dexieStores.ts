@@ -1,7 +1,8 @@
 import type { Catalog, CatalogManifest } from "../domain/catalog.ts";
 import type { CollectionEntry } from "../domain/collection.ts";
 import { DEFAULT_SETTINGS, settingsSchema, type Settings } from "../domain/settings.ts";
-import type { CatalogStore, CollectionStore, SettingsStore, StoredCatalog, SyncStore } from "../domain/stores.ts";
+import { pricesFileSchema } from "../domain/prices.ts";
+import type { CatalogStore, CollectionStore, PriceStore, SettingsStore, StoredCatalog, StoredPrices, SyncStore } from "../domain/stores.ts";
 import { syncStateSchema, type SyncState } from "../domain/sync.ts";
 import type { NovaPreemDatabase } from "./db.ts";
 
@@ -23,6 +24,22 @@ export class DexieCatalogStore implements CatalogStore {
         { key: "manifest", value: manifest },
       ]),
     );
+  }
+}
+
+/** Indicative prices: one row `prices` of the catalog table (docs/prices-spec.md §5). */
+export class DexiePriceStore implements PriceStore {
+  constructor(private readonly db: NovaPreemDatabase) {}
+
+  /** An invalid stored value is ignored, as if no prices had been downloaded. */
+  async load(): Promise<StoredPrices | undefined> {
+    const value = (await this.db.catalog.get("prices"))?.value as Partial<StoredPrices> | undefined;
+    const file = pricesFileSchema.safeParse(value?.file);
+    return file.success && typeof value?.downloadedAt === "string" ? { file: file.data, downloadedAt: value.downloadedAt } : undefined;
+  }
+
+  async save(stored: StoredPrices): Promise<void> {
+    await this.db.catalog.put({ key: "prices", value: stored });
   }
 }
 

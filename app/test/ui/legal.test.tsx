@@ -160,6 +160,7 @@ describe("legal pages at first launch (spec §2)", () => {
       imageBaseUrl: "http://localhost/catalog/images/",
       appVersion: "0.1.0",
       sync: null,
+      prices: null,
       supportUrl: null,
     };
     await act(async () => root.render(<App services={services} />));

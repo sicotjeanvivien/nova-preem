@@ -95,6 +95,8 @@ jobs:
       - run: pnpm build
         env:
           VITE_CATALOG_BASE_URL: ${{ vars.CATALOG_BASE_URL }}
+          # Indicative prices (docs/prices-spec.md); empty: the feature is absent from the app.
+          VITE_PRICES_BASE_URL: ${{ vars.PRICES_BASE_URL }}
           # Google Drive sync (docs/sync-spec.md §9); empty: the sync stays off ("Bientôt").
           VITE_GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
       - id: deploy

@@ -1,12 +1,14 @@
 import type { CatalogDependencies } from "../domain/catalogLoader.ts";
-import type { CollectionStore, SettingsStore, SyncStore } from "../domain/stores.ts";
+import type { PriceSource } from "../domain/prices.ts";
+import type { CollectionStore, PriceStore, SettingsStore, SyncStore } from "../domain/stores.ts";
 import type { RemoteFileProvider, SyncAuth } from "../domain/syncEngine.ts";
 import packageJson from "../../package.json";
 import { NovaPreemDatabase } from "../storage/db.ts";
-import { DexieCatalogStore, DexieCollectionStore, DexieSettingsStore, DexieSyncStore } from "../storage/dexieStores.ts";
+import { DexieCatalogStore, DexieCollectionStore, DexiePriceStore, DexieSettingsStore, DexieSyncStore } from "../storage/dexieStores.ts";
 import { GoogleAuth } from "./googleAuth.ts";
 import { driveFileUrl, GoogleDriveFiles } from "./googleDrive.ts";
 import { HttpCatalogSource } from "./httpCatalogSource.ts";
+import { HttpPriceSource } from "./httpPriceSource.ts";
 import { webCryptoHasher } from "./webCryptoHasher.ts";
 
 /** Everything the interface needs from the outside world, behind domain interfaces. */
@@ -19,8 +21,15 @@ export interface Services {
   appVersion: string;
   /** Google Drive sync (docs/sync-spec.md); null when the build has no Google client ID. */
   sync: SyncServices | null;
+  /** Indicative prices (docs/prices-spec.md); null when the build has no prices URL: the feature is absent. */
+  prices: PriceServices | null;
   /** The Ko-fi page of the "Nous soutenir" card (docs/legal-spec.md §7); null hides the card. */
   supportUrl: string | null;
+}
+
+export interface PriceServices {
+  store: PriceStore;
+  source: PriceSource;
 }
 
 export interface SyncServices {
@@ -38,6 +47,7 @@ export function createBrowserServices(): Services {
   const catalogBaseUrl = import.meta.env.VITE_CATALOG_BASE_URL ?? "/catalog/";
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || null;
   const supportUrl = import.meta.env.VITE_KOFI_URL?.trim() || null;
+  const pricesBaseUrl = import.meta.env.VITE_PRICES_BASE_URL?.trim() || null;
   return {
     catalog: {
       store: new DexieCatalogStore(db),
@@ -51,6 +61,7 @@ export function createBrowserServices(): Services {
     sync: googleClientId
       ? { store: new DexieSyncStore(db), auth: new GoogleAuth(googleClientId), remote: (token) => new GoogleDriveFiles(token), fileUrl: driveFileUrl }
       : null,
+    prices: pricesBaseUrl ? { store: new DexiePriceStore(db), source: new HttpPriceSource(pricesBaseUrl) } : null,
     supportUrl,
   };
 }

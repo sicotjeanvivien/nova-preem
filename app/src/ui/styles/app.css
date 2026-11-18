@@ -2699,6 +2699,11 @@ h2 {
   color: var(--color-text-muted);
 }
 
+/* Prices more than 7 days old (docs/prices-spec.md §5): the date turns amber. */
+.prices-old {
+  color: var(--color-warning-text);
+}
+
 .settings__note {
   margin: 0;
   font-size: 12px;
