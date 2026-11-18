@@ -61,20 +61,21 @@ describe("price of a card", () => {
   it.each([
     [undefined, "—", "—"],
     [0.05, "< 0,10 €", "< €0.10"],
-    [0.3, "≈ 0,30 €", "≈ €0.30"],
-    [0.96, "≈ 1,00 €", "≈ €1.00"],
-    [2.6, "≈ 2,50 €", "≈ €2.50"],
-    [9.8, "≈ 10 €", "≈ €10"],
-    [64.85, "≈ 65 €", "≈ €65"],
-    [338, "≈ 340 €", "≈ €340"],
-    [1300, "≈ 1 300 €", "≈ €1,300"],
+    [0.3, "0,30 €", "€0.30"],
+    [0.96, "1,00 €", "€1.00"],
+    [2.6, "2,50 €", "€2.50"],
+    [9.8, "10 €", "€10"],
+    [64.85, "65 €", "€65"],
+    [338, "340 €", "€340"],
+    [1300, "1 300 €", "€1,300"],
   ])("%s € is shown as %s / %s", (price, french, english) => {
     expect(plain(formatPrice(price, "fr"))).toBe(french);
     expect(plain(formatPrice(price, "en"))).toBe(english);
   });
 
   it("keeps the amount on one line", () => {
-    expect(formatPrice(0.3, "fr")).toBe("≈ 0,30 €");
+    expect(formatPrice(1300, "fr")).toBe("1 300 €");
+    expect(formatPrice(0.05, "fr")).toBe("< 0,10 €");
   });
 });
 
@@ -102,11 +103,11 @@ describe("total", () => {
   });
 
   it.each([
-    [0, "≈ 0 €", "≈ €0"],
+    [0, "0 €", "€0"],
     [0.3, "< 1 €", "< €1"],
-    [89.6, "≈ 90 €", "≈ €90"],
-    [1249, "≈ 1 250 €", "≈ €1,250"],
-    [12_345, "≈ 12 350 €", "≈ €12,350"],
+    [89.6, "90 €", "€90"],
+    [1249, "1 250 €", "€1,250"],
+    [12_345, "12 350 €", "€12,350"],
   ])("%s € is shown as %s / %s", (total, french, english) => {
     expect(plain(formatTotal(total, "fr"))).toBe(french);
     expect(plain(formatTotal(total, "en"))).toBe(english);
