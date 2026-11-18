@@ -113,7 +113,8 @@ describe("Sets, level 3: cards of a release", () => {
   it("shows Retail with the VF/VO selector, one tile per variant with − quantity +", () => {
     const html = render({ path: "/sets/wnc/wnc-retail" });
     expect(text(html)).toMatch(/Welcome to Night City Retail 0 \/ 172 variantes possédées/);
-    expect(text(html)).toMatch(/Quantités en VF VO Toutes Manquantes Possédées Doublons/);
+    expect(text(html)).toMatch(/Saisie en VF VO Toutes Manquantes Possédées Doublons/);
+    expect(html).toContain('aria-label="Langue de saisie"');
     expect(count(html, "tile ")).toBe(172);
     expect(html).toContain('aria-label="Ouvrir la carte Johnny Silverhand — Rock&#x27;n&#x27;Rebelle, numéro 003"');
     expect(html).toContain('aria-label="Ajouter un exemplaire VF : Johnny Silverhand — Rock&#x27;n&#x27;Rebelle"');
@@ -122,7 +123,7 @@ describe("Sets, level 3: cards of a release", () => {
 
   it("shows Beta without language selector (VO only), with its Iconics β168–β171", () => {
     const html = render({ path: "/sets/wnc/wnc-beta" });
-    expect(text(html)).not.toContain("Quantités en");
+    expect(text(html)).not.toContain("Saisie en");
     expect(count(html, "tile ")).toBe(172);
     expect(text(html)).toContain("β168");
     expect(html).toContain('aria-label="Ajouter un exemplaire VO : Johnny Silverhand — Rocking Renegade"');
